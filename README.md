@@ -104,3 +104,166 @@ Below is the execution timeline of our two-week sprint, detailing completed and 
 | **Text-to-Speech (TTS)**           | Edge TTS – az-AZ-BanuNeural ✅<br>Edge TTS – az-AZ-BabekNeural ✅<br>gTTS (fallback) ✅            | XTTS v2, F5-TTS, Kokoro TTS, MeloTTS, Orpheus TTS                               |
 | **Knowledge Retrieval (RAG)**      | Custom Keyword-Overlap Retriever ✅<br>Knowledge Base Retrieval ✅<br>ChromaDB + Knowledge Base ✅ | FAISS + Embeddings, Milvus, Qdrant, pgvector                                    |
 
+# TODO LIST 
+
+---
+
+## 1. Conversation Memory 
+
+Improve the assistant's ability to maintain context throughout a conversation. 
+
+### Tasks
+
+- [ ] Implement short-term conversation memory (last 5–10 conversation turns).
+- [ ] Resolve references such as **it**, **they**, **those**, **the previous one**, etc.
+- [ ] Track the current conversation topic across multiple turns.
+- [ ] Handle follow-up questions without requiring the user to repeat context.
+
+### Example
+
+**User:** Tell me about your services.
+
+**Assistant:** *Provides information about the available services.*
+
+**User:** Which of them is the most popular?
+
+The assistant should understand that **"them"** refers to **services**.
+
+---
+
+## 2. FAQ Knowledge Base
+
+Improve the robustness of the knowledge base by covering different ways users ask the same question.
+
+### Tasks
+
+- [ ] Add multiple paraphrases for every FAQ question.
+- [ ] Include synonyms and common user expressions.
+- [ ] Add common spelling mistakes and informal wording.
+- [ ] Cover short follow-up questions related to each topic.
+
+### Example
+
+**Original Question**
+
+> How can I enroll in a course?
+
+**Alternative Questions**
+
+- How do I register?
+- How do I sign up?
+- I want to join a course.
+- How can I enroll?
+- How do I start?
+
+---
+
+## 3. Retrieval-Augmented Generation (RAG)
+
+Improve knowledge retrieval quality.
+
+### Tasks
+
+- [ ] Retrieve only the most relevant documents.
+- [ ] Eliminate duplicate or irrelevant context.
+- [ ] Improve retrieval accuracy using better embeddings or ranking strategies.
+
+---
+
+## 4. Hallucination Prevention
+
+Ensure that responses remain factual.
+
+### Tasks
+
+- [ ] Generate answers only from the knowledge base.
+- [ ] Respond with *"I don't have information about that."* when information is unavailable.
+- [ ] Prevent fabricated or unsupported responses.
+
+---
+
+## 5. Prompt Engineering
+
+Improve the quality and consistency of LLM responses.
+
+### Tasks
+
+- [ ] Refine the system prompt.
+- [ ] Ensure responses are always in Azerbaijani.
+- [ ] Keep responses concise and natural.
+- [ ] Avoid unnecessary introductions and filler phrases.
+
+---
+
+## 6. Context Management
+
+Provide the model with sufficient context for accurate responses.
+
+### Tasks
+
+- [ ] Send conversation history together with retrieved knowledge.
+- [ ] Preserve context during long conversations.
+- [ ] Reset context appropriately after a complete topic change.
+
+---
+
+## 7. User Personalization
+
+Create a more natural conversational experience.
+
+### Tasks
+
+- [ ] Remember the user's name during the conversation.
+- [ ] Personalize responses using available user information.
+- [ ] Maintain session-specific preferences.
+
+---
+
+## 8. Voice Pipeline Optimization
+
+Improve overall responsiveness.
+
+### Tasks
+
+- [ ] Reduce end-to-end latency.
+- [ ] Improve speech recognition accuracy.
+- [ ] Optimize Voice Activity Detection (VAD).
+- [ ] Improve Text-to-Speech pronunciation and quality.
+
+---
+
+## 9. Error Handling
+
+Handle recognition failures gracefully.
+
+### Tasks
+
+- [ ] Detect unclear speech.
+- [ ] Ask for clarification instead of making assumptions.
+- [ ] Handle interrupted or incomplete sentences.
+
+---
+
+## 10. Testing
+
+Evaluate the assistant under realistic scenarios.
+
+### Tasks
+
+- [ ] Test multi-turn conversations.
+- [ ] Test reference resolution (e.g., *it*, *they*, *those*).
+- [ ] Test ambiguous and incomplete questions.
+- [ ] Test topic switching and returning to previous topics.
+- [ ] Test multiple variations of the same question.
+
+---
+
+# Future Improvements
+
+- [ ] Long-term memory across sessions.
+- [ ] Function Calling / API integrations.
+- [ ] Streaming LLM responses.
+- [ ] Emotion detection.
+- [ ] Multilingual support.
+- [ ] Prompt injection protection for RAG.
+- [ ] Conversation analytics and logging.
