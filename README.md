@@ -80,16 +80,17 @@ High-quality voice assistants for the Azerbaijani language are still limited. Th
 
 Below is the execution timeline of our two-week sprint, detailing completed and planned milestones. 
 
-| Day | Team Member | Tasks |
-| :---: | :---: | :--- |
-| **Day 1** | **Person 1** | Create GitHub repository, initialize project structure, create README, invite team members. |
-|  | **Person 2** | Create To-Do list, create GitHub Project Board, define milestones, create GitHub Issues. |
-|  | **Person 3** | Brainstorm project ideas, research idea feasibility, collect reference resources. |
-|  | **Person 4** | Research VAD, STT, LLM, TTS pipeline, begin model comparison. |
-| **Day 2** | **Person 1** | ... |
-|  | **Person 2** | ... |
-|  | **Person 3** | ... |
-|  | **Person 4** | ... | 
+|    Day    | Team Member | Tasks                                                                                                                                     |
+| :-------: | :---------: | :---------------------------------------------------------------------------------------------------------------------------------------- |
+| **Day 1** | **Ulviyye** | Research VAD, STT, LLM, TTS pipeline.                                                                                                     |
+|           |   **Esli**  | Create README, create To-Do list, research VAD, STT, LLM, TTS pipeline.                                                                   |
+|           |  **Orxan**  | Create GitHub repository, invite team members, brainstorm project ideas, research VAD, STT, LLM, TTS pipeline.                            |
+|           | **Ibrahim** | Brainstorm project ideas, research VAD, STT, LLM, TTS pipeline.                                                                           |
+| **Day 2** | **Ulviyye** | Test Silero VAD, Whisper Large-v3, Faster-Whisper, Qwen 2.5 7B, llama.cpp, Edge TTS (az-AZ-BanuNeural), Custom Keyword-Overlap Retriever. |
+|           |   **Esli**  | Test Silero VAD, Whisper Large-v3, Faster-Whisper, Llama 3.2 3B, llama.cpp, Edge TTS (az-AZ-BabekNeural), Knowledge Base Retrieval.       |
+|           |  **Orxan**  | Test Silero VAD, Whisper Medium, Faster-Whisper, Aya 8B, Ollama, Edge TTS (az-AZ-BabekNeural), ChromaDB + Knowledge Base.                 |
+|           | **Ibrahim** | Test Silero VAD, Whisper Distil-Large-v3, Faster-Whisper, Ollama, gTTS (fallback), ChromaDB + Knowledge Base.                             |
+
 
 ## Models Table
 
