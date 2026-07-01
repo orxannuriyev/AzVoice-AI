@@ -7,10 +7,10 @@
 
 ### Team Members
 
-- **Orkhan Nuriyev** → Database Design & Pipeline Development, Web Development
-- **Ibrahim Suleymanov** → Machine Learning Modelling, Statistical Analysis
-- **Esli Ehmedova** → Demo & Web Development
-- **Ulviyye Eliyeva** → Exploratory Data Analysis (EDA)
+- **Orkhan Nuriyev → System Architecture, Voice Assistant Pipeline Development, Backend Integration
+- **Ibrahim Suleymanov → LLM Integration, Prompt Engineering, Speech Processing
+- **Esli Ehmedova → Demo Development, Web Interface, Frontend Integration
+- **Ulviyye Eliyeva → Data Collection & Preprocessing, Pipeline Testing & Evaluation, Documentation
 
 ---
 
