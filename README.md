@@ -99,8 +99,8 @@ Below is the execution timeline of our two-week sprint, detailing completed and 
 | **Voice Activity Detection (VAD)** | Silero VAD ✅                                                                                    | NVIDIA NeMo VAD, WebRTC VAD, MarbleNet VAD                                      |
 | **Speech-to-Text (STT)**           | Whisper Medium ✅<br>Whisper Large-v3 ✅<br>Whisper Distil-Large-v3 ✅                             | NVIDIA Parakeet 1.1, NVIDIA Canary 1B, SenseVoice-Small, Whisper Large-v3 Turbo |
 | **STT Backend**                    | Faster-Whisper ✅                                                                                | Whisper.cpp, NVIDIA Riva ASR                                                    |
-| **Large Language Model (LLM)**     | Qwen 2.5 7B ✅<br>Llama 3.2 3B ✅<br>Aya 8B ✅                                                     | Qwen3 8B, Qwen3 14B, Gemma 3 12B, Llama 3.1 8B, Mistral Small 3.2, Phi-4        |
-| **LLM Inference Engine**           | Ollama ✅<br>llama.cpp ✅                                                                         | vLLM, SGLang, TensorRT-LLM, LM Studio                                           |
+| **Large Language Model (LLM)**     | Qwen 2.5 7B ✅<br>Llama 3.2 3B ✅<br>Aya 8B ✅                                                     | Qwen3 8B, Gemma 3 12B, Llama 3.1 8B, Mistral Small 3.2, Phi-4        |
+| **LLM Inference Engine**           | Ollama ✅<br>llama.cpp ✅ <br>Qwen3 14B ✅                                                                        | vLLM, SGLang, TensorRT-LLM, LM Studio                                           |
 | **Text-to-Speech (TTS)**           | Edge TTS – az-AZ-BanuNeural ✅<br>Edge TTS – az-AZ-BabekNeural ✅<br>gTTS (fallback) ✅            | XTTS v2, F5-TTS, Kokoro TTS, MeloTTS, Orpheus TTS                               |
 | **Knowledge Retrieval (RAG)**      | Custom Keyword-Overlap Retriever ✅<br>Knowledge Base Retrieval ✅<br>ChromaDB + Knowledge Base ✅ | FAISS + Embeddings, Milvus, Qdrant, pgvector                                    |
 
