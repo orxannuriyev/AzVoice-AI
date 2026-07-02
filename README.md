@@ -122,9 +122,9 @@ Below is the execution timeline of our two-week sprint, detailing completed and 
 | | Gemma4:e4b | + |
 | | Qwen3 14B | High inference latency on our hardware; occasionally produced hallucinations and unexpected responses in Chinese. |
 | LLM Inference Engine | Ollama | + |
-| | llama.cpp | Ask Orkhan. |
-| Text-to-Speech (TTS) | Edge TTS – az-AZ-BanuNeural | Ask Orkhan (better and more natural voice quality). |
-| | Edge TTS – az-AZ-BabekNeural | + |
+| | llama.cpp | -- |
+| Text-to-Speech (TTS) | Edge TTS – az-AZ-BanuNeural | Babek  |
+| | Edge TTS – az-AZ-BabekNeural |  |
 | | gTTS (fallback) | Lower speech quality and less natural Azerbaijani pronunciation than the selected TTS solution. |
 | | edge-tts | Not selected because another TTS configuration provided better overall performance for the project requirements. |
 | Embedding Model | BAAI/bge-m3 (sentence-transformers) | + |
