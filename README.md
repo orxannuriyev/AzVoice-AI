@@ -10,7 +10,7 @@
 - **Orkhan Nuriyev → System Architecture, Voice Assistant Pipeline Development, Backend Integration
 - **Ibrahim Suleymanov → LLM Integration, Prompt Engineering, Speech Processing
 - **Esli Ehmedova → Demo Development, Web Interface, Frontend Integration
-- **Ulviyye Eliyeva → Data Collection & Preprocessing, Pipeline Testing & Evaluation, Documentation
+- **Ulviyye Eliyeva → Data Collection & Preprocessing, Pipeline Testing & Evaluation, Documentation 
 
 ---
 
@@ -112,4 +112,26 @@ Below is the execution timeline of our two-week sprint, detailing completed and 
 ---
 
 # TODO LIST 
+
+## Project Progress
+
+## Project Progress
+
+| Component | Status | Notes |
+|-----------|:------:|-------|
+| Voice Activity Detection | ✅ Working | Silero VAD integrated |
+| Speech-to-Text | ✅ Working | Faster-Whisper + Whisper |
+| Large Language Model | ✅ Working | Gemma 4:e4b via Ollama |
+| Retrieval-Augmented Generation (RAG) | ✅ Working | ChromaDB + hotel knowledge base |
+| Text-to-Speech | ✅ Working | Edge TTS (Azerbaijani voices) |
+| End-to-End Voice Pipeline | ✅ Working | STT → RAG → LLM → TTS |
+| Performance Evaluation | ✅ Working | Latency and response quality benchmarked |
+| Docker Deployment | ✅ Working | Development environment configured |
+| Tool Calling | 🔧 In Progress | External function integration |
+| Hotel Knowledge Base Expansion | 🔧 In Progress | Dataset and JSON improvements |
+| Website | 🔧 In Progress | User interface and project demonstration |
+| Presentation | 🔧 In Progress | Final demo slides and project overview |
+| Monitoring Dashboard | ⏳ Planned | Conversation analytics and logs |
+| Web/Admin Interface | ⏳ Planned | Hotel operator dashboard | 
+
 
