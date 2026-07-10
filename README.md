@@ -33,10 +33,6 @@ How can we build a fast and accurate Azerbaijani voice assistant capable of unde
 ## 💡 Why It Matters
 High-quality voice assistants for the Azerbaijani language are still limited. This project aims to improve accessibility and human-computer interaction by enabling natural, low-latency voice conversations in Azerbaijani, providing a foundation for applications such as customer support, virtual assistants, and other voice-enabled services. 
 
-## 🏗️ Pipeline Architecture
-
-
----
 
 # TODO LIST 
 
