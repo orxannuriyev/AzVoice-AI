@@ -1,12 +1,12 @@
-"""Groq Cloud STT backend — whisper-large-v3 (OpenAI-uyğun endpoint).
+"""Groq Cloud STT backend — whisper-large-v3 (OpenAI-compatible endpoint).
 
-Local faster-whisper ilə EYNI model ailəsi (large-v3), lakin server GPU-su
-əvəzinə Groq buludunda işləyir. Bu, GPU-suz deploy və GPU-nu yalnız LLM-ə
-ayırmaq imkanı verir. Açar `.env`-dəki GROQ_API_KEY-dən gəlir.
+The SAME model family as local faster-whisper (large-v3), but running on the
+Groq cloud instead of a server GPU. This enables GPU-less deploy and dedicating
+the GPU to the LLM only. The key comes from GROQ_API_KEY in `.env`.
 
-Bu sinif YALNIZ xam transkript qaytarır; RMS qapısı, təmizləmə və
-halüsinasiya filtrləri `stt/transcriber.py` facade-ında (hər iki provayder
-üçün ortaq) tətbiq olunur.
+This class returns ONLY the raw transcript; the RMS gate, cleaning and
+hallucination filters are applied in the `stt/transcriber.py` facade (shared
+by both providers).
 """
 
 import io
@@ -22,7 +22,7 @@ logger = get_logger("STT-Groq")
 
 
 class GroqBackend:
-    """Groq audio transcription API üçün nazik klient (requests əsaslı)."""
+    """Thin client for the Groq audio transcription API (requests-based)."""
 
     def __init__(self):
         if not cfg.groq_api_key:
@@ -36,10 +36,10 @@ class GroqBackend:
         logger.info(f"Groq STT hazırdır (model={self._model}).")
 
     def transcribe(self, audio: np.ndarray) -> str:
-        """float32 [-1, 1] 16kHz mono audio → xam transkript mətni.
+        """float32 [-1, 1] 16kHz mono audio -> raw transcript text.
 
-        Şəbəkə/HTTP xətaları çağırana ötürülür (facade fallback qərarını
-        verir). Boş və ya yalnız-səssizlik audio üçün "" qaytarılır.
+        Network/HTTP errors are propagated to the caller (the facade makes the
+        fallback decision). Returns "" for empty or silence-only audio.
         """
         wav_bytes = self._to_wav(audio)
         files = {"file": ("audio.wav", wav_bytes, "audio/wav")}
@@ -61,9 +61,9 @@ class GroqBackend:
 
     @staticmethod
     def _to_wav(audio: np.ndarray) -> bytes:
-        """float32 [-1, 1] audio-nu 16-bit PCM WAV bytes-a çevirir.
-        (Groq multipart üçün fayl gövdəsi lazımdır; xarici audio kitabxanası
-        istifadə etmədən stdlib `wave` ilə kodlanır.)"""
+        """Converts float32 [-1, 1] audio to 16-bit PCM WAV bytes.
+        (Groq multipart needs a file body; encoded with the stdlib `wave`
+        module without using an external audio library.)"""
         pcm = np.clip(audio, -1.0, 1.0)
         pcm = (pcm * 32767.0).astype(np.int16)
         buf = io.BytesIO()

@@ -1,21 +1,21 @@
 """
-Veb deploy: FastAPI + WebSocket səsli call center serveri.
+Web deploy: FastAPI + WebSocket voice call center server.
 
-Brauzer mikrofonu 16kHz Int16 PCM parçalarını WebSocket ilə göndərir;
-server eyni pipeline-ı işlədir (VAD → STT → RAG/LLM → TTS) və cavabı
-cümlə-cümlə MP3 kimi geri göndərir. Lokal rejimdən (main.py) fərqi
-yalnız audio giriş-çıxışın şəbəkə üzərindən olmasıdır — pipeline
-komponentləri eynidir.
+The browser microphone sends 16kHz Int16 PCM chunks over WebSocket; the
+server runs the same pipeline (VAD -> STT -> RAG/LLM -> TTS) and sends the
+response back sentence-by-sentence as MP3. The only difference from local
+mode (main.py) is that audio I/O goes over the network — the pipeline
+components are identical.
 
-İşə salma (layihə kökündən):
+Run (from the project root):
     .venv\\Scripts\\python.exe -m uvicorn web.server:app --app-dir src --host 0.0.0.0 --port 8000
 
-Sonra brauzerdə: http://localhost:8000
+Then in the browser: http://localhost:8000
 
-WS protokolu:
-  Klient → server:  binary = Int16 PCM 16kHz mono
-  Server → klient:  JSON {"type": "status"|"transcript"|"sentence", ...}
-                    binary = MP3 (bir cümlənin səsi)
+WS protocol:
+  Client -> server:  binary = Int16 PCM 16kHz mono
+  Server -> client:  JSON {"type": "status"|"transcript"|"sentence", ...}
+                     binary = MP3 (audio for one sentence)
 """
 
 import asyncio
@@ -24,7 +24,7 @@ import sys
 import threading
 from pathlib import Path
 
-# src/ qovluğunu import yoluna əlavə et (uvicorn --app-dir olmadan da işləsin)
+# Add the src/ folder to the import path (so it works even without uvicorn --app-dir)
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import edge_tts
@@ -43,7 +43,7 @@ logger = get_logger("Web")
 
 app = FastAPI(title="Astana Hotel AI Call Center")
 
-# Admin panel (idarəetmə + monitorinq; pipeline-a toxunmur)
+# Admin panel (management + monitoring; does not touch the pipeline)
 from admin import auth as admin_auth          # noqa: E402
 from admin import services as admin_services  # noqa: E402
 from admin.api import router as admin_router  # noqa: E402
@@ -52,17 +52,17 @@ app.include_router(admin_router)
 
 _STATIC = Path(__file__).parent / "static"
 _ADMIN_STATIC = Path(__file__).parents[1] / "admin" / "static"
-# Layihə kökündəki character/ qovluğu (AI avatar videosu burada saxlanılır)
+# The character/ folder at the project root (the AI avatar video is kept here)
 _CHARACTER = Path(__file__).resolve().parents[2] / "character"
 
-# Ağır resurslar bir dəfə yüklənir və bütün bağlantılar arasında paylaşılır
+# Heavy resources are loaded once and shared across all connections
 _shared: dict = {}
 
 
 @app.on_event("startup")
 def _load_models():
     logger.info("Modellər yüklənir (bir dəfəlik)...")
-    # Admin: cədvəllər + ilk admin + DB-dəki parametr/prompt override-ları
+    # Admin: tables + first admin + parameter/prompt overrides from the DB
     try:
         admin_auth.ensure_admin_tables()
         admin_services.apply_saved_overrides()
@@ -85,8 +85,8 @@ def admin_index():
 
 @app.get("/character/video")
 def character_video():
-    """character/ qovluğundakı Ibrahim_latest_video.mp4 faylını (və ya ilk .mp4) verir.
-    FileResponse HTTP Range sorğularını dəstəkləyir — video axını üçün lazımdır."""
+    """Serves the Ibrahim_latest_video.mp4 file (or the first .mp4) in the character/ folder.
+    FileResponse supports HTTP Range requests — needed for video streaming."""
     vid_file = _CHARACTER / "Ibrahim_latest_video.mp4"
     if not vid_file.exists():
         vids = sorted(_CHARACTER.glob("*.mp4")) if _CHARACTER.exists() else []
@@ -97,8 +97,8 @@ def character_video():
 
 
 class UtteranceSegmenter:
-    """Gələn PCM axınından VAD ilə tam ifadələri kəsib çıxarır
-    (vad/detector.py-dakı listen() məntiqinin push əsaslı versiyası)."""
+    """Cuts complete utterances out of the incoming PCM stream using VAD
+    (a push-based version of the listen() logic in vad/detector.py)."""
 
     def __init__(self):
         self.vad = VADDetector()
@@ -114,13 +114,13 @@ class UtteranceSegmenter:
         self._started = False
 
     def flush(self):
-        """Yarımçıq seqmenti VƏ daxili buferi tam təmizləyir — cavab
-        müddətində yığılmış köhnə səs yeni input kimi emal olunmasın."""
+        """Fully clears the partial segment AND the internal buffer — so old
+        audio accumulated during the response is not processed as new input."""
         self.reset()
         self._buf = np.zeros(0, dtype=np.float32)
 
     def push(self, pcm16: bytes):
-        """Int16 PCM bytes qəbul edir; tamamlanan ifadələri yield edir."""
+        """Accepts Int16 PCM bytes; yields completed utterances."""
         audio = np.frombuffer(pcm16, dtype=np.int16).astype(np.float32) / 32768.0
         self._buf = np.concatenate([self._buf, audio])
         n = cfg.vad_frame_samples
@@ -146,8 +146,8 @@ class UtteranceSegmenter:
                 if speech_ms >= cfg.vad_min_speech_ms:
                     logger.info(f"Nitq tutuldu: {speech_ms}ms")
                     return np.concatenate(frames)
-        # Qoruyucu sərhəd (lokal rejimdəki kimi): fon küyü sükut sayğacını
-        # daim sıfırlayanda dinləmə sonsuz uzanmasın — limitdə məcburi kəs.
+        # Safety guard (like in local mode): so listening does not drag on
+        # forever when background noise keeps resetting the silence counter — force-cut at the limit.
         if self._started and len(self._frames) * self._frame_ms >= cfg.vad_max_utterance_ms:
             frames, speech_ms = self._frames, self._speech_ms
             self.reset()
@@ -158,8 +158,8 @@ class UtteranceSegmenter:
 
 
 async def _tts_mp3(text: str) -> bytes | None:
-    """edge-tts ilə mətni MP3 bytes-a çevirir (server səsləndirmir,
-    brauzer səsləndirir)."""
+    """Converts text to MP3 bytes with edge-tts (the server does not play it,
+    the browser does)."""
     try:
         buf = io.BytesIO()
         communicate = edge_tts.Communicate(
@@ -175,12 +175,12 @@ async def _tts_mp3(text: str) -> bytes | None:
 
 
 async def _respond(ws: WebSocket, backend: LLMBackend, transcript: str):
-    """LLM cavabını cümlə-cümlə sintez edib klientə göndərir."""
+    """Synthesizes the LLM response sentence-by-sentence and sends it to the client."""
     await ws.send_json({"type": "transcript", "text": transcript})
     await ws.send_json({"type": "status", "state": "thinking"})
 
-    # Bloklayan LLM generatorunu ayrıca thread-də işlədib cümlələri
-    # asyncio növbəsi ilə alırıq — beləliklə streaming qorunur.
+    # Run the blocking LLM generator in a separate thread and receive sentences
+    # via an asyncio queue — this preserves streaming.
     queue: asyncio.Queue = asyncio.Queue()
     loop = asyncio.get_running_loop()
 
@@ -207,9 +207,9 @@ async def _respond(ws: WebSocket, backend: LLMBackend, transcript: str):
 
         await ws.send_json({"type": "status", "state": "listening"})
     except (WebSocketDisconnect, RuntimeError):
-        # Klient cavab ortasında ayrıldı ("Unexpected ASGI message ...
-        # after sending 'websocket.close'") — xəta deyil, zəng bitib.
-        # Producer thread-i bloklanmasın deyə növbə boşaldılır.
+        # The client disconnected mid-response ("Unexpected ASGI message ...
+        # after sending 'websocket.close'") — not an error, the call ended.
+        # The queue is drained so the producer thread does not block.
         logger.info("Zəng cavab ortasında bitdi — göndərmə dayandırıldı.")
         while not queue.empty():
             if queue.get_nowait() is None:
@@ -218,10 +218,10 @@ async def _respond(ws: WebSocket, backend: LLMBackend, transcript: str):
 
 
 async def _drain_stale_audio(ws: WebSocket) -> bool:
-    """Cavab hazırlanıb göndərilərkən klientdən yığılıb qalmış KÖHNƏ audio
-    paketlərini atır. İstifadəçinin 'gözləmə' anında dediyi sözlər növbəti
-    input kimi emal olunub cavabların bir-birinə qarışmasına səbəb olurdu.
-    False = bağlantı qapanıb."""
+    """Drops OLD audio packets that piled up from the client while the response
+    was being prepared and sent. Words the user said during the 'wait' moment
+    were being processed as the next input and caused responses to mix together.
+    Returns False = the connection is closed."""
     dropped = 0
     try:
         while True:
@@ -244,7 +244,7 @@ async def call(ws: WebSocket):
     await ws.accept()
     logger.info("Yeni zəng (WebSocket bağlantısı).")
 
-    # Hər zəng öz söhbət konteksti ilə; ağır RAG resursları paylaşılır
+    # Each call with its own conversation context; heavy RAG resources are shared
     backend = LLMBackend(knowledge=_shared["knowledge"])
     segmenter = UtteranceSegmenter()
 
@@ -266,19 +266,19 @@ async def call(ws: WebSocket):
                 break
             if data.get("bytes") is None:
                 continue
-            # Paketdəki bütün tamamlanan ifadələr əvvəlcə toplanır — cavabdan
-            # sonra qalanları emal ETMİRİK (köhnə/qarışıq səsdir).
+            # All completed utterances in the packet are collected first — we do
+            # NOT process the rest after a response (it is old/mixed audio).
             for utterance in list(segmenter.push(data["bytes"])):
                 transcript = await asyncio.to_thread(
                     _shared["stt"].transcribe, utterance
                 )
-                # Tək sözlük təsdiq/imtina sözləri ("Bəli", "Xeyr") keçir,
-                # tək sözlük küy halüsinasiyaları əvvəlki kimi atılır.
+                # Single-word confirm/refuse words ("Bəli", "Xeyr") pass;
+                # single-word noise hallucinations are dropped as before.
                 if not is_meaningful_utterance(transcript):
                     continue
                 await _respond(ws, backend, transcript)
-                # Cavab müddətində istifadəçidən gələn səs KÖHNƏLİB — yeni
-                # sorğu kimi cavablandırılmır. Yarımçıq seqment də sıfırlanır.
+                # Audio from the user during the response is STALE — it is not
+                # answered as a new query. The partial segment is also reset.
                 segmenter.flush()
                 if not await _drain_stale_audio(ws):
                     raise WebSocketDisconnect(1000)

@@ -1,19 +1,19 @@
 """
-LLM backend: Ollama (gemma4:e4b) + FAISS/BM25 hibrid RAG.
+LLM backend: Ollama (gemma4:e4b) + FAISS/BM25 hybrid RAG.
 
-Əvvəlki versiya llama.cpp-ni in-process (GGUF fayl) işlədirdi. Bu versiya
-Ollama HTTP API-a keçib, çünki esli_0107/faqrag layihəsində gemma4:e4b
-qwen2.5:7b-dən həm sürətli (~4s vs 5-14s), həm keyfiyyətli çıxdı.
+The previous version ran llama.cpp in-process (a GGUF file). This version
+switched to the Ollama HTTP API, because in the esli_0107/faqrag project
+gemma4:e4b turned out both faster (~4s vs 5-14s) and higher quality than qwen2.5:7b.
 
-Səsli danışıq üçün gecikmə kritikdir, ona görə iki əsas optimizasiya var:
-  1. Yüksək əminlikli, tək-hissəli suallarda LLM tamam by-pass olunur —
-     FAQ cavabı cümlə-cümlə birbaşa TTS-ə göndərilir (~10-50ms).
-  2. LLM lazım olan hallarda cavab stream (token-be-token) alınır və
-     cümlə tamamlanan kimi dərhal yield edilir — TTS bütün cavabı
-     gözləmədən danışmağa başlaya bilir.
+Latency is critical for voice conversation, so there are two key optimizations:
+  1. For high-confidence, single-intent questions the LLM is fully by-passed —
+     the FAQ answer is sent sentence-by-sentence straight to TTS (~10-50ms).
+  2. When the LLM is needed, the response is streamed (token by token) and
+     yielded as soon as a sentence completes — TTS can start speaking without
+     waiting for the whole response.
 
-Public API (session.py və test_llm.py üçün) əvvəlki versiya ilə eynidir:
-    LLMBackend().stream(user_text) -> Generator[str]  (təmizlənmiş cümlələr)
+The public API (for session.py and test_llm.py) is the same as before:
+    LLMBackend().stream(user_text) -> Generator[str]  (cleaned sentences)
     LLMBackend().clear_history()
 """
 
@@ -33,11 +33,11 @@ from db.memory import ConversationMemory
 
 logger = get_logger("LLM")
 
-# Yalnız ƏSL DATABASE ƏMƏLİYYATLARI tool yoluna gedir: rezervasiya
-# yaratmaq/ləğv etmək, boş otaq / mövcudluq yoxlamaq, qonağın öz
-# rezervasiyası. Sıravi məlumat sualları (qiymətlər, xidmətlər, spa,
-# transfer və s.) FAQ-da dəqiqliklə var — sürətli RAG yolu ilə cavablanır
-# (tool yolu 10-25s, RAG direct <1s).
+# Only REAL DATABASE OPERATIONS go down the tool path: creating/cancelling a
+# reservation, checking free rooms / availability, a guest's own reservation.
+# Ordinary information questions (prices, services, spa, transfer, etc.) exist
+# precisely in the FAQ — they are answered via the fast RAG path
+# (tool path 10-25s, RAG direct <1s).
 _TOOL_INTENT_RE = re.compile(
     r"rezervasiya|bron|l[əe]ğv|imtina"
     r"|boş\s*(ota[qğ]|yer)|otaq\s*qalıb|yer\s*qalıb|mövcudluq"
@@ -48,8 +48,8 @@ _TOOL_INTENT_RE = re.compile(
     re.IGNORECASE,
 )
 
-# Assistentin rezervasiya slot-sualları: bu suallardan sonra istifadəçinin
-# cavabı (ad, nömrə, tarix, təsdiq) mütləq tool dialoqunda qalmalıdır.
+# The assistant's reservation slot questions: after these, the user's answer
+# (name, number, date, confirmation) must stay in the tool dialogue.
 _SLOT_QUESTION_RE = re.compile(
     r"ad[ıi]n[ıi]z|soyad|telefon|nömrə|hansı\s*tarix|hansı\s*otaq|otaq\s*tipi"
     r"|neçə\s*gecə|neçə\s*nəfər|çek-in|çek-aut|giriş\s*tarix|çıxış\s*tarix"
@@ -60,11 +60,11 @@ _SLOT_QUESTION_RE = re.compile(
     re.IGNORECASE,
 )
 
-# Rezervasiya slot-dialoqu davam edərkən istifadəçinin tipik CAVABLARI:
-# təsdiq sözləri, otaq tipi, telefon/rəqəmlər, tarix/ay adları, ad təqdimi.
-# Bu cavablar FAQ-da təsadüfən yüksək skorla tapılsa belə (məs. "Standart
-# otaq olsun" → "Standart otaq necədir?" FAQ-ı), dialoq tool yolundan
-# QOPMAMALIDIR — əks halda rezervasiya tool-suz "yalan uğur"la bitirdi.
+# The user's typical ANSWERS while a reservation slot-dialogue is ongoing:
+# confirmation words, room type, phone/numbers, date/month names, giving a name.
+# Even if these answers happen to match an FAQ with a high score (e.g. "Standart
+# otaq olsun" -> the "Standart otaq necədir?" FAQ), the dialogue must NOT break
+# away from the tool path — otherwise the reservation ended in a tool-less "false success".
 _SLOT_ANSWER_RE = re.compile(
     r"^\s*(xeyr|yox|oldu|tamam|olar)\b"
     r"|\b(bəli|hə+|doğrudur|düzdür|təsdiq(\s*edirəm)?|razıyam|uyğundur)\b"
@@ -78,13 +78,14 @@ _SLOT_ANSWER_RE = re.compile(
     re.IGNORECASE,
 )
 
-# Modelin "rezervasiya/ləğv əməliyyatı BAŞ TUTDU" iddiası. Bu ifadələr yalnız
-# DB-də real yazı (create/cancel_reservation → success:true) baş verəndə
-# istifadəçiyə çatmalıdır. Kiçik model bəzən tool-u atlayıb birbaşa bu cümləni
-# yazır — halüsinasiya səddi (bax _stream_with_tools) bunu tutur.
-# DİQQƏT: yalnız TAMAMLANDI iddiası tutulur (yaradıldı, təsdiqlənmişdir,
-# edildi...), niyyət/sual DEYİL (təsdiqləyirəm, edirəm) — əks halda slot
-# təsdiq mərhələsində səhv işə düşərdi.
+# The model's claim that a "reservation/cancel operation SUCCEEDED". These
+# phrases must reach the user only when a real DB write happened
+# (create/cancel_reservation -> success:true). A small model sometimes skips the
+# tool and writes this sentence directly — the hallucination guard (see
+# _stream_with_tools) catches it.
+# NOTE: only a COMPLETED claim is caught (created, confirmed, done...), NOT
+# intent/question (I confirm, I am doing) — otherwise it would misfire at the
+# slot confirmation stage.
 _WRITE_SUCCESS_CLAIM_RE = re.compile(
     r"uğurla\s+(yarad|tamamlan|ləğv|rəsmiləşdir|qeydiyyat)"
     r"|(rezervasiya|bron|otaq|yer)\w*[^.?!]{0,40}"
@@ -94,11 +95,11 @@ _WRITE_SUCCESS_CLAIM_RE = re.compile(
     r"|ləğv\s+edil(d|[ıi]b)",
     re.IGNORECASE,
 )
-# DB-yə yazan (write) tool-lar — uğur iddiası yalnız bunlarla təsdiqlənə bilər.
+# DB-writing (write) tools — a success claim can only be confirmed by these.
 _WRITE_TOOLS = frozenset({"create_reservation", "cancel_reservation"})
 
 REPLACEMENTS = {
-    # --- Tətbiq / texnologiya ---
+    # --- App / technology ---
     "app-dan": "tətbiqdən",
     "appdan": "tətbiqdən",
     "app": "tətbiq",
@@ -109,7 +110,7 @@ REPLACEMENTS = {
     "bakiye": "balans",
     "sorry": "üzr istəyirəm",
     "please": "xahiş edirəm",
-    # --- Otel terminleri (xarici → Azərbaycanca tələffüz) ---
+    # --- Hotel terms (foreign -> Azerbaijani pronunciation) ---
     "deluxe": "delüks",
     "de luxe": "delüks",
     "deluks": "delüks",
@@ -133,9 +134,9 @@ REPLACEMENTS = {
 _SENTENCE_RE = re.compile(r"([.?!;]+)(\s|$)")
 _MULTI_INTENT_RE = re.compile(r"\bvə\b|\bhəm\b|\bhəmçinin\b|\bbir də\b", re.IGNORECASE)
 
-# Anafora / davam sualları: "bəs qiyməti?", "onu bir də izah et", "o necə
-# işləyir?" — belə sorğular tək başına RAG axtarışına yaramır, əvvəlki
-# sualın konteksti ilə birlikdə emal olunmalıdır.
+# Anaphora / follow-up questions: "bəs qiyməti?", "onu bir də izah et", "o necə
+# işləyir?" — such queries are not suitable for a standalone RAG search and must
+# be processed together with the context of the previous question.
 _FOLLOWUP_RE = re.compile(
     r"^\s*(bəs|onda)\b|\b(onun|onu|ona|onlar|o\s+necə|bir\s+də|yenə|yenidən"
     r"|təkrar|davam|həmin|dediyin|dediyiniz)\b",
@@ -143,7 +144,7 @@ _FOLLOWUP_RE = re.compile(
 )
 
 # -------------------------------------------------------------------
-# Azərbaycanca say sözləri (0-999 aralığı üçün)
+# Azerbaijani number words (for the 0-999 range)
 # -------------------------------------------------------------------
 _AZ_ONES = [
     "", "bir", "iki", "üç", "dörd", "beş", "altı", "yeddi", "səkkiz", "doqquz",
@@ -154,7 +155,7 @@ _AZ_TENS = ["", "on", "iyirmi", "otuz", "qırx", "əlli", "altmış", "yetmiş",
 
 
 def _az_num(n: int) -> str:
-    """0-999 tam ədədi Azərbaycanca sözə çevirir."""
+    """Converts a 0-999 integer into Azerbaijani words."""
     if n < 0 or n > 999:
         return str(n)
     if n < 20:
@@ -167,20 +168,20 @@ def _az_num(n: int) -> str:
     return (_AZ_TENS[tens] + (" " + _AZ_ONES[ones] if ones else "")).strip()
 
 
-# Telefon nömrəsi regex: +994 ilə başlayan 12 rəqəmli nömrələr
+# Phone number regex: 12-digit numbers starting with +994
 _PHONE_RE = re.compile(r"\+994(\d{2})(\d{3})(\d{2})(\d{2})")
 
 
 def _normalize_text_for_tts(text: str) -> str:
-    """TTS-dən əvvəl mətni Azərbaycanca tez-tez oxunma problemleri üçün normallaşdırır.
-    Hələlik: +994XXXXXXXXXX formatlı telefon nömrələri söz qruplarına çevrilir.
-    Məsələn: +994557861665 → 'doqquz yüz doxsan dörd, əlli beş, yeddi yüz şəksən altı, on altı, altmış beş'
+    """Normalizes text before TTS to fix common Azerbaijani reading problems.
+    For now: phone numbers in +994XXXXXXXXXX format are converted to word groups.
+    Example: +994557861665 -> 'doqquz yüz doxsan dörd, əlli beş, yeddi yüz şəksən altı, on altı, altmış beş'
     """
     def _replace_phone(m: re.Match) -> str:
-        op   = int(m.group(1))   # operator kodu: 55, 70 və s.
-        p3   = int(m.group(2))   # 3 rəqəm
-        p2a  = int(m.group(3))   # 2 rəqəm
-        p2b  = int(m.group(4))   # 2 rəqəm
+        op   = int(m.group(1))   # operator code: 55, 70, etc.
+        p3   = int(m.group(2))   # 3 digits
+        p2a  = int(m.group(3))   # 2 digits
+        p2b  = int(m.group(4))   # 2 digits
         return (
             "doqquz yüz doxsan dörd, "
             + _az_num(op) + ", "
@@ -192,16 +193,16 @@ def _normalize_text_for_tts(text: str) -> str:
 
 NOT_FOUND_MESSAGE = "Bu barədə məlumatım yoxdur."
 
-# Ollama warm-up yalnız bir dəfə (proses başına) işləsin — veb serverdə hər
-# WebSocket bağlantısı yeni LLMBackend yaradır, hər dəfə warm-up lazım deyil.
+# Run Ollama warm-up only once (per process) — on the web server every
+# WebSocket connection creates a new LLMBackend, so warm-up is not needed each time.
 _warmup_lock = threading.Lock()
 _warmup_done = False
 
 
 def _warmup_ollama() -> None:
-    """Modeli arxa planda GPU-ya yükləyir (soyuq startda ilk real sorğu
-    15+ saniyə çəkirdi). num_predict=1 — demək olar pulsuz, keep_alive
-    modeli yaddaşda saxlayır."""
+    """Loads the model onto the GPU in the background (on a cold start the first
+    real request took 15+ seconds). num_predict=1 — almost free, keep_alive
+    keeps the model in memory."""
     global _warmup_done
     with _warmup_lock:
         if _warmup_done:
@@ -231,9 +232,9 @@ def _warmup_ollama() -> None:
 
 
 def _is_multi_intent(query: str) -> bool:
-    """Sualın bir neçə hissədən ibarət olduğunu leksik tanıyır
-    ("X nədir və necə əldə edim?"). Yalnız belə suallarda bir neçə FAQ
-    cavabının LLM ilə birləşdirilməsinə ehtiyac var."""
+    """Lexically detects that a question consists of several parts
+    ("What is X and how do I get it?"). Only such questions need several FAQ
+    answers to be combined with the LLM."""
     return bool(_MULTI_INTENT_RE.search(query)) or query.count("?") > 1
 
 
@@ -251,58 +252,58 @@ def _split_sentences(text: str) -> List[str]:
 
 class LLMBackend:
     def __init__(self, knowledge: KnowledgeBase | None = None):
-        # knowledge parametri veb serverdə bir neçə bağlantının ağır RAG
-        # resurslarını (FAISS + embedding modeli) paylaşması üçündür;
-        # verilməzsə əvvəlki kimi öz bazasını yaradır (geriyə uyğundur).
+        # The knowledge parameter is so that multiple connections on the web
+        # server can share the heavy RAG resources (FAISS + embedding model);
+        # if not given, it creates its own base as before (backward compatible).
         _provider = (cfg.llm_provider or "local").lower()
         logger.info(
             f"LLM backend: {'Gemini / ' + cfg.gemini_model if _provider == 'gemini' else 'Ollama / ' + cfg.llm_model}")
         self.knowledge = knowledge or KnowledgeBase()
         logger.info(f"RAG bilik bazası yükləndi: {self.knowledge.count} FAQ girişi")
-        # Söhbət jurnalı: hər növbə DB-yə yazılır (analitika / zəng tarixçəsi).
-        # Hər zəng təzə kontekstlə başlayır — əvvəlki zəngin söhbəti YÜKLƏNMİR
-        # (başqa müştəri ola bilər). İstisna hal üçün: cfg.memory_preload=True.
+        # Conversation log: every turn is written to the DB (analytics / call history).
+        # Every call starts with fresh context — the previous call's conversation is
+        # NOT loaded (it may be a different customer). For the exception: cfg.memory_preload=True.
         self.memory = ConversationMemory() if cfg.memory_enabled else None
         self._history = (
             self.memory.load_recent(cfg.max_history_turns)
             if (self.memory and cfg.memory_preload) else []
         )
-        # Son sorğunun getdiyi yol ("rag" | "tools") — tool dialoqu davam
-        # edərkən açar sözü olmayan cavablar ("Adım Gülü, nömrəm...") da
-        # tool yolunda qalsın deyə izlənir.
+        # The path the last request took ("rag" | "tools") — tracked so that
+        # while a tool dialogue is ongoing, answers without keywords
+        # ("My name is Gülü, my number...") also stay on the tool path.
         self._last_route = "rag"
-        # Cari növbədə aktiv LLM provayderi. Hər stream() çağırışında cfg-dən
-        # yenilənir; API (Gemini) çökərsə növbə ərzində "local"-a keçir ki,
-        # tool mesaj formatı və dispatch ardıcıl qalsın (bax fallback).
+        # The active LLM provider for the current turn. Refreshed from cfg on
+        # every stream() call; if the API (Gemini) fails, it switches to "local"
+        # for the turn so the tool message format and dispatch stay consistent (see fallback).
         self._active_provider = (cfg.llm_provider or "local").lower()
-        # Gözləmə mesajının son deyilmə vaxtı (cooldown üçün)
+        # The last time the wait message was spoken (for the cooldown)
         self._last_wait_ts = 0.0
-        # Modeli arxa planda əvvəlcədən yüklə — ilk real sorğu soyuq startda
-        # 15+ saniyə gözləməsin (bax logs: "LLM ilk cümlə latency: 15804 ms").
-        # Yalnız local (Ollama) rejimdə mənalıdır; Gemini bulud API-dır.
+        # Preload the model in the background — so the first real request does not
+        # wait 15+ seconds on a cold start (see logs: "LLM ilk cümlə latency: 15804 ms").
+        # Only meaningful in local (Ollama) mode; Gemini is a cloud API.
         if (cfg.llm_provider or "local").lower() != "gemini":
             _warmup_ollama()
 
-    # --- mətn təmizləmə (əvvəlki versiyadan dəyişməz) -----------------------
+    # --- text cleaning (unchanged from the previous version) ----------------
 
     def _clean(self, text: str) -> str:
         text = re.sub(
             r"(?i)^(müştəri|köməkçi|operator|assistant|system)\s*:\s*",
             "", text.strip()
         )
-        # Kod blokları və JSON/tool-çağırışı qalıqları nitqə düşməməlidir —
-        # model bəzən cavabın içində ReAct formatında {"action": ...} yazır.
-        # Fiqurlu mötərizəli bloklar (nested daxil) tam silinir: danışıq
-        # mətnində {} onsuz da olmur.
+        # Code blocks and JSON/tool-call leftovers must not reach speech —
+        # the model sometimes writes {"action": ...} in ReAct format inside the
+        # answer. Curly-brace blocks (including nested) are fully removed: {}
+        # does not occur in spoken text anyway.
         text = re.sub(r"```.*?```", " ", text, flags=re.DOTALL)
         prev = None
         while prev != text:
             prev = text
             text = re.sub(r"\{[^{}]*\}", " ", text)
         for bad, good in REPLACEMENTS.items():
-            # \b sərhədi olmadan "app" -> "Apple" (=> "tətbiqle") və
-            # "whatsapp" (=> "whatstətbiq") kimi söz-içi korrupsiyalar yaranırdı —
-            # FAQ cavabları (Apple, whatsapp linkləri) birbaşa TTS-ə getdikdə üzə çıxdı.
+            # Without the \b boundary, in-word corruptions appeared like
+            # "app" -> "Apple" (=> "tətbiqle") and "whatsapp" (=> "whatstətbiq") —
+            # surfaced when FAQ answers (Apple, whatsapp links) went straight to TTS.
             text = re.sub(rf"\b{re.escape(bad)}\b", good, text, flags=re.IGNORECASE)
         text = re.sub(r"[а-яА-ЯёЁ]+", "", text)
         text = re.sub(r"\s+", " ", text)
@@ -318,16 +319,16 @@ class LLMBackend:
             "men ibrahim", "adim ibrahim",
             "sizə kömək edə bilərəm",
             "sizin xidmətinizdəyəm",
-            # Daxili proses danışığı — istifadəçi bunları eşitməməlidir
+            # Internal process talk — the user must not hear these
             "tool", "funksiya", "sorğu göndər", "sistemə bax",
         )
         lowered = text.casefold()
         if re.search(r"[а-яА-ЯёЁ]", text):
             return True
-        # JSON / tool-çağırışı sızması: cümlə JSON-a bənzəyirsə və ya tool
-        # adları / "action" açarları qalıbsa — istifadəçiyə çatdırılmır.
-        # (Tam bloklar _clean-də silinir; bura yarımçıq qalıqlar üçündür,
-        # məs. JSON cümlə ortasından bölünəndə.)
+        # JSON / tool-call leakage: if the sentence looks like JSON or tool
+        # names / "action" keys remain — it is not delivered to the user.
+        # (Full blocks are removed in _clean; this is for partial leftovers,
+        # e.g. when JSON is split in the middle of a sentence.)
         if text.lstrip().startswith(("{", "[", "}", "```")):
             return True
         if re.search(r"\baction_input\b|[\"']action[\"']\s*[:,]", lowered):
@@ -337,10 +338,10 @@ class LLMBackend:
             r"|get_hotel_info|get_room_types|find_guest|get_guest_reservations"
             r"|get_reservation_by_code|list_services|list_campaigns)\b", lowered):
             return True
-        # Birinci şəxs meta-təkliflər: "yoxlaya bilərəm", "göstərə bilərəm",
-        # "istifadə edə bilərəm" — assistent niyyətini danışmamalı, işi görüb
-        # nəticəni deməlidir. (FAQ cavabları "bilərsiniz/bilərik" işlədir,
-        # ona görə bu filtr onlara toxunmur.)
+        # First-person meta-offers: "I can check", "I can show",
+        # "I can use" — the assistant must not talk about its intent, it should
+        # do the work and state the result. (FAQ answers use "you can/we can",
+        # so this filter does not touch them.)
         if re.search(r"\b\w+[aə]\s+bil[əe]r[əe]m\b", lowered):
             return True
         return any(m in lowered for m in bad_markers)
@@ -352,7 +353,7 @@ class LLMBackend:
             return cleaned
         return None
 
-    # --- prompt / tarixçə ----------------------------------------------------
+    # --- prompt / history ----------------------------------------------------
 
     def _build_messages(self, user_text: str, candidates: List[Candidate]) -> list:
         if candidates:
@@ -369,8 +370,8 @@ class LLMBackend:
                 f"--- BİLİK BAZASI ---\n{context}\n--- BİLİK BAZASI SONU ---"
             )
         else:
-            # FAQ tapılmadı, amma söhbət konteksti var — cavab yalnız
-            # tarixçəyə əsaslanmalıdır (məs. "onu bir də təkrar et").
+            # No FAQ found, but there is conversation context — the answer must
+            # be based only on the history (e.g. "repeat that again").
             system_content = (
                 f"{cfg.system_prompt}\n\n"
                 "Bilik bazasında bu sorğuya uyğun giriş tapılmadı. Cavabı YALNIZ "
@@ -388,14 +389,14 @@ class LLMBackend:
         max_messages = cfg.max_history_turns * 2
         if len(self._history) > max_messages:
             self._history = self._history[-max_messages:]
-        # Davamlı yaddaşa yaz (cavab artıq tam səsləndirilib — TTS-i ləngitmir)
+        # Write to persistent memory (the answer is already fully spoken — does not slow TTS)
         if self.memory:
             self.memory.save_turn(user_text, response)
 
     # --- Ollama streaming ------------------------------------------------------
 
     def _stream_ollama_sentences(self, messages: list) -> Generator[str, None, None]:
-        """Ollama-dan token-token oxuyur, cümlə tamamlanan kimi xam mətni yield edir."""
+        """Reads token by token from Ollama, yields the raw text as each sentence completes."""
         response = requests.post(
             cfg.ollama_url,
             json={
@@ -403,9 +404,9 @@ class LLMBackend:
                 "messages": messages,
                 "stream": True,
                 "keep_alive": cfg.ollama_keep_alive,
-                # "thinking" modellər (gemma4 və s.) reasoning tokenlərini
-                # num_predict büdcəsindən yeyib boş cavab qaytara bilir —
-                # söndürülür ki, bütün büdcə görünən cavaba getsin.
+                # "thinking" models (gemma4 etc.) can eat reasoning tokens from
+                # the num_predict budget and return an empty answer — disabled
+                # so the whole budget goes to the visible answer.
                 "think": False,
                 "options": {
                     "temperature": cfg.llm_temperature,
@@ -443,10 +444,10 @@ class LLMBackend:
             yield buffer.strip()
 
     def _llm_stream_sentences(self, messages: list) -> Generator[str, None, None]:
-        """Provayderə görə streaming (tool-suz) cavab — cümlə-cümlə xam mətn.
-        Gemini çökərsə: heç bir cümlə hələ göndərilməyibsə local Ollama-ya
-        keçir; artıq cümlə getibsə təmiz fallback mümkün deyil (yarımçıq +
-        təkrar olardı), ona görə sadəcə bitirir."""
+        """Streaming (tool-less) response by provider — raw text, sentence by sentence.
+        If Gemini fails: if no sentence has been sent yet, switch to local Ollama;
+        if a sentence already went out, a clean fallback is not possible (it would
+        be partial + repeated), so it just finishes."""
         if self._active_provider != "gemini":
             yield from self._stream_ollama_sentences(messages)
             return
@@ -469,7 +470,7 @@ class LLMBackend:
         yield from self._stream_ollama_sentences(messages)
 
     def _stream_gemini_sentences(self, messages: list) -> Generator[str, None, None]:
-        """Gemini (OpenAI-uyğun SSE) axınından cümlə tamamlanan kimi yield edir."""
+        """Yields from the Gemini (OpenAI-compatible SSE) stream as each sentence completes."""
         response = requests.post(
             f"{cfg.gemini_openai_url}/chat/completions",
             headers={"Authorization": f"Bearer {cfg.gemini_api_key}"},
@@ -512,7 +513,7 @@ class LLMBackend:
         if buffer.strip():
             yield buffer.strip()
 
-    # --- tool calling (otel database-i) ---------------------------------------
+    # --- tool calling (hotel database) ----------------------------------------
 
     def _tools_system_prompt(self) -> str:
         from datetime import date, timedelta
@@ -596,7 +597,7 @@ class LLMBackend:
         )
 
     def _chat_ollama_with_tools(self, messages: list) -> dict:
-        """Bir dəfəlik (stream=False) çağırış — model tool istəyə bilər."""
+        """One-shot (stream=False) call — the model may request a tool."""
         response = requests.post(
             cfg.ollama_url,
             json={
@@ -618,10 +619,10 @@ class LLMBackend:
         return response.json().get("message", {})
 
     def _llm_chat_tools(self, messages: list) -> dict:
-        """Provayderə görə tool-lu (stream=False) çağırış. Hər iki halda
-        NORMAL formada assistant mesajı qaytarır: {content, tool_calls[...]}.
-        Gemini çökərsə (429/5xx/timeout/şəbəkə) və fallback açıqdırsa, bu
-        növbə üçün local Ollama-ya keçir (self._active_provider = "local")."""
+        """Tool-enabled (stream=False) call by provider. In both cases returns a
+        NORMAL-form assistant message: {content, tool_calls[...]}.
+        If Gemini fails (429/5xx/timeout/network) and fallback is on, switches to
+        local Ollama for this turn (self._active_provider = "local")."""
         if self._active_provider == "gemini":
             try:
                 return self._gemini_chat_tools(messages)
@@ -633,7 +634,7 @@ class LLMBackend:
         return self._chat_ollama_with_tools(messages)
 
     def _gemini_chat_tools(self, messages: list) -> dict:
-        """Gemini (OpenAI-uyğun endpoint) — tool-lu, stream=False çağırış."""
+        """Gemini (OpenAI-compatible endpoint) — tool-enabled, stream=False call."""
         response = requests.post(
             f"{cfg.gemini_openai_url}/chat/completions",
             headers={"Authorization": f"Bearer {cfg.gemini_api_key}"},
@@ -654,15 +655,14 @@ class LLMBackend:
 
     @staticmethod
     def _extract_tool_calls(msg: dict) -> list:
-        """Assistant mesajından tool çağırışlarını normal formaya çıxarır:
-        [{"id", "name", "args"(dict)}]. Ollama və OpenAI/Gemini eyni
-        `tool_calls[].function.{name,arguments}` quruluşundan istifadə edir;
-        Gemini əlavə `id` verir (tool nəticəsini bağlamaq üçün lazımdır).
-        Fallback: Gemini bəzən ReAct formatında
-        {"action":"...","action_input":{...}} mətni kimi cavab verir —
-        bu da tool çağırışı kimi parse edilir."""
+        """Extracts tool calls from an assistant message into normal form:
+        [{"id", "name", "args"(dict)}]. Ollama and OpenAI/Gemini use the same
+        `tool_calls[].function.{name,arguments}` structure; Gemini also provides
+        an `id` (needed to bind the tool result).
+        Fallback: Gemini sometimes replies as ReAct-format text
+        {"action":"...","action_input":{...}} — this is also parsed as a tool call."""
         calls = []
-        # 1) Standart tool_calls formatı (Ollama + Gemini function calling)
+        # 1) Standard tool_calls format (Ollama + Gemini function calling)
         for tc in (msg or {}).get("tool_calls") or []:
             fn = tc.get("function", {})
             args = fn.get("arguments") or {}
@@ -674,9 +674,9 @@ class LLMBackend:
             calls.append({"id": tc.get("id"), "name": fn.get("name", ""), "args": args})
         if calls:
             return calls
-        # 2) ReAct fallback: model cavabı content-də JSON olaraq yazdısa
-        # {"action": "tool_adı", "action_input": {...}} və ya
-        # {"action": "tool_adı", "action_input": "{...}"} formatını tap
+        # 2) ReAct fallback: if the model wrote the answer as JSON in content,
+        # find the {"action": "tool_name", "action_input": {...}} or
+        # {"action": "tool_name", "action_input": "{...}"} format
         content = (msg or {}).get("content", "") or ""
         _react_re = re.compile(
             r'\{\s*"action"\s*:\s*"([^"]+)"\s*,\s*"action_input"\s*:\s*(\{.*?\}|".*?")\s*\}',
@@ -691,9 +691,9 @@ class LLMBackend:
                 if isinstance(args, str):
                     args = json.loads(args)
             except (json.JSONDecodeError, TypeError):
-                # Model bəzən action_input-u Python dict sintaksisi ilə yazır:
-                # "{'name': 'Əhməd', 'phone': '055...'}" — tək dırnaqlar
-                # json.loads-da keçmir, ast.literal_eval ilə oxunur.
+                # The model sometimes writes action_input in Python dict syntax:
+                # "{'name': 'Əhməd', 'phone': '055...'}" — single quotes do not
+                # pass json.loads, so they are read with ast.literal_eval.
                 import ast
                 for candidate in (raw_args, raw_args.strip("\"'")):
                     try:
@@ -712,9 +712,9 @@ class LLMBackend:
         return calls
 
     def _tool_result_message(self, call: dict, result: dict) -> dict:
-        """Tool nəticəsini AKTIV provayderin gözlədiyi formatda mesaja çevirir.
-        Gemini/OpenAI `tool_call_id` tələb edir; Ollama `tool_name` işlədir.
-        Fallback baş verdikdə self._active_provider artıq "local" olur."""
+        """Converts a tool result into a message in the format the ACTIVE provider expects.
+        Gemini/OpenAI require `tool_call_id`; Ollama uses `tool_name`.
+        When a fallback happens, self._active_provider is already "local"."""
         content = json.dumps(result, ensure_ascii=False)
         if self._active_provider == "gemini":
             return {"role": "tool",
@@ -723,11 +723,11 @@ class LLMBackend:
         return {"role": "tool", "tool_name": call.get("name"), "content": content}
 
     def _run_tool_rounds(self, messages: list, executed: list | None = None) -> dict:
-        """Maksimum 3 raund tool çağırışı (məs. find_guest → check_availability).
-        Son modelin mesajını qaytarır; messages siyahısı yerində genişlənir.
-        `executed` verilsə, icra olunan hər (tool_adı, nəticə) cütü ora yazılır —
-        halüsinasiya səddi real DB yazısını təsdiqləmək üçün buna baxır.
-        Provayder-müstəqildir: local (Ollama) və gemini eyni məntiqlə işləyir."""
+        """Up to 3 rounds of tool calls (e.g. find_guest -> check_availability).
+        Returns the last model message; the messages list is expanded in place.
+        If `executed` is given, each executed (tool_name, result) pair is written
+        there — the hallucination guard looks at this to confirm a real DB write.
+        Provider-independent: local (Ollama) and gemini work with the same logic."""
         for _round in range(3):
             msg = self._llm_chat_tools(messages)
             calls = self._extract_tool_calls(msg)
@@ -745,8 +745,8 @@ class LLMBackend:
 
     @staticmethod
     def _has_committed_write(executed: list) -> bool:
-        """Bu növbədə DB-yə real yazı (create/cancel_reservation → success)
-        baş veribmi — uğur iddiasının doğruluq şərti."""
+        """Whether a real DB write (create/cancel_reservation -> success) happened
+        in this turn — the truth condition for a success claim."""
         return any(
             name in _WRITE_TOOLS and isinstance(result, dict) and result.get("success")
             for name, result in executed
@@ -755,10 +755,10 @@ class LLMBackend:
     def _stream_with_tools(
         self, user_text: str, candidates: List[Candidate] | None = None
     ) -> Generator[str, None, None]:
-        """Otel sorğuları: LLM tool seçir → tool icra olunur → yekun cavab
-        stream edilir (cümlə-cümlə TTS-ə). FAQ namizədləri də sistem
-        promptuna əlavə olunur ki, tool dialoqu zamanı verilən adi suallar
-        ("səhər yeməyi daxildir?") tool-suz, dərhal cavablansın."""
+        """Hotel queries: the LLM picks a tool -> the tool runs -> the final answer
+        is streamed (sentence by sentence to TTS). FAQ candidates are also added to
+        the system prompt so that ordinary questions asked during the tool dialogue
+        ("is breakfast included?") are answered immediately without a tool."""
         start = time.perf_counter()
         full_response = ""
         system_content = self._tools_system_prompt()
@@ -779,12 +779,12 @@ class LLMBackend:
         messages.append({"role": "user", "content": user_text})
 
         try:
-            # Tool raundları bir neçə saniyə çəkə bilər. İstifadəçini səssiz
-            # gözlətməmək üçün raundlar arxa planda işləyir; müəyyən həddən
-            # uzun çəkərsə gözləmə mesajı səsləndirilir — mesaj oxunarkən
-            # tool işi PARALEL davam edir (perceived latency azalır).
+            # Tool rounds may take several seconds. To avoid making the user wait
+            # in silence, the rounds run in the background; if they take longer than
+            # a threshold, a wait message is spoken — while the message plays the
+            # tool work continues in PARALLEL (perceived latency drops).
             box: dict = {}
-            executed: list = []   # (tool_adı, nəticə) — halüsinasiya səddi üçün
+            executed: list = []   # (tool_name, result) — for the hallucination guard
 
             def _worker():
                 try:
@@ -796,11 +796,11 @@ class LLMBackend:
             worker.start()
             worker.join(timeout=cfg.tools_wait_threshold_s)
             if worker.is_alive():
-                # Gözləmə mesajı: cooldown ilə — hər cavabda təkrarlanmasın
+                # Wait message: with a cooldown — so it is not repeated on every response
                 now = time.time()
                 if now - self._last_wait_ts > cfg.tools_wait_cooldown_s:
                     self._last_wait_ts = now
-                    # Tarixçəyə yazılmır — yalnız səsləndirilir
+                    # Not written to history — only spoken
                     yield cfg.tools_wait_message
                 worker.join()
             if "error" in box:
@@ -811,12 +811,12 @@ class LLMBackend:
 
             content = (msg or {}).get("content", "")
 
-            # ── HALÜSİNASİYA SƏDDİ (rezervasiya/ləğv uğuru) ────────────────────
-            # Kiçik model bəzən create_reservation tool-unu atlayıb birbaşa
-            # "Rezervasiyanız uğurla yaradıldı" yazır — DB-yə heç nə yazılmadan.
-            # Model uğur iddia edir, amma bu növbədə real DB yazısı yoxdursa:
-            # (1) əməliyyatı MƏCBURİ bir tool raundu ilə həqiqətən icra etdiririk;
-            # (2) yenə də təsdiqlənməsə, YALAN cümləni istifadəçiyə buraxmırıq.
+            # ── HALLUCINATION GUARD (reservation/cancel success) ──────────────
+            # A small model sometimes skips the create_reservation tool and writes
+            # "Your reservation was created successfully" directly — without any DB write.
+            # If the model claims success but there is no real DB write this turn:
+            # (1) we FORCE the operation to actually run with one tool round;
+            # (2) if it is still not confirmed, we do not let the FALSE sentence reach the user.
             committed = self._has_committed_write(executed)
             if content and not committed and _WRITE_SUCCESS_CLAIM_RE.search(content):
                 logger.warning(
@@ -834,7 +834,7 @@ class LLMBackend:
                 committed = self._has_committed_write(executed)
                 content = (msg or {}).get("content", "")
 
-            # Məcburi raunddan sonra da uğur təsdiqlənməyibsə — yalan cavabı blokla.
+            # If success is still not confirmed even after the forced round — block the false answer.
             if content and not committed and _WRITE_SUCCESS_CLAIM_RE.search(content):
                 err = next((r.get("error") for _n, r in executed
                             if isinstance(r, dict) and r.get("error")), None)
@@ -848,9 +848,9 @@ class LLMBackend:
                     "Zəhmət olmasa məlumatlarınızı bir daha təsdiqləyin."
                 )
 
-            # Yekun cavab: tool nəticələri kontekstdədir, stream edilir
+            # Final answer: tool results are in context, streamed
             if content:
-                # Model tool istəmədən birbaşa cavab verdi
+                # The model answered directly without requesting a tool
                 for sentence in _split_sentences(content):
                     cleaned = self._emit(sentence)
                     if cleaned:
@@ -872,39 +872,39 @@ class LLMBackend:
             self._update_history(user_text, full_response.strip())
 
         except requests.exceptions.RequestException as e:
-            # ConnectionError/Timeout + HTTPError (məs. Ollama 500) — hamısında
-            # istifadəçi mütləq cavab eşitməlidir, sükut qəbuledilməzdir.
+            # ConnectionError/Timeout + HTTPError (e.g. Ollama 500) — in all of
+            # them the user must hear a response, silence is unacceptable.
             logger.error(f"Ollama əlçatmazdır (tools): {e}")
             yield "Üzr istəyirəm, sistemdə qısa fasilə yarandı. Bir az sonra yenidən cəhd edin."
         except Exception as e:
             logger.error(f"Tool calling xətası: {e}")
             yield "Üzr istəyirəm, əməliyyatı tamamlaya bilmədim."
 
-    # --- əsas giriş nöqtəsi ----------------------------------------------------
+    # --- main entry point ------------------------------------------------------
 
     def stream(self, user_text: str, force_llm: bool = False) -> Generator[str, None, None]:
-        """force_llm=True: FAQ-bypass yolunu söndürür, hər sorğu Ollama-nı
-        çağırır (real LLM sürətini ölçmək üçün — bax benchmark_voice_latency.py).
-        Adi zəng axınında (session.py) dəyişməyib, default False qalır."""
+        """force_llm=True: disables the FAQ-bypass path, every query calls Ollama
+        (to measure the real LLM speed — see benchmark_voice_latency.py).
+        Unchanged in the normal call flow (session.py), stays False by default."""
         logger.info(f"LLM sorğusu: '{user_text}'")
-        # Hər növbə cfg-dəki provayderdən başlayır (admin panel dəyişikliyini
-        # götürür); API çökərsə bu növbə üçün "local"-a düşəcək.
+        # Every turn starts from the provider in cfg (picks up admin-panel changes);
+        # if the API fails it will drop to "local" for this turn.
         self._active_provider = (cfg.llm_provider or "local").lower()
 
-        # Yönləndirmə: otel əməliyyatı sorğuları (rezervasiya, qiymət, boş
-        # otaq...) database tool-ları ilə cavablanır. Tool dialoqu davam
-        # edirsə (məs. model ad/telefon soruşub), açar sözü olmayan cavablar
-        # da tool yolunda qalır — əks halda söhbət konteksti itirdi.
+        # Routing: hotel operation queries (reservation, price, free room...) are
+        # answered with database tools. If a tool dialogue is ongoing (e.g. the
+        # model asked for name/phone), answers without keywords also stay on the
+        # tool path — otherwise the conversation context was lost.
         candidates = None
         route_tools = bool(_TOOL_INTENT_RE.search(user_text))
         if not route_tools and self._last_route == "tools" and self._history:
             last = self._history[-1]
-            # Yapışqanlıq YALNIZ rezervasiya slot-dialoqunda qalır: assistent
-            # konkret məlumat (ad, telefon, tarix, otaq tipi, təsdiq)
-            # soruşubsa, istifadəçinin növbəti sözü ONA CAVABDIR.
-            # Digər hallarda: sual FAQ-da tapılırsa RAG-a QAYIDIRIQ — əks
-            # halda söhbət tool yolunda ilişib qalır və FAQ-da olan
-            # məlumatlara "məlumatım yoxdur" deyilirdi.
+            # Stickiness stays ONLY in the reservation slot-dialogue: if the
+            # assistant asked for specific info (name, phone, date, room type,
+            # confirmation), the user's next word is the ANSWER to it.
+            # Otherwise: if the question is found in the FAQ we RETURN to RAG —
+            # otherwise the conversation got stuck on the tool path and said
+            # "I have no information" to data that is in the FAQ.
             slot_question = (
                 last["role"] == "assistant"
                 and last["content"].rstrip().endswith("?")
@@ -914,10 +914,10 @@ class LLMBackend:
                 route_tools = True
                 logger.info("Tool dialoqu davam edir (slot sualına cavab)")
             elif _SLOT_ANSWER_RE.search(user_text):
-                # Cavab slot-cavaba bənzəyir ("Standart otaq olsun", "bəli,
-                # doğrudur", tarix, nömrə...) — FAQ-da tapılsa belə dialoq
-                # tool yolunda qalır (tool yolu FAQ konteksti ilə də cavab
-                # verə bilir, amma rezervasiya axını qopmur).
+                # The answer looks like a slot answer ("Standart otaq olsun", "bəli,
+                # doğrudur", a date, a number...) — even if found in the FAQ, the
+                # dialogue stays on the tool path (the tool path can also answer
+                # with FAQ context, but the reservation flow does not break).
                 route_tools = True
                 logger.info("Tool dialoqu davam edir (slot cavabı)")
             else:
@@ -939,9 +939,9 @@ class LLMBackend:
         start = time.perf_counter()
         full_response = ""
 
-        # Davam sualı ("bəs qiyməti?", "onu təkrar et") — sorğu tək başına
-        # axtarışa yaramır: əvvəlki istifadəçi sualı ilə birləşdirilib
-        # axtarılır və cavabı kontekstlə LLM verir (direct-bypass söndürülür).
+        # Follow-up question ("bəs qiyməti?", "onu təkrar et") — the query is not
+        # suitable for a standalone search: it is combined with the previous user
+        # question and searched, and the LLM answers with context (direct-bypass off).
         followup = bool(self._history) and bool(_FOLLOWUP_RE.search(user_text))
         if candidates is None:
             query = user_text
@@ -962,9 +962,9 @@ class LLMBackend:
         best = candidates[0] if candidates else None
         multi_intent = _is_multi_intent(user_text) and len(candidates) > 1
 
-        # Yüksək əminlik + tək-hissəli, kontekstsiz sual — LLM lazım deyil,
-        # FAQ cavabı cümlə-cümlə birbaşa TTS-ə göndərilir (gecikmə qazancı).
-        # Davam suallarında bypass söndürülür ki, kontekst nəzərə alınsın.
+        # High confidence + single-intent, context-free question — no LLM needed,
+        # the FAQ answer goes sentence-by-sentence straight to TTS (latency win).
+        # For follow-up questions the bypass is disabled so context is considered.
         if (best and best.score >= cfg.rag_direct_threshold
                 and not multi_intent and not followup and not force_llm):
             logger.info(f"Direct cavab (score={best.score:.3f}): '{best.question}'")
@@ -977,7 +977,7 @@ class LLMBackend:
             self._update_history(user_text, full_response.strip())
             return
 
-        # Multi-intent və ya orta əminlikli namizədlər — LLM streaming ilə cavab yazır
+        # Multi-intent or medium-confidence candidates — the LLM writes the answer via streaming
         first_token = True
         claim_blocked = False
         try:
@@ -987,9 +987,9 @@ class LLMBackend:
                     log_latency(logger, "LLM ilk cümlə", time.perf_counter() - start)
                     first_token = False
                 cleaned = self._emit(raw_sentence)
-                # HALÜSİNASİYA SƏDDİ (RAG yolu): bu yolda tool çağırılmır,
-                # deməli DB-yə yazı OLA BİLMƏZ — model "rezervasiyanız
-                # tamamlandı / ləğv edildi" desə, bu, yalandır və bloklanır.
+                # HALLUCINATION GUARD (RAG path): no tool is called on this path,
+                # so there CANNOT be a DB write — if the model says "your reservation
+                # is complete / cancelled", it is false and is blocked.
                 if cleaned and _WRITE_SUCCESS_CLAIM_RE.search(cleaned):
                     logger.warning(
                         f"Tool-suz yolda yalan əməliyyat uğuru bloklandı: '{cleaned}'")
@@ -1006,15 +1006,15 @@ class LLMBackend:
                     "zəhmət olmasa məlumatlarınızı bir daha təsdiq edin."
                 )
                 full_response += correction + " "
-                # Növbəti cavab ("bəli, doğrudur") tool yoluna getsin ki,
-                # rezervasiya bu dəfə HƏQİQƏTƏN icra olunsun.
+                # Route the next answer ("bəli, doğrudur") to the tool path so
+                # the reservation is ACTUALLY executed this time.
                 self._last_route = "tools"
                 yield correction
 
             log_latency(logger, "LLM tam cavab", time.perf_counter() - start)
 
             if not full_response.strip():
-                # LLM heç nə qaytarmadı — ən yaxın FAQ cavabına fallback
+                # The LLM returned nothing — fall back to the closest FAQ answer
                 logger.warning("LLM boş cavab qaytardı, FAQ cavabına fallback.")
                 fallback = best.answer if best else NOT_FOUND_MESSAGE
                 for sentence in _split_sentences(fallback):
@@ -1026,10 +1026,10 @@ class LLMBackend:
             self._update_history(user_text, full_response.strip())
 
         except requests.exceptions.RequestException as e:
-            # ConnectionError/Timeout + HTTPError (məs. Ollama 500 qaytaranda
-            # raise_for_status HTTPError atır) — hamısında FAQ fallback işləyir.
-            # Əvvəl yalnız ConnectionError/Timeout tutulurdu və HTTP 500-də
-            # istifadəçi cavabsız (sükutda) qalırdı.
+            # ConnectionError/Timeout + HTTPError (e.g. when Ollama returns 500,
+            # raise_for_status throws HTTPError) — the FAQ fallback works in all of them.
+            # Previously only ConnectionError/Timeout was caught and on HTTP 500
+            # the user was left without a response (in silence).
             logger.error(f"Ollama əlçatmazdır: {e}. FAQ cavabına fallback.")
             fallback = best.answer if best else NOT_FOUND_MESSAGE
             for sentence in _split_sentences(fallback):
@@ -1040,7 +1040,7 @@ class LLMBackend:
             self._update_history(user_text, full_response.strip())
         except Exception as e:
             logger.error(f"LLM xətası: {e}")
-            # Gözlənilməz xətada da istifadəçi səssiz qalmamalıdır
+            # Even on an unexpected error the user must not be left in silence
             if not full_response.strip():
                 fallback = best.answer if best else (
                     "Üzr istəyirəm, sistemdə qısa fasilə yarandı. "
@@ -1052,8 +1052,8 @@ class LLMBackend:
                         yield cleaned
 
     def clear_history(self):
-        """Cari zəngin kontekstini sıfırlayır (yeni zəng = təzə söhbət).
-        DB-dəki zəng jurnalı toxunulmaz qalır."""
+        """Resets the current call's context (new call = fresh conversation).
+        The call log in the DB is left untouched."""
         self._history = []
         self._last_route = "rag"
         logger.info("Söhbət tarixi silindi.")

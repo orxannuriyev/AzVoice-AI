@@ -1,12 +1,11 @@
 """
-Generic database idarəetməsi: cədvəllərin avtomatik aşkarlanması və
-təhlükəsiz CRUD.
+Generic database management: automatic table discovery and safe CRUD.
 
-Təhlükəsizlik modeli:
-  * Cədvəl və sütun adları HEÇ VAXT istifadəçidən birbaşa SQL-ə düşmür —
-    əvvəlcə information_schema-dan oxunan real adlarla tutuşdurulur
-    (whitelist), yalnız uyğun gələnlər istifadə olunur.
-  * Dəyərlər həmişə parametrləşdirilmiş sorğu ilə ötürülür.
+Security model:
+  * Table and column names NEVER go from the user directly into SQL — they are
+    first matched against the real names read from information_schema
+    (whitelist), and only matching ones are used.
+  * Values are always passed via parameterized queries.
 """
 
 import csv
@@ -19,14 +18,14 @@ from utils.logger import get_logger
 
 logger = get_logger("AdminDB")
 
-# Generic CRUD-dan qorunan sistem cədvəlləri:
-#   admin_users — yalnız Users bölməsindən (parol hash-ləri korlanmasın)
-#   audit_log   — audit jurnalı dəyişdirilə bilməz (təhlükəsizlik tələbi)
+# System tables protected from generic CRUD:
+#   admin_users — only from the Users section (so password hashes are not corrupted)
+#   audit_log   — the audit log cannot be modified (security requirement)
 _PROTECTED_TABLES = {"admin_users", "audit_log"}
 
 
 def list_tables() -> list[dict]:
-    """Bütün istifadəçi cədvəllərini sətir sayı ilə qaytarır."""
+    """Returns all user tables with their row counts."""
     with get_conn() as conn:
         rows = conn.execute("""
             SELECT c.relname AS name,
@@ -65,7 +64,7 @@ def _safe_columns(table: str, cols: list[str]) -> list[str]:
 
 
 def _pk_column(table: str) -> str:
-    """Primary key sütununu tapır (yoxdursa 'id' fərz edilir)."""
+    """Finds the primary key column (assumes 'id' if none)."""
     with get_conn() as conn:
         row = conn.execute("""
             SELECT a.attname AS name
@@ -82,7 +81,7 @@ def query_rows(
     sort: str | None = None, order: str = "asc",
     search: str | None = None, filters: dict[str, str] | None = None,
 ) -> dict:
-    """Pagination + sort + axtarış + sütun filtri ilə sətirlər."""
+    """Rows with pagination + sort + search + column filters."""
     table = _safe_table(table)
     cols = [c["name"] for c in table_columns(table)]
     where, params = [], []
@@ -174,7 +173,7 @@ def delete_rows(table: str, pk_values: list[str]) -> int:
 # ── Export / Import ────────────────────────────────────────────────────────
 
 def export_rows(table: str, fmt: str) -> tuple[bytes, str, str]:
-    """Bütün cədvəli csv/json/xlsx formatında qaytarır:
+    """Returns the whole table in csv/json/xlsx format:
     (bytes, mime, filename)."""
     table = _safe_table(table)
     with get_conn() as conn:
@@ -211,8 +210,8 @@ def export_rows(table: str, fmt: str) -> tuple[bytes, str, str]:
 
 
 def import_rows(table: str, filename: str, content: bytes) -> dict:
-    """CSV/XLSX faylından sətirlər əlavə edir. Başlıq sətri sütun adları
-    ilə üst-üstə düşməlidir; naməlum sütunlar ötürülür."""
+    """Adds rows from a CSV/XLSX file. The header row must match the column
+    names; unknown columns are skipped."""
     table = _safe_table(table)
     if table in _PROTECTED_TABLES:
         raise ValueError("Bu cədvəl yalnız Users bölməsindən idarə olunur")

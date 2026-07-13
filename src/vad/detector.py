@@ -40,9 +40,9 @@ class VADDetector:
 
         self.reset()
         frames = []
-        # Pre-roll buferi: nitq başlamazdan əvvəlki son ~vad_speech_pad_ms
-        # audio saxlanılır və nitqin əvvəlinə əlavə olunur — əks halda ilk
-        # heca kəsilir və Whisper sözü səhv tanıyır ("Salam" → "alam").
+        # Pre-roll buffer: the last ~vad_speech_pad_ms of audio before speech
+        # starts is kept and prepended to the speech — otherwise the first
+        # syllable is clipped and Whisper mis-recognizes the word ("Salam" -> "alam").
         pad_frames = max(1, int(cfg.vad_speech_pad_ms / self._frame_ms))
         preroll: deque = deque(maxlen=pad_frames)
         logger.info("Dinləyirəm...")
@@ -56,7 +56,7 @@ class VADDetector:
 
             if confidence >= cfg.vad_threshold:
                 if not self._speech_started:
-                    # Nitq başladı — pre-roll buferini əvvələ əlavə et
+                    # Speech started — prepend the pre-roll buffer
                     frames.extend(preroll)
                     preroll.clear()
                 self._speech_started = True
@@ -80,16 +80,16 @@ class VADDetector:
                         self.reset()
                         frames = []
             else:
-                # Hələ nitq yoxdur — pre-roll buferini yenilə
+                # No speech yet — update the pre-roll buffer
                 preroll.append(frame)
 
-            # QORUYUCU SƏRHƏD: fon küyü/əks-səda arabir həddi keçirsə sükut
-            # sayğacı hər dəfə sıfırlanır və dinləmə heç vaxt bitmirdi.
-            # Nitq başlayandan sonra ümumi müddət limiti aşarsa, ifadə
-            # məcburi bağlanır və STT-yə göndərilir.
+            # SAFETY GUARD: if background noise/echo occasionally crosses the
+            # threshold, the silence counter keeps resetting and listening never ends.
+            # After speech starts, if the total duration exceeds the limit, the
+            # utterance is force-closed and sent to STT.
             if self._speech_started:
-                # Ümumi müddət toplanmış frame sayından hesablanır — sükut
-                # sayğacı spike-larla sıfırlansa belə, divar-saat vaxtı artır.
+                # Total duration is computed from the accumulated frame count — even
+                # if the silence counter is reset by spikes, wall-clock time keeps growing.
                 total_ms = len(frames) * self._frame_ms
                 if total_ms >= cfg.vad_max_utterance_ms:
                     if self._speech_ms >= cfg.vad_min_speech_ms:

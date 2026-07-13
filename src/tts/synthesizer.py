@@ -48,7 +48,7 @@ class Synthesizer:
         return buffer.read()
 
     def synthesize(self, text: str):
-        """Yalnız audio bytes qaytarır (sintez), səsləndirmir."""
+        """Returns only audio bytes (synthesis), does not play them."""
         if not text.strip():
             return None
         try:
@@ -64,7 +64,7 @@ class Synthesizer:
                 return None
 
     def play(self, audio_bytes, stop_event: threading.Event = None):
-        """Hazır audio bytes-i səsləndirir (bloklayır, playback bitənə qədər)."""
+        """Plays ready audio bytes (blocks until playback finishes)."""
         if audio_bytes is None:
             return
         self._stop_event = stop_event or self._stop_event

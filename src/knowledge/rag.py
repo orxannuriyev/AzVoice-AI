@@ -1,12 +1,11 @@
 """
-RAG modulu: FAISS (dense, BAAI/bge-m3) + BM25 (sparse) hibrid axtarış.
+RAG module: FAISS (dense, BAAI/bge-m3) + BM25 (sparse) hybrid search.
 
-Bilik bazası knowledge/faq_augmented.json-dur — hər FAQ girişinin
-"variations" sahəsindəki alternativ ifadələr də expand edilərək ayrı
-index entry-lərinə çevrilir (eyni cavabla). Bu sayədə 190 FAQ → ~2090
-indekslənmiş sual — istifadəçi eyni sualı fərqli sözdə versə belə
-doğru cavab tapılır. Threshold-lar üçün bax config.py-dakı rag_*
-parametrləri.
+The knowledge base is knowledge/faq_augmented.json — the alternative phrasings
+in each FAQ entry's "variations" field are also expanded into separate index
+entries (with the same answer). This turns 190 FAQs -> ~2090 indexed questions
+— so the correct answer is found even if the user asks the same question with
+different words. For thresholds see the rag_* parameters in config.py.
 """
 
 import hashlib
@@ -25,9 +24,9 @@ from config import cfg
 
 logger = get_logger("RAG")
 
-# faq.json-da bəzi suallar bölmə başlığı və nömrələmə ilə birlikdə yazılıb
-# (məs. "Layihə barədə ümumi suallar:\n\n1. "4Sİ Akademiyası" nədir?") —
-# bunlar embedding keyfiyyətini korlayır, təmizlənir.
+# In faq.json some questions are written together with a section header and
+# numbering (e.g. "General questions about the project:\n\n1. What is "4Sİ Akademiyası"?") —
+# these hurt embedding quality, so they are cleaned.
 _SECTION_HEADER_RE = re.compile(r"^[^\n?]*:\s*$")
 _LEADING_NUMBER_RE = re.compile(r"^\d+\.\s*")
 
@@ -41,7 +40,7 @@ def _clean_question(raw: str) -> str:
 
 
 def _tokenize(text: str) -> List[str]:
-    """BM25 üçün Azərbaycan hərflərini saxlayan sadə tokenizer."""
+    """Simple tokenizer for BM25 that preserves Azerbaijani letters."""
     text = text.lower()
     text = re.sub(r"[^\w\səıöüşçğ]", " ", text)
     return text.split()
@@ -55,7 +54,7 @@ class Candidate:
 
 
 class KnowledgeBase:
-    """FAQ üzərində hibrid (dense + BM25) axtarış aparır."""
+    """Performs hybrid (dense + BM25) search over the FAQ."""
 
     def __init__(self, faq_path: Optional[Path] = None):
         self.faq_path = Path(faq_path) if faq_path else cfg.faq_path
@@ -72,25 +71,25 @@ class KnowledgeBase:
 
         self._load()
 
-    # --- yükləmə / indeks qurma ---------------------------------------------
+    # --- loading / index building -------------------------------------------
 
     def _load_faq_entries(self) -> List[dict]:
         with open(self.faq_path, "r", encoding="utf-8") as f:
             data = json.load(f)
         entries = []
         for item in data:
-            # Admin paneldən passiv edilmiş girişlər indekslənmir
+            # Entries deactivated from the admin panel are not indexed
             if item.get("active") is False:
                 continue
             q = (item.get("question") or "").strip()
             a = (item.get("answer") or "").strip()
             if not q or not a:
                 continue
-            # Ana sualı index-ə əlavə et
+            # Add the main question to the index
             entries.append({"question": _clean_question(q), "answer": a})
-            # "variations" sahəsindəki alternativ ifadələri də expand et.
-            # Hər variation eyni cavabla ayrı entry olur — istifadəçi sualı
-            # fərqli sözdə versə belə FAISS/BM25 doğru cavabı tapır.
+            # Also expand the alternative phrasings in the "variations" field.
+            # Each variation becomes a separate entry with the same answer — so
+            # FAISS/BM25 find the right answer even if the user asks with different words.
             for variation in item.get("variations", []):
                 v = (variation or "").strip()
                 if v:
@@ -137,9 +136,9 @@ class KnowledgeBase:
                 needs_build = True
 
         logger.info(f"Embedding modeli yüklənir: {cfg.embedding_model} (ilk dəfədirsə endirilə bilər)")
-        # CPU-da yüklənir: kiçik modeldir (94 FAQ, sorğu başına 1 encode),
-        # GPU-nun CUDA versiyası ilə uyğunsuzluq riski olmadan işləyir —
-        # STT (Whisper) üçün ayrılmış CUDA mühitinə toxunmur.
+        # Loaded on CPU: it is a small model (94 FAQs, 1 encode per query),
+        # runs without risk of incompatibility with the GPU's CUDA version —
+        # does not touch the CUDA environment reserved for STT (Whisper).
         self._embedder = SentenceTransformer(cfg.embedding_model, device="cpu")
 
         if needs_build:
@@ -187,7 +186,7 @@ class KnowledgeBase:
 
         logger.info(f"Bilik bazası hazırdır: {self.count} FAQ girişi.")
 
-    # --- axtarış -------------------------------------------------------------
+    # --- search --------------------------------------------------------------
 
     def retrieve(self, query: str) -> List[Candidate]:
         query = (query or "").strip()

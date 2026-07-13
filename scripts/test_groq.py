@@ -1,19 +1,19 @@
-"""Groq STT bağlantı testi.
+"""Groq STT connection test.
 
-İşə salma (layihə kökündən):
+Run (from the project root):
     .venv\\Scripts\\python.exe scripts\\test_groq.py
 
-Nə yoxlayır:
-  1) .env-dən GROQ_API_KEY oxunur.
-  2) Groq API-yə çıxış var (models endpoint).
-  3) İstəsən, mikrofondan 4 saniyə səs alıb az dilində transkript edir
-     (--mic bayrağı ilə).
+What it checks:
+  1) GROQ_API_KEY is read from .env.
+  2) There is access to the Groq API (models endpoint).
+  3) Optionally, records 4 seconds from the microphone and transcribes it in
+     Azerbaijani (with the --mic flag).
 """
 
 import sys
 from pathlib import Path
 
-# src/ qovluğunu import yoluna əlavə et
+# Add the src/ folder to the import path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 import requests
@@ -48,7 +48,7 @@ def check_key_and_network() -> bool:
 
 
 def check_mic() -> None:
-    """Mikrofondan 4 saniyə səs alıb Groq ilə az dilində transkript edir."""
+    """Records 4 seconds from the microphone and transcribes it in Azerbaijani with Groq."""
     import sounddevice as sd
     from stt.groq_backend import GroqBackend
 

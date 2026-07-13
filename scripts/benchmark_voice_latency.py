@@ -1,13 +1,13 @@
 """
-Səsli pipeline latency benchmarki: 10 sual üzərində STT, LLM, TTS
-latency-lərini ayrı-ayrı ölçür, sonda hər mərhələ üçün mean/std çıxarır.
+Voice pipeline latency benchmark: measures STT, LLM and TTS latency separately
+over 10 questions, and at the end reports mean/std for each stage.
 
-İstifadə:
+Usage:
     python scripts/benchmark_voice_latency.py
 
-Axın: skript ekranda sualı göstərir -> Enter basırsınız -> ucadan
-soruşursunuz -> sistem STT/LLM/TTS ilə cavab verir -> növbəti sual.
-10 sualdan sonra statistika cədvəli çap olunur və logs/ altına CSV yazılır.
+Flow: the script shows the question on screen -> you press Enter -> you ask it
+out loud -> the system answers with STT/LLM/TTS -> the next question.
+After 10 questions a statistics table is printed and a CSV is written under logs/.
 """
 
 import statistics
@@ -17,7 +17,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import List, Optional
 
-# Layihə kökündəki src/ qovluğunu import yoluna əlavə et
+# Add the project root's src/ folder to the import path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 sys.stderr.reconfigure(encoding="utf-8", errors="replace")
@@ -70,9 +70,9 @@ def run_round(idx: int, question_hint: str, audio, vad, stt, llm, tts) -> Option
     print(f"{'=' * 60}")
     input("Hazır olanda Enter basın, sonra danışın...")
 
-    # Enter-i gözlədiyimiz müddətdə mikrofon fasiləsiz yazır — o "köhnə"
-    # (real vaxtdan geri qalmış) bufer təmizlənməlidir, yoxsa VAD ordakı
-    # təsadüfi səs-küy+sükutu "danışıq bitdi" sayıb sizi vaxtından əvvəl kəsir.
+    # While we wait for Enter the microphone keeps recording continuously — that
+    # "old" (behind real time) buffer must be cleared, otherwise VAD treats the
+    # random noise+silence there as "speech ended" and cuts you off early.
     audio.unmute()
 
     print("Dinləyirəm...")
@@ -91,7 +91,7 @@ def run_round(idx: int, question_hint: str, audio, vad, stt, llm, tts) -> Option
         print("Boş transkript, bu sual buraxılır.")
         return None
 
-    # --- LLM (real sürət: FAQ-bypass söndürülür, hər sorğu Ollama-nı çağırır) ---
+    # --- LLM (real speed: FAQ-bypass disabled, every query calls Ollama) ---
     t0 = time.perf_counter()
     sentences = list(llm.stream(transcript, force_llm=True))
     llm_s = time.perf_counter() - t0
@@ -102,13 +102,13 @@ def run_round(idx: int, question_hint: str, audio, vad, stt, llm, tts) -> Option
         print("Boş cavab, bu sual buraxılır.")
         return None
 
-    # --- TTS (yalnız sintez — "danışmağa başlaya bilər" anı, tam oxuma yox) ---
+    # --- TTS (synthesis only — the "can start speaking" moment, not full playback) ---
     t0 = time.perf_counter()
     audio_bytes = tts.synthesize(answer)
     tts_s = time.perf_counter() - t0
     print(f"TTS   : {tts_s:.2f}s (yalnız sintez)")
 
-    tts.play(audio_bytes)  # ölçüyə daxil deyil, sadəcə eşitmək üçün
+    tts.play(audio_bytes)  # not included in the measurement, just to listen
 
     total = stt_s + llm_s + tts_s
     print(f"YEKUN : {total:.2f}s")
@@ -152,9 +152,9 @@ def save_csv(results: List[RoundResult]) -> Path:
 
 
 def main():
-    # Bəzi sualların içində ("... və ..." kimi) təbii fasilə 700ms-dən uzun
-    # ola bilər — yalnız bu skriptin prosesi üçün bir qədər artırılır ki,
-    # danışıq vaxtından əvvəl kəsilməsin (main.py-a təsir etmir).
+    # In some questions (like "... və ...") the natural pause can be longer than
+    # 700ms — it is raised a bit for this script's process only, so speech is not
+    # cut off early (does not affect main.py).
     cfg.vad_min_silence_ms = 900
 
     print("Modellər yüklənir (STT, LLM/RAG, TTS)... bir az vaxt ala bilər.")

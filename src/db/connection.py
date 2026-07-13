@@ -1,10 +1,10 @@
 """
-PostgreSQL bağlantısı (Docker-dəki hotel_callcenter database-i).
+PostgreSQL connection (the hotel_callcenter database in Docker).
 
-Parametrlər database/.env faylından oxunur (layihə kökündə), mühit
-dəyişənləri üstünlük təşkil edir. Hər tool çağırışı üçün qısa ömürlü
-connection açılır — call center yükündə bu kifayətdir və "stale
-connection" problemlərindən qoruyur.
+Parameters are read from the database/.env file (at the project root), with
+environment variables taking precedence. A short-lived connection is opened
+for each tool call — this is sufficient under call-center load and protects
+against "stale connection" problems.
 """
 
 import os

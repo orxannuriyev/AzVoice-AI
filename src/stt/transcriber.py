@@ -6,16 +6,16 @@ import numpy as np
 from utils.logger import get_logger, log_latency
 from config import cfg
 
-# Qeyd: `faster_whisper` importu qəsdən burada DEYİL — yalnız local
-# provayder ilk dəfə istifadə olunanda (`_ensure_local_model`) import olunur.
-# Beləcə "groq" rejimində işləyən GPU-suz maşınlarda faster-whisper/torch
-# quraşdırılmış olmasa belə server qalxa bilir.
+# Note: the `faster_whisper` import is intentionally NOT here — it is imported
+# only when the local provider is first used (`_ensure_local_model`).
+# That way, on GPU-less machines running in "groq" mode, the server can start
+# even if faster-whisper/torch are not installed.
 
 logger = get_logger("STT")
 
-# Tək sözlük, amma dialoq üçün KRİTİK cavablar. Qısa transkript filtri
-# (halüsinasiya qoruması) bunları atmamalıdır: rezervasiya təsdiqi ("Bəli"),
-# imtina ("Xeyr") və çıxış əmri ("Çıx") əks halda tamamilə işləmirdi.
+# Single-word but CRITICAL responses for the dialogue. The short-transcript
+# filter (hallucination guard) must not drop these: reservation confirmation
+# ("Bəli"), refusal ("Xeyr") and the exit command ("Çıx") otherwise broke entirely.
 _VALID_SHORT_WORDS = frozenset({
     "bəli", "hə", "həə", "xeyr", "yox", "oldu", "tamam", "yaxşı", "olar",
     "razıyam", "düzdür", "doğrudur", "təsdiq", "salam", "sağol", "sağolun",
@@ -24,11 +24,11 @@ _VALID_SHORT_WORDS = frozenset({
 
 
 def is_meaningful_utterance(transcript: str) -> bool:
-    """Transkriptin emala layiq olub-olmadığını yoxlayır.
+    """Checks whether the transcript is worth processing.
 
-    2+ sözlük ifadələr həmişə qəbul olunur; tək sözlük ifadə yalnız
-    tanınmış cavab sözlərindəndirsə keçir (küy halüsinasiyaları —
-    "Əlbəyəndə", "Hadid" kimi — əvvəlki kimi atılır).
+    Phrases of 2+ words are always accepted; a single-word phrase passes only
+    if it is one of the recognized response words (noise hallucinations —
+    like "Əlbəyəndə", "Hadid" — are dropped as before).
     """
     if not transcript:
         return False
@@ -39,41 +39,41 @@ def is_meaningful_utterance(transcript: str) -> bool:
 
 
 class Transcriber:
-    """STT facade — `cfg.stt_provider`-ə görə local (faster-whisper) və ya
-    Groq buludu arasında hər çağırışda seçim edir. Admin paneldən provayder
-    dəyişəndə yenidən yükləmə lazım deyil (dəyər çağırış vaxtı oxunur).
+    """STT facade — chooses per call between local (faster-whisper) and the
+    Groq cloud based on `cfg.stt_provider`. When the provider is changed from
+    the admin panel no reload is needed (the value is read at call time).
 
-    Ağır resurslar lazım olduqda (lazy) yüklənir və keşlənir: "groq"
-    rejimində whisper modeli heç yüklənmir (GPU-suz deploy üçün vacib),
-    "local" rejimində model başlanğıcda hazırlanır (ilk zəngdə latency
-    spike olmasın deyə). Provayder runtime-da dəyişəndə digər backend ilk
-    istifadədə yüklənir."""
+    Heavy resources are loaded lazily and cached: in "groq" mode the whisper
+    model is never loaded (important for GPU-less deploy); in "local" mode the
+    model is prepared at startup (to avoid a latency spike on the first call).
+    When the provider changes at runtime, the other backend is loaded on first
+    use."""
 
     def __init__(self):
         self._model = None                 # faster-whisper WhisperModel (lazy)
         self._model_lock = threading.Lock()
         self._groq = None                  # GroqBackend (lazy)
-        # Aktiv cihaz/hesablama tipi — CUDA xətalarında pilləli endirilir:
-        # (cfg dəyəri) → cuda/int8 → cpu/int8 (bax _degrade_model).
+        # Active device/compute type — degraded step by step on CUDA errors:
+        # (cfg value) -> cuda/int8 -> cpu/int8 (see _degrade_model).
         self._device: str | None = None
         self._compute: str | None = None
 
         if (cfg.stt_provider or "local").lower() == "groq":
             logger.info("STT provayderi: Groq (local whisper yüklənmir).")
         else:
-            # Local rejim: modeli əvvəlcədən yüklə (mövcud davranış qorunur).
+            # Local mode: preload the model (existing behavior preserved).
             self._ensure_local_model()
 
-    # ── Provayder marşrutlaması ────────────────────────────────────────────
+    # ── Provider routing ───────────────────────────────────────────────────
 
     def transcribe(self, audio: np.ndarray) -> str:
         if audio is None or len(audio) == 0:
             return ""
 
-        # Enerji qapısı: VAD-dan keçmiş, amma əslində danışıq olmayan
-        # sakit parçalar (uzaq küy, nəfəs) STT-yə çatmadan atılır —
-        # model belə parçalarda mətn uydurur (halüsinasiya). Hər iki
-        # provayder üçün tətbiq olunur.
+        # Energy gate: quiet segments that passed VAD but are not actually
+        # speech (distant noise, breath) are dropped before reaching STT —
+        # the model fabricates text on such segments (hallucination). Applied
+        # for both providers.
         rms = float(np.sqrt(np.mean(np.square(audio, dtype=np.float64))))
         if rms < cfg.stt_min_rms:
             logger.debug(f"Sakit parça atıldı (RMS={rms:.4f} < {cfg.stt_min_rms})")
@@ -83,11 +83,11 @@ class Transcriber:
             return self._transcribe_groq(audio)
         return self._transcribe_local(audio)
 
-    # ── Groq buludu ────────────────────────────────────────────────────────
+    # ── Groq cloud ─────────────────────────────────────────────────────────
 
     def _transcribe_groq(self, audio: np.ndarray) -> str:
-        """Groq whisper-large-v3 ilə transkripsiya. Xəta olarsa (şəbəkə,
-        limit, açar) `stt_fallback_to_local` aktivdirsə local-a keçir."""
+        """Transcription with Groq whisper-large-v3. On error (network,
+        rate limit, key), falls back to local if `stt_fallback_to_local` is on."""
         try:
             if self._groq is None:
                 from stt.groq_backend import GroqBackend
@@ -101,8 +101,8 @@ class Transcriber:
                 return self._transcribe_local(audio)
             return ""
 
-        # Ortaq təmizləmə + halüsinasiya filtrləri (segment metadatası yoxdur,
-        # ona görə logprob əsaslı filtr tətbiq olunmur — RMS qapısı yuxarıda).
+        # Shared cleaning + hallucination filters (no segment metadata, so the
+        # logprob-based filter is not applied — the RMS gate above covers it).
         transcript = self._clean(raw)
         words = transcript.lower().split()
         if len(words) >= 4 and len(set(words)) == 1:
@@ -120,8 +120,8 @@ class Transcriber:
     # ── Local faster-whisper ───────────────────────────────────────────────
 
     def _ensure_local_model(self):
-        """Local whisper modelini (thread-safe, bir dəfə) yükləyir.
-        Yükləmə alınmasa pilləli fallback: (cfg dəyəri) → cuda/int8 → cpu/int8."""
+        """Loads the local whisper model (thread-safe, once).
+        If loading fails, a stepwise fallback: (cfg value) -> cuda/int8 -> cpu/int8."""
         if self._model is not None:
             return self._model
         with self._model_lock:
@@ -157,9 +157,9 @@ class Transcriber:
         return self._model
 
     def _degrade_model(self, err) -> bool:
-        """CUDA icra xətasında (məs. cuBLAS NOT_SUPPORTED — köhnə GPU-larda
-        float16/int8_float16 dəstəklənmir) modeli daha təhlükəsiz
-        konfiqurasiyaya endirir. False = enəcək pillə qalmayıb."""
+        """On a CUDA execution error (e.g. cuBLAS NOT_SUPPORTED — old GPUs do
+        not support float16/int8_float16), degrades the model to a safer
+        configuration. Returns False = no lower step left."""
         with self._model_lock:
             if self._device == "cuda" and self._compute != "int8":
                 nxt = ("cuda", "int8")
@@ -176,9 +176,9 @@ class Transcriber:
         return True
 
     def _transcribe_local(self, audio: np.ndarray) -> str:
-        """Lokal transkripsiya + CUDA icra xətalarına qarşı avtomatik endirmə.
-        Xəta zəngi qırmır: model təhlükəsiz rejimdə yenidən qurulub təkrar
-        cəhd olunur; son halda boş nəticə qaytarılır (sükut fallback-i)."""
+        """Local transcription + automatic degradation against CUDA execution errors.
+        An error does not break the call: the model is rebuilt in a safe mode and
+        retried; in the last resort an empty result is returned (silence fallback)."""
         for _attempt in range(3):
             model = self._ensure_local_model()
             try:
@@ -212,7 +212,7 @@ class Transcriber:
             if segment.no_speech_prob > 0.75:
                 logger.debug(f"Səssiz seqment ötürüldü: {segment.text}")
                 continue
-            # Azərbaycan dili üçün logprob adətən aşağı ola bilər, filteri yüngülləşdiririk
+            # For Azerbaijani, logprob can usually be low, so we relax the filter
             seg_lp = getattr(segment, "avg_logprob", 0.0)
             if seg_lp < -2.0:
                 logger.debug(f"Aşağı ehtimallı seqment ötürüldü: {segment.text}")
@@ -220,7 +220,7 @@ class Transcriber:
             worst_logprob = min(worst_logprob, seg_lp)
             text = segment.text.strip()
             if text:
-                # Təkrar söz halüsinasiyalarının qarşısını almaq (məs: "Əli Əli Əli Əli")
+                # Prevent repeated-word hallucinations (e.g. "Əli Əli Əli Əli")
                 words = text.lower().split()
                 if len(words) >= 4 and len(set(words)) == 1:
                     logger.debug(f"Təkrarlanan halüsinasiya ötürüldü: {text}")
@@ -230,20 +230,20 @@ class Transcriber:
         transcript = " ".join(accepted).strip()
         transcript = self._clean(transcript)
 
-        # Qısa + aşağı əminlikli nəticə halüsinasiyaların tipik profilidir:
-        # küydən yaranan "Hadid", "Elə deyirəm, nəsə" kimi 1-3 sözlük
-        # parçalar adətən çox aşağı avg_logprob ilə gəlir. Real qısa
-        # cavablar ("Bəli, təsdiq edirəm") yüksək əminliklə tanınır.
+        # A short + low-confidence result is the typical profile of hallucinations:
+        # 1-3 word fragments born from noise, like "Hadid", "Elə deyirəm, nəsə",
+        # usually come with a very low avg_logprob. Real short answers
+        # ("Bəli, təsdiq edirəm") are recognized with high confidence.
         if transcript and len(transcript.split()) <= 3 and worst_logprob < -1.2:
             logger.debug(
                 f"Qısa aşağı-əminlikli transkript atıldı "
                 f"(logprob={worst_logprob:.2f}): '{transcript}'")
             transcript = ""
 
-        # Whisper bəzən səssizlik/küy zamanı öz initial_prompt-unu
-        # "eşitdiyini" iddia edir ("Mövzu: rezervasiya, bron, ... tarix").
-        # Sözlərin böyük hissəsi prompt lüğətindən gələn uzun transkript
-        # halüsinasiyadır — atılır.
+        # Whisper sometimes, during silence/noise, claims to "hear" its own
+        # initial_prompt ("Mövzu: rezervasiya, bron, ... tarix"). A long transcript
+        # where most words come from the prompt vocabulary is a hallucination —
+        # it is dropped.
         if transcript and self._is_prompt_echo(transcript):
             logger.debug(f"Prompt halüsinasiyası ötürüldü: {transcript}")
             transcript = ""
@@ -259,9 +259,9 @@ class Transcriber:
         return transcript
 
     def _is_prompt_echo(self, text: str) -> bool:
-        """Transkriptin whisper_initial_prompt-un təkrarı olub-olmadığını
-        yoxlayır: 4+ sözlük mətnin sözlərinin 70%-dən çoxu prompt
-        lüğətindəndirsə, bu, halüsinasiyadır."""
+        """Checks whether the transcript is a repeat of whisper_initial_prompt:
+        if more than 70% of the words in a 4+ word text come from the prompt
+        vocabulary, this is a hallucination."""
         import re
         prompt_words = set(re.findall(r"\w+", cfg.whisper_initial_prompt.casefold()))
         words = re.findall(r"\w+", text.casefold())

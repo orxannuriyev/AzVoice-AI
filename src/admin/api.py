@@ -1,12 +1,12 @@
 """
 Admin panel REST API — /api/admin/*
 
-UI heç vaxt database ilə birbaşa işləmir; bütün əməliyyatlar bu router
-üzərindən gedir. İcazə modeli:
-    GET  endpointlər  → viewer+
-    yazma əməliyyatları → operator+
-    istifadəçi idarəetməsi / parametrlər / promptlar → admin
-Hər yazma əməliyyatı audit_log-a düşür.
+The UI never works with the database directly; all operations go through this
+router. Permission model:
+    GET  endpoints          -> viewer+
+    write operations        -> operator+
+    user management / settings / prompts -> admin
+Every write operation is recorded in audit_log.
 """
 
 from fastapi import APIRouter, Depends, HTTPException, Request, Response, UploadFile
@@ -36,7 +36,7 @@ class PasswordBody(BaseModel):
     new_password: str
 
 
-# Login brute-force qorunması: IP başına sadə pəncərəli limit
+# Login brute-force protection: a simple windowed limit per IP
 _login_fails: dict[str, list[float]] = {}
 _LOGIN_MAX_FAILS = 5
 _LOGIN_WINDOW_S = 300.0
@@ -50,15 +50,15 @@ def login(body: LoginBody, request: Request):
     if len(fails) >= _LOGIN_MAX_FAILS:
         raise HTTPException(429, "Çox sayda uğursuz cəhd — 5 dəqiqə sonra yenidən yoxlayın")
 
-    # Server başlayanda DB bağlı idisə admin cədvəli/hesabı yaranmayıb —
-    # login zamanı bir daha cəhd edilir (idempotentdir).
+    # If the DB was down when the server started, the admin table/account was not
+    # created — it is attempted again at login (idempotent).
     try:
         auth.ensure_admin_tables()
     except Exception as e:
         raise HTTPException(
             503, f"Database əlçatmazdır — Docker DB işləyirmi? ({e})")
 
-    # Boşluqlar kəsilir: "admin " kimi daxiletmələr 401 verməsin
+    # Whitespace is trimmed: inputs like "admin " should not give a 401
     user = auth.authenticate(body.username.strip(), body.password.strip())
     if not user:
         fails.append(_t.time())
@@ -215,7 +215,7 @@ def faq_delete(body: dict, user: dict = _admin):
     return {"deleted": n}
 
 
-# ── Söhbətlər ──────────────────────────────────────────────────────────────
+# ── Conversations ──────────────────────────────────────────────────────────
 
 @router.get("/conversations")
 def conversations(page: int = 1, per_page: int = 20,
@@ -227,7 +227,7 @@ def transcript(session_id: str, user: dict = _viewer):
     return services.conversation_transcript(session_id)
 
 
-# ── Loglar ─────────────────────────────────────────────────────────────────
+# ── Logs ───────────────────────────────────────────────────────────────────
 
 @router.get("/logs")
 def logs(level: str | None = None, search: str | None = None,
@@ -235,7 +235,7 @@ def logs(level: str | None = None, search: str | None = None,
     return services.read_logs(level, search, min(limit, 1000))
 
 
-# ── Promptlar ──────────────────────────────────────────────────────────────
+# ── Prompts ────────────────────────────────────────────────────────────────
 
 class PromptBody(BaseModel):
     content: str
@@ -259,7 +259,7 @@ def prompt_update(name: str, body: PromptBody, user: dict = _admin):
     return {"ok": True}
 
 
-# ── Model parametrləri ─────────────────────────────────────────────────────
+# ── Model parameters ───────────────────────────────────────────────────────
 
 class SettingBody(BaseModel):
     value: str
@@ -279,7 +279,7 @@ def setting_update(key: str, body: SettingBody, user: dict = _admin):
     return result
 
 
-# ── User Management (yalnız admin) ─────────────────────────────────────────
+# ── User Management (admin only) ───────────────────────────────────────────
 
 class UserBody(BaseModel):
     username: str

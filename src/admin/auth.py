@@ -1,13 +1,13 @@
 """
-Admin panel autentifikasiyası və avtorizasiyası.
+Admin panel authentication and authorization.
 
-* JWT-format token (header.payload.signature), HMAC-SHA256 ilə imzalanır —
-  əlavə kitabxana tələb etmir (stdlib hmac/hashlib).
-* Parollar PBKDF2-SHA256 ilə saxlanılır.
-* RBAC: admin (hər şey) > operator (redaktə, silmə yox) > viewer (yalnız oxu).
-* Token Authorization header-ində daşınır — cookie yoxdur, deməli CSRF
-  hücumu texniki olaraq mümkün deyil.
-* Hər yazma əməliyyatı audit_log-a düşür.
+* JWT-format token (header.payload.signature), signed with HMAC-SHA256 —
+  requires no extra library (stdlib hmac/hashlib).
+* Passwords are stored with PBKDF2-SHA256.
+* RBAC: admin (everything) > operator (edit, no delete) > viewer (read only).
+* The token is carried in the Authorization header — no cookie, so a CSRF
+  attack is technically impossible.
+* Every write operation is recorded in audit_log.
 """
 
 import base64
@@ -27,19 +27,19 @@ from utils.logger import get_logger
 
 logger = get_logger("AdminAuth")
 
-# Server restart-da tokenlər etibarsız olur (sadə və təhlükəsiz default).
-# Sabit açar istəsəniz: ADMIN_SECRET mühit dəyişəni.
+# On server restart tokens become invalid (a simple and safe default).
+# If you want a fixed key: the ADMIN_SECRET environment variable.
 _SECRET = os.getenv("ADMIN_SECRET", secrets.token_hex(32)).encode()
 TOKEN_TTL_S = 12 * 3600
 
-# Rol iyerarxiyası: yuxarı rol aşağının bütün icazələrinə malikdir
+# Role hierarchy: a higher role has all permissions of the lower ones
 _ROLE_LEVEL = {"viewer": 0, "operator": 1, "admin": 2}
 
 DEFAULT_ADMIN_USER = "admin"
 DEFAULT_ADMIN_PASS = "astana2026"
 
 
-# ── Parol ──────────────────────────────────────────────────────────────────
+# ── Password ───────────────────────────────────────────────────────────────
 
 def hash_password(password: str, iterations: int = 200_000) -> str:
     salt = secrets.token_hex(16)
@@ -89,10 +89,10 @@ def decode_token(token: str) -> Optional[dict]:
         return None
 
 
-# ── DB əməliyyatları ───────────────────────────────────────────────────────
+# ── DB operations ──────────────────────────────────────────────────────────
 
 def ensure_admin_tables() -> None:
-    """Admin cədvəllərini yaradır (yoxdursa) və ilk admin istifadəçisini əkir."""
+    """Creates the admin tables (if missing) and seeds the first admin user."""
     sql = (Path(__file__).resolve().parents[2]
            / "database" / "init" / "08_admin.sql").read_text(encoding="utf-8")
     with get_conn() as conn:
@@ -136,7 +136,7 @@ def audit(username: str, action: str, target: str, detail: dict | None = None) -
         logger.warning(f"Audit yazıla bilmədi: {e}")
 
 
-# ── FastAPI dependency-ləri ────────────────────────────────────────────────
+# ── FastAPI dependencies ───────────────────────────────────────────────────
 
 def get_current_user(request: Request) -> dict:
     auth = request.headers.get("Authorization", "")
@@ -148,7 +148,7 @@ def get_current_user(request: Request) -> dict:
     return {"username": claims["sub"], "role": claims["role"]}
 
 def require_role(min_role: str):
-    """Rol əsaslı icazə: require_role('operator') → operator VƏ admin keçir."""
+    """Role-based permission: require_role('operator') -> operator AND admin pass."""
     def _check(user: dict = Depends(get_current_user)) -> dict:
         if _ROLE_LEVEL.get(user["role"], -1) < _ROLE_LEVEL[min_role]:
             raise HTTPException(403, f"Bu əməliyyat üçün minimum '{min_role}' rolu lazımdır")

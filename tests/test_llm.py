@@ -4,7 +4,7 @@ import os
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
-# Layihə kökündəki src/ qovluğunu import yoluna əlavə et
+# Add the project root's src/ folder to the import path
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src"))
 
 from llm.backend import LLMBackend
@@ -15,7 +15,7 @@ def main():
         backend = LLMBackend()
         print("Backend ugurla yaradildi.\n")
 
-        # RAG test sualları - otel FAQ-dən (knowledge/faq.json) cavab verməlidir
+        # RAG test questions - should be answered from the hotel FAQ (knowledge/faq.json)
         test_questions = [
             "Check-in və check-out saatları neçədədir?",
             "Hansı otaq tipləriniz var?",

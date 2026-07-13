@@ -1,21 +1,20 @@
 """
-Davamlı söhbət yaddaşı (PostgreSQL).
+Persistent conversation memory (PostgreSQL).
 
-LLM-in söhbət tarixçəsi əvvəllər yalnız RAM-da idi — proqram hər dəfə
-yenidən başlayanda kontekst itirdi. Bu modul hər user/assistant
-növbəsini conversation_history cədvəlinə yazır və başlanğıcda son
-növbələri geri yükləyir, beləliklə assistent söhbətlər arasında
-yaddaşını saxlayır.
+The LLM's conversation history used to live only in RAM — context was lost
+every time the program restarted. This module writes each user/assistant
+turn to the conversation_history table and reloads the last turns at startup,
+so the assistant keeps its memory across conversations.
 
-Dizayn qərarları:
-  * DB əlçatmaz olsa sistem ÇÖKMÜR — xəbərdarlıq loglanır və yaddaş
-    yalnız RAM rejimində davam edir (zəng kəsilməməlidir).
-  * Yükləmə pəncərəsi (cfg.memory_window_hours) köhnə söhbətlərin
-    bugünkü zəngi çaşdırmasının qarşısını alır: "sabah üçün otaq"
-    kimi köhnəlmiş kontekst 24 saatdan sonra yüklənmir.
-  * Cədvəl runtime-da CREATE TABLE IF NOT EXISTS ilə yaradılır —
-    mövcud Docker DB-ni yenidən qurmağa ehtiyac yoxdur.
-  * Yazma cavab tam bitəndən sonra baş verir (TTS axınını ləngitmir).
+Design decisions:
+  * If the DB is unreachable the system does NOT crash — a warning is logged
+    and memory continues in RAM-only mode (the call must not drop).
+  * The load window (cfg.memory_window_hours) prevents old conversations from
+    confusing today's call: stale context like "a room for tomorrow" is not
+    loaded after 24 hours.
+  * The table is created at runtime with CREATE TABLE IF NOT EXISTS —
+    no need to rebuild the existing Docker DB.
+  * Writing happens after the response fully completes (does not slow the TTS stream).
 """
 
 import time
@@ -41,7 +40,7 @@ CREATE INDEX IF NOT EXISTS idx_conversation_history_created
 
 
 class ConversationMemory:
-    """LLM söhbət tarixçəsinin PostgreSQL-də davamlı saxlanması."""
+    """Persistent storage of the LLM conversation history in PostgreSQL."""
 
     def __init__(self):
         self.session_id = f"call_{time.strftime('%Y%m%d_%H%M%S')}"
@@ -61,10 +60,10 @@ class ConversationMemory:
         return self._available
 
     def load_recent(self, max_turns: int) -> List[Dict[str, str]]:
-        """Son söhbət növbələrini xronoloji ardıcıllıqla qaytarır.
+        """Returns the recent conversation turns in chronological order.
 
-        Yalnız son cfg.memory_window_hours saat ərzindəki mesajlar
-        yüklənir ki, köhnəlmiş kontekst yeni zəngi çaşdırmasın.
+        Only messages within the last cfg.memory_window_hours hours are
+        loaded so that stale context does not confuse a new call.
         """
         if not self._available:
             return []
@@ -91,7 +90,7 @@ class ConversationMemory:
             return []
 
     def save_turn(self, user_text: str, assistant_text: str) -> None:
-        """Bir tam növbəni (user + assistant) DB-yə yazır."""
+        """Writes one full turn (user + assistant) to the DB."""
         if not self._available:
             return
         try:

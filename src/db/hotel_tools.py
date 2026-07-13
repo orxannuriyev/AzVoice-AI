@@ -1,11 +1,11 @@
 """
-Otel tool-ları — LLM zəng zamanı bunları çağırıb real datadan cavab verir.
+Hotel tools — the LLM calls these during a call to answer from real data.
 
-Hər funksiya JSON-serializable dict qaytarır (Decimal → float, date → str).
-Xəta halında {"error": "..."} qaytarılır ki, LLM istifadəçiyə izah edə bilsin.
+Each function returns a JSON-serializable dict (Decimal -> float, date -> str).
+On error it returns {"error": "..."} so the LLM can explain it to the user.
 
-TOOLS — Ollama tool calling formatında spesifikasiya.
-execute_tool(name, args) — dispatcher, backend.py buradan çağırır.
+TOOLS — specification in the Ollama tool-calling format.
+execute_tool(name, args) — dispatcher, called from backend.py.
 """
 
 import json
@@ -21,7 +21,7 @@ from utils.logger import get_logger
 logger = get_logger("DB-Tools")
 
 
-# --- köməkçilər --------------------------------------------------------------
+# --- helpers -----------------------------------------------------------------
 
 def _jsonable(obj):
     if isinstance(obj, Decimal):
@@ -39,13 +39,13 @@ def _jsonable(obj):
     return obj
 
 
-# Rezervasiya üfüqü: bu gündən neçə gün irəliyə rezervasiya qəbul olunur.
-# 92 gün ≈ 3 ay — "2 aya qədər irəli" rezervasiyalar problemsiz işləsin deyə
-# ehtiyat payı ilə seçilib. availability cədvəli bu üfüq daxilində avtomatik
-# genişlənir (bax _ensure_availability).
+# Booking horizon: how many days ahead from today a reservation is accepted.
+# 92 days ~ 3 months — chosen with a safety margin so that "up to 2 months
+# ahead" bookings work without issues. The availability table expands
+# automatically within this horizon (see _ensure_availability).
 BOOKING_HORIZON_DAYS = 92
 
-# Azərbaycanca ay adları → ay nömrəsi ("15 avqust", "avqustun 15-i" üçün)
+# Azerbaijani month names -> month number (for "15 avqust", "avqustun 15-i")
 _AZ_MONTHS = {
     "yanvar": 1, "fevral": 2, "mart": 3, "aprel": 4, "may": 5, "iyun": 6,
     "iyul": 7, "avqust": 8, "sentyabr": 9, "oktyabr": 10, "noyabr": 11, "dekabr": 12,
@@ -59,8 +59,8 @@ _AZ_DATE_RE = re.compile(
 
 
 def _parse_date(s: str) -> date:
-    """'2026-07-10', '10.07.2026', 'bu gün', 'sabah', 'birisi gün',
-    '15 avqust', 'avqustun 15-i' formatlarını qəbul edir."""
+    """Accepts formats like '2026-07-10', '10.07.2026', 'bu gün', 'sabah',
+    'birisi gün', '15 avqust', 'avqustun 15-i'."""
     s = (s or "").strip().lower()
     today = date.today()
     words = {"bu gün": 0, "bugün": 0, "sabah": 1, "birisi gün": 2, "birisigün": 2}
@@ -71,7 +71,7 @@ def _parse_date(s: str) -> date:
             return datetime.strptime(s, fmt).date()
         except ValueError:
             continue
-    # Azərbaycanca ay adı ilə: "15 avqust", "avqustun 15-i", "15 avqust 2026"
+    # With an Azerbaijani month name: "15 avqust", "avqustun 15-i", "15 avqust 2026"
     m = _AZ_DATE_RE.search(s)
     if m:
         if m.group(1):
@@ -83,7 +83,7 @@ def _parse_date(s: str) -> date:
             d = date(year, month, day)
         except ValueError:
             raise ValueError(f"Tarix mövcud deyil: '{s}'.")
-        # İl deyilməyibsə və tarix artıq keçibsə — növbəti il nəzərdə tutulur
+        # If no year was given and the date has already passed, assume next year
         if not m.group(5) and d < today:
             d = date(year + 1, month, day)
         return d
@@ -91,7 +91,7 @@ def _parse_date(s: str) -> date:
 
 
 def _price_for(cur, room_type_id, check_in: date, check_out: date) -> float:
-    """Gecə-gecə qiymət: aktiv rate_plan varsa onun qiyməti, yoxsa base_price."""
+    """Per-night price: the active rate_plan price if present, otherwise base_price."""
     row = cur.execute(
         "SELECT base_price FROM room_types WHERE id = %s", (room_type_id,)
     ).fetchone()
@@ -111,7 +111,7 @@ def _price_for(cur, room_type_id, check_in: date, check_out: date) -> float:
 
 
 def _horizon_check(ci: date) -> dict | None:
-    """Rezervasiya üfüqü yoxlaması: çox uzaq tarixlərə icazə verilmir."""
+    """Booking-horizon check: dates too far in the future are not allowed."""
     max_date = date.today() + timedelta(days=BOOKING_HORIZON_DAYS)
     if ci > max_date:
         return {"error": (f"Rezervasiyalar ən çoxu 3 ay əvvəldən qəbul olunur. "
@@ -120,14 +120,14 @@ def _horizon_check(ci: date) -> dict | None:
 
 
 def _ensure_availability(cur, room_type_id, check_in: date, check_out: date) -> None:
-    """Verilən aralıqda çatışmayan availability sətirlərini avtomatik yaradır.
+    """Automatically creates the missing availability rows in the given range.
 
-    Seed skripti cədvəli məhdud müddətə açır və vaxt keçdikcə üfüq daralır —
-    nəticədə yaxın aydan sonrakı tarixlərə 'cədvəl hələ açılmayıb' xətası
-    yaranırdı. total_rooms dəyəri həmin otaq tipinin mövcud cədvəlindəki son
-    dəyərdən (o da yoxdursa, rooms cədvəlindəki fiziki otaq sayından) götürülür.
-    UNIQUE (room_type_id, date) + ON CONFLICT DO NOTHING → mövcud sətirlərə
-    (və booked_rooms saylarına) toxunulmur."""
+    The seed script opens the schedule for a limited period and the horizon
+    shrinks over time — as a result dates beyond the coming month produced a
+    'schedule not open yet' error. The total_rooms value is taken from the last
+    value in that room type's existing schedule (or, if absent, from the physical
+    room count in the rooms table). UNIQUE (room_type_id, date) + ON CONFLICT DO
+    NOTHING -> existing rows (and their booked_rooms counts) are left untouched."""
     row = cur.execute(
         """SELECT total_rooms FROM availability
            WHERE room_type_id = %s ORDER BY date DESC LIMIT 1""",
@@ -153,7 +153,7 @@ def _ensure_availability(cur, room_type_id, check_in: date, check_out: date) -> 
 
 
 def _apply_campaigns(cur, room_type_name: str, nights: int, total: float):
-    """Aktiv kampaniyanı tətbiq edir (varsa). (yekun_qiymət, kampaniya_adı|None)"""
+    """Applies the active campaign (if any). Returns (final_price, campaign_name|None)."""
     rows = cur.execute(
         """SELECT name, discount_type, discount_value, conditions FROM campaigns
            WHERE is_active AND valid_from <= CURRENT_DATE AND valid_to >= CURRENT_DATE"""
@@ -172,10 +172,10 @@ def _apply_campaigns(cur, room_type_name: str, nights: int, total: float):
     return total, None
 
 
-# --- tool funksiyaları --------------------------------------------------------
+# --- tool functions ----------------------------------------------------------
 
 def get_hotel_info() -> dict:
-    """Otel haqqında ümumi məlumat: ad, ünvan, check-in/out saatları."""
+    """General hotel information: name, address, check-in/out times."""
     with get_conn() as conn:
         row = conn.execute("SELECT name, address, city, phone, check_in_time, check_out_time, currency FROM hotel_info LIMIT 1").fetchone()
     if not row:
@@ -184,7 +184,7 @@ def get_hotel_info() -> dict:
 
 
 def get_room_types() -> dict:
-    """Otaq tipləri, qiymətlər və imkanlar."""
+    """Room types, prices and amenities."""
     with get_conn() as conn:
         rows = conn.execute(
             """SELECT name, description, base_price, max_occupancy, amenities
@@ -194,7 +194,7 @@ def get_room_types() -> dict:
 
 
 def check_availability(check_in: str, check_out: str, room_type: str | None = None) -> dict:
-    """Tarix aralığında boş otaqlar (tip üzrə) və ümumi qiymət."""
+    """Free rooms (by type) in a date range and the total price."""
     ci, co = _parse_date(check_in), _parse_date(check_out)
     if co <= ci:
         return {"error": "check_out tarixi check_in-dən sonra olmalıdır."}
@@ -203,7 +203,7 @@ def check_availability(check_in: str, check_out: str, room_type: str | None = No
     nights = (co - ci).days
     with get_conn() as conn:
         cur = conn.cursor()
-        # Sorğulanan aralıq üçün availability cədvəlini avtomatik genişləndir
+        # Automatically expand the availability table for the requested range
         rt_q = "SELECT id FROM room_types WHERE is_active"
         rt_params: list = []
         if room_type:
@@ -247,7 +247,7 @@ def check_availability(check_in: str, check_out: str, room_type: str | None = No
 
 
 def find_guest(phone: str) -> dict:
-    """Telefon nömrəsi ilə qonağı tapır (zəngedəni tanıma)."""
+    """Finds a guest by phone number (caller identification)."""
     phone = phone.strip().replace(" ", "")
     with get_conn() as conn:
         row = conn.execute(
@@ -260,7 +260,7 @@ def find_guest(phone: str) -> dict:
 
 
 def get_guest_reservations(phone: str) -> dict:
-    """Qonağın rezervasiyaları (telefonla) — aktiv və son keçmişlər."""
+    """A guest's reservations (by phone) — active and recent past ones."""
     phone = phone.strip().replace(" ", "")
     with get_conn() as conn:
         rows = conn.execute(
@@ -282,10 +282,10 @@ _schema_checked = False
 
 
 def _ensure_schema() -> None:
-    """reservations.short_code sütununun mövcudluğunu təmin edir (bir dəfə).
-    Mövcud DB-lər üçün yüngül miqrasiya — öz tranzaksiyasında işləyir ki,
-    əsas rezervasiya əməliyyatını təsir etməsin. Yeni DB-lərdə sütun
-    onsuz da 01_schema.sql-də var."""
+    """Ensures the reservations.short_code column exists (once).
+    A lightweight migration for existing DBs — runs in its own transaction so
+    it does not affect the main reservation operation. In new DBs the column
+    already exists in 01_schema.sql."""
     global _schema_checked
     if _schema_checked:
         return
@@ -302,18 +302,18 @@ def _ensure_schema() -> None:
 
 
 def _unique_short_code(cur) -> str:
-    """DB-də təkrarlanmayan 6 rəqəmli təsdiq kodu yaradır."""
+    """Generates a 6-digit confirmation code that is unique in the DB."""
     for _ in range(10):
         code = f"{random.randint(0, 999999):06d}"
         if not cur.execute(
                 "SELECT 1 FROM reservations WHERE short_code = %s", (code,)).fetchone():
             return code
-    return f"{random.randint(0, 999999):06d}"  # nadir hal; UNIQUE indeks son qoruma
+    return f"{random.randint(0, 999999):06d}"  # rare case; UNIQUE index is the last guard
 
 
 def create_reservation(phone: str, full_name: str, room_type: str,
                        check_in: str, check_out: str) -> dict:
-    """Yeni rezervasiya yaradır. Qonaq yoxdursa, əvvəlcə qeydiyyata alır."""
+    """Creates a new reservation. If the guest does not exist, registers them first."""
     _ensure_schema()
     ci, co = _parse_date(check_in), _parse_date(check_out)
     today = date.today()
@@ -337,12 +337,12 @@ def create_reservation(phone: str, full_name: str, room_type: str,
                 "SELECT name FROM room_types WHERE is_active").fetchall()]
             return {"error": f"'{room_type}' tipi tapılmadı. Mövcud tiplər: {', '.join(names)}"}
 
-        # Rezervasiya üfüqü daxilində cədvəli avtomatik genişləndir —
-        # "cədvəl hələ açılmayıb" xətası yaranmasın
+        # Automatically expand the schedule within the booking horizon —
+        # to avoid the "schedule not open yet" error
         _ensure_availability(cur, rt["id"], ci, co)
 
-        # Boş yer yoxlaması (sətirlər əvvəlcə FOR UPDATE ilə kilidlənir —
-        # paralel bron təhlükəsizliyi; aqreqat kilidlənmiş nəticə üzərində işləyir)
+        # Availability check (rows are first locked with FOR UPDATE —
+        # concurrent-booking safety; the aggregate runs over the locked result)
         avail = cur.execute(
             """SELECT COUNT(*) AS days, MIN(total_rooms - booked_rooms) AS min_free
                FROM (SELECT total_rooms, booked_rooms
@@ -369,9 +369,9 @@ def create_reservation(phone: str, full_name: str, room_type: str,
         total = _price_for(cur, rt["id"], ci, co)
         final, camp = _apply_campaigns(cur, rt["name"], nights, total)
 
-        # 6 rəqəmli təsdiq kodu — DB-də saxlanılır ki, müştəri sonradan
-        # kodla zəng edəndə axtarıb tapmaq mümkün olsun (get_reservation_by_code).
-        # UUID səsləndirilmir: model onu oxusaydı mənasız uzun hərflər eşidilərdi.
+        # 6-digit confirmation code — stored in the DB so that when the customer
+        # later calls with the code we can look it up (get_reservation_by_code).
+        # The UUID is not spoken: if the model read it out, meaningless long letters would be heard.
         short_code = _unique_short_code(cur)
         res = cur.execute(
             """INSERT INTO reservations
@@ -390,7 +390,7 @@ def create_reservation(phone: str, full_name: str, room_type: str,
 
 
 def get_reservation_by_code(short_code: str) -> dict:
-    """6 rəqəmli təsdiq kodu ilə rezervasiyanı tapır (müştəri kodunu deyəndə)."""
+    """Finds a reservation by its 6-digit confirmation code (when the customer says it)."""
     _ensure_schema()
     code = str(short_code).strip()
     with get_conn() as conn:
@@ -410,7 +410,7 @@ def get_reservation_by_code(short_code: str) -> dict:
 
 
 def cancel_reservation(phone: str, check_in: str | None = None) -> dict:
-    """Qonağın aktiv rezervasiyasını ləğv edir. check_in verilsə, konkret onu tapır."""
+    """Cancels a guest's active reservation. If check_in is given, finds that specific one."""
     phone = phone.strip().replace(" ", "")
     with get_conn() as conn:
         cur = conn.cursor()
@@ -433,7 +433,7 @@ def cancel_reservation(phone: str, check_in: str | None = None) -> dict:
 
 
 def list_services() -> dict:
-    """Otelin xidmətləri və qiymətləri."""
+    """The hotel's services and prices."""
     with get_conn() as conn:
         rows = conn.execute(
             "SELECT name, description, price, category FROM services WHERE is_active ORDER BY category, price"
@@ -442,7 +442,7 @@ def list_services() -> dict:
 
 
 def list_campaigns() -> dict:
-    """Hazırda aktiv endirim kampaniyaları."""
+    """Currently active discount campaigns."""
     with get_conn() as conn:
         rows = conn.execute(
             """SELECT name, discount_type, discount_value, valid_to, conditions
@@ -454,7 +454,7 @@ def list_campaigns() -> dict:
     return {"campaigns": _jsonable(rows)}
 
 
-# --- Ollama tool spesifikasiyası ---------------------------------------------
+# --- Ollama tool specification ------------------------------------------------
 
 def _tool(name, desc, props=None, required=None):
     return {"type": "function", "function": {
@@ -513,12 +513,12 @@ _REGISTRY = {
 
 
 def execute_tool(name: str, args: dict) -> dict:
-    """Dispatcher — LLM-in istədiyi tool-u icra edir, xətanı LLM-ə oxunaqlı qaytarır."""
+    """Dispatcher — runs the tool the LLM requested, returns errors readably to the LLM."""
     fn = _REGISTRY.get(name)
     if fn is None:
         return {"error": f"Naməlum tool: {name}"}
-    # Model bəzən (xüsusən ReAct rejimində) parametr adlarını spesifikasiyadan
-    # fərqli yazır — geniş yayılmış sinonimlər düzəldilir.
+    # The model sometimes (especially in ReAct mode) writes parameter names
+    # differently from the spec — common synonyms are corrected here.
     if args:
         _ALIASES = {"name": "full_name", "fullname": "full_name",
                     "phone_number": "phone", "checkin": "check_in",

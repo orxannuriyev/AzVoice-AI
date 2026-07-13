@@ -34,8 +34,8 @@ class CallSession:
             self.audio.unmute()
 
     def _process_utterance(self, transcript):
-        # Tək sözlük təsdiq/imtina/çıxış sözləri ("Bəli", "Xeyr", "Çıx")
-        # keçir, tək sözlük küy halüsinasiyaları əvvəlki kimi atılır.
+        # Single-word confirm/refuse/exit words ("Bəli", "Xeyr", "Çıx") pass;
+        # single-word noise hallucinations are dropped as before.
         if not is_meaningful_utterance(transcript):
             logger.debug(f"Çox qısa transkript ötürüldü: '{transcript}'")
             return
@@ -62,7 +62,7 @@ class CallSession:
         log_latency(logger, "Tam cavab", time.perf_counter() - start)
 
     def greet(self):
-        """Zəngin əvvəlində bir dəfə səslənən salamlama."""
+        """Greeting spoken once at the start of the call."""
         greeting = (
             "Salam, hər vaxtınız xeyir! "
             "Sizinlə əlaqə saxlayan Astana otelin süni intellekt assistenti İbrahimdir. "

@@ -1,11 +1,11 @@
 """
-Admin panel servisləri: dashboard statistikası, analytics, loglar,
-FAQ idarəetməsi, prompt versiyaları, model parametrləri.
+Admin panel services: dashboard statistics, analytics, logs, FAQ management,
+prompt versions, model parameters.
 
-Pipeline-a toxunmur: statistika conversation_history + digər cədvəllərdən,
-gecikmə metrikləri log fayllarındakı "⏱ ... latency: X ms" sətirlərinin
-parse-indən gəlir. Model parametrləri app_settings-də saxlanılır və
-in-memory cfg-yə tətbiq olunur (kod faylları dəyişmir).
+Does not touch the pipeline: statistics come from conversation_history + other
+tables, latency metrics come from parsing the "⏱ ... latency: X ms" lines in the
+log files. Model parameters are stored in app_settings and applied to the
+in-memory cfg (code files do not change).
 """
 
 import json
@@ -27,7 +27,7 @@ _SRC_DIR = Path(__file__).resolve().parents[1]
 _PROMPTS_PY = _SRC_DIR / "prompts.py"
 _CONFIG_PY = _SRC_DIR / "config.py"
 
-# Paneldən dəyişilə bilən cfg parametrləri (Model Management)
+# cfg parameters that can be changed from the panel (Model Management)
 TUNABLE_SETTINGS: dict[str, type] = {
     "stt_provider": str,
     "llm_provider": str, "gemini_model": str,
@@ -155,7 +155,7 @@ def _iter_log_lines(max_files: int = 10):
 
 
 def _latency_stats() -> dict:
-    """Log fayllarından STT/LLM/TTS gecikmə statistikası."""
+    """STT/LLM/TTS latency statistics from the log files."""
     buckets: dict[str, list[float]] = {}
     for line in _iter_log_lines():
         m = _LATENCY_RE.match(line)
@@ -178,7 +178,7 @@ def _tool_usage() -> list[dict]:
     return [{"tool": t, "count": n} for t, n in counter.most_common()]
 
 
-# ── Loglar ─────────────────────────────────────────────────────────────────
+# ── Logs ───────────────────────────────────────────────────────────────────
 
 def read_logs(level: str | None = None, search: str | None = None,
               limit: int = 200) -> dict:
@@ -196,7 +196,7 @@ def read_logs(level: str | None = None, search: str | None = None,
     return {"lines": lines[-limit:][::-1], "total": len(lines)}
 
 
-# ── Söhbətlər ──────────────────────────────────────────────────────────────
+# ── Conversations ──────────────────────────────────────────────────────────
 
 def list_conversations(page: int = 1, per_page: int = 20,
                        search: str | None = None) -> dict:
@@ -272,12 +272,12 @@ def faq_categories() -> list[str]:
     return sorted({e.get("category", "") for e in faq_list()} - {""})
 
 
-# ── Promptlar (versiyalı) ──────────────────────────────────────────────────
+# ── Prompts (versioned) ────────────────────────────────────────────────────
 
 _PROMPT_NAMES = ("system_prompt", "whisper_initial_prompt")
 
 def prompt_list() -> list[dict]:
-    """Hər prompt üçün aktiv məzmun (DB-də yoxdursa koddakı default)."""
+    """The active content for each prompt (the code default if not in the DB)."""
     result = []
     with get_conn() as conn:
         for name in _PROMPT_NAMES:
@@ -310,26 +310,26 @@ def prompt_update(name: str, content: str, username: str) -> None:
         conn.execute(
             "INSERT INTO prompt_versions (name, content, is_active, created_by) "
             "VALUES (%s, %s, true, %s)", (name, content, username))
-    setattr(cfg, name, content)   # dərhal qüvvəyə minir
-    _sync_prompts_file()          # kod faylı da sinxronlaşır
+    setattr(cfg, name, content)   # takes effect immediately
+    _sync_prompts_file()          # the code file is synced too
     logger.info(f"Prompt yeniləndi: {name} ({username})")
 
 
 def _sync_prompts_file() -> None:
-    """Paneldəki prompt dəyişikliyini src/prompts.py faylına da yazır —
-    beləliklə kod repo-su ilə panel arasında fərq yaranmır. Fayl yazıla
-    bilməsə (məs. Docker image içində), DB versiyası onsuz da işləyir."""
+    """Also writes the panel's prompt change to the src/prompts.py file — so
+    there is no divergence between the code repo and the panel. If the file
+    cannot be written (e.g. inside a Docker image), the DB version still works."""
     try:
         body = (
             '"""\n'
-            "Sistem promptları — bütün prompt mətnləri bir yerdə.\n\n"
-            "QEYD: Bu fayl admin paneldən avtomatik yenilənir (Prompt\n"
-            "Management). Əl ilə redaktə də mümkündür, amma paneldəki\n"
-            "növbəti dəyişiklik faylı yenidən yazacaq.\n"
+            "System prompts — all prompt texts in one place.\n\n"
+            "NOTE: This file is auto-updated from the admin panel (Prompt\n"
+            "Management). Manual editing is possible too, but the next change\n"
+            "in the panel will rewrite the file.\n"
             '"""\n\n'
-            "# STT (faster-whisper) üçün ilkin kontekst.\n"
+            "# Initial context for STT (faster-whisper).\n"
             f"WHISPER_INITIAL_PROMPT: str = {cfg.whisper_initial_prompt!r}\n\n"
-            "# LLM sistem promptu — call center operatorunun davranış qaydaları.\n"
+            "# LLM system prompt — behavior rules for the call center operator.\n"
             f"SYSTEM_PROMPT: str = {cfg.system_prompt!r}\n"
         )
         _PROMPTS_PY.write_text(body, encoding="utf-8")
@@ -338,8 +338,8 @@ def _sync_prompts_file() -> None:
         logger.warning(f"prompts.py yazıla bilmədi (DB versiyası işləyir): {e}")
 
 def apply_saved_overrides() -> None:
-    """Server başlayanda DB-dəki aktiv prompt/parametr override-larını
-    cfg-yə tətbiq edir. DB yoxdursa səssiz ötürülür."""
+    """Applies the active prompt/parameter overrides from the DB to cfg at server
+    startup. Silently skipped if there is no DB."""
     try:
         for p in prompt_list():
             if p["source"] == "db":
@@ -355,7 +355,7 @@ def apply_saved_overrides() -> None:
         logger.warning(f"Override-lar yüklənmədi (DB bağlıdır?): {e}")
 
 
-# ── Model parametrləri ─────────────────────────────────────────────────────
+# ── Model parameters ───────────────────────────────────────────────────────
 
 def settings_get() -> list[dict]:
     return [{"key": k, "value": getattr(cfg, k), "type": t.__name__}
@@ -370,7 +370,7 @@ def settings_update(key: str, value: str, username: str) -> dict:
     if key == "llm_provider" and value not in ("local", "gemini"):
         raise ValueError("llm_provider yalnız 'local' və ya 'gemini' ola bilər.")
     typed = caster(value)
-    setattr(cfg, key, typed)      # dərhal qüvvəyə minir
+    setattr(cfg, key, typed)      # takes effect immediately
     with get_conn() as conn:
         conn.execute("""
             INSERT INTO app_settings (key, value, updated_by)
@@ -379,15 +379,15 @@ def settings_update(key: str, value: str, username: str) -> dict:
                 SET value = EXCLUDED.value, updated_by = EXCLUDED.updated_by,
                     updated_at = now()
         """, (key, str(typed), username))
-    _sync_config_file(key, typed)  # kod faylı da sinxronlaşır
+    _sync_config_file(key, typed)  # the code file is synced too
     return {"key": key, "value": typed}
 
 
 def _sync_config_file(key: str, value) -> None:
-    """Parametr dəyişikliyini src/config.py-dakı müvafiq sətrə də yazır.
-    Yalnız tək-sətirlik `ad: tip = dəyər` sahələri dəyişdirilir; llm_model
-    kimi os.getenv(...) sahələrində getenv qorunub fallback yenilənir.
-    Fayl yazıla bilməsə DB override onsuz da işləyir."""
+    """Also writes the parameter change to the corresponding line in src/config.py.
+    Only single-line `name: type = value` fields are changed; for os.getenv(...)
+    fields like llm_model the getenv is preserved and the fallback is updated.
+    If the file cannot be written, the DB override still works."""
     try:
         text = _CONFIG_PY.read_text(encoding="utf-8")
         typ = TUNABLE_SETTINGS[key].__name__
@@ -408,4 +408,4 @@ def _sync_config_file(key: str, value) -> None:
         logger.info(f"config.py sinxronlaşdırıldı: {key} = {value!r}")
     except OSError as e:
         logger.warning(f"config.py yazıla bilmədi (DB versiyası işləyir): {e}")
-# (stt_provider paneldən idarə olunur — bax TUNABLE_SETTINGS)
+# (stt_provider is managed from the panel — see TUNABLE_SETTINGS)

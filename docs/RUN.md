@@ -1,22 +1,22 @@
-# Layihənin Digər Kompüterdə İşə Salınması
+# Running the Project on Another Computer
 
-Bu köməkçi fayl layihəni başqa bir kompüterdə necə quraşdırmaq və işə salmaq barədə addım-addım təlimatları təqdim edir.
+This helper file provides step-by-step instructions on how to install and run the project on another computer.
 
-## Sürətli Quraşdırma (Qlobal Mühit - Yerin tutulmaması üçün)
+## Quick Setup (Global Environment — to save space)
 
-Əgər layihə qovluğunda virtual mühit (`.venv`) yaradıb əlavə yer tutmasını istəmirsinizsə, kitabxanaları birbaşa kompüterə yükləyə bilərsiniz:
+If you do not want to create a virtual environment (`.venv`) in the project folder and take up extra space, you can install the libraries directly on the computer:
 
-1. **Terminalı açın** və layihənin yerləşdiyi qovluğa keçin:
+1. **Open a terminal** and go to the project folder:
    ```powershell
    cd "C:\Path\To\azerbaijani_assistant"
    ```
 
-2. **Kitabxanaları quraşdırın** (requirements.txt daxilində Pytorch CUDA üçün lazımi link qeyd olunub):
+2. **Install the libraries** (requirements.txt includes the link needed for PyTorch CUDA):
    ```powershell
    pip install -r requirements.txt
    ```
 
-3. **Kök qovluğundan `src` qovluğuna keçin və proqramı başladın:**
+3. **Go from the root folder into the `src` folder and start the program:**
    ```powershell
    cd src
    python main.py
@@ -24,17 +24,17 @@ Bu köməkçi fayl layihəni başqa bir kompüterdə necə quraşdırmaq və iş
 
 ---
 
-## Standart Quraşdırma (Virtual Mühit - Təhlükəsiz və Təcrid olunmuş)
+## Standard Setup (Virtual Environment — safe and isolated)
 
-Digər layihələrlə kitabxana versiyalarının toqquşmaması üçün virtual mühit yaratmaq məsləhətdir:
+To avoid library version clashes with other projects, creating a virtual environment is recommended:
 
-1. **Layihə qovluğunda terminalı açın.**
-2. **Virtual mühit yaradın:**
+1. **Open a terminal in the project folder.**
+2. **Create the virtual environment:**
    ```powershell
    python -m venv .venv
    ```
 
-3. **Virtual mühiti aktivləşdirin:**
+3. **Activate the virtual environment:**
    * **Windows PowerShell:**
      ```powershell
      .venv\Scripts\Activate.ps1
@@ -48,12 +48,12 @@ Digər layihələrlə kitabxana versiyalarının toqquşmaması üçün virtual 
      source .venv/bin/activate
      ```
 
-4. **Kitabxanaları virtual mühitə quraşdırın:**
+4. **Install the libraries into the virtual environment:**
    ```powershell
    pip install -r requirements.txt
    ```
 
-5. **`src` qovluğuna keçin və başladın:**
+5. **Go into the `src` folder and start:**
    ```powershell
    cd src
    python main.py
@@ -61,22 +61,22 @@ Digər layihələrlə kitabxana versiyalarının toqquşmaması üçün virtual 
 
 ---
 
-## Lazımi İlkin Tələblər
+## Prerequisites
 
-* **Python:** Python 3.10 və ya 3.11 versiyaları tövsiyə olunur.
-* **Ollama:** Kompüterdə [Ollama](https://ollama.com) quraşdırılmalı və arxa fonda işləməlidir. LLM modeli (`gemma4:e4b`) endirilməlidir:
+* **Python:** Python 3.10 or 3.11 is recommended.
+* **Ollama:** [Ollama](https://ollama.com) must be installed on the computer and running in the background. The LLM model (`gemma4:e4b`) must be pulled:
   ```powershell
   ollama pull gemma4:e4b
   ```
-* **İlk işə salma zamanı avtomatik endirilən modellər (internet lazımdır):**
-  * Whisper `large-v3` (STT) — `faster-whisper` tərəfindən, ~3 GB
-  * `BAAI/bge-m3` (RAG embedding) — `sentence-transformers` tərəfindən, ~2 GB
-  * `knowledge/faq.json` avtomatik indekslənir (FAISS + BM25) və `vector_store/`-a yazılır, əl ilə heç nə etmək lazım deyil.
+* **Models downloaded automatically on the first run (internet required):**
+  * Whisper `large-v3` (STT) — by `faster-whisper`, ~3 GB
+  * `BAAI/bge-m3` (RAG embedding) — by `sentence-transformers`, ~2 GB
+  * `knowledge/faq.json` is indexed automatically (FAISS + BM25) and written to `vector_store/`; nothing needs to be done manually.
 
 ---
 
-## Davranış qeydləri (bugfix-lərdən sonra)
+## Behavior notes (after bugfixes)
 
-* **Ollama warm-up:** backend başlayanda model arxa planda GPU-ya əvvəlcədən yüklənir (`llm/backend.py: _warmup_ollama`) — ilk sorğunun 15+ saniyəlik soyuq-start gecikməsi aradan qalxır.
-* **Ollama xətalarında fallback:** Ollama 500/timeout/bağlantı xətası verəndə istifadəçi heç vaxt cavabsız qalmır — ən yaxın FAQ cavabı və ya üzr mesajı səsləndirilir.
-* **Tək sözlük cavablar:** "Bəli", "Xeyr", "Çıx" kimi tanınmış tək sözlük cavablar emal olunur (`stt/transcriber.py: is_meaningful_utterance`); tək sözlük küy halüsinasiyaları əvvəlki kimi atılır.
+* **Ollama warm-up:** when the backend starts, the model is preloaded onto the GPU in the background (`llm/backend.py: _warmup_ollama`) — the 15+ second cold-start delay of the first request is eliminated.
+* **Fallback on Ollama errors:** when Ollama returns a 500/timeout/connection error, the user is never left without a response — the closest FAQ answer or an apology message is spoken.
+* **Single-word answers:** recognized single-word answers like "Bəli", "Xeyr", "Çıx" are processed (`stt/transcriber.py: is_meaningful_utterance`); single-word noise hallucinations are dropped as before.

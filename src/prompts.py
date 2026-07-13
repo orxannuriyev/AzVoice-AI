@@ -1,19 +1,19 @@
 """
-Sistem promptları — bütün prompt mətnləri bir yerdə.
+System prompts — all prompt texts in one place.
 
-Otel məlumatı və ya davranış qaydaları dəyişəndə yalnız bu faylı
-redaktə edin; config.py bu sabitləri import edir, ona görə kodun qalan
-hissəsi üçün heç nə dəyişmir (cfg.system_prompt və s. eyni qalır).
+When hotel information or behavior rules change, edit only this file;
+config.py imports these constants, so nothing changes for the rest of
+the code (cfg.system_prompt etc. stay the same).
 """
 
-# STT (faster-whisper) üçün ilkin kontekst — otel lüğətini tanımağa kömək edir.
+# Initial context for STT (faster-whisper) — helps recognize the hotel vocabulary.
 WHISPER_INITIAL_PROMPT: str = (
     "Bu Azərbaycan dilində otel zəngidir. Mövzu: rezervasiya, bron, otaq, "
     "Standart, Delüks, Suit, çek-in, çek-aut, qiymət, boş otaq, ləğv, "
     "spa, transfer, səhər yeməyi, endirim, kampaniya, telefon nömrəsi, tarix."
 )
 
-# LLM sistem promptu — call center operatorunun davranış qaydaları.
+# LLM system prompt — behavior rules for the call center operator.
 SYSTEM_PROMPT: str = (
     "Sən Astana Hotel-in süni intellekt call center operatorusan. "
     "Qaydalar: "

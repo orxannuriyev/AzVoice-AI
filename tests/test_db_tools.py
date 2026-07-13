@@ -1,7 +1,7 @@
 """
-Database tool-larının testi — LLM olmadan, birbaşa funksiyaları çağırır.
+Test of the database tools — without the LLM, calls the functions directly.
 
-İşlətmək (Docker-dəki database işləməlidir):
+Run (the database in Docker must be running):
     python tests/test_db_tools.py
 """
 
@@ -10,7 +10,7 @@ import os
 import sys
 from datetime import date, timedelta
 
-# Layihə kökündəki src/ qovluğunu import yoluna əlavə et
+# Add the project root's src/ folder to the import path
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src"))
 
 from db.hotel_tools import (

@@ -6,12 +6,12 @@ from prompts import SYSTEM_PROMPT, WHISPER_INITIAL_PROMPT
 
 
 def _load_dotenv() -> None:
-    """Layihə kökündəki `.env` faylını mühit dəyişənlərinə yükləyir.
+    """Loads the `.env` file at the project root into environment variables.
 
-    Xarici asılılıq (python-dotenv) əlavə etməmək üçün minimal KEY=VALUE
-    parseri. Artıq təyin olunmuş mühit dəyişənləri ÜSTÜN tutulur (override
-    edilmir) — deploy zamanı real env dəyişənləri fayldan güclüdür.
-    Fayl yoxdursa və ya oxunmursa səssiz ötürülür (məcburi deyil).
+    A minimal KEY=VALUE parser to avoid adding an external dependency
+    (python-dotenv). Already-defined environment variables take PRECEDENCE
+    (are not overridden) — during deployment real env vars beat the file.
+    If the file is missing or unreadable it is silently skipped (not required).
     """
     env_path = Path(__file__).resolve().parent.parent / ".env"
     if not env_path.exists():
@@ -30,7 +30,7 @@ def _load_dotenv() -> None:
         pass
 
 
-# .env-i Config sinifinin default-ları (os.getenv) hesablanmazdan ƏVVƏL yüklə.
+# Load .env BEFORE the Config class defaults (os.getenv) are evaluated.
 _load_dotenv()
 
 
@@ -42,29 +42,29 @@ class Config:
     vad_frame_samples: int = 512
 
     # ── Silero VAD ─────────────────────────────────────────────────────────
-    # threshold 0.5→0.6 və min_speech 250→400: zəif fon küyü / nəfəs
-    # "nitq" kimi keçib Whisper halüsinasiyalarına səbəb olurdu.
+    # threshold 0.5->0.6 and min_speech 250->400: faint background noise / breath
+    # was passing as "speech" and causing Whisper hallucinations.
     vad_threshold: float = 0.6
-    # Danışığın bitdiyini təyin edən sükut həddi (endpointing). Çox kiçik
-    # olsa cümlə arasındakı təbii pauza "bitdi" kimi qəbul edilib istifadəçinin
-    # sözünü kəsir; çox böyük olsa cavab gecikir. 1100 ms balanslı dəyərdir.
-    # Admin paneldən tənzimlənir (Model parametrləri → vad_min_silence_ms).
+    # Silence threshold that marks the end of speech (endpointing). If too small,
+    # the natural pause between sentences is treated as "done" and cuts the user
+    # off; if too large, the response lags. 1100 ms is a balanced value.
+    # Tunable from the admin panel (Model parameters -> vad_min_silence_ms).
     vad_min_silence_ms: int = 1000
     vad_speech_pad_ms: int = 200
     vad_min_speech_ms: int = 400
-    # Nitq başlayandan sonra dinləmənin mütləq üst həddi. Fon küyü sükut
-    # sayğacını daim sıfırlayanda dinləmə sonsuz uzanırdı — bu limitə
-    # çatanda ifadə məcburi bağlanıb STT-yə göndərilir.
+    # Absolute upper limit of listening after speech starts. When background
+    # noise kept resetting the silence counter, listening dragged on forever —
+    # on reaching this limit the utterance is force-closed and sent to STT.
     vad_max_utterance_ms: int = 20000
 
     # ── STT ────────────────────────────────────────────────────────────────
-    # "large-v3" ~4-5GB VRAM istəyir — kiçik GPU-larda yaddaş RAM-a daşınır
-    # və transkripsiya dəqiqələrlə çəkir. "large-v3-turbo" (~1-1.5GB,
-    # int8_float16 ilə) 6-8x sürətlidir, keyfiyyəti çox yaxındır.
-    # Güclü GPU varsa .env-də WHISPER_MODEL=large-v3 qaytarın.
+    # "large-v3" needs ~4-5GB VRAM — on small GPUs memory spills to RAM and
+    # transcription takes minutes. "large-v3-turbo" (~1-1.5GB, with
+    # int8_float16) is 6-8x faster with very close quality.
+    # If you have a strong GPU, set WHISPER_MODEL=large-v3 in .env.
     whisper_model: str = os.getenv("WHISPER_MODEL", "large-v3-turbo")
-    # Docker/serversiz mühitlər üçün env ilə dəyişdirilə bilir
-    # (məs. WHISPER_DEVICE=cpu WHISPER_COMPUTE=int8)
+    # Can be changed via env for Docker/serverless environments
+    # (e.g. WHISPER_DEVICE=cpu WHISPER_COMPUTE=int8)
     whisper_device: str = os.getenv("WHISPER_DEVICE", "cuda")
     whisper_compute_type: str = os.getenv("WHISPER_COMPUTE", "float16")
     whisper_language: str = "az"
@@ -72,22 +72,22 @@ class Config:
     whisper_cpu_threads: int = field(
         default_factory=lambda: max(1, (os.cpu_count() or 4) - 1)
     )
-    # Prompt mətnləri prompts.py-dadır
+    # Prompt texts live in prompts.py
     whisper_initial_prompt: str = WHISPER_INITIAL_PROMPT
-    # Tutulan ifadənin minimum enerji (RMS) səviyyəsi — bundan sakit
-    # audio danışıq deyil (uzaq küy, fon), STT-yə göndərilmir.
+    # Minimum energy (RMS) level of the captured utterance — audio quieter
+    # than this is not speech (distant noise, background) and is not sent to STT.
     stt_min_rms: float = 0.008
 
-    # ── STT provayder seçimi (local ↔ Groq API) ──────────────────────────
-    # "local" = faster-whisper (GPU, tam offline).
-    # "groq"  = Groq Cloud whisper-large-v3 (API açarı; GPU tələb etmir).
-    # Admin paneldən runtime-da dəyişdirilir: Model parametrləri → stt_provider.
-    # RMS qapısı, təmizləmə və halüsinasiya filtrləri hər iki provayderə
-    # tətbiq olunur (bax stt/transcriber.py).
+    # ── STT provider selection (local <-> Groq API) ──────────────────────
+    # "local" = faster-whisper (GPU, fully offline).
+    # "groq"  = Groq Cloud whisper-large-v3 (API key; no GPU required).
+    # Changed at runtime from the admin panel: Model parameters -> stt_provider.
+    # The RMS gate, cleaning and hallucination filters apply to both providers
+    # (see stt/transcriber.py).
     stt_provider: str = os.getenv("STT_PROVIDER", 'groq')
-    # Groq çağırışı alınmasa (şəbəkə xətası / limit), local whisper-ə keçilir.
+    # If the Groq call fails (network error / rate limit), fall back to local whisper.
     stt_fallback_to_local: bool = True
-    # Groq açarı .env-dən oxunur — koda YAZILMIR, git-ə düşmür.
+    # The Groq key is read from .env — NOT written in code, not committed to git.
     groq_api_key: str = os.getenv("GROQ_API_KEY", "")
     groq_stt_model: str = os.getenv("GROQ_STT_MODEL", "whisper-large-v3")
     groq_stt_url: str = os.getenv(
@@ -95,27 +95,27 @@ class Config:
     groq_timeout_s: float = 15.0
 
     # ── LLM (Ollama) ───────────────────────────────────────────────────────
-    # esli_0107/faqrag layihəsində sınanmış konfiqurasiya: gemma4:e4b
-    # qwen2.5:7b-dən sürətli (~4s vs 5-14s) və "think": false ilə boş
-    # cavab problemi olmur (bax llm/backend.py).
+    # Configuration tested in the esli_0107/faqrag project: gemma4:e4b is
+    # faster than qwen2.5:7b (~4s vs 5-14s) and with "think": false there is no
+    # empty-response problem (see llm/backend.py).
     llm_backend: str = "ollama"
 
-    # ── LLM provayder seçimi (local Ollama ↔ Gemini API) ──────────────────
+    # ── LLM provider selection (local Ollama <-> Gemini API) ──────────────
     # "local"  = Ollama (offline, GPU; model = llm_model).
-    # "gemini" = Google Gemini (OpenAI-uyğun endpoint; GPU tələb etmir, daha
-    #            güclü tool-calling və Azərbaycan dili; model = gemini_model).
-    # Admin paneldən runtime-da dəyişilir (Model parametrləri → llm_provider).
-    # Marşrutlama, halüsinasiya səddi, streaming hər iki provayderdə eynidir.
+    # "gemini" = Google Gemini (OpenAI-compatible endpoint; no GPU required,
+    #            stronger tool-calling and Azerbaijani; model = gemini_model).
+    # Changed at runtime from the admin panel (Model parameters -> llm_provider).
+    # Routing, hallucination guard and streaming are the same for both providers.
     llm_provider: str = os.getenv("LLM_PROVIDER", 'gemini')
     gemini_api_key: str = os.getenv("GEMINI_API_KEY", "")
     gemini_model: str = os.getenv("GEMINI_MODEL", 'gemini-3.1-flash-lite')
     gemini_openai_url: str = os.getenv(
         "GEMINI_OPENAI_URL",
         "https://generativelanguage.googleapis.com/v1beta/openai")
-    # API (Gemini) çağırışı üçün QISA timeout — çökən/ilişən API-də fallback
-    # tez işə düşsün deyə local timeout-dan qısadır (429/limit onsuz da dərhal gəlir).
+    # SHORT timeout for the API (Gemini) call — shorter than the local timeout
+    # so fallback kicks in quickly on a crashing/hanging API (429/limit come instantly anyway).
     gemini_timeout_s: float = 12.0
-    # API alınmasa (429/5xx/timeout/şəbəkə) avtomatik local Ollama-ya keçsin.
+    # If the API fails (429/5xx/timeout/network), automatically switch to local Ollama.
     llm_fallback_to_local: bool = True
 
     llm_model: str = os.getenv("LLM_MODEL", "gemma4:e4b")
@@ -126,26 +126,26 @@ class Config:
     llm_max_tokens: int = 250
     llm_timeout_s: float = 60.0
 
-    # ── RAG (FAISS + BM25 hibrid) ──────────────────────────────────────────
+    # ── RAG (FAISS + BM25 hybrid) ──────────────────────────────────────────
     embedding_model: str = "BAAI/bge-m3"
     rag_top_k: int = 3
-    # Liderdən bu qədər geri qalan namizədlər atılır; daxilində qalanlar
-    # (multi-intent suallar üçün) LLM-ə birlikdə context kimi verilir.
+    # Candidates trailing the leader by more than this are dropped; those within
+    # are passed together to the LLM as context (for multi-intent questions).
     rag_candidate_margin: float = 0.15
-    # Bundan aşağı score = bilik bazasında tapılmadı (LLM çağırılmır).
+    # Below this score = not found in the knowledge base (the LLM is not called).
     rag_min_similarity: float = 0.60
-    # Bundan yuxarı score + tək-hissəli sual = FAQ cavabı birbaşa TTS-ə
-    # gedir, LLM çağırılmır (ən böyük latency qazancı).
+    # Above this score + a single-intent question = the FAQ answer goes straight
+    # to TTS, the LLM is not called (the biggest latency win).
     rag_direct_threshold: float = 0.70
-    # Dense (embedding) çəkisi hibrid axtarışda (1.0 = BM25 söndürülür).
+    # Dense (embedding) weight in the hybrid search (1.0 = BM25 disabled).
     rag_hybrid_alpha: float = 0.9
 
-    # FAQ faylının adı — .env-dən FAQ_FILE ilə override olunur.
-    # faq_augmented.json: variations expand edilmiş, ~2090 sual (~190 x 11).
-    # faq.json: köhnə format, yalnız ana suallar (190 giriş).
+    # FAQ file name — overridden via FAQ_FILE in .env.
+    # faq_augmented.json: variations expanded, ~2090 questions (~190 x 11).
+    # faq.json: old format, only the main questions (190 entries).
     faq_filename: str = os.getenv("FAQ_FILE", "faq_augmented.json")
 
-    # Prompt mətni prompts.py-dadır
+    # Prompt text lives in prompts.py
     system_prompt: str = SYSTEM_PROMPT
 
     # ── TTS ────────────────────────────────────────────────────────────────
@@ -159,22 +159,22 @@ class Config:
     session_timeout_s: float = 300.0
     assistant_name: str = "Ibrahim"
 
-    # ── Tool əməliyyatları (UX) ───────────────────────────────────────────
-    # Tool raundları bu qədər saniyədən uzun çəksə, istifadəçiyə gözləmə
-    # mesajı səsləndirilir (mesaj oxunarkən tool işi paralel davam edir).
+    # ── Tool operations (UX) ──────────────────────────────────────────────
+    # If tool rounds take longer than this many seconds, a wait message is
+    # spoken to the user (tool work continues in parallel while it plays).
     tools_wait_threshold_s: float = 3.0
     tools_wait_message: str = "Bircə saniyə, zəhmət olmasa gözləyin, yoxlayıram."
-    # Gözləmə mesajı ən çox bu intervalda BİR DƏFƏ deyilir — hər cavabda
-    # təkrarlanıb bezdirməsin deyə.
+    # The wait message is spoken at most ONCE per this interval — so it is not
+    # repeated on every response and does not become annoying.
     tools_wait_cooldown_s: float = 90.0
 
-    # ── Söhbət jurnalı (PostgreSQL, bax db/memory.py) ─────────────────────
-    # Hər növbə DB-yə yazılır (zəng tarixçəsi / analitika üçün).
+    # ── Conversation log (PostgreSQL, see db/memory.py) ───────────────────
+    # Every turn is written to the DB (for call history / analytics).
     memory_enabled: bool = True
-    # Başlanğıcda əvvəlki söhbətlərin kontekstə yüklənməsi. Call center-də
-    # hər zəng TƏZƏ söhbətdir (başqa müştəri ola bilər) — default söndürülüb.
+    # Loading previous conversations into context at startup. In a call center
+    # every call is a NEW conversation (it may be a different customer) — disabled by default.
     memory_preload: bool = False
-    # Preload aktiv olsa, yalnız bu qədər saat ərzindəki mesajlar yüklənir.
+    # If preload is enabled, only messages within this many hours are loaded.
     memory_window_hours: int = 24
 
     # ── Queue sizes ────────────────────────────────────────────────────────

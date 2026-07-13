@@ -1,69 +1,69 @@
-# Deploy Təlimatı — Veb Tətbiq
+# Deploy Guide — Web Application
 
-Layihə iki rejimdə işləyir:
+The project runs in two modes:
 
-| Rejim | Audio | İşə salma |
+| Mode | Audio | Run |
 |---|---|---|
-| Lokal (demo) | Kompüterin mikrofonu/dinamiki | `run.bat` və ya `python src/main.py` |
-| Veb | Brauzer mikrofonu (WebSocket) | Aşağıda |
+| Local (demo) | The computer's microphone/speaker | `run.bat` or `python src/main.py` |
+| Web | Browser microphone (WebSocket) | Below |
 
-## 1. Veb serveri lokal işə salmaq (Docker-siz)
+## 1. Running the web server locally (without Docker)
 
-Ollama və DB işləyən vəziyyətdə, layihə kökündən:
+With Ollama and the DB running, from the project root:
 
 ```powershell
 .venv\Scripts\python.exe -m uvicorn web.server:app --app-dir src --host 0.0.0.0 --port 8000
 ```
 
-Brauzerdə: **http://localhost:8000** — 📞 düyməsinə basıb danışın.
+In the browser: **http://localhost:8000** — press the 📞 button and talk.
 
-Eyni şəbəkədəki başqa cihazdan test: `http://<kompüterin-IP-si>:8000`
-(Qeyd: mikrofon icazəsi `localhost`-dan kənarda yalnız HTTPS ilə işləyir — aşağıya bax.)
+Testing from another device on the same network: `http://<computer-IP>:8000`
+(Note: microphone permission works outside `localhost` only over HTTPS — see below.)
 
-## 2. Tam stack — Docker Compose (GPU server)
+## 2. Full stack — Docker Compose (GPU server)
 
-Tələblər: Linux server, NVIDIA GPU (~8GB VRAM), `docker` + `nvidia-container-toolkit`.
+Requirements: a Linux server, an NVIDIA GPU (~8GB VRAM), `docker` + `nvidia-container-toolkit`.
 
 ```bash
-# 1. Layihəni serverə köçürün (git və ya scp)
-# 2. Qurun və başladın
+# 1. Copy the project to the server (git or scp)
+# 2. Build and start
 docker compose up -d --build
 
-# 3. İlk dəfə LLM modelini endirin
+# 3. Pull the LLM model the first time
 docker compose exec ollama ollama pull gemma4:e4b
 
-# 4. Yoxlayın
+# 4. Check
 docker compose logs -f app
 ```
 
-Brauzerdə: `http://<server-ip>:8000`
+In the browser: `http://<server-ip>:8000`
 
-İlk başlanğıcda Whisper (~3GB) və bge-m3 (~2GB) avtomatik endirilir və
-`hf_cache` volume-də saxlanılır — sonrakı başlanğıclar sürətlidir.
+On the first startup Whisper (~3GB) and bge-m3 (~2GB) are downloaded automatically and
+stored in the `hf_cache` volume — subsequent startups are fast.
 
-## 3. HTTPS (istehsal üçün vacib)
+## 3. HTTPS (important for production)
 
-Brauzerlər mikrofonu yalnız `localhost` və ya HTTPS üzərindən verir.
-İctimai deploy üçün qarşıya reverse-proxy qoyun:
+Browsers grant microphone access only over `localhost` or HTTPS.
+For a public deploy, put a reverse proxy in front:
 
 ```
-İnternet → Caddy/Nginx (443, TLS) → app:8000
+Internet → Caddy/Nginx (443, TLS) → app:8000
 ```
 
-Ən asan yol — Caddy (avtomatik Let's Encrypt sertifikatı):
+The easiest way is Caddy (automatic Let's Encrypt certificate):
 
 ```
 # Caddyfile
-sizin-domen.az {
+your-domain.az {
     reverse_proxy localhost:8000
 }
 ```
 
-WebSocket avtomatik proxy-lənir, əlavə konfiqurasiya lazım deyil.
+WebSocket is proxied automatically, no extra configuration needed.
 
-## 4. GPU olmayan server (yavaş, yalnız test)
+## 4. Server without a GPU (slow, test only)
 
-`docker-compose.yml`-də `app` servisinə əlavə edin və `deploy:` bölməsini silin:
+In `docker-compose.yml`, add to the `app` service and remove the `deploy:` section:
 
 ```yaml
     environment:
@@ -71,22 +71,22 @@ WebSocket avtomatik proxy-lənir, əlavə konfiqurasiya lazım deyil.
       WHISPER_COMPUTE: int8
 ```
 
-STT xeyli yavaşıyacaq (large-v3 CPU-da ~10-20s) — `config.py`-da
-`whisper_model: "medium"` etmək məsləhətdir.
+STT will be much slower (large-v3 on CPU ~10-20s) — setting
+`whisper_model: "medium"` in `config.py` is recommended.
 
-## 5. Mühit dəyişənləri
+## 5. Environment variables
 
-| Dəyişən | Default | Təsvir |
+| Variable | Default | Description |
 |---|---|---|
 | `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME` | localhost/5432/... | PostgreSQL |
 | `OLLAMA_URL` | http://localhost:11434/api/chat | Ollama endpoint |
-| `LLM_MODEL` | gemma4:e4b | Ollama modeli |
-| `WHISPER_DEVICE` | cuda | `cpu` mümkündür |
-| `WHISPER_COMPUTE` | float16 | CPU üçün `int8` |
+| `LLM_MODEL` | gemma4:e4b | Ollama model |
+| `WHISPER_DEVICE` | cuda | `cpu` is possible |
+| `WHISPER_COMPUTE` | float16 | `int8` for CPU |
 
-## Qeydlər
+## Notes
 
-* `edge-tts` Microsoft serverlərinə çıxış tələb edir — serverin interneti olmalıdır.
-* Hər WebSocket bağlantısı ayrıca zəngdir: öz söhbət konteksti var, ağır
-  modellər (Whisper, FAISS, embedding) isə bütün zənglər arasında paylaşılır.
-* Zəng jurnalı `conversation_history` cədvəlinə yazılır.
+* `edge-tts` requires access to Microsoft servers — the server must have internet.
+* Each WebSocket connection is a separate call: it has its own conversation context,
+  while the heavy models (Whisper, FAISS, embedding) are shared across all calls.
+* The call log is written to the `conversation_history` table.
