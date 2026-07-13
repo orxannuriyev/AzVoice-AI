@@ -1,0 +1,3422 @@
+[
+  {
+    "category": "Ümumi məlumat",
+    "question": "Otel harada yerləşir? Ünvanınız nədir?",
+    "answer": "Astana Hotel Bakı şəhərində, Neftçilər prospekti 153 ünvanında yerləşir. Dənizkənarı bulvara piyada 5 dəqiqəlik məsafədədir.",
+    "active": true,
+    "variations": [
+      "Oteliniz hansı ünvandadır?",
+      "Sizin ünvanınız nədir?",
+      "Otel hansı əraziyə yerləşib?",
+      "Otelinizin ünvanını deyə bilərsiniz?",
+      "Otel şəhərin harasındadır?",
+      "Ünvanınızı bilmək istəyirəm.",
+      "Otel dəqiq harada yerləşir?",
+      "Sizi harada tapmaq olar?",
+      "Otelin yeri haradır?",
+      "Otelin ünvanı barədə məlumat verə bilərsinizmi?"
+    ]
+  },
+  {
+    "category": "Ümumi məlumat",
+    "question": "Otelə necə əlaqə saxlaya bilərəm?",
+    "answer": "Bizimlə +994 12 498 00 00 nömrəsi ilə əlaqə saxlaya bilərsiniz. Zənglərə hər gün 24 saat cavab veririk.",
+    "active": true,
+    "variations": [
+      "Sizinlə necə əlaqə saxlaya bilərəm?",
+      "Telefon nömrəniz nədir?",
+      "Otellə əlaqə saxlamaq üçün nə etməliyəm?",
+      "Sizə necə zəng edə bilərəm?",
+      "Əlaqə nömrənizi bilə bilərəmmi?",
+      "Sizinlə necə danışa bilərəm?",
+      "Otelin əlaqə vasitələri hansılardır?",
+      "Zəng etmək üçün nömrə lazımdır, verə bilərsiniz?",
+      "Sizinlə əlaqə saxlamağın yolu nədir?",
+      "Sizə necə müraciət edə bilərəm?"
+    ]
+  },
+  {
+    "category": "Giriş və çıxış",
+    "question": "Çek-in və çek-aut saatları neçədədir?",
+    "answer": "Çek-in saat 14:00-dan başlayır, çek-aut saat 12:00-a qədərdir. Erkən çek-in mövcudluqdan asılıdır və pulsuzdur. Gecikmiş çek-aut saat 18:00-a qədər 40 manatdır.",
+    "active": true,
+    "variations": [
+      "Giriş və çıxış saatlarınız neçədir?",
+      "Çek-in saat neçədə başlayır?",
+      "Çıxış vaxtı nə vaxtdır?",
+      "Neçədə otağa girib, neçədə çıxmaq lazımdır?",
+      "Çek-in/çek-aut vaxtlarını deyə bilərsiniz?",
+      "Otaqdan çıxış saatı neçədir?",
+      "Giriş saatınız neçədədir?",
+      "Nə vaxt çek-in edə bilərəm, nə vaxt çıxmalıyam?",
+      "Çek-in çek-aut qaydası necədir?",
+      "Saat neçədə gəlib, neçədə getməliyəm?"
+    ]
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Hansı otaq tipləriniz var?",
+    "answer": "Üç otaq tipimiz var. Standard — şəhər mənzərəli, iki nəfərlik. Delüks — dəniz mənzərəli, balkonlu, üç nəfərə qədər. Suit — iki otaqlı lüks süit, jakuzi ilə, dörd nəfərə qədər.",
+    "active": true,
+    "variations": [
+      "Otaq növləriniz hansılardır?",
+      "Nə cür otaqlarınız var?",
+      "Otaq seçimləri hansılardır?",
+      "Hansı otaqlar təklif edirsiniz?",
+      "Sizdə hansı tip otaqlar mövcuddur?",
+      "Otaq çeşidləriniz nədir?",
+      "Hansı kateqoriyalı otaqlarınız var?",
+      "Otaqların növləri barədə məlumat verin.",
+      "Nə cür otaq variantlarınız var?",
+      "Otaq tipləri haqqında deyə bilərsiniz?"
+    ]
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Otaqlarda hansı imkanlar var?",
+    "answer": "Bütün otaqlarda pulsuz Vay-Fay, televizor, kondisioner və mini-bar var. Delüks otaqlarda əlavə balkon və dəniz mənzərəsi, Suit otaqlarda jakuzi və ayrıca qonaq otağı mövcuddur.",
+    "active": true,
+    "variations": [
+      "Otaqlarda nələr var?",
+      "Otaq daxilində hansı şərait var?",
+      "Otaqlarda hansı avadanlıq mövcuddur?",
+      "Otaqların təchizatı necədir?",
+      "Otaqda nə kimi imkanlar təklif olunur?",
+      "Otaqlarda hansı xüsusiyyətlər var?",
+      "Otaqların daxili necədir, nə var?",
+      "Otaqlarda hansı şeylər mövcuddur?",
+      "Otaq içində hansı imkanlardan istifadə edə bilərəm?",
+      "Otaqlarınızda nələr təmin olunub?"
+    ]
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Rezervasiyanı necə ləğv edə bilərəm? Ləğv qaydası nədir?",
+    "answer": "Rezervasiya çek-in tarixinə 48 saat qalana qədər pulsuz ləğv edilə bilər. Daha gec ləğvlərdə ilk gecənin qiyməti tutulur. Ləğv üçün zəng etməniz kifayətdir.",
+    "active": true,
+    "variations": [
+      "Bronu necə ləğv edə bilərəm?",
+      "Rezervasiyanı ləğv etmək istəyirəm, necə olur?",
+      "Ləğvetmə şərtləriniz nədir?",
+      "Bronumu ləğv etmək üçün nə etməliyəm?",
+      "Rezervasiyanı geri götürmək mümkündürmü?",
+      "Ləğv qaydalarınızı izah edə bilərsiniz?",
+      "Bron ləğvi necə həyata keçirilir?",
+      "Otağı ləğv etsəm nə olur?",
+      "Rezervasiyadan imtina etmək istəyirəm, prosedur nədir?",
+      "Necə imtina edə bilərəm rezervasiyadan?"
+    ]
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Ödənişi necə edə bilərəm? Hansı ödəniş üsullarını qəbul edirsiniz?",
+    "answer": "Nağd, Viza və Masterkard bank kartları, həmçinin bank köçürməsi qəbul olunur. Rezervasiya zamanı ilk gecənin qiyməti depozit kimi tutulur.",
+    "active": true,
+    "variations": [
+      "Ödəniş üsullarınız hansılardır?",
+      "Necə ödəniş edə bilərəm?",
+      "Hansı yollarla ödəniş qəbul edirsiniz?",
+      "Ödəniş etmək üçün hansı seçimlər var?",
+      "Pulu necə ödəyim?",
+      "Ödəniş formaları hansılardır?",
+      "Kart, nağd, köçürmə — hansını qəbul edirsiniz?",
+      "Ödəmə şəkilləriniz nədir?",
+      "Ödənişlə bağlı hansı imkanlar var?",
+      "Necə hesablaşa bilərəm sizinlə?"
+    ]
+  },
+  {
+    "category": "Restoran və qidalanma",
+    "question": "Səhər yeməyi qiymətə daxildirmi?",
+    "answer": "Səhər yeməyi ayrıca sifariş olunur, qiyməti 25 manatdır. Açıq bufet formasında restoranımızda saat 07:00-dan 10:30-a qədər verilir. Otağa səhər yeməyi sifarişi əlavə 10 manatdır.",
+    "active": true,
+    "variations": [
+      "Səhər yeməyi otaq qiymətinə daxildir?",
+      "Breakfast qiymətə əlavədir, yoxsa daxildir?",
+      "Səhər yeməyi ödənişsizdir?",
+      "Otaq qiymətinə səhər yeməyi də var?",
+      "Səhər yeməyi ayrıca ödənilir?",
+      "Qiymətə səhər yeməyi hesablanıb?",
+      "Səhər yeməyi pulsuzdurmu?",
+      "Otaq haqqına səhər yeməyi daxil edilib?",
+      "Səhər yeməyinə əlavə pul lazımdır?",
+      "Səhər yeməyi paketə daxildirmi?"
+    ]
+  },
+  {
+    "category": "Hotel xidmətləri",
+    "question": "Oteldə hovuz varmı?",
+    "answer": "Bəli, açıq hovuzumuz var. Hovuz hər gün saat 07:00-dan 22:00-a qədər açıqdır və otel qonaqları üçün pulsuzdur.",
+    "active": true,
+    "variations": [
+      "Hovuzunuz varmı?",
+      "Sizdə üzmə hovuzu var?",
+      "Otelin hovuzu varmı?",
+      "Hovuz xidməti təklif edirsiniz?",
+      "Üzə biləcəyim hovuz var?",
+      "Oteldə basseyn varmı?",
+      "Hovuzunuz mövcuddur?",
+      "Sizin hovuz varmı otel ərazisində?",
+      "Bəs hovuz, var?",
+      "Otel ərazisində hovuz təklif olunur?"
+    ]
+  },
+  {
+    "category": "Hotel xidmətləri",
+    "question": "Fitnes zalınız varmı?",
+    "answer": "Bəli, fitnes zalımız 24 saat açıqdır. Giriş otaq kartı ilədir və otel qonaqları üçün pulsuzdur.",
+    "active": true,
+    "variations": [
+      "Sizdə idman zalı var?",
+      "Fitnes zalı mövcuddur?",
+      "İdman etmək üçün zal varmı?",
+      "Trenajor zalınız var?",
+      "Fitnes mərkəziniz varmı?",
+      "Gym var oteldə?",
+      "Otel ərazisində idman zalı varmı?",
+      "Fitnes imkanınız var?",
+      "İdman zalınızdan istifadə edə bilərəm?",
+      "Sizdə fitnes zalı fəaliyyət göstərir?"
+    ]
+  },
+  {
+    "category": "Hotel xidmətləri",
+    "question": "Spa xidmətiniz varmı? Spa qiyməti nə qədərdir?",
+    "answer": "Bəli, spa mərkəzimiz saat 10:00-dan 21:00-a qədər işləyir. Spa paketinə 60 dəqiqəlik klassik masaj, türk hamamı və sauna daxildir, qiyməti 80 manatdır. Cütlük paketi 140 manatdır.",
+    "active": true,
+    "variations": [
+      "Spa xidmətiniz varmı?",
+      "Spa nə qədərdir?",
+      "Spa mərkəziniz var?",
+      "Masaj və spa xidmətləriniz nədir?",
+      "Spa paketinin qiyməti nədir?",
+      "Spa xidmətindən yararlana bilərəm?",
+      "Sizdə spa var, qiyməti nədir?",
+      "Spa haqqında məlumat verə bilərsiniz?",
+      "Nə qədərdir spa xidməti?",
+      "Spaya nə daxildir və qiyməti neçədir?"
+    ]
+  },
+  {
+    "category": "Nəqliyyat",
+    "question": "Hava limanından transfer varmı?",
+    "answer": "Bəli, Heydər Əliyev Hava Limanından otelə və geriyə transfer xidmətimiz var, qiyməti 35 manatdır. Transfer əvvəlcədən sifariş olunmalıdır. Yol təxminən 25-30 dəqiqə çəkir.",
+    "active": true,
+    "variations": [
+      "Hava limanı transferiniz var?",
+      "Aeroportdan gətirmə xidmətiniz varmı?",
+      "Məni aeroportdan götürə bilərsiniz?",
+      "Transfer xidməti təklif edirsiniz?",
+      "Hava limanından otelə necə gələ bilərəm?",
+      "Aeroport transferi mövcuddur?",
+      "Sizdə hava limanı transferi var?",
+      "Aeroportdan avtomobil sifariş edə bilərəm?",
+      "Uçuşdan sonra məni kim qarşılayacaq?",
+      "Aeroport-otel transferi varmı?"
+    ]
+  },
+  {
+    "category": "İnternet və texnologiya",
+    "question": "Vay-Fay pulsuzdurmu?",
+    "answer": "Bəli, bütün otaqlarda və otelin ümumi ərazilərində Vay-Fay tamamilə pulsuzdur.",
+    "active": true,
+    "variations": [
+      "Vay-Fay ödənişsizdir?",
+      "İnternet pulsuzdur?",
+      "Wifi haqqı var?",
+      "Vay-Fay üçün pul ödəməliyəm?",
+      "İnternetə görə əlavə haqq varmı?",
+      "Wifi pulsuz təqdim olunur?",
+      "Otaqlarda internet ödənişsizdirmi?",
+      "Vay-Faya görə haqq alınır?",
+      "İnternetdən istifadə pulsuzdur?",
+      "Wifi xidməti haqsızdır?"
+    ]
+  },
+  {
+    "category": "Parkinq",
+    "question": "Parkinq varmı?",
+    "answer": "Bəli, otelin pulsuz parkinqi var, lakin yer sayı məhduddur. Elektromobillər üçün 2 şarj yeri mövcuddur.",
+    "active": true,
+    "variations": [
+      "Parkinqiniz varmı?",
+      "Avtomobil saxlamaq üçün yer var?",
+      "Maşını haraya qoyum?",
+      "Parkinq yeriniz var?",
+      "Avtomobil parkı mövcuddur?",
+      "Sizdə parkinq var?",
+      "Maşın üçün park yeri varmı?",
+      "Parking təklif edirsiniz?",
+      "Avtomobilimi harada saxlaya bilərəm?",
+      "Otelin parkinqi var?"
+    ]
+  },
+  {
+    "category": "Ailə və uşaqlar",
+    "question": "Uşaqlar üçün qaydalar necədir? Uşaqla qala bilərəmmi?",
+    "answer": "6 yaşa qədər uşaqlar valideynlə eyni otaqda pulsuz qalır. 6 yaşdan 12 yaşa qədər uşaqlar üçün əlavə çarpayı 30 manatdır.",
+    "active": true,
+    "variations": [
+      "Uşaqla qalmaq üçün qaydalar nədir?",
+      "Uşaqlar üçün şərtləriniz necədir?",
+      "Uşaqla otelinizə gələ bilərəm?",
+      "Uşaqlı qonaqlar üçün qayda var?",
+      "Uşaqlarla bağlı qaydalarınız nədir?",
+      "Uşaqla qalmağın şərtləri nədir?",
+      "Uşaq üçün xüsusi qayda varmı?",
+      "Uşaqlı ailələr üçün şərait necədir?",
+      "Uşaqla qala bilərikmi otelinizdə?",
+      "Uşaqlar barədə qaydalarınızı deyin."
+    ]
+  },
+  {
+    "category": "Ev heyvanları",
+    "question": "Ev heyvanı ilə qala bilərəmmi?",
+    "answer": "Ev heyvanları yalnız 5 kiloqrama qədər kiçik itlər üçün icazəlidir, gecəlik əlavə 20 manat ödənilir. Suit otaqlarda ev heyvanı qadağandır.",
+    "active": true,
+    "variations": [
+      "Ev heyvanımla qala bilərəm?",
+      "Heyvanla gəlmək olar?",
+      "İtimlə/pişiyimlə qala bilərəm?",
+      "Ev heyvanı qəbul edirsiniz?",
+      "Heyvan gətirmək icazəlidir?",
+      "Pet-friendly otelsinizmi?",
+      "Heyvanımla otaqda qala bilərəmmi?",
+      "Ev heyvanına icazə var?",
+      "Heyvanla gəlişimə şərait varmı?",
+      "Heyvan qəbulu ilə bağlı qaydanız var?"
+    ]
+  },
+  {
+    "category": "Hotel qaydaları",
+    "question": "Otaqda siqaret çəkmək olarmı?",
+    "answer": "Xeyr, bütün otaqlarda siqaret çəkmək qadağandır. Pozuntu halında 100 manat cərimə tutulur. Siqaret üçün terrasda ayrılmış xüsusi zona mövcuddur.",
+    "active": true,
+    "variations": [
+      "Otaqda papiros çəkmək olar?",
+      "Siqaret çəkmək qadağandırmı otaqlarda?",
+      "Otaq daxilində siqaret çəkilə bilər?",
+      "Siqaret çəkməyə icazə var otaqda?",
+      "Otaqda tütün məmulatı işlətmək olar?",
+      "Otağımda siqaret çəkə bilərəm?",
+      "Siqaret çəkmək otaqlarda mümkündürmü?",
+      "Otaqlarda siqaretə icazə verilir?",
+      "Papiros çəkmək qadağandır otaqda?",
+      "Siqaret çəksəm nə olar otaqda?"
+    ]
+  },
+  {
+    "category": "Camaşırxana",
+    "question": "Camaşırxana xidmətiniz varmı?",
+    "answer": "Bəli, gündəlik camaşır xidmətimiz var, qiyməti 15 manatdır. Səhər təhvil verilən paltarlar axşama qədər hazır olur.",
+    "active": true,
+    "variations": [
+      "Camaşırxananız var?",
+      "Paltar yudurmaq xidmətiniz varmı?",
+      "Çamaşır xidməti təklif edirsiniz?",
+      "Paltarları yumaq üçün xidmətiniz var?",
+      "Camaşır yuma imkanınız var?",
+      "Paltar yudurmaq mümkündürmü?",
+      "Sizdə çamaşırxana xidməti var?",
+      "Paltarları kim yuyur, xidmətiniz varmı?",
+      "Camaşır xidmətindən istifadə edə bilərəm?",
+      "Paltar yuma xidmətiniz mövcuddur?"
+    ]
+  },
+  {
+    "category": "Endirimlər və kampaniyalar",
+    "question": "Hansı endirimlər və kampaniyalar var?",
+    "answer": "Hazırda yay endirimi kampaniyası keçirilir: 3 gecə və daha çox qalanlara Delüks və Suit otaqlarda 15 faiz endirim tətbiq olunur. Həmçinin 30 gün əvvəl rezervasiya edənlərə bütün otaq tiplərində 10 faiz erkən rezervasiya endirimi var.",
+    "active": true,
+    "variations": [
+      "Endirimləriniz nələrdir?",
+      "Hansı kampaniyalar keçirilir?",
+      "İndirimlər varmı?",
+      "Kampaniya təklifləriniz nədir?",
+      "Endirim şansım varmı?",
+      "Nə kimi endirimlər təklif edirsiniz?",
+      "Aksiyalarınız var?",
+      "Hazırda hansı kampaniyalar aktivdir?",
+      "Endirimlərinizi bilmək istəyirəm.",
+      "Hər hansı endirim tətbiq olunur?"
+    ]
+  },
+  {
+    "category": "Endirimlər və kampaniyalar",
+    "question": "Bal ayı paketi varmı?",
+    "answer": "Bəli, bal ayı paketimiz var: Suit otaqda 3 gecə, şampan, gül bəzəyi və cütlük spa paketi daxildir. Qiyməti 1350 manat əvəzinə 1100 manatdır.",
+    "active": true,
+    "variations": [
+      "Bal ayı üçün xüsusi paketiniz var?",
+      "Medovoy ay paketiniz varmı?",
+      "Yeni evlilər üçün paket təklif edirsiniz?",
+      "Bal ayı təklifiniz nədir?",
+      "Toy səyahəti üçün paket varmı?",
+      "Bal ayı üçün endirim var?",
+      "Yeni evlilərə xüsusi şərtiniz var?",
+      "Bal ayı paketi haqqında məlumat verə bilərsiniz?",
+      "Honeymoon paketiniz varmı?",
+      "Bal ayı üçün nə təklif edirsiniz?"
+    ]
+  },
+  {
+    "category": "Biznes müştəriləri",
+    "question": "Konfrans zalınız varmı?",
+    "answer": "Bəli, 80 nəfərlik konfrans zalımız var. Proyektor və səs sistemi ilə təchiz olunub. Günlük icarə 500 manatdır, otel qonaqlarına 20 faiz endirim tətbiq olunur.",
+    "active": true,
+    "variations": [
+      "Konfrans zalınız var?",
+      "İclas keçirmək üçün zalınız varmı?",
+      "Konfrans üçün məkanınız var?",
+      "Tədbir zalı təklif edirsiniz?",
+      "Böyük görüşlər üçün zalınız varmı?",
+      "Konfrans salonu mövcuddur?",
+      "Zalınızda konfrans keçirmək olar?",
+      "Sizdə iclas zalı var?",
+      "Konfrans keçirmək üçün yer lazımdır, varmı?",
+      "Toplantı zalınız varmı?"
+    ]
+  },
+  {
+    "category": "Restoran və qidalanma",
+    "question": "Restoranınız varmı? Nahar və şam yeməyi verilirmi?",
+    "answer": "Bəli, otelin restoranı var. Səhər yeməyi 07:00-10:30, nahar 12:30-15:00, şam yeməyi 18:30-22:30 arası verilir. Rum sörvis ilə yemək sifarişi 24 saat mümkündür.",
+    "active": true,
+    "variations": [
+      "Restoranınız var? Nahar-şam verilir?",
+      "Yemək üçün restoranınız varmı?",
+      "Nahar və axşam yeməyi təklif edirsiniz?",
+      "Restoranda yemək yeyə bilərəm?",
+      "Sizdə restoran xidməti var?",
+      "Nahar-şam yeməyi harada verilir?",
+      "Restoran fəaliyyət göstərir oteldə?",
+      "Yemək otağınız/restoranınız var?",
+      "Nahar və şam üçün restoran varmı?",
+      "Restoranınızda hansı yeməklər verilir?"
+    ]
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Dəniz mənzərəli otaq varmı?",
+    "answer": "Bəli, Delüks otaqlarımız dəniz mənzərəli və balkonludur. Suit otaqların da bir hissəsi dənizə baxır. Rezervasiya zamanı istəyinizi bildirsəniz, nəzərə alarıq.",
+    "active": true,
+    "variations": [
+      "Dənizə baxan otağınız var?",
+      "Dəniz mənzərəli otaq təklif edirsiniz?",
+      "Otaqdan dəniz görünür?",
+      "Dəniz görünüşlü otaq varmı?",
+      "Sizdə dənizə baxan otaqlar var?",
+      "Dəniz mənzərəsi olan otaq istəyirəm, var?",
+      "Otaqlarınızdan dəniz görünür?",
+      "Dənizi görə biləcəyim otaq varmı?",
+      "Dəniz manzaralı otaqlarınız varmı?",
+      "Otaqdan dəniz mənzərəsi açılır?"
+    ]
+  },
+  {
+    "category": "Təhlükəsizlik",
+    "question": "Otaqda seyf varmı?",
+    "answer": "Bəli, bütün otaqlarda elektron seyf var və istifadəsi pulsuzdur. Qiymətli əşyalarınızı həmçinin risepşındakı baş seyfdə də saxlaya bilərsiniz.",
+    "active": true,
+    "variations": [
+      "Otaqda seyf var?",
+      "Qiymətli əşyalarımı harada saxlayım, seyf varmı?",
+      "Sizdə otaq seyfi var?",
+      "Seyf xidmətiniz varmı?",
+      "Otaqda pul qutusu/seyf var?",
+      "Əşyalarımı seyfə qoya bilərəm?",
+      "Otaqda əşya saxlamaq üçün seyf var?",
+      "Seyfiniz varmı otaqlarda?",
+      "Dəyərli əşyaları saxlamaq üçün seyf var?",
+      "Otaqlarda elektron seyf mövcuddur?"
+    ]
+  },
+  {
+    "category": "Giriş və çıxış",
+    "question": "Gec gələcəyəm, risepşın işləyəcəkmi?",
+    "answer": "Risepşınımız 24 saat işləyir, istənilən vaxt çek-in edə bilərsiniz. Gec gələcəyinizi əvvəlcədən bildirsəniz, rezervasiyanız təhlükəsiz saxlanılar.",
+    "active": true,
+    "variations": [
+      "Gecikəcəyəm, risepşın açıqdır?",
+      "Gec gələcəyəm, kimsə olacaq?",
+      "Risepşın gecə işləyir?",
+      "Gec gəlsəm, sizi tapa bilərəm?",
+      "Risepşınınız 24 saat işləyir?",
+      "Gecə gəlsəm, qarşılayan olacaq?",
+      "Gec vaxt gələcəyəm, problem olmaz ki?",
+      "Risepşın gecə saatlarında açıqdır?",
+      "Gec gəlişimdə risepşın fəaliyyətdə olacaq?",
+      "Gecə saatlarında risepşınınız işləyir?"
+    ]
+  },
+  {
+    "category": "Nəqliyyat",
+    "question": "Taksi çağıra bilərsinizmi?",
+    "answer": "Bəli, risepşın istənilən vaxt sizin üçün taksi çağıra bilər. Həmçinin otelin öz transfer xidmətindən də istifadə edə bilərsiniz.",
+    "active": true,
+    "variations": [
+      "Taksi çağıra bilərsiniz?",
+      "Mənə taksi tapa bilərsiniz?",
+      "Taksi sifariş etmək mümkündür?",
+      "Risepşın taksi çağırır?",
+      "Taksi tələb etsəm kömək edərsiniz?",
+      "Sizdə taksi çağırma xidməti var?",
+      "Taksi lazımdır, çağıra bilərsiniz?",
+      "Mənə taksi tuta bilərsiniz?",
+      "Taksi sifariş vermək istəyirəm, mümkündür?",
+      "Taksi çağırmaqda kömək edə bilərsiniz?"
+    ]
+  },
+  {
+    "category": "Ətraf ərazi",
+    "question": "Otel şəhər mərkəzinə yaxındırmı? Yaxınlıqda nə var?",
+    "answer": "Otel şəhərin mərkəzində, Neftçilər prospektində yerləşir. Dənizkənarı bulvar piyada 5 dəqiqəlik, İçərişəhər 15 dəqiqəlik məsafədədir. Yaxınlıqda restoranlar, ticarət mərkəzləri və muzeylər var.",
+    "active": true,
+    "variations": [
+      "Otel mərkəzə yaxındır? Ətrafda nə var?",
+      "Şəhər mərkəzinə yaxınsınız?",
+      "Otel mərkəzdədir?",
+      "Ətrafınızda nələr var?",
+      "Mərkəzə məsafəniz nə qədərdir?",
+      "Yaxınlıqda hansı yerlər var?",
+      "Otel şəhərin mərkəzindədir?",
+      "Mərkəzə yaxın yerləşirsiniz?",
+      "Ətraf mühit necədir, nə var yaxınlıqda?",
+      "Şəhər mərkəzinə uzaqsınız?"
+    ]
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Qrup rezervasiyası edə bilərəmmi?",
+    "answer": "Bəli, qrup rezervasiyaları üçün xüsusi şərtlər təklif olunur. 5 otaqdan çox rezervasiya üçün menecerlərimiz sizinlə fərdi qaydada əlaqə saxlayacaq.",
+    "active": true,
+    "variations": [
+      "Qrup üçün rezervasiya edə bilərəm?",
+      "Böyük qrupla gəlsək rezervasiya mümkündür?",
+      "Qrup bronu qəbul edirsiniz?",
+      "Çox otaq üçün birlikdə rezervasiya edə bilərəm?",
+      "Qrup rezervasiyası şərtləriniz nədir?",
+      "Komandayla gəlsək otaq ayıra bilərsiniz?",
+      "Çoxlu otaq sifariş etmək istəyirəm, mümkündür?",
+      "Qrup halında bron etmək olar?",
+      "Bir neçə otaq birlikdə rezervasiya edilə bilər?",
+      "Qrup üçün xüsusi şərtiniz varmı?"
+    ]
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Faktura və ya qəbz ala bilərəmmi?",
+    "answer": "Bəli, çek-aut zamanı bütün ödənişlər üzrə rəsmi qəbz təqdim olunur. Şirkət adına faktura lazımdırsa, əvvəlcədən şirkət rekvizitlərini bildirin.",
+    "active": true,
+    "variations": [
+      "Qəbz verə bilərsiniz?",
+      "Faktura ala bilərəm?",
+      "Ödəniş üçün sənəd verilir?",
+      "Çek ala bilərəm sizdən?",
+      "Rəsmi qəbz təqdim edirsiniz?",
+      "Faktura lazımdır, verə bilərsiniz?",
+      "Ödəniş sənədi ala bilərəm?",
+      "Şirkət üçün faktura düzəldə bilərsiniz?",
+      "Qəbz və ya invoys verilir?",
+      "Ödədiyim məbləğ üçün sənəd verilirmi?"
+    ]
+  },
+  {
+    "category": "Əlçatanlıq",
+    "question": "Əlil arabası ilə giriş mümkündürmü? Əlilliyi olan qonaqlar üçün şərait varmı?",
+    "answer": "Bəli, oteldə lift, panduslar və əlilliyi olan qonaqlar üçün uyğunlaşdırılmış otaqlar mövcuddur. Rezervasiya zamanı ehtiyacınızı bildirsəniz, uyğun otaq ayırarıq.",
+    "active": true,
+    "variations": [
+      "Əlil arabası ilə giriş var? Şərait varmı?",
+      "Əlillər üçün otel uyğundur?",
+      "Wheelchair ilə girmək mümkündür?",
+      "Əlilliyi olanlar üçün şəraitiniz var?",
+      "Əlil arabalı qonaqlar üçün imkan var?",
+      "Oteliniz əlçatandır?",
+      "Əlil arabası ilə hərəkət etmək mümkündür?",
+      "Fiziki məhdudiyyəti olanlar üçün şərait varmı?",
+      "Əngəlli qonaqlar üçün otelinizdə uyğunluq var?",
+      "Əlillər üçün xüsusi imkanlarınız nədir?"
+    ]
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Valyuta dəyişmək mümkündürmü? Hansı valyuta ilə ödəniş edə bilərəm?",
+    "answer": "Bütün qiymətlər manatladır və ödənişlər manatla qəbul olunur. Yaxınlıqda bank və valyuta dəyişmə məntəqələri var, risepşın sizə yol göstərə bilər.",
+    "active": true,
+    "variations": [
+      "Valyuta dəyişmək olar? Hansı pulla ödəyə bilərəm?",
+      "Hansı valyutada ödəniş edirsiniz?",
+      "Dollarla ödəyə bilərəm?",
+      "Valyuta mübadiləsi mümkündür?",
+      "Pulumu dəyişdirmək olar?",
+      "Hansı pulla hesablaşırsınız?",
+      "Manatdan başqa valyuta qəbul edirsiniz?",
+      "Valyuta çevirmə imkanınız var?",
+      "Ödəniş hansı valyuta ilə olmalıdır?",
+      "Xarici valyuta ilə ödəyə bilərəm?"
+    ]
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Ütü və fen varmı otaqda?",
+    "answer": "Bütün otaqlarda fen var. Ütü və ütü masası risepşından pulsuz sifariş oluna bilər, həmçinin camaşırxana xidmətimizdən istifadə edə bilərsiniz.",
+    "active": true,
+    "variations": [
+      "Otaqda ütü, fen var?",
+      "Fen və ütü mövcuddur otaqda?",
+      "Saç qurutmaq üçün fen var?",
+      "Ütü lazımdır, otaqda var?",
+      "Otaqda fen, ütü təmin olunub?",
+      "Fen varmı otaqlarda?",
+      "Paltar ütüləmək üçün imkan var otaqda?",
+      "Otaqda saç qurudan var?",
+      "Ütü masası otaqda mövcuddur?",
+      "Fen və ütüdən istifadə edə bilərəm otaqda?"
+    ]
+  },
+  {
+    "category": "Ümumi məlumat",
+    "question": "Oteliniz haqqında məlumat verə bilərsiniz? Astana Hotel necə oteldir?",
+    "answer": "Astana Hotel Bakının mərkəzində yerləşən dörd ulduzlu şəhər otelidir. 10 rahat otağımız, restoranımız, açıq hovuzumuz, spa mərkəzimiz və konfrans zalımız var. Həm istirahət, həm də işgüzar səfərlər üçün əlverişlidir.",
+    "active": true,
+    "variations": [
+      "Astana Hotel necə bir oteldir?",
+      "Oteliniz haqqında məlumat verin.",
+      "Sizin haqqınızda danışa bilərsiniz?",
+      "Otel nə cür yerdir?",
+      "Astana Hotel barədə deyin.",
+      "Oteliniz nə təklif edir?",
+      "Sizi tanımaq istəyirəm, otel necədir?",
+      "Otel haqqında ümumi məlumat verin.",
+      "Astana Hotel nədir, necə otel?",
+      "Otelinizi qısaca təsvir edə bilərsiniz?"
+    ]
+  },
+  {
+    "category": "Ümumi məlumat",
+    "question": "Otel neçə ulduzludur?",
+    "answer": "Astana Hotel dörd ulduzlu oteldir.",
+    "active": true,
+    "variations": [
+      "Neçə ulduzlu oteldir bu?",
+      "Otelin ulduz sayı neçədir?",
+      "Kateqoriyanız neçə ulduzdur?",
+      "Neçə ulduzlusunuz?",
+      "Otelin dərəcəsi nədir?",
+      "Ulduz sayınız neçədir?",
+      "Hansı kateqoriyaya aiddir otel?",
+      "Neçə ulduz otelisiniz?",
+      "Otelin statusu neçə ulduzdur?",
+      "Sizin ulduz reytinqiniz nədir?"
+    ]
+  },
+  {
+    "category": "Ümumi məlumat",
+    "question": "Otel neçə mərtəbəlidir? Neçə otağınız var?",
+    "answer": "Otelimiz dörd mərtəbəlidir və cəmi 10 otağımız var: 5 Standart, 3 Delüks və 2 Suit. Kiçik otel olduğumuz üçün hər qonağa fərdi diqqət göstəririk.",
+    "active": true,
+    "variations": [
+      "Otel neçə mərtəbəli, neçə otaq var?",
+      "Neçə mərtəbədən ibarətdir otel?",
+      "Ümumi otaq sayınız neçədir?",
+      "Otelin mərtəbə sayı nə qədərdir?",
+      "Neçə otağınız var cəmi?",
+      "Bina neçə mərtəbəlidir?",
+      "Otelin ölçüsü nə qədərdir, neçə otaq?",
+      "Mərtəbə və otaq sayını deyə bilərsiniz?",
+      "Otel böyükdür, neçə otaqdır?",
+      "Neçə mərtəbə və neçə otaqdan ibarətsiniz?"
+    ]
+  },
+  {
+    "category": "Ümumi məlumat",
+    "question": "Otelin üstünlükləri nələrdir? Niyə sizi seçməliyəm?",
+    "answer": "Əsas üstünlüklərimiz mərkəzi yerləşmə, dəniz mənzərəli otaqlar, pulsuz parkinq, açıq hovuz və 24 saat xidmətdir. Dənizkənarı bulvar cəmi 5 dəqiqəlik məsafədədir və qiymətlərimiz mövqeyimizə görə çox münasibdir.",
+    "active": true,
+    "variations": [
+      "Otelin üstünlükləri nədir?",
+      "Niyə sizi seçim, nə fərqiniz var?",
+      "Sizi başqalarından fərqləndirən nədir?",
+      "Otelin güclü tərəfləri nələrdir?",
+      "Nəyə görə sizi tövsiyə edirsiniz?",
+      "Sizin üstünlükləriniz hansılardır?",
+      "Otel niyə seçilməlidir?",
+      "Sizdə başqa yerdə olmayan nə var?",
+      "Otelin ən yaxşı tərəfləri nədir?",
+      "Niyə məhz sizin oteldə qalmalıyam?"
+    ]
+  },
+  {
+    "category": "Ümumi məlumat",
+    "question": "Hava limanına nə qədər məsafə var?",
+    "answer": "Heydər Əliyev Hava Limanı oteldən təxminən 25 kilometr məsafədədir. Avtomobillə yol 25-30 dəqiqə çəkir. Transfer xidmətimiz 35 manatdır.",
+    "active": true,
+    "variations": [
+      "Hava limanına məsafə nə qədərdir?",
+      "Aeroporta qədər nə qədər yol var?",
+      "Hava limanı nə qədər uzaqdır?",
+      "Aeroportadək məsafə nə qədərdir?",
+      "Hava limanına neçə km var?",
+      "Aeroporta getmək nə qədər çəkir?",
+      "Hava limanı uzaqdırmı sizdən?",
+      "Aeroporta olan məsafəni bilmək istəyirəm.",
+      "Hava limanına qədər yol nə qədər vaxt aparır?",
+      "Aeroport oteldən nə qədər aralıdadır?"
+    ]
+  },
+  {
+    "category": "Ümumi məlumat",
+    "question": "Şəhər mərkəzinə nə qədər məsafə var?",
+    "answer": "Otel elə şəhərin mərkəzində yerləşir. Dənizkənarı bulvar piyada 5 dəqiqə, İçərişəhər 15 dəqiqə, Fəvvarələr meydanı təxminən 20 dəqiqəlik piyada məsafəsindədir.",
+    "active": true,
+    "variations": [
+      "Şəhər mərkəzinə məsafə nə qədərdir?",
+      "Mərkəzə qədər nə qədər yol var?",
+      "Şəhər mərkəzi uzaqdırmı?",
+      "Mərkəzə getmək nə qədər vaxt aparır?",
+      "Şəhərin mərkəzinə nə qədər aralısınız?",
+      "Mərkəzə piyada nə qədər çəkir?",
+      "Şəhər mərkəzinə olan məsafəni bilmək istəyirəm.",
+      "Mərkəzə qədər yol nə qədərdir?",
+      "Sizdən mərkəzə neçə dəqiqədir?",
+      "Şəhər mərkəzi nə qədər yaxındır?"
+    ]
+  },
+  {
+    "category": "Ümumi məlumat",
+    "question": "Otelin yaxınlığında hansı görməli yerlər var?",
+    "answer": "Yaxınlıqda İçərişəhər, Qız Qalası, Dənizkənarı bulvar, Xalça Muzeyi və Alov Qüllələri var. Əksəriyyətinə piyada və ya qısa taksi yolu ilə çatmaq olar.",
+    "active": true,
+    "variations": [
+      "Yaxınlıqda görməli yerlər hansılardır?",
+      "Ətrafda hara gəzə bilərəm?",
+      "Yaxınlıqda turist yerləri var?",
+      "Sizin ətrafda nə görmək olar?",
+      "Görməli yerlər yaxındadırmı?",
+      "Ətrafınızda maraqlı yerlər varmı?",
+      "Yaxın məsafədə hansı yerlərə baxmaq olar?",
+      "Otelin yanında nə görmək olar?",
+      "Turistik yerlər yaxınlıqdadır?",
+      "Ətraf mühitdə hansı görməli yerlər var?"
+    ]
+  },
+  {
+    "category": "Ümumi məlumat",
+    "question": "Otelə ictimai nəqliyyatla necə gələ bilərəm?",
+    "answer": "Ən yaxın metro stansiyası İçərişəhərdir, oteldən piyada təxminən 15 dəqiqəlik məsafədədir. Neftçilər prospekti üzərindən çoxsaylı avtobus marşrutları da keçir.",
+    "active": true,
+    "variations": [
+      "İctimai nəqliyyatla necə gələ bilərəm?",
+      "Metro və avtobusla necə çatmaq olar?",
+      "Otelə ictimai nəqliyyatla gəlmək mümkündür?",
+      "Hansı nəqliyyatla gələ bilərəm?",
+      "Sizə avtobusla necə gəlmək olar?",
+      "İctimai nəqliyyat vasitələri hansılardır yaxınlıqda?",
+      "Metro stansiyası yaxındadır?",
+      "Otelə necə çatmaq olar nəqliyyatla?",
+      "Avtobus və metro ilə yolu izah edə bilərsiniz?",
+      "Sizə ictimai nəqliyyatla necə çatılır?"
+    ]
+  },
+  {
+    "category": "Ətraf ərazi",
+    "question": "Yaxınlıqda restoran və kafe varmı?",
+    "answer": "Bəli, otelin ətrafında çoxlu restoran və kafe var. Milli mətbəx, italyan və şərq mətbəxi təklif edən məkanlar piyada 5-10 dəqiqəlik məsafədədir. Risepşın sizə məmnuniyyətlə tövsiyə verər.",
+    "active": true,
+    "variations": [
+      "Yaxınlıqda restoran, kafe var?",
+      "Ətrafda yemək yerləri hansılardır?",
+      "Yaxın məsafədə restoran varmı?",
+      "Kafe tapmaq mümkündür yaxınlıqda?",
+      "Yeməyə hara gedə bilərəm ətrafda?",
+      "Otelin yanında restoranlar var?",
+      "Yaxınlıqda yemək məkanları hansılardır?",
+      "Ətrafınızda kafe-restoran çoxdur?",
+      "Yaxın yerdə yemək tapa bilərəm?",
+      "Restoranlar oteldən uzaqdadır?"
+    ]
+  },
+  {
+    "category": "Ətraf ərazi",
+    "question": "Yaxınlıqda aptek varmı?",
+    "answer": "Bəli, otelə ən yaxın aptek piyada 3 dəqiqəlik məsafədədir və 24 saat işləyir. Risepşın sizə yolu göstərə bilər.",
+    "active": true,
+    "variations": [
+      "Yaxınlıqda aptek var?",
+      "Ən yaxın aptek haradır?",
+      "Dərman almaq üçün aptek varmı yaxınlıqda?",
+      "Aptek tapa bilərəm yaxın məsafədə?",
+      "Yaxınlıqda dərmanxana varmı?",
+      "Aptek oteldən uzaqdır?",
+      "Ən yaxın aptekə nə qədər var?",
+      "Dərmanxana yaxındadır?",
+      "Aptek tapmaq üçün hara getməliyəm?",
+      "Yaxınlıqda aptek işləyir?"
+    ]
+  },
+  {
+    "category": "Ətraf ərazi",
+    "question": "Yaxınlıqda xəstəxana və ya klinika varmı?",
+    "answer": "Bəli, otelə 10 dəqiqəlik məsafədə özəl klinika, 15 dəqiqəlik məsafədə isə dövlət xəstəxanası var. Təcili hallarda risepşın dərhal həkim və ya təcili yardım çağırar.",
+    "active": true,
+    "variations": [
+      "Yaxınlıqda xəstəxana, klinika var?",
+      "Ən yaxın tibb ocağı haradır?",
+      "Klinika yaxındadırmı?",
+      "Xəstəxana tapmaq mümkündür yaxınlıqda?",
+      "Tibb müəssisəsi varmı ətrafda?",
+      "Yaxın məsafədə həkimə müraciət edə biləcəyim yer var?",
+      "Xəstəxana uzaqdadır?",
+      "Klinika və ya xəstəxana yaxınlıqdadır?",
+      "Sağlamlıq müəssisəsi varmı yaxında?",
+      "Ən yaxın klinikaya nə qədər var?"
+    ]
+  },
+  {
+    "category": "Ətraf ərazi",
+    "question": "Yaxınlıqda bank və ya bankomat varmı?",
+    "answer": "Bəli, otelin yaxınlığında bir neçə bank filialı və bankomat var. Ən yaxın bankomat piyada 2 dəqiqəlik məsafədədir.",
+    "active": true,
+    "variations": [
+      "Yaxınlıqda bank, bankomat var?",
+      "Ən yaxın bankomat haradır?",
+      "Pul çıxarmaq üçün bankomat varmı yaxında?",
+      "Bank filialı yaxındadırmı?",
+      "ATM tapa bilərəm yaxınlıqda?",
+      "Bankomat nə qədər aralıdadır?",
+      "Yaxınlıqda bank var?",
+      "Nağd pul üçün bankomat lazımdır, var?",
+      "Bank yaxınlıqda fəaliyyət göstərir?",
+      "Ən yaxın ATM-ə nə qədər var?"
+    ]
+  },
+  {
+    "category": "Ətraf ərazi",
+    "question": "Yaxınlıqda ticarət mərkəzi varmı?",
+    "answer": "Bəli, ən yaxın ticarət mərkəzi piyada 10 dəqiqəlik məsafədədir. Orada mağazalar, supermarket və food kort mövcuddur. Şəhərin böyük ticarət mərkəzlərinə taksi ilə 10-15 dəqiqəyə çatmaq olar.",
+    "active": true,
+    "variations": [
+      "Yaxınlıqda ticarət mərkəzi var?",
+      "Alış-veriş üçün hara gedə bilərəm?",
+      "Mall yaxındadırmı?",
+      "Ticarət mərkəzi uzaqdadır?",
+      "Yaxın məsafədə mağazalar var?",
+      "Alış-veriş mərkəzi varmı ətrafda?",
+      "Ən yaxın ticarət mərkəzi haradır?",
+      "Şoppinq üçün yer varmı yaxınlıqda?",
+      "Mağazaya getmək istəyirəm, yaxın var?",
+      "Ticarət mərkəzinə nə qədər məsafə var?"
+    ]
+  },
+  {
+    "category": "Ətraf ərazi",
+    "question": "Yaxınlıqda park varmı? Gəzinti üçün hara gedə bilərəm?",
+    "answer": "Dənizkənarı Milli Park, yəni bulvar, otelə piyada 5 dəqiqəlik məsafədədir. Gəzinti, qaçış və velosiped sürmək üçün ideal yerdir.",
+    "active": true,
+    "variations": [
+      "Yaxınlıqda park var? Gəzintiyə hara gedim?",
+      "Gəzmək üçün park varmı ətrafda?",
+      "Ən yaxın park haradır?",
+      "Açıq havada gəzinti üçün yer varmı?",
+      "Park yaxındadırmı?",
+      "Piknik və ya gəzinti üçün yer tövsiyə edə bilərsiniz?",
+      "Ətrafda gəzinti yeri var?",
+      "Yaşıllıq içində gəzə biləcəyim yer varmı?",
+      "Parka nə qədər var buradan?",
+      "Gəzinti üçün ən yaxşı yer haradır?"
+    ]
+  },
+  {
+    "category": "Ətraf ərazi",
+    "question": "Yaxınlıqda muzey varmı?",
+    "answer": "Bəli, Azərbaycan Xalça Muzeyi bulvarda, piyada 10 dəqiqəlik məsafədədir. İçərişəhərdəki muzeylər və Şirvanşahlar sarayı da 15-20 dəqiqəlik piyada məsafəsindədir.",
+    "active": true,
+    "variations": [
+      "Yaxınlıqda muzey var?",
+      "Muzeyə getmək istəyirəm, yaxınlıqda var?",
+      "Ən yaxın muzey haradır?",
+      "Muzeylər uzaqdadırmı?",
+      "Tarixi muzey varmı ətrafda?",
+      "Muzey ziyarəti üçün yaxın yer varmı?",
+      "Ətrafda hansı muzeylər var?",
+      "Muzeyə piyada gedə bilərəm?",
+      "Muzey oteldən nə qədər aralıdadır?",
+      "Yaxınlıqda görməyə dəyər muzey var?"
+    ]
+  },
+  {
+    "category": "Ətraf ərazi",
+    "question": "Dənizə girmək mümkündürmü? Çimərlik varmı?",
+    "answer": "Şəhər mərkəzində çimərlik yoxdur, amma Bakı ətrafındakı çimərliklərə avtomobillə 30-40 dəqiqəyə çatmaq olar. Risepşın transfer və ya taksi təşkil edə bilər. Oteldə isə açıq hovuzumuz var.",
+    "active": true,
+    "variations": [
+      "Dənizə girmək olar? Çimərlik varmı?",
+      "Çimərliyiniz var?",
+      "Dənizdə üzmək mümkündür buradan?",
+      "Ən yaxın çimərlik haradır?",
+      "Dənizə çıxış varmı?",
+      "Çimərliyə nə qədər var?",
+      "Dənizdə çimə bilərəm?",
+      "Sahil xətti yaxındadır?",
+      "Plaj varmı yaxınlıqda?",
+      "Dənizə girmək üçün yer tövsiyə edərsiniz?"
+    ]
+  },
+  {
+    "category": "Ümumi məlumat",
+    "question": "Otelin e-poçt ünvanı və saytı varmı?",
+    "answer": "Rezervasiya və suallar üçün bizə telefonla müraciət edə bilərsiniz: +994 12 498 00 00. Zənglərə 24 saat cavab veririk.",
+    "active": true,
+    "variations": [
+      "E-poçt ünvanınız və saytınız var?",
+      "Sayt və mail ünvanınızı verə bilərsiniz?",
+      "Elektron poçtunuz nədir?",
+      "Sizin veb saytınız var?",
+      "E-mail ünvanınız nədir?",
+      "İnternet saytınız varmı?",
+      "Mail göndərə biləcəyim ünvan var?",
+      "Sizinlə onlayn əlaqə saxlamaq üçün sayt varmı?",
+      "Rəsmi saytınız hansıdır?",
+      "E-poçt vasitəsilə yaza bilərəm?"
+    ]
+  },
+  {
+    "category": "Ümumi məlumat",
+    "question": "Oteldə neçə nəfər işləyir? Xidmət dili hansıdır?",
+    "answer": "Komandamız 24 saat xidmətinizdədir. Əməkdaşlarımız Azərbaycan, rus və ingilis dillərində xidmət göstərir.",
+    "active": true,
+    "variations": [
+      "Neçə əməkdaş çalışır, xidmət dili nədir?",
+      "Hansı dillərdə xidmət göstərirsiniz?",
+      "Personalınız hansı dilləri bilir?",
+      "Neçə nəfər işləyir oteldə?",
+      "Xidmət dilləriniz hansılardır?",
+      "Komandanız hansı dillərdə danışır?",
+      "İşçi sayınız nə qədərdir?",
+      "Əməkdaşlarınız ingiliscə bilir?",
+      "Xidmət göstərən heyət hansı dillərdə danışır?",
+      "Neçə nəfərlik komandanız var?"
+    ]
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Standart otaq haqqında məlumat verin. Standart otaq necədir?",
+    "answer": "Standart otağımız 25 kvadratmetrdir, şəhər mənzərəlidir və iki nəfər üçün nəzərdə tutulub. İçində kinq bed və ya iki tək çarpayı, pulsuz Vay-Fay, televizor, kondisioner, mini-bar, seyf və fen var. Gecəlik qiyməti 120 manatdan başlayır.",
+    "active": true,
+    "variations": [
+      "Standart otaq necədir?",
+      "Standart otaq haqqında məlumat verin.",
+      "Standart otağın xüsusiyyətləri nədir?",
+      "Standart otaqda nə var?",
+      "Standart otaq nə cürdür?",
+      "Standart otaq barədə deyə bilərsiniz?",
+      "Ən sadə otaq tipiniz necədir?",
+      "Standart otağın şəraiti nədir?",
+      "Standart kateqoriyalı otaq necə olur?",
+      "Standart otaq nə təklif edir?"
+    ]
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Delüks otaq haqqında məlumat verin. Delüks otaq necədir?",
+    "answer": "Delüks otağımız 35 kvadratmetrdir, dəniz mənzərəli və balkonludur. Üç nəfərə qədər qonaq üçün uyğundur, kinq bed və əlavə çarpayı imkanı var. Gecəlik qiyməti 200 manatdan başlayır.",
+    "active": true,
+    "variations": [
+      "Delüks otaq necədir?",
+      "Delux otaq haqqında məlumat verin.",
+      "Delüks otağın xüsusiyyətləri nədir?",
+      "Deluxe otaqda nə var?",
+      "Delüks otaq nə cürdür?",
+      "Delüks otaq barədə deyə bilərsiniz?",
+      "Delüks kateqoriyalı otaq necə olur?",
+      "Delüks otağın şəraiti nədir?",
+      "Delüks otaq nə təklif edir?",
+      "Deluxe otaq haqqında danışın."
+    ]
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Suit otaq haqqında məlumat verin. Suit necədir?",
+    "answer": "Suit otağımız 60 kvadratmetrlik iki otaqlı lüks süitdir: yataq otağı və ayrıca qonaq otağı. Jakuzi, balkon və dörd nəfərə qədər yerləşmə imkanı var. Gecəlik qiyməti 350 manatdan başlayır.",
+    "active": true,
+    "variations": [
+      "Suit necədir?",
+      "Süit otaq haqqında məlumat verin.",
+      "Suit otağın xüsusiyyətləri nədir?",
+      "Süit otaqda nə var?",
+      "Suit otaq nə cürdür?",
+      "Suit barədə deyə bilərsiniz?",
+      "Ən lüks otağınız necədir?",
+      "Suit otağın şəraiti nədir?",
+      "Süit otaq nə təklif edir?",
+      "Suit haqqında danışın."
+    ]
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Otaqların sahəsi nə qədərdir?",
+    "answer": "Standart otaq 25 kvadratmetr, Delüks otaq 35 kvadratmetr, Suit isə 60 kvadratmetrdir.",
+    "active": true,
+    "variations": [
+      "Otaqların sahəsi neçə kvadratmetrdir?",
+      "Otaqlar nə qədər böyükdür?",
+      "Otaq ölçüləri nə qədərdir?",
+      "Otaqların kvadratı nə qədərdir?",
+      "Hansı otaq neçə kvadratdır?",
+      "Otaqların sahəsini bilmək istəyirəm.",
+      "Otaqlar neçə metrdir?",
+      "Otaq sahələri barədə məlumat verin.",
+      "Otaqlar böyükdürmü, neçə kvadrat?",
+      "Otaqların ölçüsü haqqında deyin."
+    ]
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Hansı çarpayı növləri var? Kinq bed varmı?",
+    "answer": "Standart otaqlarda kinq bed və ya iki tək çarpayı seçimi var. Delüks otaqlarda kinq bed, Suit otaqlarda isə kinq bed və qonaq otağında açılan divan mövcuddur. İstəyinizi rezervasiya zamanı bildirin.",
+    "active": true,
+    "variations": [
+      "Hansı çarpayı seçimləri var? Kinq bed varmı?",
+      "Yataq növləri hansılardır?",
+      "Çarpayı tipləri nədir?",
+      "Kinq ölçülü çarpayı var?",
+      "Yataq seçimlərini bilmək istəyirəm.",
+      "İki nəfərlik yoxsa tək çarpayı var?",
+      "Çarpayı ölçüləri hansılardır?",
+      "Otaqda hansı yataq növü var?",
+      "King size çarpayı mövcuddur?",
+      "Çarpayı seçimi haqqında deyin."
+    ]
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Bir otaqda maksimum neçə nəfər qala bilər?",
+    "answer": "Standart otaqda maksimum 2 nəfər, Delüks otaqda 3 nəfər, Suit otaqda isə 4 nəfər qala bilər. 6 yaşa qədər uşaqlar bu saya daxil deyil.",
+    "active": true,
+    "variations": [
+      "Bir otaqda maksimum neçə nəfər qalar?",
+      "Otaqda neçə nəfər yerləşir?",
+      "Maksimum tutum neçə nəfərdir?",
+      "Otaqların tutumu nədir?",
+      "Bir otağa neçə adam sığar?",
+      "Otaqda neçə nəfərə qədər yerləşdirmə mümkündür?",
+      "Maksimum qonaq sayı nədir otaqda?",
+      "Neçə nəfərlik otaqlarınız var?",
+      "Otaq tutumu haqqında məlumat verin.",
+      "Bir otaqda neçə kişi/qadın qala bilər?"
+    ]
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Ailə otağınız varmı? Böyük ailə üçün hansı otaq uyğundur?",
+    "answer": "Ailələr üçün ən uyğun seçim Suit otaqdır — iki otaqlıdır və dörd nəfərə qədər yerləşdirir. Daha böyük ailələr üçün yanaşı yerləşən iki otaq da təklif edə bilərik.",
+    "active": true,
+    "variations": [
+      "Ailə otağınız var? Böyük ailəyə hansı otaq uyğundur?",
+      "Ailələr üçün otaq varmı?",
+      "Böyük ailə üçün nə tövsiyə edirsiniz?",
+      "Ailə otağı təklif edirsiniz?",
+      "Ailəyə uyğun otaq hansıdır?",
+      "Çoxlu nəfərlik ailə üçün otaq varmı?",
+      "Ailə üçün ən yaxşı otaq hansıdır?",
+      "Ailə otaqlarınız haqqında məlumat verin.",
+      "Böyük ailəyə hansı otaq tövsiyə olunur?",
+      "Ailə üçün otaq seçimi nədir?"
+    ]
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Birləşən otaqlarınız varmı?",
+    "answer": "Birləşən qapılı otağımız yoxdur, amma eyni mərtəbədə yanaşı otaqlar təklif edə bilərik. Rezervasiya zamanı bildirsəniz, mövcudluğa uyğun təşkil edərik.",
+    "active": true,
+    "variations": [
+      "Birləşən otaqlarınız var?",
+      "Connecting room varmı?",
+      "İki otaq bir-birinə açılır?",
+      "Bitişik otaqlarınız var?",
+      "Ailə üçün birləşən otaq təklif edirsiniz?",
+      "Qapı ilə birləşən otaqlarınız var?",
+      "İki otağı birləşdirmək mümkündür?",
+      "Bir-birinə keçidli otaqlarınız varmı?",
+      "Connecting otaq mövcuddur?",
+      "Yanaşı və birləşən otaq fərqi nədir?"
+    ]
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Siqaret çəkilən otağınız varmı?",
+    "answer": "Xeyr, bütün otaqlarımız siqaret çəkilməyəndir. Siqaret üçün terrasda xüsusi zona ayrılıb. Otaqda siqaret çəkilməsi halında 100 manat cərimə tutulur.",
+    "active": true,
+    "variations": [
+      "Siqaret çəkilən otağınız var?",
+      "Smoking otaq təklif edirsiniz?",
+      "Siqaret çəkilə bilən otaq varmı?",
+      "Tüstülənən otaqlarınız var?",
+      "Siqaret çəkənlər üçün xüsusi otaq var?",
+      "Smoking room mövcuddur?",
+      "Otaqlardan hansı siqaret çəkilir?",
+      "Siqaret otağı seçə bilərəm?",
+      "Sizdə siqaretli otaq var?",
+      "Otaqlar arasında smoking olan var?"
+    ]
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Balkonlu otaq varmı?",
+    "answer": "Bəli, Delüks və Suit otaqlarımız balkonludur. Standart otaqlarda balkon yoxdur.",
+    "active": true,
+    "variations": [
+      "Balkonlu otağınız var?",
+      "Balkon olan otaq varmı?",
+      "Balkonu olan otaq təklif edirsiniz?",
+      "Hansı otaqlarda balkon var?",
+      "Balkonlu otaq seçimim varmı?",
+      "Otaqlardan balkonlu olanı istəyirəm, var?",
+      "Balkon otaqlara aiddir?",
+      "Balkonu olan otaqlarınız hansılardır?",
+      "Balkonlu variant mövcuddur?",
+      "Sizdə balkonlu otaq var?"
+    ]
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Otaqdan hansı mənzərə açılır?",
+    "answer": "Standart otaqlar şəhərə baxır, Delüks otaqlar dəniz mənzərəlidir. Suit otaqların bir hissəsi dənizə, bir hissəsi şəhərə baxır. Mənzərə istəyinizi rezervasiya zamanı bildirin.",
+    "active": true,
+    "variations": [
+      "Otaqdan hansı görüntü açılır?",
+      "Otaqdan nə görünür?",
+      "Otağın mənzərəsi necədir?",
+      "Pəncərədən nə görünür?",
+      "Otaqdan şəhər yoxsa dəniz görünür?",
+      "Otağın baxdığı tərəf nədir?",
+      "Mənzərə hansı tərəfə açılır?",
+      "Otaqdan görünən mənzərə necədir?",
+      "Otaq hansı tərəfə baxır?",
+      "Pəncərədən açılan görüntü nədir?"
+    ]
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Otaqlar hər gün təmizlənirmi?",
+    "answer": "Bəli, bütün otaqlarda gündəlik təmizlik aparılır. Dəsmallar hər gün, yataq dəstləri iki gündən bir dəyişdirilir. Narahat edilmək istəmirsinizsə, qapıya xüsusi işarə asa bilərsiniz.",
+    "active": true,
+    "variations": [
+      "Otaqlar gündəlik təmizlənir?",
+      "Hər gün təmizlik olur?",
+      "Otaq gündə bir dəfə yığışdırılır?",
+      "Təmizlik xidməti gündəlikdir?",
+      "Otaqlarda təmizlik neçə vaxtdan bir edilir?",
+      "Gündəlik otaq təmizliyi var?",
+      "Otağım hər gün yığışdırılacaq?",
+      "Təmizlik xidməti necə işləyir?",
+      "Otaqlar nə qədər tez-tez təmizlənir?",
+      "Hər gün otağa girib təmizləyirlər?"
+    ]
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Otaqda mini-bar varmı? Mini-bar ödənişlidirmi?",
+    "answer": "Bəli, bütün otaqlarda mini-bar var. İçindəki su pulsuzdur, digər içkilər və qəlyanaltılar isə qiymət cədvəlinə əsasən ödənişlidir. İstifadə etdikləriniz çek-aut zamanı hesaba əlavə olunur.",
+    "active": true,
+    "variations": [
+      "Otaqda mini-bar var? Ödənişlidir?",
+      "Mini-bar pulsuzdur?",
+      "Otaqda içki dolabı var?",
+      "Mini-bardan istifadə ödənişlidir?",
+      "Otaqda mini bar mövcuddur?",
+      "Mini-bardakı şeylər pulsuzdur?",
+      "Mini-bar haqqı hesaba yazılır?",
+      "Otaqda içki-qəlyanaltı dolabı var?",
+      "Mini-bar xərci necə hesablanır?",
+      "Mini-bar var, nə qədərdir?"
+    ]
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Otaqda çaydan, çay və qəhvə varmı?",
+    "answer": "Bəli, bütün otaqlarda elektrik çaydanı, pulsuz çay və qəhvə dəsti var. Dəst hər gün təmizlik zamanı yenilənir.",
+    "active": true,
+    "variations": [
+      "Otaqda çaydan, çay-qəhvə var?",
+      "Çay qəhvə dəsti var otaqda?",
+      "Elektrik çaydanı var?",
+      "Otaqda çay dəmləmək üçün imkan var?",
+      "Qəhvə hazırlamaq üçün ləvazimat var?",
+      "Çaydan otaqda mövcuddur?",
+      "Çay-qəhvə pulsuzdur otaqda?",
+      "Otaqda isti içki hazırlaya bilərəm?",
+      "Çaydan və fincanlar var otaqda?",
+      "Qəhvə-çay dəsti təmin olunub otaqda?"
+    ]
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Otaqda kondisioner varmı? İstilik sistemi necədir?",
+    "answer": "Bəli, bütün otaqlarda fərdi idarə olunan kondisioner var — həm soyutma, həm də isitmə rejimi mövcuddur.",
+    "active": true,
+    "variations": [
+      "Otaqda kondisioner, istilik sistemi var?",
+      "Kondisioner işləyir otaqda?",
+      "Otaq qızdırma sistemi necədir?",
+      "Soyutma-isitmə var otaqda?",
+      "Kondisionerdən istifadə edə bilərəm?",
+      "Otaqda istilik necə təmin olunur?",
+      "Kondisioner fərdi idarə olunur?",
+      "Qışda otaq isti olur?",
+      "Yayda otaq soyudulur?",
+      "Otaqda temperaturu tənzimləyə bilərəm?"
+    ]
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Otaqda xalat və terlik varmı?",
+    "answer": "Delüks və Suit otaqlarda xalat və terlik standart olaraq qoyulur. Standart otaqlar üçün risepşından pulsuz sifariş edə bilərsiniz.",
+    "active": true,
+    "variations": [
+      "Otaqda xalat, terlik var?",
+      "Hamam xalatı verilir?",
+      "Terlik təmin olunur otaqda?",
+      "Xalat və şıppı var?",
+      "Otaqda hamam ləvazimatı var?",
+      "Xalat pulsuzdur otaqda?",
+      "Terlik hər otaqda var?",
+      "Xalat-terlik dəsti mövcuddur?",
+      "Otaqda geyim ləvazimatı var?",
+      "Hamam xalatı hansı otaqlarda var?"
+    ]
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Hamamda nələr var? Şampun və sabun verilirmi?",
+    "answer": "Bütün otaqların hamamında duş, fen, dəsmallar və pulsuz gigiyena vasitələri — şampun, duş geli, sabun və diş dəsti var. Suit otaqlarda əlavə jakuzi mövcuddur.",
+    "active": true,
+    "variations": [
+      "Hamamda nələr var, şampun-sabun verilir?",
+      "Duşda hansı ləvazimat var?",
+      "Hamam ləvazimatları nədir?",
+      "Şampun, sabun otaqda var?",
+      "Hamamda gigiyena vasitələri var?",
+      "Duş geli verilir otaqda?",
+      "Hamam avadanlığı necədir?",
+      "Hamamda nə tapıram?",
+      "Gigiyena dəsti verilir otaqda?",
+      "Hamam otağında nələr mövcuddur?"
+    ]
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Otaqda iş masası varmı?",
+    "answer": "Bəli, bütün otaqlarda iş masası, stul və masa lampası var. Vay-Fay pulsuzdur, USB enerji çıxışları da mövcuddur.",
+    "active": true,
+    "variations": [
+      "Otaqda iş masası var?",
+      "İşləmək üçün masa var otaqda?",
+      "Yazı masası mövcuddur otaqda?",
+      "Otaqda stol-stul var işləmək üçün?",
+      "İş masası və işıq var?",
+      "Notebook üçün masa var otaqda?",
+      "Otaqda ofis masası var?",
+      "İşlə məşğul olmaq üçün şərait var otaqda?",
+      "Masa varmı otaqda işləmək üçün?",
+      "Otaqda iş yeri düzəldilib?"
+    ]
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Otaqlar səsizolyasiyalıdırmı? Küçə səsi eşidilirmi?",
+    "answer": "Otaqlarımızda ikiqat şüşəli pəncərələr var və səsizolyasiya yaxşıdır. Daha sakit otaq istəyirsinizsə, həyətə baxan otaq təklif edə bilərik.",
+    "active": true,
+    "variations": [
+      "Otaqlar səsizolyasiyalıdır? Küçə səsi eşidilir?",
+      "Otaqda küçə səsi rahatsız edir?",
+      "Səs izolyasiyası yaxşıdır otaqlarda?",
+      "Otaq sakitdir?",
+      "Küçədən səs gəlir otağa?",
+      "Otaqlar səs keçirmir?",
+      "Gecə küçə səsindən narahat olaram?",
+      "Pəncərələr səsi kəsir?",
+      "Otaqda səs-küy problemi var?",
+      "Sakit otaq istəyirəm, mümkündür?"
+    ]
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Su pulsuzdurmu? Otağa su qoyulurmu?",
+    "answer": "Bəli, hər gün otağa iki şüşə içməli su pulsuz qoyulur. Əlavə su mini-barda və ya rum sörvis ilə sifariş oluna bilər.",
+    "active": true,
+    "variations": [
+      "Su pulsuzdur? Otağa su qoyulur?",
+      "Otaqda içməli su var?",
+      "Su şüşələri pulsuz verilir?",
+      "Otağa hər gün su qoyulur?",
+      "İçməli su təmin olunur otaqda?",
+      "Su pulsuz təqdim olunur?",
+      "Otaqda su şüşəsi var?",
+      "Suyu haradan alım otaqda?",
+      "Otağa gündəlik su qoyulur?",
+      "Su xidməti pulsuzdur otaqda?"
+    ]
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Rezervasiya necə edilir? Otaq bron etmək istəyirəm.",
+    "answer": "Rezervasiya üçün elə bu zəngdə sizə kömək edə bilərəm. Giriş və çıxış tarixlərini, otaq tipini və adınızı bildirsəniz, dərhal bron edərəm. İlk gecənin qiyməti depozit kimi tutulur.",
+    "active": true,
+    "variations": [
+      "Otaq bron etmək istəyirəm, necə edilir?",
+      "Rezervasiya prosesi necədir?",
+      "Otaq sifariş etmək üçün nə etməliyəm?",
+      "Bron etmək istəyirəm, kömək edərsiniz?",
+      "Otaq necə bron olunur?",
+      "Rezervasiyanı necə edim?",
+      "Otaq tutmaq istəyirəm, prosedur nədir?",
+      "Bron üçün nələr lazımdır?",
+      "Rezervasiya etmək istəyirəm.",
+      "Otaq sifarişi necə verilir?"
+    ]
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Telefonla rezervasiya edə bilərəm?",
+    "answer": "Bəli, əlbəttə. Elə indi telefonla rezervasiya edə bilərik. Tarixləri və otaq tipini deyin, qalanını mən həll edim.",
+    "active": true,
+    "variations": [
+      "Telefonla bron edə bilərəm?",
+      "Zəng edib rezervasiya edə bilərəm?",
+      "Telefon vasitəsilə otaq sifariş edilir?",
+      "Telefonla otaq tuta bilərəm?",
+      "Rezervasiyanı telefonla etmək mümkündür?",
+      "Zəngdə bron etmək olar?",
+      "Telefon üzərindən sifariş verə bilərəm?",
+      "Telefonla rezervasiya qəbul edirsiniz?",
+      "Zəng edərək otaq ayırda bilərəm?",
+      "Telefonla bron mümkündürmü?"
+    ]
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Onlayn rezervasiya mümkündürmü?",
+    "answer": "Otelimizi məşhur onlayn rezervasiya saytlarında tapa bilərsiniz. Amma birbaşa zənglə rezervasiya etsəniz, ən yaxşı qiymətə zəmanət veririk.",
+    "active": true,
+    "variations": [
+      "Onlayn bron etmək olar?",
+      "İnternet üzərindən rezervasiya mümkündür?",
+      "Saytdan otaq sifariş edə bilərəm?",
+      "Onlayn platformada varsınız?",
+      "İnternetdən bron etmək olar?",
+      "Onlayn rezervasiya sisteminiz var?",
+      "Sayt vasitəsilə otaq tuta bilərəm?",
+      "Booking saytlarında varsınız?",
+      "Onlayn sifariş vermək mümkündür?",
+      "İnternet üzərindən otaq ayırda bilərəm?"
+    ]
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Bu gün üçün boş otağınız varmı?",
+    "answer": "Bir dəqiqə, sistemdə yoxlayım. Hansı otaq tipi ilə maraqlanırsınız — Standart, Delüks, yoxsa Suit? Neçə nəfər üçün otaq lazımdır?",
+    "active": true,
+    "variations": [
+      "Bu gün üçün boş otaq var?",
+      "Bu gün yer varmı?",
+      "Bugün üçün otağınız boşdur?",
+      "Bu axşam qalmaq üçün otaq var?",
+      "Bugün üçün rezervasiya edə bilərəm?",
+      "Bu gün otağınız var mı?",
+      "İndi üçün boş otaq varmı?",
+      "Bugün gəlsəm otaq tapa bilərəm?",
+      "Bu gün üçün yer ayıra bilərsiniz?",
+      "Bugün qalmaq mümkündür?"
+    ]
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Sabah üçün rezervasiya edə bilərəm?",
+    "answer": "Bəli, mövcudluq olduqda sabah üçün də rezervasiya mümkündür. Hansı otaq tipini istəyirsiniz və neçə gecə qalacaqsınız?",
+    "active": true,
+    "variations": [
+      "Sabah üçün bron edə bilərəm?",
+      "Sabaha otaq varmı?",
+      "Sabah gəlmək üçün rezervasiya edim?",
+      "Sabahkı gün üçün yer var?",
+      "Sabah üçün otaq ayırda bilərsiniz?",
+      "Sabaha qədər rezervasiya mümkündür?",
+      "Sabah qalmaq istəyirəm, olar?",
+      "Sabah üçün otaq tutmaq istəyirəm.",
+      "Sabahkı tarixə bron ala bilərəm?",
+      "Sabah üçün yer varmı?"
+    ]
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Rezervasiyamı dəyişdirə bilərəm? Tarixi dəyişmək istəyirəm.",
+    "answer": "Bəli, mövcudluq olduqda rezervasiya tarixləri pulsuz dəyişdirilə bilər. Telefon nömrənizi deyin, rezervasiyanızı tapıb yeni tarixlərə keçirim.",
+    "active": true,
+    "variations": [
+      "Rezervasiyamın tarixini dəyişə bilərəm?",
+      "Bronu dəyişdirmək istəyirəm.",
+      "Tarixi başqa günə keçirə bilərəm?",
+      "Rezervasiya dəyişikliyi mümkündür?",
+      "Otaq tarixini dəyişdirə bilərəm?",
+      "Bron tarixini yeniləmək istəyirəm.",
+      "Rezervasiyamda dəyişiklik edə bilərsiniz?",
+      "Tarixləri dəyişmək olar?",
+      "Bronumun tarixini başqa günə köçürə bilərəm?",
+      "Rezervasiyanı yeni tarixə keçirmək istəyirəm."
+    ]
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Rezervasiyamı təsdiqləmək istəyirəm. Bronum qüvvədədirmi?",
+    "answer": "Əlbəttə, yoxlayım. Rezervasiya etdiyiniz telefon nömrəsini deyin, sistemdə statusuna baxım.",
+    "active": true,
+    "variations": [
+      "Bronum qüvvədədir?",
+      "Rezervasiyamı təsdiqləmək istəyirəm.",
+      "Otağım rezerv olunub?",
+      "Bronumu yoxlaya bilərsiniz?",
+      "Rezervasiyam sistemdə var?",
+      "Bron statusumu bilmək istəyirəm.",
+      "Rezervasiyam təsdiqlənib?",
+      "Otağım ayrılıb?",
+      "Bronumun etibarlı olduğunu təsdiq edin.",
+      "Rezervasiyam qeydə alınıb?"
+    ]
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Gecikəcəyəm, rezervasiyam ləğv olunacaqmı?",
+    "answer": "Narahat olmayın, risepşın 24 saat işləyir və rezervasiyanız gecə saat 12-yə qədər qüvvədə qalır. Daha gec gələcəksinizsə, zəng edib bildirin, otağınızı saxlayaq.",
+    "active": true,
+    "variations": [
+      "Gecikəcəyəm, bronum ləğv olunar?",
+      "Gec gəlsəm rezervasiyam pozular?",
+      "Gecikmə halında otağım saxlanılır?",
+      "Gec gələcəyəm, otağı itirərəmmi?",
+      "Rezervasiyam gecikməyə görə ləğv olunacaq?",
+      "Gec gəlsəm otağım qalır?",
+      "Bronum saxlanılacaq gecikəcəyəm?",
+      "Vaxtında gəlməsəm otağım gedər?",
+      "Gecikmə rezervasiyaya təsir edər?",
+      "Otağım gözlənilir gecikmə halında?"
+    ]
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Zəmanətli rezervasiya üçün nə lazımdır?",
+    "answer": "Rezervasiyanı zəmanətə almaq üçün ilk gecənin qiyməti depozit kimi ödənilir. Bundan sonra otağınız tarixlərinizdə tam zəmanətlə saxlanılır.",
+    "active": true,
+    "variations": [
+      "Zəmanətli bron üçün nə lazımdır?",
+      "Rezervasiyanı necə zəmanətə alım?",
+      "Zəmanətli qalış üçün şərt nədir?",
+      "Otağı təminatlı saxlamaq üçün nə etməliyəm?",
+      "Zəmanət ödənişi lazımdır?",
+      "Rezervasiya zəmanəti necə verilir?",
+      "Otağın saxlanması üçün depozit lazımdır?",
+      "Zəmanətli bron şərtləri nədir?",
+      "Rezervasiyanı təsdiqlətmək üçün nə ödəməliyəm?",
+      "Bron təminatı necə olur?"
+    ]
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Korporativ rezervasiya edirik, şirkət üçün şərtlər varmı?",
+    "answer": "Bəli, şirkətlər üçün korporativ müqavilə və endirimli tariflər təklif edirik. Mütəmadi işgüzar səfərlər üçün xüsusi şərtlər mövcuddur. Şirkət rekvizitlərinizi bildirin, menecerimiz sizinlə əlaqə saxlasın.",
+    "active": true,
+    "variations": [
+      "Korporativ rezervasiya şərtləriniz nədir?",
+      "Şirkət üçün xüsusi qaydalarınız var?",
+      "Biznes müştəri kimi rezervasiya edə bilərik?",
+      "Korporativ müqavilə təklif edirsiniz?",
+      "Şirkət adına bron etmək mümkündür?",
+      "Korporativ tərəfdaşlıq şərtləri nədir?",
+      "Firma üçün xüsusi tariflər var?",
+      "Korporativ sifariş necə edilir?",
+      "Şirkət hesabına rezervasiya olar?",
+      "Biznes şəraiti nədir korporativ müştərilər üçün?"
+    ]
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Tədbir üçün otaqlar bron etmək istəyirik.",
+    "answer": "Toy, konfrans və digər tədbirlər üçün qrup rezervasiyası və zal icarəsi birlikdə sərfəli paketlə təklif olunur. Tədbirin tarixini və qonaq sayını deyin, menecerimiz təklif hazırlasın.",
+    "active": true,
+    "variations": [
+      "Tədbir üçün otaqlar bron etmək istəyirik.",
+      "Tədbirimiz üçün otaq lazımdır.",
+      "Tədbir keçirmək üçün otaqlar ayırda bilərsiniz?",
+      "Bir tədbir planlaşdırırıq, otaq lazımdır.",
+      "Tədbir üçün qrup halında otaq sifariş edə bilərik?",
+      "Tədbirimiz olacaq, otaqlar hazırlaya bilərsiniz?",
+      "Xüsusi tədbir üçün otaq bron edə bilərik?",
+      "Tədbirimiz üçün yer ayırmaq istəyirik.",
+      "Bir mərasim üçün otaq lazımdır bizə.",
+      "Tədbirlə bağlı otaq rezervasiyası edə bilərikmi?"
+    ]
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Neçə gün əvvəldən rezervasiya etmək lazımdır?",
+    "answer": "İstənilən vaxt rezervasiya edə bilərsiniz, amma yay mövsümündə otaqlar tez dolur. 30 gün əvvəl bron etsəniz, 10 faiz erkən rezervasiya endirimi qazanırsınız.",
+    "active": true,
+    "variations": [
+      "Neçə gün əvvəldən bron etmək lazımdır?",
+      "Nə vaxt rezervasiya etməliyəm?",
+      "Əvvəlcədən neçə gün bron olunmalıdır?",
+      "Nə qədər tez rezervasiya etməliyəm?",
+      "Rezervasiya üçün nə qədər vaxt lazımdır?",
+      "Neçə gün qabaqcadan bildirməliyəm?",
+      "Bron etmə müddəti nə qədərdir?",
+      "Nə vaxt əvvəl sifariş verməliyəm?",
+      "Rezervasiyanı nə vaxt etmək daha yaxşıdır?",
+      "Otağı nə qədər tez ayırtmalıyam?"
+    ]
+  },
+  {
+    "category": "Giriş və çıxış",
+    "question": "Erkən çek-in mümkündürmü? Səhər tezdən gələcəyəm.",
+    "answer": "Erkən çek-in mövcudluqdan asılıdır və pulsuzdur. Otaq hazır deyilsə, baqajınızı pulsuz saxlayarıq, siz də restoranda və ya bulvarda vaxt keçirə bilərsiniz. Otaq hazır olan kimi sizə xəbər verərik.",
+    "active": true,
+    "variations": [
+      "Səhər tezdən gələcəyəm, erkən çek-in olar?",
+      "Erkən girə bilərəm otağa?",
+      "Tezdən gəlsəm otağa keçə bilərəm?",
+      "Erkən çek-in mümkündür?",
+      "Vaxtından əvvəl otağa girmək olar?",
+      "Erkən gəlsəm otağı hazır tapa bilərəm?",
+      "Səhər tez gəlsəm nə olar?",
+      "Erkən check-in şərtiniz var?",
+      "Tez gəlsəm baqajımı saxlayarsınız?",
+      "Erkən girişə icazə var?"
+    ]
+  },
+  {
+    "category": "Giriş və çıxış",
+    "question": "Gec çek-aut mümkündürmü? Axşam uçuşum var.",
+    "answer": "Bəli, gecikmiş çek-aut saat 18:00-a qədər 40 manatdır, mövcudluqdan asılıdır. Saat 13:00-a qədər isə adətən pulsuz güzəşt edirik. Axşama qədər baqajınızı pulsuz saxlaya bilərik.",
+    "active": true,
+    "variations": [
+      "Axşam uçuşum var, gec çek-aut olar?",
+      "Gec çıxmaq mümkündür?",
+      "Otaqda gecə saatına qədər qala bilərəm?",
+      "Gec çıxış üçün şərtiniz var?",
+      "Axşama qədər otaqda qala bilərəm?",
+      "Late check-out mümkündür?",
+      "Gec çek-aut necə olur, ödənişli?",
+      "Uçuşum gec, otaqda qala bilərəm?",
+      "Çıxışı gecikdirmək olar?",
+      "Gec vaxta qədər otağı saxlaya bilərəm?"
+    ]
+  },
+  {
+    "category": "Giriş və çıxış",
+    "question": "Gecə saat 2-də gələ bilərəm? Gecə çek-in mümkündürmü?",
+    "answer": "Bəli, risepşınımız 24 saat işləyir, gecə saat 2-də də çek-in edə bilərsiniz. Sadəcə rezervasiya zamanı gec gələcəyinizi bildirin ki, otağınız saxlanılsın.",
+    "active": true,
+    "variations": [
+      "Gecə saat 2-də gələ bilərəm, çek-in olar?",
+      "Gecə yarısı gəlsəm otağa girə bilərəm?",
+      "Gecə çek-in mümkündür?",
+      "Gecə saatlarında girmək olar otağa?",
+      "Gecə gəlişim problem olar?",
+      "Çox gec gəlsəm risepşın açıq olar?",
+      "Gecə saat 2 radələrində gəlsəm nə olar?",
+      "Gecə vaxtı çek-in edilir?",
+      "Gecə yarısı otağa qəbul olunuram?",
+      "Gecikmiş gecə saatında gələ bilərəm?"
+    ]
+  },
+  {
+    "category": "Giriş və çıxış",
+    "question": "Çek-in üçün hansı sənədlər lazımdır?",
+    "answer": "Şəxsiyyət vəsiqəsi və ya pasport kifayətdir. Xarici vətəndaşlar üçün pasport mütləqdir. Rezervasiya başqa şəxsin adınadırsa, bunu əvvəlcədən bildirin.",
+    "active": true,
+    "variations": [
+      "Çek-in üçün hansı sənədlər lazımdır?",
+      "Qeydiyyat üçün nə lazımdır?",
+      "Hansı sənədi göstərməliyəm?",
+      "Çek-in zamanı nə tələb olunur?",
+      "Şəxsiyyət vəsiqəsi kifayətdirmi?",
+      "Hansı sənədlər olmadan çek-in olmur?",
+      "Qeydiyyatdan keçmək üçün nə göstərməliyəm?",
+      "Otağa girmək üçün sənəd lazımdır?",
+      "Pasport lazımdır çek-in üçün?",
+      "Çek-in sənədləri hansılardır?"
+    ]
+  },
+  {
+    "category": "Giriş və çıxış",
+    "question": "Çek-in üçün yaş məhdudiyyəti varmı?",
+    "answer": "Otaq rezervasiyası üçün minimum yaş 18-dir. 18 yaşdan kiçik qonaqlar yalnız valideyn və ya qanuni himayəçi ilə birlikdə qala bilər.",
+    "active": true,
+    "variations": [
+      "Çek-in üçün yaş həddi var?",
+      "Neçə yaşdan otaq götürmək olar?",
+      "Yaş məhdudiyyəti varmı?",
+      "Yetkinlik yaşı tələb olunur?",
+      "Kiçik yaşlılar tək qala bilməzmi?",
+      "Rezervasiya üçün minimum yaş nədir?",
+      "Yaşla bağlı qaydanız var?",
+      "Neçə yaşından etibarən otaq bron edilə bilər?",
+      "Yaş şərti nədir çek-in üçün?",
+      "18 yaşdan aşağı olanlar üçün qayda var?"
+    ]
+  },
+  {
+    "category": "Giriş və çıxış",
+    "question": "Baqajımı saxlaya bilərəm? Çamadan otağı varmı?",
+    "answer": "Bəli, çek-indən əvvəl və çek-autdan sonra baqajınızı pulsuz saxlayırıq. Baqaj otağımız təhlükəsizdir və 24 saat əlçatandır.",
+    "active": true,
+    "variations": [
+      "Baqajımı saxlaya bilərəm?",
+      "Çamadan qoymaq üçün otaq var?",
+      "Əşyalarımı harada saxlaya bilərəm?",
+      "Baqaj otağınız var?",
+      "Çamadanları saxlamaq mümkündür?",
+      "Baqaj saxlama xidmətiniz var?",
+      "Əşyaları müvəqqəti qoya bilərəm?",
+      "Çamadan üçün ayrıca yer varmı?",
+      "Baqajımı çek-inə qədər saxlaya bilərsiniz?",
+      "Əşyalarımı təhlükəsiz saxlayarsınız?"
+    ]
+  },
+  {
+    "category": "Giriş və çıxış",
+    "question": "Otaq kartını itirsəm nə etməliyəm?",
+    "answer": "Narahat olmayın, risepşına müraciət edin, şəxsiyyətinizi təsdiqlədikdən sonra dərhal yeni kart verilir. İlk dəfə pulsuzdur, təkrar itirilmə halında 10 manat ödənilir.",
+    "active": true,
+    "variations": [
+      "Otaq kartını itirsəm nə etməliyəm?",
+      "Kart itib, nə edim?",
+      "Otaq açarını itirdim, necə olsun?",
+      "Kartımı tapa bilmirəm, kömək edərsiniz?",
+      "İtirilmiş kart üçün nə lazımdır?",
+      "Yeni kart necə alına bilər?",
+      "Açarı itirsəm əlavə ödəniş olar?",
+      "Otaq kartını itirmişəm, prosedur nədir?",
+      "Kartı itirdim, yenisini necə ala bilərəm?",
+      "Kart itirilərsə nə baş verir?"
+    ]
+  },
+  {
+    "category": "Giriş və çıxış",
+    "question": "Qeydiyyat prosesi nə qədər çəkir?",
+    "answer": "Çek-in adətən 5 dəqiqədən çox çəkmir. Rezervasiya məlumatlarınız hazır olduqda sənədinizi göstərməniz kifayətdir.",
+    "active": true,
+    "variations": [
+      "Qeydiyyat prosesi nə qədər vaxt aparır?",
+      "Çek-in neçə dəqiqə çəkir?",
+      "Otağa girmə prosesi uzun sürür?",
+      "Qeydiyyat sürətli olur?",
+      "Çek-in nə qədər davam edir?",
+      "Otaqda yerləşmə prosesi nə qədər çəkir?",
+      "Qeydiyyata görə gözləməli olacam?",
+      "Çek-in prosedur vaxtı nə qədərdir?",
+      "Otağa keçmək nə qədər sürəcək?",
+      "Qeydiyyat neçə dəqiqədə bitir?"
+    ]
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Qiymətlər necədir? Otaq neçəyədir?",
+    "answer": "Gecəlik qiymətlər Standart otaqda 120 manatdan, Delüks otaqda 200 manatdan, Suit otaqda isə 350 manatdan başlayır. Yay mövsümündə qiymətlər bir qədər fərqlənə bilər. Dəqiq tarixlərinizi desəniz, dəqiq qiyməti hesablayım.",
+    "active": true,
+    "variations": [
+      "Otaq neçəyədir?",
+      "Qiymətlər nə qədərdir?",
+      "Bir gecə nə qədərdir?",
+      "Otaqların qiyməti nədir?",
+      "Gecəlik qiymət nə qədərdir?",
+      "Otağın qiyməti neçədir?",
+      "Nə qədər ödəməliyəm otağa görə?",
+      "Qiymət siyahınızı deyə bilərsiniz?",
+      "Otaq haqqı nə qədərdir?",
+      "Qalış qiyməti nə qədərdir?"
+    ]
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Qiymətə vergi daxildirmi? Əlavə xidmət haqqı varmı?",
+    "answer": "Bəli, bütün qiymətlərimizə ƏDV daxildir. Gizli əlavə xidmət haqqı yoxdur — dediyimiz qiymət son qiymətdir.",
+    "active": true,
+    "variations": [
+      "Qiymətə vergi daxildir? Əlavə haqq var?",
+      "Gizli xərc varmı qiymətdə?",
+      "ƏDV daxildirmi qiymətə?",
+      "Əlavə ödəniş tələb olunur?",
+      "Qiymətə bütün xərclər daxildir?",
+      "Son qiymət elan olunan qiymətdirmi?",
+      "Qiymətdən başqa nəyəsə pul verməliyəm?",
+      "Vergilər qiymətə əlavədir?",
+      "Elan olunan qiymətdə hər şey var?",
+      "Xidmət haqqı əlavə tutulur?"
+    ]
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Nağd ödəniş edə bilərəm?",
+    "answer": "Bəli, nağd ödəniş manatla qəbul olunur. Həmçinin kart və bank köçürməsi ilə də ödəyə bilərsiniz.",
+    "active": true,
+    "variations": [
+      "Nağd ödəyə bilərəm?",
+      "Pulu əlnən verə bilərəm?",
+      "Nağd qəbul edirsiniz?",
+      "Kassaya nağd ödəniş edilir?",
+      "Nağd pulla ödəniş mümkündür?",
+      "Cash qəbul olunur?",
+      "Pulu nağd şəkildə verə bilərəm?",
+      "Nağd hesablaşma olur?",
+      "Kartsız, nağd ödəmək olar?",
+      "Nağd ödəniş qəbul edilir sizdə?"
+    ]
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Kartla ödəniş edə bilərəm? Hansı kartlar keçir?",
+    "answer": "Bəli, Viza və Masterkard kartları qəbul olunur. Ödəniş terminalımız həm risepşında, həm də restorandadır.",
+    "active": true,
+    "variations": [
+      "Kartla ödəniş edə bilərəm? Hansı kartlar keçir?",
+      "Bank kartı ilə ödəmək olar?",
+      "Viza qəbul edirsiniz?",
+      "Kart ödənişi mümkündür?",
+      "Hansı bank kartları işləyir?",
+      "Kartla hesablaşma olur?",
+      "Masterkard qəbul olunur?",
+      "Kart terminalınız var?",
+      "Kredit kartı ilə ödəyə bilərəm?",
+      "Kartla ödəmə seçimi var sizdə?"
+    ]
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Bank köçürməsi ilə ödəyə bilərəm?",
+    "answer": "Bəli, xüsusilə korporativ müştərilər üçün bank köçürməsi mümkündür. Rekvizitləri sizə təqdim edərik, ödəniş çek-inə qədər tamamlanmalıdır.",
+    "active": true,
+    "variations": [
+      "Bank köçürməsi ilə ödəyə bilərəm?",
+      "Köçürmə ilə ödəniş mümkündür?",
+      "Hesaba pul köçürə bilərəm?",
+      "Bank transferi qəbul edirsiniz?",
+      "Rekvizitlərinizə köçürmə edə bilərəm?",
+      "Köçürmə yolu ilə hesablaşma olur?",
+      "Bank vasitəsilə ödəniş edilə bilər?",
+      "Pulu bank köçürməsi ilə göndərə bilərəm?",
+      "Transfer ilə ödəmək mümkündür?",
+      "Şirkət hesabına köçürmə qəbul olunur?"
+    ]
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Depozit nə qədərdir? Əvvəlcədən nə qədər ödəməliyəm?",
+    "answer": "Rezervasiya zamanı ilk gecənin qiyməti depozit kimi tutulur. Qalan məbləği çek-in və ya çek-aut zamanı ödəyə bilərsiniz.",
+    "active": true,
+    "variations": [
+      "Depozit nə qədərdir?",
+      "Əvvəlcədən nə qədər ödəməliyəm?",
+      "Ön ödəniş məbləği nədir?",
+      "Depozit məbləği nə qədərdir?",
+      "Rezervasiya üçün nə qədər depozit lazımdır?",
+      "Öncədən ödəniş tələb olunur?",
+      "Depozit haqqında məlumat verin.",
+      "Neçə manat ön ödəniş etməliyəm?",
+      "Bron üçün ilkin ödəniş nə qədərdir?",
+      "Depozit tutulur, məbləği nədir?"
+    ]
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Depozitim geri qaytarılırmı? Ləğv etsəm pulum nə olur?",
+    "answer": "Çek-in tarixinə 48 saat qalana qədər ləğv etsəniz, depozit tam geri qaytarılır. Daha gec ləğvlərdə ilk gecənin qiyməti tutulur.",
+    "active": true,
+    "variations": [
+      "Depozitim geri qaytarılır?",
+      "Ləğv etsəm pulum qayıdır?",
+      "Ön ödəniş geri verilir?",
+      "Depozit qaytarılırmı ləğvdə?",
+      "İmtina etsəm pulumu geri alaram?",
+      "Depozit itirilir ləğv halında?",
+      "Pulumu geri ala bilərəm ləğv etsəm?",
+      "Ləğv zamanı ödədiyim pul nə olur?",
+      "Depozit şərtsiz qaytarılır?",
+      "İmtina halında pul geri qaytarılır?"
+    ]
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Uşaqlar üçün ödəniş necədir?",
+    "answer": "6 yaşa qədər uşaqlar valideynlə eyni otaqda pulsuz qalır. 6-12 yaş arası uşaqlar üçün əlavə çarpayı 30 manatdır. 12 yaşdan yuxarı qonaqlar böyük hesab olunur.",
+    "active": true,
+    "variations": [
+      "Uşaqlar üçün ödəniş necədir?",
+      "Uşağa görə əlavə pul verməliyəm?",
+      "Uşaq qalışı ödənişlidir?",
+      "Uşaqlar pulsuz qala bilər?",
+      "Uşaq üçün qiymət necə hesablanır?",
+      "Balaca uşağa görə ödəniş var?",
+      "Uşaqlı qalış nə qədərə başa gəlir?",
+      "Uşaqların otaq haqqı necədir?",
+      "Uşağa əlavə haqq alınır?",
+      "Uşaq yaşına görə ödəniş dəyişir?"
+    ]
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Dollar və ya avro ilə ödəyə bilərəm?",
+    "answer": "Ödənişlər yalnız manatla qəbul olunur. Yaxınlıqdakı banklarda və dəyişmə məntəqələrində valyutanı rahat dəyişə bilərsiniz, risepşın yol göstərər.",
+    "active": true,
+    "variations": [
+      "Dollar, avro ilə ödəyə bilərəm?",
+      "Xarici valyuta ilə hesablaşma olur?",
+      "Avro qəbul edirsiniz?",
+      "Dollarla ödəniş mümkündür?",
+      "Yalnız manatla ödəniş edirsiniz?",
+      "Xarici pulla ödəyə bilərəm?",
+      "Dollar/avro qəbul olunur ödənişdə?",
+      "Manatdan başqa valyuta ilə ödəmək olar?",
+      "Ödəniş yalnız yerli valyutadadır?",
+      "Xarici valyutayla hesablaşa bilərəm?"
+    ]
+  },
+  {
+    "category": "Restoran və qidalanma",
+    "question": "Səhər yeməyi nə vaxt və harada verilir?",
+    "answer": "Səhər yeməyi restoranımızda hər gün saat 07:00-dan 10:30-a qədər açıq bufet formasında verilir. Qiyməti 25 manatdır. Otağa sifariş əlavə 10 manatdır.",
+    "active": true,
+    "variations": [
+      "Səhər yeməyi nə vaxt, harada verilir?",
+      "Breakfast saatları nədir?",
+      "Səhər yeməyi hansı vaxt aralığında olur?",
+      "Səhər yeməyi harada verilir?",
+      "Səhər yeməyi neçədən neçəyə qədərdir?",
+      "Səhər yeməyi restoranda mı verilir?",
+      "Səhər yeməyinin vaxtı nədir?",
+      "Breakfast harada, nə vaxt?",
+      "Səhər yeməyi saatları hansılardır?",
+      "Səhər yeməyinə hansı vaxt getməliyəm?"
+    ]
+  },
+  {
+    "category": "Restoran və qidalanma",
+    "question": "Səhər yeməyində nələr olur?",
+    "answer": "Açıq bufetimizdə isti yeməklər, yumurta, pendir-kərə yağı, təzə çörək, meyvə, qatıq, sıyıq, şirniyyat, çay və qəhvə olur. Milli səhər yeməyi seçimləri də var.",
+    "active": true,
+    "variations": [
+      "Səhər yeməyində nələr olur?",
+      "Breakfast menyusunda nə var?",
+      "Səhər yeməyi nədən ibarətdir?",
+      "Səhər süfrəsində nə olur?",
+      "Səhər yeməyi bufetində nə təklif olunur?",
+      "Səhər yeməyinə nə daxildir?",
+      "Nə yeyə bilərəm səhər yeməyində?",
+      "Səhər yeməyinin tərkibi necədir?",
+      "Bufetdə hansı yeməklər var səhər?",
+      "Səhər yeməyi çeşidi nədir?"
+    ]
+  },
+  {
+    "category": "Restoran və qidalanma",
+    "question": "Rum sörvis varmı? Otağa yemək sifariş edə bilərəm?",
+    "answer": "Bəli, rum sörvis 24 saat işləyir. Menyu otağınızdadır, daxili telefonla sifariş verə bilərsiniz. Gecə saatlarında menyu bir qədər məhduddur.",
+    "active": true,
+    "variations": [
+      "Rum sörvis var? Otağa yemək sifariş edə bilərəm?",
+      "Otağa yemək gətirilir?",
+      "Room service xidmətiniz var?",
+      "Yeməyi otağa sifariş edə bilərəm?",
+      "Otaqda yemək sifarişi mümkündür?",
+      "Rum sörvisdən istifadə edə bilərəm?",
+      "Otağa yemək çatdırılması var?",
+      "Yataqda yemək yeyə bilərəm sifarişlə?",
+      "Otağa sifariş vermək mümkündür?",
+      "Room service mövcuddur?"
+    ]
+  },
+  {
+    "category": "Restoran və qidalanma",
+    "question": "Uşaq menyusu varmı?",
+    "answer": "Bəli, restoranımızda uşaq menyusu var — uşaqların sevdiyi sadə və sağlam yeməklər. Uşaq oturacağı da mövcuddur.",
+    "active": true,
+    "variations": [
+      "Uşaq menyusu var?",
+      "Uşaqlar üçün ayrıca menyu var?",
+      "Balacalar üçün yemək seçimi var?",
+      "Uşaq yeməkləri təklif edirsiniz?",
+      "Uşağa uyğun menyu var restoranda?",
+      "Uşaqlar üçün xüsusi yeməklər var?",
+      "Kiçiklər üçün menyu mövcuddur?",
+      "Uşaq yeməyi seçimi var?",
+      "Restoranda uşaq menyusu təklif olunur?",
+      "Uşaqlar üçün nə yeməklər var?"
+    ]
+  },
+  {
+    "category": "Restoran və qidalanma",
+    "question": "Vegetarian yeməkləriniz varmı?",
+    "answer": "Bəli, menyumuzda vegetarian seçimlər var. Aşpazımız istəyinizə uyğun ayrıca yemək də hazırlaya bilər, kifayətdir ki, əvvəlcədən bildirəsiniz.",
+    "active": true,
+    "variations": [
+      "Vegetarian yemək var?",
+      "Ət olmayan yeməklər təklif edirsiniz?",
+      "Vegetarianlar üçün seçim var?",
+      "Bitki əsaslı yeməkləriniz var?",
+      "Vegetarian menyunuz var?",
+      "Ət yeməyənlər üçün variant var?",
+      "Sizdə vegetarian yeməklər var?",
+      "Vegetarian olanlar üçün nə təklif edirsiniz?",
+      "Ət istifadə olunmayan yeməklər var?",
+      "Vegetarian qonaqlar üçün seçim mövcuddur?"
+    ]
+  },
+  {
+    "category": "Restoran və qidalanma",
+    "question": "Veqan yemək tapa bilərəm?",
+    "answer": "Bəli, veqan qonaqlarımız üçün seçimlər mövcuddur. Əvvəlcədən xəbər versəniz, aşpazımız sizin üçün xüsusi veqan menyu hazırlayar.",
+    "active": true,
+    "variations": [
+      "Veqan yemək var?",
+      "Vegan menyunuz var?",
+      "Heyvan mənşəli məhsul olmayan yemək var?",
+      "Veqanlar üçün seçim təklif edirsiniz?",
+      "Veqan qonaqlar üçün yemək hazırlanır?",
+      "Süd və yumurtasız yemək var?",
+      "Veqan variant mövcuddur restoranda?",
+      "Vegan yemək sifariş edə bilərəm?",
+      "Sizdə vegan seçimlər var?",
+      "Veqan menyu təklif olunur?"
+    ]
+  },
+  {
+    "category": "Restoran və qidalanma",
+    "question": "Yeməkləriniz halaldırmı?",
+    "answer": "Bəli, restoranımızda bütün ət məhsulları halaldır. Donuz əti istifadə olunmur.",
+    "active": true,
+    "variations": [
+      "Yeməkləriniz halaldır?",
+      "Halal qidalanma təmin edirsiniz?",
+      "Donuz əti istifadə olunur yeməkdə?",
+      "Halal sertifikatınız var?",
+      "Yeməklər dini qaydalara uyğundur?",
+      "Halal mətbəx təklif edirsiniz?",
+      "Ət məhsulları halaldır?",
+      "Restoranınız halaldır?",
+      "Halal olmayan məhsul var yeməkdə?",
+      "Yeməklərdə halallıq təmin olunur?"
+    ]
+  },
+  {
+    "category": "Restoran və qidalanma",
+    "question": "Allergiyam var, xüsusi pəhriz yeməyi mümkündürmü?",
+    "answer": "Əlbəttə. Allergiyanızı və ya pəhriz tələblərinizi əvvəlcədən bildirin, aşpazımız buna uyğun yemək hazırlayar. Qlutensiz və şəkərsiz seçimlər də mümkündür.",
+    "active": true,
+    "variations": [
+      "Allergiyam var, xüsusi pəhriz mümkündür?",
+      "Allergiyaya görə xüsusi yemək hazırlanır?",
+      "Pəhriz tələblərimi nəzərə alarsınız?",
+      "Qlutensiz yemək var?",
+      "Allergik reaksiyalarımı bildirsəm uyğun yemək hazırlanar?",
+      "Xüsusi qidalanma ehtiyaclarım var, kömək edərsiniz?",
+      "Şəkərsiz yemək hazırlana bilər?",
+      "Allergiyalı qonaqlar üçün seçim var?",
+      "Pəhriz yeməyi sifariş edə bilərəm?",
+      "Allergiyama uyğun menyu hazırlanır?"
+    ]
+  },
+  {
+    "category": "Restoran və qidalanma",
+    "question": "Barınız varmı? Axşam harada içki içə bilərəm?",
+    "answer": "Bəli, restoranımızın bar hissəsi axşam saat 23:00-a qədər işləyir. İçkilər, kokteyllər və yüngül qəlyanaltılar təklif olunur. Sonra rum sörvis ilə otağa sifariş verə bilərsiniz.",
+    "active": true,
+    "variations": [
+      "Barınız var? Axşam içki içə bilərəm?",
+      "Bar xidmətiniz var?",
+      "Axşam hara gedib içki içə bilərəm?",
+      "Kokteyl bar mövcuddur?",
+      "Barda oturmaq mümkündür?",
+      "İçki içmək üçün yer var oteldə?",
+      "Bar hansı saata qədər işləyir?",
+      "Axşamlar bar açıqdır?",
+      "Barınız neçəyə qədər fəaliyyət göstərir?",
+      "İçki menyunuz varmı barda?"
+    ]
+  },
+  {
+    "category": "Restoran və qidalanma",
+    "question": "Restorana kənar qonaqlar gələ bilərmi?",
+    "answer": "Bəli, restoranımız kənar qonaqlar üçün də açıqdır. Yer ayırtmaq üçün əvvəlcədən zəng etməniz məsləhətdir.",
+    "active": true,
+    "variations": [
+      "Restorana kənar qonaq gələ bilər?",
+      "Otel qonağı olmayan da restoranda yeyə bilər?",
+      "Restoranınız xaricdən qonaq qəbul edir?",
+      "Kənar şəxslər restorana gələ bilər?",
+      "Otel qonağı olmadan restoranınızdan istifadə edə bilərəm?",
+      "Xarici qonaqlar üçün restoran açıqdır?",
+      "Otelə qalmayan da restoranınıza gələ bilər?",
+      "Restoran hamı üçün açıqdır?",
+      "Yer ayırtmadan gələ bilərəm restorana?",
+      "Kənar müştərilər qəbul olunur restoranda?"
+    ]
+  },
+  {
+    "category": "Restoran və qidalanma",
+    "question": "Kofe maşını varmı? Harada yaxşı qəhvə içə bilərəm?",
+    "answer": "Restoranımızda barista qəhvəsi — espresso, kapuçino və lattə hazırlanır. Otağınızda da pulsuz çay-qəhvə dəsti var.",
+    "active": true,
+    "variations": [
+      "Kofe maşını var? Yaxşı qəhvə haradan içə bilərəm?",
+      "Espresso maşınınız var?",
+      "Keyfiyyətli qəhvə haradan tapa bilərəm?",
+      "Barista qəhvəsi var?",
+      "Qəhvə maşını mövcuddur restoranda?",
+      "Kapuçino hazırlanır sizdə?",
+      "Qəhvə içmək üçün yaxşı yer var?",
+      "Otaqda qəhvə maşını var?",
+      "Espresso, lattə hazırlanır?",
+      "Qəhvə seçimi nədir sizdə?"
+    ]
+  },
+  {
+    "category": "Hotel xidmətləri",
+    "question": "Hovuz ödənişlidirmi? Hovuz nə vaxt açıqdır?",
+    "answer": "Hovuz otel qonaqları üçün tamamilə pulsuzdur. Hər gün saat 07:00-dan 22:00-a qədər açıqdır. Dəsmallar hovuzun yanında verilir.",
+    "active": true,
+    "variations": [
+      "Hovuz ödənişlidir? Nə vaxt açıqdır?",
+      "Hovuza görə pul verməliyəm?",
+      "Hovuzun iş saatları nədir?",
+      "Hovuz istifadəsi pulsuzdur?",
+      "Hovuza neçədən neçəyə qədər girə bilərəm?",
+      "Hovuz saatları hansılardır?",
+      "Hovuzdan pulsuz istifadə edə bilərəm?",
+      "Hovuz nə vaxta qədər açıqdır?",
+      "Hovuz üçün əlavə ödəniş var?",
+      "Hovuz saatı barədə məlumat verin."
+    ]
+  },
+  {
+    "category": "Hotel xidmətləri",
+    "question": "Hovuz qapalıdır yoxsa açıq? Qışda işləyirmi?",
+    "answer": "Hovuzumuz açıq hovuzdur və may ayından oktyabra qədər işləyir. Qış aylarında bağlı olur, amma spa mərkəzimiz və saunamız il boyu xidmətinizdədir.",
+    "active": true,
+    "variations": [
+      "Hovuz açıq yoxsa qapalıdır? Qışda işləyir?",
+      "Hovuzunuz açıq havadadır?",
+      "Qış aylarında hovuz fəaliyyət göstərir?",
+      "Hovuz örtülüdür?",
+      "Hovuz bütün il açıqdır?",
+      "Qapalı hovuzunuz var?",
+      "Hovuz açıq tipdədir?",
+      "Qışda hovuzdan istifadə mümkündür?",
+      "Hovuz mövsümi işləyir?",
+      "Hovuz il boyu açıqdır?"
+    ]
+  },
+  {
+    "category": "Hotel xidmətləri",
+    "question": "Uşaqlar hovuzdan istifadə edə bilərmi?",
+    "answer": "Bəli, uşaqlar valideyn nəzarəti ilə hovuzdan istifadə edə bilər. Hovuzun dayaz hissəsi uşaqlar üçün uyğundur.",
+    "active": true,
+    "variations": [
+      "Uşaqlar hovuzdan istifadə edə bilər?",
+      "Balacalar hovuza girə bilər?",
+      "Uşaqlar üzə bilər hovuzda?",
+      "Uşaqlı hovuza girmək icazəlidir?",
+      "Hovuzda uşaq hissəsi var?",
+      "Uşaqlar valideynlə hovuza girə bilər?",
+      "Hovuz uşaqlar üçün təhlükəsizdir?",
+      "Kiçik uşaqlar hovuzdan istifadə edə bilər?",
+      "Hovuzda uşaq bölməsi mövcuddur?",
+      "Uşaqlı ailələr hovuzdan yararlanabilir?"
+    ]
+  },
+  {
+    "category": "Hotel xidmətləri",
+    "question": "Sauna varmı? Sauna ödənişlidirmi?",
+    "answer": "Bəli, spa mərkəzimizdə sauna və türk hamamı var. Spa paketinə daxildir, ayrıca istifadə isə saatlıq 30 manatdır. Saat 10:00-dan 21:00-a qədər işləyir.",
+    "active": true,
+    "variations": [
+      "Sauna var? Ödənişlidir?",
+      "Saunanız var?",
+      "Sauna xidməti pulludur?",
+      "Sauna istifadəsi pulsuzdur?",
+      "Sizdə sauna mövcuddur?",
+      "Sauna ayrıca ödənilir?",
+      "Sauna paketə daxildir yoxsa əlavə?",
+      "Sauna saatlıq nə qədərdir?",
+      "Sauna işlədir?",
+      "Sauna varsa qiyməti nədir?"
+    ]
+  },
+  {
+    "category": "Hotel xidmətləri",
+    "question": "Masaj sifariş edə bilərəm? Masaj neçəyədir?",
+    "answer": "Bəli, spa mərkəzimizdə 60 dəqiqəlik klassik masaj var. Tam spa paketi — masaj, türk hamamı və sauna — 80 manatdır. Cütlük paketi isə 140 manatdır. Əvvəlcədən yazılmaq məsləhətdir.",
+    "active": true,
+    "variations": [
+      "Masaj sifariş edə bilərəm? Qiyməti nədir?",
+      "Masaj xidməti nə qədərdir?",
+      "Masaj etdirmək istəyirəm, mümkündür?",
+      "Masaj sifariş necə verilir?",
+      "Masaj neçə manatdır?",
+      "Masaj xidmətindən yararlanmaq istəyirəm.",
+      "Masaj üçün əvvəlcədən yazılmaq lazımdır?",
+      "Klassik masaj nə qədərdir?",
+      "Masaj paketi qiyməti nədir?",
+      "Masaj xidməti mövcuddur, nə qədərdir?"
+    ]
+  },
+  {
+    "category": "Hotel xidmətləri",
+    "question": "Fitnes zalında hansı avadanlıqlar var?",
+    "answer": "Fitnes zalımızda qaçış yolu, velotrenajor, ştanq-hantel dəsti və çoxfunksiyalı trenajor var. Zal 24 saat açıqdır, giriş otaq kartı ilədir və pulsuzdur.",
+    "active": true,
+    "variations": [
+      "Fitnes zalında hansı avadanlıq var?",
+      "Trenajor zalında nə var?",
+      "Fitnes zalının təchizatı necədir?",
+      "Hansı idman aletləri mövcuddur?",
+      "Zalda hansı trenajorlar var?",
+      "İdman avadanlıqları hansılardır fitnes zalında?",
+      "Fitnes zalı nə ilə təchiz olunub?",
+      "Zalda çəki qaldırma aletləri var?",
+      "Qaçış yolu var fitnes zalında?",
+      "Fitnes zalının imkanları nədir?"
+    ]
+  },
+  {
+    "category": "Hotel xidmətləri",
+    "question": "Bağınız və ya terrasınız varmı?",
+    "answer": "Bəli, otelin həyət terrası var — yaşıllıq içində oturma guşələri ilə. Yayda terrasda səhər yeməyi və axşam çayı təklif olunur. Siqaret zonası da terrasdadır.",
+    "active": true,
+    "variations": [
+      "Bağınız, terrasınız var?",
+      "Açıq hava sahəniz var?",
+      "Terras mövcuddur?",
+      "Bağ sahəniz var oteldə?",
+      "Otelin həyəti var?",
+      "Açıq terras varmı?",
+      "Yaşıllıq sahəniz var?",
+      "Bağçanız var otelin ərazisində?",
+      "Terras oturacaq yerləri var?",
+      "Otelin açıq sahəsi necədir?"
+    ]
+  },
+  {
+    "category": "Hotel xidmətləri",
+    "question": "Lift varmı?",
+    "answer": "Bəli, oteldə lift var və bütün mərtəbələrə xidmət edir. Lift əlil arabası üçün də uyğundur.",
+    "active": true,
+    "variations": [
+      "Lift var?",
+      "Asansörünüz var?",
+      "Otelinizdə lift mövcuddur?",
+      "Yuxarı mərtəbələrə liftlə çıxıla bilər?",
+      "Asansör var otel binasında?",
+      "Liftdən istifadə edə bilərəm?",
+      "Otelinizdə asansör işləyir?",
+      "Lift bütün mərtəbələrə xidmət edir?",
+      "Merdivensiz çıxmaq üçün lift var?",
+      "Asansörünüz düzgün işləyir?"
+    ]
+  },
+  {
+    "category": "Hotel xidmətləri",
+    "question": "Səhər oyandırma xidməti varmı?",
+    "answer": "Bəli, risepşına zəng edib istədiyiniz vaxtı deyin, sizi telefonla oyandaraq. Xidmət pulsuzdur.",
+    "active": true,
+    "variations": [
+      "Səhər oyandırma xidməti var?",
+      "Wake-up call xidmətiniz var?",
+      "Məni səhər oyandıra bilərsiniz?",
+      "Oyandırma zəngi mövcuddur?",
+      "Səhər zəng edib oyandıra bilərsiniz?",
+      "Sizdə oyandırma xidməti var?",
+      "İstədiyim vaxt oyandırılıram?",
+      "Səhər zəngi xidməti pulsuzdur?",
+      "Wake-up call sifariş edə bilərəm?",
+      "Oyandırma xidməti necə işləyir?"
+    ]
+  },
+  {
+    "category": "İnternet və texnologiya",
+    "question": "İnternet sürəti necədir? Video zəng üçün yetərlidirmi?",
+    "answer": "Vay-Fay sürətimiz 100 meqabitə qədərdir — video zənglər, striminq və onlayn iş üçün tam yetərlidir. Bütün otaqlarda və ümumi ərazilərdə pulsuzdur.",
+    "active": true,
+    "variations": [
+      "İnternet sürəti necədir? Video zəng üçün yetər?",
+      "Wifi sürəti yaxşıdır?",
+      "İnternet video görüşmə üçün kifayətdir?",
+      "Vay-Fay sürəti nə qədərdir?",
+      "İnternet striminq üçün uyğundur?",
+      "Wifi sürətli işləyir?",
+      "Video zəng edə bilərəm rahat şəkildə?",
+      "İnternet sürəti barədə məlumat verin.",
+      "Wifi keyfiyyəti necədir?",
+      "İnternet sürəti işə yarayır video üçün?"
+    ]
+  },
+  {
+    "category": "İnternet və texnologiya",
+    "question": "Vay-Fay şifrəsi nədir? Necə qoşulum?",
+    "answer": "Vay-Fay şifrəsi çek-in zamanı otaq kartı ilə birlikdə verilir. Problem yaşasanız, risepşına zəng edin, dərhal kömək edərik.",
+    "active": true,
+    "variations": [
+      "Vay-Fay şifrəsi nədir? Necə qoşulum?",
+      "Wifi parolu nədir?",
+      "İnternetə necə bağlanım?",
+      "Vay-Fay şifrəsini haradan alım?",
+      "Wifi-a qoşulmaq üçün nə etməliyəm?",
+      "Şifrəni harada tapa bilərəm?",
+      "İnternet parolunu deyə bilərsiniz?",
+      "Vay-Faya necə qoşula bilərəm?",
+      "Wifi şifrəsi otaqdadır?",
+      "İnternetə bağlanmaq üçün şifrə lazımdır."
+    ]
+  },
+  {
+    "category": "İnternet və texnologiya",
+    "question": "Otaqda televizor necədir? Hansı kanallar var?",
+    "answer": "Bütün otaqlarda Smart Tivi var — yerli və xarici kanallar, həmçinin striminq tətbiqləri mövcuddur. Öz hesabınızla YouTube və digər platformalara qoşula bilərsiniz.",
+    "active": true,
+    "variations": [
+      "Otaqda televizor necədir, hansı kanallar var?",
+      "TV-də hansı kanallar göstərilir?",
+      "Smart TV var otaqda?",
+      "Televizorda xarici kanallar var?",
+      "Otaqda hansı televiziya xidməti var?",
+      "TV kanalları hansılardır?",
+      "Televizordan striminq izləyə bilərəm?",
+      "Otaqda hansı TV var?",
+      "Netflix kimi tətbiqlərə qoşula bilərəm televizordan?",
+      "TV-də yerli kanallar var?"
+    ]
+  },
+  {
+    "category": "İnternet və texnologiya",
+    "question": "USB enerji çıxışı varmı? Telefonu harada şarj edim?",
+    "answer": "Bəli, otaqlarda çarpayı yanında USB enerji çıxışları və adi rozetkalar var. Adapter lazım olsa, risepşından pulsuz götürə bilərsiniz.",
+    "active": true,
+    "variations": [
+      "USB enerji çıxışı var? Telefonu harada şarj edim?",
+      "USB port var otaqda?",
+      "Telefonu şarj etmək üçün rozetka var?",
+      "Otaqda USB çıxışı mövcuddur?",
+      "Şarj etmək üçün yer var otaqda?",
+      "Telefon şarjı üçün adapter lazımdır?",
+      "USB girişi var yataq yanında?",
+      "Rozetka və USB var otaqda?",
+      "Telefonu necə şarj edə bilərəm?",
+      "Otaqda enerji çıxışları hansılardır?"
+    ]
+  },
+  {
+    "category": "İnternet və texnologiya",
+    "question": "Noutbukla işləmək üçün şərait varmı?",
+    "answer": "Bəli, hər otaqda iş masası, sürətli Vay-Fay və USB çıxışları var. Həmçinin lobbidə sakit iş guşəsi və çap xidməti mövcuddur.",
+    "active": true,
+    "variations": [
+      "Noutbukla işləmək üçün şərait var?",
+      "Kompüterlə işləmək mümkündür otaqda?",
+      "Noutbuk üçün masa və internet var?",
+      "İşləmək üçün rahat şərait var?",
+      "Uzaqdan iş üçün otaq uyğundur?",
+      "Noutbukumla işə davam edə bilərəm otaqda?",
+      "İş üçün lazımi avadanlıq var otaqda?",
+      "Remote iş üçün şərait varmı?",
+      "Noutbuk işlətmək üçün yer var?",
+      "İşləmək istəyirəm, otaq uyğundurmu?"
+    ]
+  },
+  {
+    "category": "Ailə və uşaqlar",
+    "question": "Körpə çarpayısı verə bilərsiniz?",
+    "answer": "Bəli, körpə çarpayısı pulsuz təqdim olunur. Rezervasiya zamanı bildirin ki, otağınıza əvvəlcədən qoyulsun.",
+    "active": true,
+    "variations": [
+      "Körpə çarpayısı verə bilərsiniz?",
+      "Beşik təmin edirsiniz?",
+      "Körpə üçün yataq var?",
+      "Uşaq çarpayısı otağa qoyula bilər?",
+      "Körpəm üçün beşik lazımdır, var?",
+      "Yeni doğulmuş uşaq üçün çarpayı verilir?",
+      "Körpə krovatı mövcuddur?",
+      "Beşik pulsuz təmin olunur?",
+      "Körpəm üçün yer hazırlaya bilərsiniz?",
+      "Otağa körpə çarpayısı əlavə edilir?"
+    ]
+  },
+  {
+    "category": "Ailə və uşaqlar",
+    "question": "Əlavə çarpayı mümkündürmü? Qiyməti nə qədərdir?",
+    "answer": "Bəli, əlavə çarpayı mümkündür — 6-12 yaş arası uşaqlar üçün 30 manat, böyüklər üçün 40 manatdır. Standart otaqda yer məhdud olduğu üçün əlavə çarpayı yalnız Delüks və Suit otaqlarda qoyulur.",
+    "active": true,
+    "variations": [
+      "Əlavə çarpayı mümkündür? Qiyməti nədir?",
+      "Otağa əlavə yataq qoyula bilər?",
+      "Extra bed nə qədərdir?",
+      "Əlavə çarpayı sifariş edə bilərəm?",
+      "Bir çarpayı da əlavə etmək istəyirəm, mümkündür?",
+      "Əlavə yatağın qiyməti nədir?",
+      "Otağa bir nəfər də əlavə edə bilərəm?",
+      "Əlavə çarpayı hər otaqda var?",
+      "Extra çarpayı üçün nə qədər ödəyirəm?",
+      "Əlavə yataq lazımdır, verə bilərsiniz?"
+    ]
+  },
+  {
+    "category": "Ailə və uşaqlar",
+    "question": "Uşaq baxıcısı xidməti varmı?",
+    "answer": "Əvvəlcədən sifarişlə uşaq baxıcısı xidməti təşkil edə bilərik, saatlıq 15 manatdır. Ən azı bir gün əvvəl risepşına müraciət edin.",
+    "active": true,
+    "variations": [
+      "Uşaq baxıcısı xidməti var?",
+      "Babysitter xidmətiniz var?",
+      "Uşağa baxan tapa bilərsiniz?",
+      "Uşaq baxıcısı sifariş edə bilərəm?",
+      "Uşağımı saxlayacaq kimsə var?",
+      "Babysitting xidməti təklif edirsiniz?",
+      "Uşaq baxıcısı nə qədərdir?",
+      "Uşağa nəzarət edəcək işçi var?",
+      "Uşaq baxıcısı xidməti necə sifariş olunur?",
+      "Bir neçə saatlıq uşaq baxıcısı tapa bilərəm?"
+    ]
+  },
+  {
+    "category": "Ailə və uşaqlar",
+    "question": "Uşaqlar üçün oyun sahəsi varmı?",
+    "answer": "Otelin həyət terrasında kiçik oyun guşəsi var. Həmçinin dənizkənarı bulvardakı böyük uşaq meydançaları piyada 5 dəqiqəlik məsafədədir.",
+    "active": true,
+    "variations": [
+      "Uşaqlar üçün oyun sahəsi var?",
+      "Uşaq meydançası var oteldə?",
+      "Balacalar üçün oynamaq üçün yer var?",
+      "Playground mövcuddur?",
+      "Uşaqların oynaya biləcəyi sahə var?",
+      "Uşaq oyun guşəsi var?",
+      "Otel ərazisində uşaq parkı var?",
+      "Uşaqlar üçün əyləncə sahəsi varmı?",
+      "Uşaq meydançasına yaxınsınız?",
+      "Balacalar üçün oyun zonası mövcuddur?"
+    ]
+  },
+  {
+    "category": "Ailə və uşaqlar",
+    "question": "Ailə paketi və ya ailə endirimi varmı?",
+    "answer": "Suit otaqda qalan ailələr üçün səhər yeməyi daxil paket təklif edirik. 6 yaşa qədər uşaqlar onsuz da pulsuz qalır. Dəqiq tarixlərinizi desəniz, ən sərfəli variantı hesablayım.",
+    "active": true,
+    "variations": [
+      "Ailə paketi, ailə endirimi var?",
+      "Ailələr üçün xüsusi təklif var?",
+      "Ailə üçün endirimli paketiniz var?",
+      "Ailəyə uyğun kampaniya var?",
+      "Ailə üçün sərfəli təklif təklif edirsiniz?",
+      "Ailə qalışı üçün endirim var?",
+      "Ailə paketinizdə nə var?",
+      "Ailələr üçün xüsusi şərtiniz var?",
+      "Ailə üçün münasib təklifiniz var?",
+      "Ailəyə görə endirim tətbiq olunur?"
+    ]
+  },
+  {
+    "category": "Ev heyvanları",
+    "question": "İt və ya pişiklə qala bilərəm? Şərtlər nədir?",
+    "answer": "Yalnız 5 kiloqrama qədər kiçik itlərə icazə verilir, gecəlik 20 manat əlavə ödənişlə. Pişik və digər heyvanlar, təəssüf ki, qəbul olunmur. Suit otaqlarda ev heyvanı qadağandır.",
+    "active": true,
+    "variations": [
+      "İt yoxsa pişiklə qala bilərəm? Şərtlər nədir?",
+      "Ev heyvanı qaydalarınız nədir?",
+      "Pişiyimlə gələ bilərəm?",
+      "İtimlə qalmaq şərtləri nədir?",
+      "Heyvanla qalış üçün nə tələb olunur?",
+      "Ev heyvanı üçün hansı şərtlər var?",
+      "İt/pişik qəbulu ilə bağlı qaydanız nədir?",
+      "Heyvanımla qalmaq istəyirəm, mümkündürmü?",
+      "Ev heyvanına icazə şərtləri nədir?",
+      "Pişik və it qəbul olunur?"
+    ]
+  },
+  {
+    "category": "Ev heyvanları",
+    "question": "Ev heyvanı üçün nə ödəməliyəm? Hansı qaydalar var?",
+    "answer": "Kiçik it üçün gecəlik 20 manat ödənilir. İt restorana və hovuz ərazisinə buraxılmır, ümumi ərazilərdə xaltada olmalıdır. Otaqda tək qalmamalıdır.",
+    "active": true,
+    "variations": [
+      "Ev heyvanı üçün nə ödəməliyəm? Qaydalar nədir?",
+      "Heyvana görə əlavə ödəniş var?",
+      "İt üçün gündəlik haqq nə qədərdir?",
+      "Ev heyvanı ilə bağlı ödəniş qaydası nədir?",
+      "Heyvanımın qalması nə qədərə başa gəlir?",
+      "Ev heyvanı gecəlik nə qədərdir?",
+      "Heyvan üçün qaydalarınızı deyin.",
+      "İtimin qalması üçün nə ödəyirəm?",
+      "Ev heyvanı xərci nə qədərdir?",
+      "Heyvan qaydaları haqqında məlumat verin."
+    ]
+  },
+  {
+    "category": "Nəqliyyat",
+    "question": "Transfer xidmətiniz varmı? Məni hava limanından götürə bilərsiniz?",
+    "answer": "Bəli, hava limanından otelə və geriyə transfer 35 manatdır. Uçuş nömrənizi və gəliş vaxtınızı bildirin, sürücümüz sizi adınız yazılmış lövhə ilə qarşılayar.",
+    "active": true,
+    "variations": [
+      "Transfer xidmətiniz var? Aeroportdan götürə bilərsiniz?",
+      "Hava limanından məni götürərsiniz?",
+      "Aeroport transferi sifariş edə bilərəm?",
+      "Məni aeroportdan otelə aparan xidmət var?",
+      "Transfer üçün maşın göndərə bilərsiniz?",
+      "Aeroportdan qarşılama xidmətiniz var?",
+      "Uçuşdan sonra məni kim götürəcək?",
+      "Hava limanı-otel transferi mövcuddur?",
+      "Sürücü göndərə bilərsiniz aeroporta?",
+      "Transfer xidməti haqqında məlumat verin."
+    ]
+  },
+  {
+    "category": "Nəqliyyat",
+    "question": "Şatl xidməti varmı?",
+    "answer": "Müntəzəm şatl xidmətimiz yoxdur, amma fərdi transfer sifariş edə bilərsiniz. Şəhər daxili gedişlər üçün risepşın taksi çağırar — taksilər 5 dəqiqəyə gəlir.",
+    "active": true,
+    "variations": [
+      "Şatl xidmətiniz var?",
+      "Şəhər daxili şatl xidməti var?",
+      "Müntəzəm nəqliyyat xidmətiniz var?",
+      "Şatl avtobusunuz işləyir?",
+      "Otel şatlı var?",
+      "Nəqliyyat xidmətiniz şatl şəklindədir?",
+      "Şəhər turu üçün şatl var?",
+      "Otelinizin öz şatl avtobusu var?",
+      "Müntəzəm servis xidmətiniz var?",
+      "Şatl ilə şəhərə gedə bilərəm?"
+    ]
+  },
+  {
+    "category": "Nəqliyyat",
+    "question": "Avtomobil icarəyə götürə bilərəm?",
+    "answer": "Bəli, tərəfdaş icarə şirkətimiz vasitəsilə avtomobil icarəsi təşkil edirik. Avtomobil birbaşa otelə gətirilir. Qiymətlər sinifdən asılıdır, risepşın sizə variantları təqdim edər.",
+    "active": true,
+    "variations": [
+      "Avtomobil icarəyə götürə bilərəm?",
+      "Maşın kirayə edə bilərəm sizin vasitəçiliklə?",
+      "Avtomobil icarəsi təşkil edirsiniz?",
+      "Rent a car xidmətiniz var?",
+      "Maşın icarəsi mümkündür oteldə?",
+      "Avtomobil kirayələmək istəyirəm, kömək edərsiniz?",
+      "İcarə maşını sifariş edə bilərəm?",
+      "Sizin vasitəçiliklə avtomobil icarə edə bilərəm?",
+      "Rent-a-car tərəfdaşınız var?",
+      "Avtomobil icarə şərtləri nədir?"
+    ]
+  },
+  {
+    "category": "Nəqliyyat",
+    "question": "Velosiped icarəsi varmı?",
+    "answer": "Oteldə velosiped icarəsi yoxdur, amma dənizkənarı bulvarda — piyada 5 dəqiqəlik məsafədə — velosiped icarə məntəqələri var. Risepşın yol göstərər.",
+    "active": true,
+    "variations": [
+      "Velosiped icarəsi var?",
+      "Velosiped kirayə edə bilərəm?",
+      "Sizdə velosiped icarəsi mövcuddur?",
+      "Velosipedlə gəzmək üçün icarə var?",
+      "Bike rental xidmətiniz var?",
+      "Velosiped tuta bilərəm sizdən?",
+      "Velosiped icarə məntəqəniz var?",
+      "Velosipedlə gəzinti üçün nə təklif edirsiniz?",
+      "Velosiped icarəsi mümkündür yaxınlıqda?",
+      "Sizdə velosiped var icarəyə?"
+    ]
+  },
+  {
+    "category": "Parkinq",
+    "question": "Parkinq pulsuzdur? Yer tapacağammı?",
+    "answer": "Bəli, parkinq otel qonaqları üçün pulsuzdur, amma yer sayı məhduddur. Avtomobillə gələcəksinizsə, rezervasiya zamanı bildirin, sizə yer saxlayaq.",
+    "active": true,
+    "variations": [
+      "Parkinq pulsuzdur? Yer taparammı?",
+      "Parkinqdə yer olacaq mı?",
+      "Parkinq pulsuz, amma yer var?",
+      "Avtomobilim üçün yer ayırda bilərsiniz?",
+      "Parkinq yeri kifayət qədərdir?",
+      "Maşınımı qoymaq üçün yer olacaq?",
+      "Parkinqdə sıxlıq olur?",
+      "Yerin olacağına əminəm parkinqdə?",
+      "Parkinq yerinizi əvvəlcədən ayırda bilərəm?",
+      "Parkinq həmişə boş yer var?"
+    ]
+  },
+  {
+    "category": "Parkinq",
+    "question": "Vale parkinq xidməti varmı?",
+    "answer": "Vale xidmətimiz yoxdur, parkinq otelin həyətindədir və girişə çox yaxındır. Baqajınızı daşımaqda əməkdaşlarımız kömək edər.",
+    "active": true,
+    "variations": [
+      "Vale parkinq xidmətiniz var?",
+      "Valet parking təklif edirsiniz?",
+      "Maşınımı sizin işçiniz park edər?",
+      "Vale xidməti mövcuddur?",
+      "Avtomobili özüm park etməliyəm, yoxsa vale var?",
+      "Valet servisiniz var?",
+      "Maşını sizə tapşıra bilərəm parklamaq üçün?",
+      "Vale parkinq xidməti təklif olunur?",
+      "Avtomobili işçiləriniz park edir?",
+      "Valet parking mövcuddur otelinizdə?"
+    ]
+  },
+  {
+    "category": "Parkinq",
+    "question": "Elektromobilimi şarj edə bilərəm?",
+    "answer": "Bəli, parkinqdə elektromobillər üçün 2 şarj yeri var. İstifadə pulsuzdur, amma yer məhdud olduğu üçün əvvəlcədən bildirməniz məsləhətdir.",
+    "active": true,
+    "variations": [
+      "Elektromobilimi şarj edə bilərəm?",
+      "Elektrikli maşın üçün şarj stansiyası var?",
+      "EV şarj nöqtəniz var?",
+      "Elektrikli avtomobil şarjı mümkündür?",
+      "Elektromobil üçün infrastrukturunuz var?",
+      "Şarj yeriniz var parkinqdə?",
+      "Elektromobil şarj etmək olar sizdə?",
+      "EV charging mövcuddur?",
+      "Elektrikli maşınlar üçün yer ayırılıb?",
+      "Elektromobil şarjı üçün xüsusi yeriniz var?"
+    ]
+  },
+  {
+    "category": "Parkinq",
+    "question": "Parkinq təhlükəsizdirmi?",
+    "answer": "Bəli, parkinq otelin həyətindədir, 24 saat kamera nəzarəti altındadır və mühafizə olunur.",
+    "active": true,
+    "variations": [
+      "Parkinq təhlükəsizdir?",
+      "Parkinqdə kamera var?",
+      "Avtomobilim təhlükəsizdirmi parkinqdə?",
+      "Parkinq nəzarət altındadır?",
+      "Maşınıma zərər dəyməz parkinqdə?",
+      "Parkinq mühafizə olunur?",
+      "Parkinqdə təhlükəsizlik tədbirləri hansılardır?",
+      "Kamera nəzarəti var parkinqdə?",
+      "Avtomobilim üçün narahat olmamalıyam parkinqdə?",
+      "Parkinq gecə də qorunur?"
+    ]
+  },
+  {
+    "category": "Camaşırxana",
+    "question": "Paltarlarımı yudura bilərəm? Nə vaxta hazır olur?",
+    "answer": "Bəli, camaşır xidmətimiz gündəlik işləyir, qiyməti 15 manatdır. Səhər saat 10-a qədər verilən paltarlar həmin axşam hazır olur.",
+    "active": true,
+    "variations": [
+      "Paltarlarımı yudura bilərəm? Nə vaxt hazır olur?",
+      "Camaşır nə vaxta hazır olur?",
+      "Paltarlarımı yumaq üçün nə qədər vaxt lazımdır?",
+      "Camaşırı verəndə nə vaxt qaytarırsınız?",
+      "Paltarlarım eyni gün hazır olur?",
+      "Camaşır neçə saata hazırlanır?",
+      "Paltar yumaq sifarişi nə vaxt tamamlanır?",
+      "Camaşırxananıza paltar verə bilərəm?",
+      "Paltarlarım nə vaxt təhvil verilir?",
+      "Camaşır xidməti nə qədər vaxt aparır?"
+    ]
+  },
+  {
+    "category": "Camaşırxana",
+    "question": "Quru təmizləmə xidməti varmı?",
+    "answer": "Bəli, quru təmizləmə xidmətimiz var, qiyməti 20 manatdan başlayır. Kostyum və palto kimi geyimlər bir günə hazır olur.",
+    "active": true,
+    "variations": [
+      "Quru təmizləmə xidmətiniz var?",
+      "Dry cleaning xidməti var?",
+      "Kostyumumu quru təmizləməyə verə bilərəm?",
+      "Quru təmizləmə mövcuddur?",
+      "Xüsusi geyimləri necə təmizlədə bilərəm?",
+      "Quru təmizləmə xidmətindən istifadə edə bilərəm?",
+      "Paltonu quru təmizləməyə verə bilərəm?",
+      "Quru təmizləmə nə qədərdir?",
+      "Dəri, ipək geyimləri təmizlədə bilərəm?",
+      "Quru təmizləmə xidməti təklif edirsiniz?"
+    ]
+  },
+  {
+    "category": "Camaşırxana",
+    "question": "Ütü xidməti varmı? Köynəyimi ütülədə bilərəm?",
+    "answer": "Bəli, ütü masası və ütünü otağınıza pulsuz veririk. İstəsəniz, camaşırxanamız paltarlarınızı ütüləyə bilər — köynək 3 manatdır.",
+    "active": true,
+    "variations": [
+      "Ütü xidməti var? Köynəyimi ütülədə bilərəm?",
+      "Köynək ütüsü sifariş edə bilərəm?",
+      "Ütüləmə xidmətiniz var?",
+      "Paltarımı ütülədə bilərsiniz?",
+      "Ütü xidməti nə qədərdir?",
+      "Köynəyi ütüləmək üçün kimə müraciət edim?",
+      "Ütü xidmətindən istifadə edə bilərəm?",
+      "Paltarları ütüləyən xidmətiniz var?",
+      "Köynək ütüləməyə nə qədər vaxt lazımdır?",
+      "Ütü sifarişi necə verilir?"
+    ]
+  },
+  {
+    "category": "Biznes müştəriləri",
+    "question": "Sənəd çap edə bilərəm? Çap xidməti varmı?",
+    "answer": "Bəli, risepşında çap və skan xidməti var. Az səhifə pulsuzdur, böyük həcmli çap üçün səhifəsi 20 qəpikdir. Sənədi e-poçtla göndərməniz kifayətdir.",
+    "active": true,
+    "variations": [
+      "Sənəd çap edə bilərəm? Çap xidməti var?",
+      "Printer xidmətiniz var?",
+      "Çap etmək üçün yer var oteldə?",
+      "Sənədi çap etdirə bilərəm?",
+      "Print xidməti mövcuddur?",
+      "Çap-skan xidməti var sizdə?",
+      "Faylı çap etdirmək istəyirəm, mümkündür?",
+      "Print out edə bilərəm sənədimi?",
+      "Çap xidməti nə qədərdir?",
+      "Skan xidmətiniz də var?"
+    ]
+  },
+  {
+    "category": "Biznes müştəriləri",
+    "question": "İclas otağınız varmı? Kiçik görüş üçün yer lazımdır.",
+    "answer": "Bəli, 12 nəfərlik mitinq rumumuz var — ekran, ofis lövhəsi və video-konfrans imkanı ilə. Saatlıq 30 manat, günlük 100 manatdır. Çay-qəhvə xidməti daxildir.",
+    "active": true,
+    "variations": [
+      "İclas otağınız var? Kiçik görüş üçün yer lazımdır.",
+      "Meeting room mövcuddur?",
+      "Kiçik iclas keçirmək üçün yeriniz var?",
+      "Görüş otağı təklif edirsiniz?",
+      "İş görüşü üçün otaq var?",
+      "Kiçik toplantı otağınız var?",
+      "Meeting rumunuz neçə nəfərlikdir?",
+      "Görüş üçün ayrıca otaq lazımdır, var?",
+      "İclas otağı sifariş edə bilərəm?",
+      "Kiçik biznes görüşü üçün yer varmı?"
+    ]
+  },
+  {
+    "category": "Biznes müştəriləri",
+    "question": "Biznes mərkəziniz varmı?",
+    "answer": "Lobbidə kompüter, çap və skan imkanı olan iş guşəmiz var, 24 saat açıqdır. Böyük görüşlər üçün konfrans zalı və mitinq rum icarəyə verilir.",
+    "active": true,
+    "variations": [
+      "Biznes mərkəziniz var?",
+      "İş mərkəziniz var oteldə?",
+      "Business center mövcuddur?",
+      "İş üçün xüsusi guşəniz var?",
+      "Biznes mərkəzində nə var?",
+      "İşgüzar müştərilər üçün xüsusi sahə var?",
+      "Business center xidmətləri hansılardır?",
+      "Ofis xidmətləri təklif edən mərkəziniz var?",
+      "Biznes mərkəzi 24 saat açıqdır?",
+      "İş üçün ayrılmış sahəniz var?"
+    ]
+  },
+  {
+    "category": "Tədbirlər",
+    "question": "Toy və ya nişan mərasimi keçirə bilərik?",
+    "answer": "Bəli, 120 nəfərlik banket zalımız toy, nişan və yubileylər üçün uyğundur. Yemək menyusu, bəzək və musiqi təşkilatı ilə tam paket təklif edirik. Tədbir menecerimiz sizinlə görüşüb təklif hazırlayar.",
+    "active": true,
+    "variations": [
+      "Toy, nişan mərasimi keçirə bilərik?",
+      "Toy təşkil edirsiniz?",
+      "Nişan üçün zalınız var?",
+      "Toy mərasimi üçün yeriniz uyğundur?",
+      "Toy keçirmək istəyirik, mümkündürmü?",
+      "Nişan mərasimi təşkil edə bilərsiniz?",
+      "Toy üçün banket zalınız var?",
+      "Toy təşkilatı xidmətiniz var?",
+      "Nişan üçün yer ayıra bilərsiniz?",
+      "Toy planlamaqda kömək edərsiniz?"
+    ]
+  },
+  {
+    "category": "Tədbirlər",
+    "question": "Ad günü təşkil edə bilərsiniz? Otağı bəzəyə bilərsiniz?",
+    "answer": "Əlbəttə! Ad günü üçün otaq bəzəyi — şarlar, güllər və tort — 50 manatdan başlayır. Restoranda ad günü masası da təşkil edə bilərik. Bir gün əvvəl bildirin, hər şeyi hazırlayaq.",
+    "active": true,
+    "variations": [
+      "Ad günü təşkil edə bilərsiniz? Otağı bəzəyə bilərsiniz?",
+      "Doğum günü üçün otaq bəzəyi mümkündür?",
+      "Ad günü üçün nə təklif edirsiniz?",
+      "Otağı ad günü üçün bəzəyə bilərsiniz?",
+      "Doğum günü sürprizi hazırlaya bilərsiniz?",
+      "Ad günü tədbiri təşkil edirsiniz?",
+      "Otağa tort, şar qoya bilərsiniz?",
+      "Doğum günü paketi varmı?",
+      "Ad günü üçün restoran masası ayıra bilərsiniz?",
+      "Doğum günümü orada qeyd edə bilərəm?"
+    ]
+  },
+  {
+    "category": "Tədbirlər",
+    "question": "Konfrans və ya seminar keçirmək istəyirik. Şərtlər nədir?",
+    "answer": "80 nəfərlik konfrans zalımız proyektor, səs sistemi və mikrofonlarla təchiz olunub. Günlük icarə 500 manatdır, otel qonaqlarına 20 faiz endirim var. Fasilə kofesi və nahar paketi əlavə sifariş oluna bilər.",
+    "active": true,
+    "variations": [
+      "Konfrans, seminar keçirmək istəyirik. Şərtlər nədir?",
+      "Seminar üçün zal təklif edirsiniz?",
+      "Konfrans keçirmə şərtləriniz nədir?",
+      "Böyük tədbir üçün zal icarəsi necədir?",
+      "Seminar keçirmək istəyirik, kömək edərsiniz?",
+      "Konfrans zalınızın şərtləri nədir?",
+      "Tədbirimiz üçün lazımi avadanlığınız var?",
+      "Seminar təşkilatı təklif edirsiniz?",
+      "Konfrans üçün qiymət və şərtlər nədir?",
+      "İclas/konfrans üçün nələr təmin edirsiniz?"
+    ]
+  },
+  {
+    "category": "Tədbirlər",
+    "question": "Korporativ tədbir üçün nə təklif edirsiniz?",
+    "answer": "Korporativ tədbirlər üçün konfrans zalı, banket zalı və qrup yerləşdirmə birlikdə paket şəklində təklif olunur. İştirakçı sayını və tarixi bildirin, menecerimiz fərdi təklif hazırlasın.",
+    "active": true,
+    "variations": [
+      "Korporativ tədbir üçün nə təklif edirsiniz?",
+      "Şirkət tədbiri üçün paketiniz var?",
+      "Korporativ mərasim təşkil edirsiniz?",
+      "Biznes tədbiri üçün şərtləriniz nədir?",
+      "Şirkət eventini keçirə bilərik sizdə?",
+      "Korporativ görüş üçün nə təklif olunur?",
+      "Firma tədbiri üçün paket var?",
+      "Şirkət üçün xüsusi tədbir planı hazırlayırsınız?",
+      "Korporativ paket nələrdən ibarətdir?",
+      "İşgüzar tədbir təşkilatı edirsiniz?"
+    ]
+  },
+  {
+    "category": "Təhlükəsizlik",
+    "question": "Otel təhlükəsizdirmi? Mühafizə varmı?",
+    "answer": "Bəli, oteldə 24 saat mühafizə xidməti və bütün ümumi ərazilərdə kamera nəzarəti var. Otaq qapıları elektron kartla açılır.",
+    "active": true,
+    "variations": [
+      "Otel təhlükəsizdir? Mühafizə var?",
+      "Otelinizdə təhlükəsizlik necədir?",
+      "Mühafizə xidmətiniz var?",
+      "Otel qorunur?",
+      "Təhlükəsizlik tədbirləriniz nədir?",
+      "Otel kameralarla izlənir?",
+      "Gecə mühafizə olur otel?",
+      "Təhlükəsizlik baxımından necəsiniz?",
+      "Otelinizdə özümü təhlükəsiz hiss edərəm?",
+      "Mühafizə xidməti 24 saatdır?"
+    ]
+  },
+  {
+    "category": "Təhlükəsizlik",
+    "question": "Yanğın təhlükəsizliyi necə təmin olunur?",
+    "answer": "Bütün otaqlarda tüstü detektorları, dəhlizlərdə yanğınsöndürənlər və işıqlandırılmış təxliyə planları var. Təxliyə çıxışları hər mərtəbədə göstərilib.",
+    "active": true,
+    "variations": [
+      "Yanğın təhlükəsizliyi necə təmin olunur?",
+      "Yanğınla bağlı tədbirləriniz nədir?",
+      "Yanğın hallarında nə edilir?",
+      "Otel yanğına qarşı qorunur?",
+      "Tüstü detektoru var otaqlarda?",
+      "Yanğınsöndürənlər varmı otel daxilində?",
+      "Yanğın çıxışları hansılardır?",
+      "Yanğın halında təxliyə planı var?",
+      "Yanğın təhlükəsizliyi tədbirləri nələrdir?",
+      "Otel yanğına qarşı hazırlıqlıdır?"
+    ]
+  },
+  {
+    "category": "Təhlükəsizlik",
+    "question": "Təcili hallarda nə etməliyəm? Kimə zəng edim?",
+    "answer": "İstənilən təcili halda otaq telefonundan sıfırı yığın — risepşın 24 saat cavab verir. Tibbi yardım lazım olsa, dərhal həkim və ya təcili yardım çağırırıq.",
+    "active": true,
+    "variations": [
+      "Təcili hallarda nə etməliyəm? Kimə zəng edim?",
+      "Fövqəladə vəziyyətdə kim kömək edir?",
+      "Təcili halda kimlə əlaqə saxlayım?",
+      "Acil hallarda nə etməliyəm?",
+      "Təhlükə anında kimə müraciət edim?",
+      "Fövqəladə vəziyyət üçün nömrə var?",
+      "Təcili hal olsa kömək gələcək?",
+      "Kritik vəziyyətdə necə hərəkət etməliyəm?",
+      "Acil yardım necə çağırılır?",
+      "Təcili hallar üçün prosedur nədir?"
+    ]
+  },
+  {
+    "category": "Təhlükəsizlik",
+    "question": "Otağıma başqası girə bilərmi? Açarlar necə qorunur?",
+    "answer": "Otaq kartları fərdiləşdirilib və yalnız sizin otağınızı açır. Təmizlik xidməti qeydiyyatlı kartla daxil olur. Kartı itirsəniz, dərhal deaktiv edilib yenisi verilir.",
+    "active": true,
+    "variations": [
+      "Otağıma başqası girə bilərmi? Açarlar necə qorunur?",
+      "Otağıma yad adam girə bilər?",
+      "Otaq kartı təhlükəsizdirmi?",
+      "Kartlar necə qorunur?",
+      "Otağıma icazəsiz giriş mümkündürmü?",
+      "Otaq açarı yalnız mənə aiddir?",
+      "Başqa kimsə otağıma daxil ola bilər?",
+      "Otağımın təhlükəsizliyi necə təmin olunur?",
+      "Kartlar fərdiləşdirilib?",
+      "Otağıma kimin girmə hüququ var?"
+    ]
+  },
+  {
+    "category": "Əlçatanlıq",
+    "question": "Əlilliyi olan qonaqlar üçün xüsusi otaq varmı?",
+    "answer": "Bəli, birinci mərtəbədə əlil arabası üçün uyğunlaşdırılmış otağımız var — geniş qapılar, tutacaqlı hamam və pandus girişi. Rezervasiya zamanı bildirin, bu otağı sizə ayıraq.",
+    "active": true,
+    "variations": [
+      "Əlilliyi olan qonaqlar üçün xüsusi otaq var?",
+      "Əlil arabalı qonaqlar üçün uyğunlaşdırılmış otaq var?",
+      "Wheelchair üçün otaq mövcuddur?",
+      "Əngəlli qonaqlar üçün otaq təklif edirsiniz?",
+      "Xüsusi ehtiyacı olanlar üçün otaq var?",
+      "Əlil arabası ilə rahat istifadə oluna bilən otaq var?",
+      "Uyğunlaşdırılmış otağınız hansı mərtəbədədir?",
+      "Fiziki məhdudiyyəti olanlar üçün otaq necədir?",
+      "Əlillər üçün xüsusi hazırlanmış otaq var?",
+      "Əlçatan otağınız hansı imkanlara malikdir?"
+    ]
+  },
+  {
+    "category": "Əlçatanlıq",
+    "question": "Sanitar qovşaqlar əlil arabası üçün uyğundurmu?",
+    "answer": "Uyğunlaşdırılmış otağımızın hamamı tutacaqlar və geniş giriş ilə təchiz olunub. Ümumi ərazilərdə də əlçatan sanitar qovşaq mövcuddur.",
+    "active": true,
+    "variations": [
+      "Sanitar qovşaqlar əlil arabası üçün uyğundur?",
+      "Hamam əlil arabası üçün əlçatandır?",
+      "Tualet əlil üçün uyğunlaşdırılıb?",
+      "Hamam otağı geniş girişlidir?",
+      "Sanitar qovşaqda tutacaqlar var?",
+      "Əlillər üçün hamam uyğundur?",
+      "Tualetlər əlçatandır?",
+      "Geniş qapılı hamam var?",
+      "Əlil arabası ilə hamama girmək mümkündür?",
+      "Sanitar sahə əlilliyə uyğunlaşdırılıb?"
+    ]
+  },
+  {
+    "category": "Əlçatanlıq",
+    "question": "Görmə və ya eşitmə məhdudiyyəti olan qonaqlar üçün dəstək varmı?",
+    "answer": "Əməkdaşlarımız hər cür dəstək göstərməyə hazırdır. Ehtiyaclarınızı rezervasiya zamanı bildirsəniz, qalışınızı maksimum rahat təşkil edərik.",
+    "active": true,
+    "variations": [
+      "Görmə, eşitmə məhdudiyyəti olanlar üçün dəstək var?",
+      "Kor və ya karlar üçün xüsusi dəstək var?",
+      "Görmə əngəlli qonaqlara kömək edirsiniz?",
+      "Eşitmə problemi olanlar üçün şərait var?",
+      "Xüsusi ehtiyacı olan qonaqlara dəstək göstərirsiniz?",
+      "Görmə məhdudiyyəti olan qonağa necə kömək edirsiniz?",
+      "Eşitmə cihazı olanlar üçün uyğunluq var?",
+      "Əngəlli qonaqlara fərdi yanaşma var?",
+      "Görmə-eşitmə problemi olanlar üçün nə təklif edirsiniz?",
+      "Belə qonaqlara necə xidmət göstərirsiniz?"
+    ]
+  },
+  {
+    "category": "Hotel qaydaları",
+    "question": "Sakitlik saatları varmı? Gecə səs-küy olurmu?",
+    "answer": "Sakitlik saatları gecə 23:00-dan səhər 08:00-a qədərdir. Bu saatlarda ümumi ərazilərdə və otaqlarda səs-küyə icazə verilmir.",
+    "active": true,
+    "variations": [
+      "Sakitlik saatları var? Gecə səs-küy olur?",
+      "Gecə saatlarında sakitlik tələb olunur?",
+      "Sakitlik rejimi hansı saatlardadır?",
+      "Gecə səs-küyə icazə verilir?",
+      "Sakitlik qaydası varmı?",
+      "Gecə saatlarında hansı qaydalar var?",
+      "Sakitlik saatları neçədən neçəyədir?",
+      "Gecə küy salmaq qadağandır?",
+      "Sakitlik rejiminə uyğun davranmalıyıq?",
+      "Gecə istirahətə mane olan səs-küy olur?"
+    ]
+  },
+  {
+    "category": "Hotel qaydaları",
+    "question": "Otağıma qonaq gələ bilərmi?",
+    "answer": "Bəli, qonaqlarınız saat 23:00-a qədər otağınızda ola bilər, risepşında qeydiyyatdan keçmələri kifayətdir. Gecələmə üçün isə qonaq rəsmi qeydiyyata alınmalı və əlavə ödəniş edilməlidir.",
+    "active": true,
+    "variations": [
+      "Otağıma qonaq gələ bilərmi?",
+      "Otağa kənar şəxs gəlsə olar?",
+      "Qonağımı otağa dəvət edə bilərəm?",
+      "Otağıma dostumu qəbul edə bilərəm?",
+      "Otaqda qonaq saxlamaq olar?",
+      "Otağıma kimsə gəlsə problem olar?",
+      "Otaqda gecələməyən qonaq qəbul edə bilərəm?",
+      "Qonaq qəbul etmə qaydanız nədir?",
+      "Otağıma başqasını gətirə bilərəm?",
+      "Qonağımın otağımda olması icazəlidir?"
+    ]
+  },
+  {
+    "category": "Hotel qaydaları",
+    "question": "Otaqda nəsə xarab etsəm nə olur?",
+    "answer": "Təsadüfi kiçik zədələr üçün narahat olmayın, sadəcə risepşına bildirin. Ciddi zərər halında dəymiş ziyan qiymətləndirilərək hesaba əlavə olunur.",
+    "active": true,
+    "variations": [
+      "Otaqda nəsə xarab etsəm nə olur?",
+      "Zədə versem otaqda nə baş verir?",
+      "Otaqda əşya sındırsam ödəniş edirəm?",
+      "Otağa ziyan dəysə necə olur?",
+      "Qəza baş versə otaqda nə edilir?",
+      "Xəsarət yetirsəm otağa cərimə olar?",
+      "Otaqdakı əşyaya zərər versəm nə olur?",
+      "Təsadüfən nəsə sındırsam ödəniş varmı?",
+      "Otağa ziyan vurmaq halında qayda nədir?",
+      "Otaqda hadisə baş versə nə edilir?"
+    ]
+  },
+  {
+    "category": "Hotel qaydaları",
+    "question": "Nəsə unutsam nə etməliyəm? İtirilmiş əşyalar harada saxlanılır?",
+    "answer": "Tapılan əşyalar 3 ay müddətində qeydiyyatla saxlanılır. Zəng edib əşyanızı təsvir etsəniz, yoxlayıb sizə çatdırılmasını təşkil edərik — kuryer və ya poçtla göndərə bilərik.",
+    "active": true,
+    "variations": [
+      "Nəsə unutsam nə etməliyəm? İtirilmiş əşyalar harada saxlanılır?",
+      "Əşyamı unutmuşam, necə tapım?",
+      "İtən əşyalar üçün müraciət hara olur?",
+      "Unudulmuş əşyalar hansı müddət saxlanılır?",
+      "Otaqda əşya qoyub getsəm nə olur?",
+      "İtirilən əşya sistemi necədir?",
+      "Nəsə itirsem necə axtarım?",
+      "Unudulmuş əşyaları geri ala bilərəm?",
+      "İtirilmiş əşya bölməniz var?",
+      "Əşyamı otaqda unutmuşam, kömək edərsiniz?"
+    ]
+  },
+  {
+    "category": "Hotel qaydaları",
+    "question": "Otelə öz yeməyimi və içkimi gətirə bilərəm?",
+    "answer": "Otağınızda şəxsi qəlyanaltılar probleminiz deyil, amma restoran və ümumi ərazilərə kənar yemək-içki gətirilməsi qadağandır. Restoranımız və 24 saatlıq rum sörvis həmişə xidmətinizdədir.",
+    "active": true,
+    "variations": [
+      "Otelə öz yeməyimi, içkimi gətirə bilərəm?",
+      "Xarici yemək gətirmək olar?",
+      "Öz içkimi gətirə bilərəm otağa?",
+      "Kənar yemək-içki qəbul olunur?",
+      "Özümlə yemək gətirmək qadağandır?",
+      "Restora öz yeməyimi apara bilərəm?",
+      "Şəxsi qəlyanaltı gətirmək olar?",
+      "Otağıma özüm yemək gətirə bilərəm?",
+      "Ümumi ərazilərə xarici yemək gətirmək olar?",
+      "Öz içkimi restoranda içə bilərəm?"
+    ]
+  },
+  {
+    "category": "Hotel qaydaları",
+    "question": "Elektron siqaret çəkmək olarmı?",
+    "answer": "Elektron siqaret də adi siqaret kimi yalnız terrasdakı siqaret zonasında icazəlidir. Otaqlarda bütün növ siqaret qadağandır.",
+    "active": true,
+    "variations": [
+      "Elektron siqaret çəkmək olar?",
+      "Vape çəkmək icazəlidir?",
+      "E-siqaret otaqda çəkilə bilər?",
+      "Elektron siqaretə də qadağa var?",
+      "Vape otaqlarda qadağandır?",
+      "Elektron siqaret üçün ayrıca qayda var?",
+      "E-siqaret çəkmək hara icazəlidir?",
+      "Vape zonanız var?",
+      "Elektron siqaretə münasibətiniz nədir?",
+      "Otaqda vape çəkə bilərəm?"
+    ]
+  },
+  {
+    "category": "Endirimlər və kampaniyalar",
+    "question": "Mövsümi endirimlər olurmu? Nə vaxt daha ucuzdur?",
+    "answer": "Bəli, mövsümdən asılı olaraq kampaniyalar keçiririk. Hazırda yay endirimi var: 3 gecədən çox qalanlara Delüks və Suit otaqlarda 15 faiz endirim. Noyabr-mart aylarında qiymətlər ümumiyyətlə daha münasibdir.",
+    "active": true,
+    "variations": [
+      "Mövsümi endirimlər olur? Nə vaxt ucuzdur?",
+      "Hansı aylarda qiymət aşağı olur?",
+      "Mövsümə görə endirim tətbiq olunur?",
+      "Ən ucuz mövsüm hansıdır?",
+      "Qiymətlər ilin hər fəslində eynidir?",
+      "Mövsümi kampaniyalarınız var?",
+      "Hansı vaxt qalmaq daha sərfəlidir?",
+      "Endirimli mövsüm nə vaxtdır?",
+      "Qış aylarında endirim olur?",
+      "Ən sərfəli vaxt nə vaxtdır qalmaq üçün?"
+    ]
+  },
+  {
+    "category": "Endirimlər və kampaniyalar",
+    "question": "Daimi müştərilər üçün endirim varmı?",
+    "answer": "Bəli, daimi qonaqlarımızı unutmuruq — beşinci qalışdan etibarən 10 faiz daimi müştəri endirimi tətbiq olunur. Telefon nömrənizlə tarixçəniz sistemdə saxlanılır.",
+    "active": true,
+    "variations": [
+      "Daimi müştərilər üçün endirim var?",
+      "Sadiq qonaqlara endirim tətbiq olunur?",
+      "Təkrar gələnlərə xüsusi şərt var?",
+      "Daimi qonaq proqramınız var?",
+      "Çox dəfə qalanlara endirim var?",
+      "Loyallıq proqramınız var?",
+      "Daimi müştəri statusu necə qazanılır?",
+      "Təkrar rezervasiyaya endirim var?",
+      "Sadiq qonaqlara xüsusi imtiyaz var?",
+      "Daimi qonaqlara nə təklif edirsiniz?"
+    ]
+  },
+  {
+    "category": "Endirimlər və kampaniyalar",
+    "question": "Uzun müddət qalsam endirim olar? Bir aylıq qiymət necədir?",
+    "answer": "7 gecədən uzun qalışlar üçün fərdi endirim təklif edirik. Aylıq qalış üçün xüsusi tarif mövcuddur — menecerimiz sizinlə əlaqə saxlayıb ən sərfəli təklifi hazırlayar.",
+    "active": true,
+    "variations": [
+      "Uzun müddət qalsam endirim olar? Aylıq qiymət necədir?",
+      "Uzunmüddətli qalış üçün endirim var?",
+      "Ay ərzində qalsam neçəyə başa gəlir?",
+      "Uzun qalışda qiymət aşağı düşür?",
+      "Aylıq tarifiniz var?",
+      "Bir ay qalmaq istəyirəm, qiymət nədir?",
+      "Uzun müddət üçün xüsusi qiymət var?",
+      "Çox gün qalsam sərfəli olar?",
+      "Uzunmüddətli qonaqlara endirim tətbiq olunur?",
+      "Ay üçün necə hesablanır qiymət?"
+    ]
+  },
+  {
+    "category": "Endirimlər və kampaniyalar",
+    "question": "Erkən rezervasiya endirimi necə işləyir?",
+    "answer": "Çek-in tarixindən ən azı 30 gün əvvəl rezervasiya etsəniz, bütün otaq tiplərində 10 faiz endirim qazanırsınız. Endirim avtomatik tətbiq olunur.",
+    "active": true,
+    "variations": [
+      "Erkən rezervasiya endirimi necə işləyir?",
+      "Tez bron edəndə endirim olur?",
+      "Əvvəlcədən sifariş versəm endirim qazanaram?",
+      "Erkən bron kampaniyası necədir?",
+      "Nə qədər tez bron etsəm endirim böyük olur?",
+      "Erkən rezervasiya şərtləri nədir?",
+      "30 gün əvvəl bron etsəm nə qazanıram?",
+      "Erkən sifariş endirimi nə qədərdir?",
+      "Tezdən rezervasiya edənlərə nə təklif olunur?",
+      "Erkən bron kampaniyasına necə qoşulum?"
+    ]
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Bu həftə sonu üçün yer varmı?",
+    "answer": "Yoxlayım. Hansı otaq tipində və neçə nəfər üçün otaq axtarırsınız? Cümə-bazar tarixlərini dəqiqləşdirsək, dərhal deyim.",
+    "active": true,
+    "variations": [
+      "Bu həftə sonu üçün yer var?",
+      "Uikend üçün otaq varmı?",
+      "Şənbə-bazar üçün rezervasiya edə bilərəm?",
+      "Bu weekend boş otağınız var?",
+      "Həftə sonuna otaq lazımdır, tapıla bilər?",
+      "Cümə axşamı-bazar üçün yer var?",
+      "Uikendə qalmaq istəyirəm, mümkündür?",
+      "Bu həftə sonu doludur?",
+      "Weekend üçün rezervasiya edim?",
+      "Şənbə günü üçün otaq axtarıram."
+    ]
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "İki gecə üçün ümumi qiymət nə qədər olar?",
+    "answer": "Tarixlərinizi və otaq tipini deyin, dəqiq hesablayım. Təxmini olaraq: Standart otaqda iki gecə 240 manatdan, Delüks otaqda 400 manatdan başlayır.",
+    "active": true,
+    "variations": [
+      "İki gecə üçün ümumi qiymət nə qədər olar?",
+      "İki gecəlik qalış nə qədərə başa gəlir?",
+      "2 gecə qalsam cəmi nə qədər ödəyirəm?",
+      "İki gecəlik hesab nə qədərdir?",
+      "İki günlük qiymət nə qədərdir?",
+      "2 gecəlik otaq haqqı nədir?",
+      "İki gecə üçün ümumi məbləği hesablaya bilərsiniz?",
+      "İki gün qalmaq nə qədərə oturur?",
+      "2 gecəlik cəmi məbləğ nə qədərdir?",
+      "İki gecəlik qiyməti deyə bilərsiniz?"
+    ]
+  },
+  {
+    "category": "Giriş və çıxış",
+    "question": "Saat neçədə otağa girə bilərəm?",
+    "answer": "Otaqlar saat 14:00-dan təhvil verilir. Daha tez gəlsəniz, mövcudluq olduqda erkən çek-in pulsuzdur, olmasa baqajınızı saxlayıb otaq hazır olan kimi xəbər verərik.",
+    "active": true,
+    "variations": [
+      "Saat neçədə otağa girə bilərəm?",
+      "Otağa hansı saatda daxil ola bilərəm?",
+      "Neçədən sonra otağa girmək olar?",
+      "Çek-in saatı neçədir?",
+      "Otağa girmək üçün saat neçəni gözləməliyəm?",
+      "Nə vaxtdan etibarən otaq mənim olur?",
+      "Otağın açıldığı saat neçədir?",
+      "Saat 14-dən əvvəl girə bilmərəm?",
+      "Otağa keçmə vaxtı neçədir?",
+      "Girişə icazə verilən saat nədir?"
+    ]
+  },
+  {
+    "category": "Restoran və qidalanma",
+    "question": "Səhər yeməyi olmadan qala bilərəm? Məcburidirmi?",
+    "answer": "Əlbəttə, səhər yeməyi məcburi deyil — ayrıca xidmətdir. İstəsəniz qalışınıza əlavə edərsiniz, istəməsəniz ətrafda çoxlu kafe var.",
+    "active": true,
+    "variations": [
+      "Səhər yeməyi olmadan qala bilərəm? Məcburidir?",
+      "Səhər yeməyi götürməyə bilərəm?",
+      "Breakfast şərt deyil?",
+      "Səhər yeməyisiz qalış mümkündür?",
+      "Səhər yeməyini istəmirəmsə ödəməli deyiləm?",
+      "Səhər yeməyi qalış üçün vacibdir?",
+      "Breakfast olmadan sifariş verə bilərəm?",
+      "Səhər yeməyini imtina edə bilərəm?",
+      "Qalışıma səhər yeməyi əlavə etməyə bilərəm?",
+      "Səhər yeməyi opsional xidmətdir?"
+    ]
+  },
+  {
+    "category": "Hotel xidmətləri",
+    "question": "Dəsmal və yataq dəsti nə qədər tez-tez dəyişdirilir?",
+    "answer": "Dəsmallar hər gün, yataq dəstləri iki gündən bir dəyişdirilir. İstəsəniz, gündəlik dəyişmə də sifariş edə bilərsiniz — risepşına bildirməniz kifayətdir.",
+    "active": true,
+    "variations": [
+      "Dəsmal, yataq dəsti nə qədər tez-tez dəyişdirilir?",
+      "Dəsmallar hər gün dəyişilir?",
+      "Çarşaf neçə gündən bir dəyişdirilir?",
+      "Yorğan-döşək dəsti nə vaxt yenilənir?",
+      "Dəsmal dəyişimi gündəlikdir?",
+      "Otel dəsmalları nə qədər tez-tez təzələnir?",
+      "Yataq dəsti dəyişmə qaydası nədir?",
+      "Dəsmallarımı hər gün dəyişə bilərəm?",
+      "Çarşafların dəyişilmə tezliyi nədir?",
+      "Yataq ağlarını neçə gündən bir dəyişirsiniz?"
+    ]
+  },
+  {
+    "category": "Nəqliyyat",
+    "question": "Hava limanına necə qayıda bilərəm? Gediş transferi varmı?",
+    "answer": "Bəli, otelə gəldiyi kimi hava limanına da transfer edirik — 35 manat. Uçuşunuzdan ən azı 3-4 saat əvvəl yola çıxmağı tövsiyə edirik. Bir gün əvvəl sifariş verin.",
+    "active": true,
+    "variations": [
+      "Hava limanına necə qayıda bilərəm? Gediş transferi var?",
+      "Aeroporta qayıtmaq üçün transfer var?",
+      "Hava limanına geriyə xidmət var?",
+      "Otel-aeroport gediş nəqliyyatı var?",
+      "Getmə vaxtı transfer sifariş edə bilərəm?",
+      "Aeroporta necə çatdırılıram?",
+      "Gediş transferi necə təşkil olunur?",
+      "Hava limanına qayıdış yolu necədir?",
+      "Uçuşuma aeroporta necə gedim?",
+      "Geri dönüş transferi mövcuddur?"
+    ]
+  },
+  {
+    "category": "Ümumi məlumat",
+    "question": "Otel yenidirmi? Nə vaxt tikilib və ya təmir olunub?",
+    "answer": "Otelimiz müasir standartlara uyğun tam təmirlidir, otaqlar və ümumi ərazilər yenilənib. Təmiz, işıqlı və müasir interyerlərimiz var.",
+    "active": true,
+    "variations": [
+      "Otel yenidir? Nə vaxt tikilib, təmir olunub?",
+      "Otelin tikilmə tarixi nədir?",
+      "Son təmir nə vaxt olub?",
+      "Otel köhnədir yoxsa yeni?",
+      "Bina nə vaxt inşa edilib?",
+      "Otel yenilənib?",
+      "Renovasiya nə vaxt aparılıb?",
+      "Otelin yaşı nə qədərdir?",
+      "İnteryer yenidir?",
+      "Otel müasirləşdirilib?"
+    ]
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Başqasının adına rezervasiya edə bilərəm? Hədiyyə etmək istəyirəm.",
+    "answer": "Bəli, başqa şəxsin adına rezervasiya mümkündür. Qonağın adını və telefon nömrəsini bildirin. Hədiyyə qalışı üçün otağa gül və ya şampan da əlavə edə bilərik.",
+    "active": true,
+    "variations": [
+      "Başqasının adına rezervasiya edə bilərəm? Hədiyyə etmək istəyirəm.",
+      "Başqa şəxs üçün bron edə bilərəm?",
+      "Dostuma hədiyyə olaraq otaq bron edə bilərəm?",
+      "Rezervasiyanı başqasının adına yaza bilərsiniz?",
+      "Hədiyyə qalışı təşkil edə bilərsiniz?",
+      "Sürpriz olaraq başqa adına otaq ayıra bilərəm?",
+      "Başqa şəxs adına bron etmək mümkündür?",
+      "Hədiyyə üçün rezervasiya necə edilir?",
+      "Otaqda hədiyyə bəzəyi əlavə edə bilərsiniz?",
+      "Sevgilim üçün hədiyyə otaq bron etmək istəyirəm."
+    ]
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Qiymətə səhər yeməyi daxil paket varmı?",
+    "answer": "Bəli, istəsəniz rezervasiyaya nəfər başına 25 manat hesabı ilə səhər yeməyi əlavə edirik. Beləliklə hər səhər açıq bufetimizdən istifadə edirsiniz.",
+    "active": true,
+    "variations": [
+      "Qiymətə səhər yeməyi daxil paket var?",
+      "Səhər yeməyili paket təklif edirsiniz?",
+      "Otaq+səhər yeməyi paketi var?",
+      "Səhər yeməyi ilə birgə qiymət hesablaya bilərsiniz?",
+      "Breakfast daxil paket mövcuddur?",
+      "Səhər yeməyi əlavə olunmuş qiymət varmı?",
+      "Paket qiymətinə səhər yeməyi əlavə edilə bilər?",
+      "Otaq qiymətinə səhər yeməyini də qatmaq olar?",
+      "Səhər yeməyili variant təklif edirsiniz?",
+      "Breakfast paketiniz nə qədərdir?"
+    ]
+  },
+  {
+    "category": "Hotel xidmətləri",
+    "question": "Çətir götürə bilərəm? Yağış yağır.",
+    "answer": "Bəli, risepşında qonaqlar üçün pulsuz çətirlərimiz var. Çıxanda götürün, qayıdanda təhvil verin.",
+    "active": true,
+    "variations": [
+      "Çətir götürə bilərəm? Yağış yağır.",
+      "Yağış yağır, çətiriniz var?",
+      "Çətir borc verə bilərsiniz?",
+      "Yağışdan qorunmaq üçün çətir lazımdır.",
+      "Sizdə qonaqlar üçün çətir var?",
+      "Çətir istəyirəm, verə bilərsiniz?",
+      "Yağışlı havada çətir təklif edirsiniz?",
+      "Çətir lazımdır, risepşında var?",
+      "Bayıra çıxmaq üçün çətir ala bilərəm?",
+      "Çətiriniz varmı istifadə üçün?"
+    ]
+  },
+  {
+    "category": "Təhlükəsizlik",
+    "question": "Həkim çağıra bilərsiniz? Özümü pis hiss edirəm.",
+    "answer": "Bəli, dərhal həkim çağıra bilərik və ya sizi ən yaxın klinikaya yönləndirərik. Təcili haldırsa, otaq telefonundan sıfırı yığın, təcili yardımı biz çağıraq.",
+    "active": true,
+    "variations": [
+      "Həkim çağıra bilərsiniz? Özümü pis hiss edirəm.",
+      "Özüm yaxşı deyiləm, həkim lazımdır.",
+      "Doktor çağıra bilərsiniz?",
+      "Xəstələnmişəm, kömək lazımdır.",
+      "Tibbi yardım çağıra bilərsiniz?",
+      "Özümü pis hiss edirəm, nə etməliyəm?",
+      "Həkimə ehtiyacım var, kömək edərsiniz?",
+      "Sağlamlığımla bağlı problem var, kömək lazımdır.",
+      "Təcili həkim lazımdır mənə.",
+      "Xəstəyəm, həkim tapa bilərsiniz?"
+    ]
+  },
+  {
+    "category": "Ətraf ərazi",
+    "question": "Suvenir haradan ala bilərəm?",
+    "answer": "İçərişəhərdə — piyada 15 dəqiqəlik məsafədə — çoxlu suvenir dükanı var. Milli sənətkarlıq məhsulları üçün ora ən yaxşı ünvandır. Risepşın marşrut məsləhəti verə bilər.",
+    "active": true,
+    "variations": [
+      "Suvenir haradan ala bilərəm?",
+      "Hədiyyəlik əşya haradan tapa bilərəm?",
+      "Suvenir mağazası haradadır?",
+      "Milli məhsullar haradan alınır?",
+      "Xatirə əşyası haradan almaq olar?",
+      "Suvenir dükanı yaxındadır?",
+      "Hədiyyə üçün nə alım, haradan?",
+      "Turist suveniri harada satılır?",
+      "Ən yaxşı suvenir haradan alınır?",
+      "Hədiyyəlik nə alacağımı bilmirəm, tövsiyəniz var?"
+    ]
+  },
+  {
+    "category": "Restoran və qidalanma",
+    "question": "Gecə acsam nə edim? Gecə yemək tapa bilərəm?",
+    "answer": "Rum sörvis 24 saat işləyir — gecə menyusundan istədiyinizi otağınıza sifariş edə bilərsiniz. Mini-barda da qəlyanaltılar var.",
+    "active": true,
+    "variations": [
+      "Gecə acsam nə edim? Gecə yemək tapa bilərəm?",
+      "Gecə saatlarında yemək sifariş edə bilərəm?",
+      "Gecə yarısı ac qalsam nə edim?",
+      "Gecə açıq restoran var?",
+      "Gecə vaxtı qəlyanaltı tapa bilərəm?",
+      "Gecə yemək gətirən xidmət var?",
+      "Gec saatda ac qalsam kömək edərsiniz?",
+      "Gecə acanda nə edə bilərəm?",
+      "Room service gecə də işləyir?",
+      "Gecə yeməyə nə var?"
+    ]
+  },
+  {
+    "category": "Giriş və çıxış",
+    "question": "Çek-autdan sonra duş qəbul edə bilərəm? Gecə uçuşum var.",
+    "answer": "Gec çek-aut götürsəniz, otağınızda saat 18:00-a qədər qala bilərsiniz — 40 manatdır. Digər halda spa mərkəzimizin duş imkanlarından istifadə edə bilərsiniz, baqajınızı da pulsuz saxlayarıq.",
+    "active": true,
+    "variations": [
+      "Çek-autdan sonra duş qəbul edə bilərəm? Gecə uçuşum var.",
+      "Çıxışdan sonra duş almaq üçün yer var?",
+      "Otağı boşaldandan sonra yuyunmaq mümkündür?",
+      "Uçuşum gec, duş üçün yer lazımdır.",
+      "Çek-autdan sonra hara gedib yuyunum?",
+      "Otağı verdikdən sonra duşdan istifadə edə bilərəm?",
+      "Gecə uçuşuna qədər yuyunmaq üçün imkan var?",
+      "Çıxışdan sonra spa-dan istifadə edə bilərəm?",
+      "Duş almaq üçün ayrıca yer varmı çıxışdan sonra?",
+      "Bagajımı verib duş ala bilərəm?"
+    ]
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Otaq görə bilərəm? Şəkillər varmı?",
+    "answer": "Otelə yaxınlıqdadırsınızsa, buyurun gəlin, boş otaq olduqda məmnuniyyətlə göstərərik. Otaq şəkillərini vatsap ilə də göndərə bilərik — nömrənizi bildirin.",
+    "active": true,
+    "variations": [
+      "Otaq görə bilərəm? Şəkillər var?",
+      "Otağın fotosunu göndərə bilərsiniz?",
+      "Rezervasiyadan əvvəl otağa baxmaq istəyirəm.",
+      "Otaq şəkillərini görmək istəyirəm.",
+      "Otağı canlı görə bilərəm?",
+      "Otaq görüntülərini paylaşa bilərsiniz?",
+      "Bron etmədən əvvəl otağı yoxlaya bilərəm?",
+      "Otağın şəklini vatsapa göndərə bilərsiniz?",
+      "Otağa baxmaq üçün gələ bilərəm?",
+      "Otaq fotoları haradadır?"
+    ]
+  },
+  {
+    "category": "Ümumi məlumat",
+    "question": "Oteldə pul dəyişmə xidməti varmı?",
+    "answer": "Oteldə valyuta dəyişmə xidməti yoxdur, amma ən yaxın dəyişmə məntəqəsi və bank piyada 2-3 dəqiqəlik məsafədədir. Risepşın yolu göstərər.",
+    "active": true,
+    "variations": [
+      "Oteldə pul dəyişmə xidməti var?",
+      "Valyuta mübadiləsi edirsiniz?",
+      "Pul dəyişdirmək üçün xidmətiniz var?",
+      "Otel daxilində exchange var?",
+      "Valyuta dəyişmə məntəqəniz var?",
+      "Pulumu burada dəyişə bilərəm?",
+      "Otelinizdə currency exchange var?",
+      "Valyuta çevirmə xidməti təklif edirsiniz?",
+      "Pul dəyişdirmək üçün hara müraciət edim?",
+      "Otel daxilində valyuta əməliyyatı olur?"
+    ]
+  },
+  {
+    "category": "Hotel qaydaları",
+    "question": "Otelin ləğv siyasəti sərtdirmi? Fikrimi dəyişsəm nə olur?",
+    "answer": "Siyasətimiz çevikdir: çek-inə 48 saat qalana qədər pulsuz ləğv. Ondan sonra yalnız ilk gecənin qiyməti tutulur, qalan məbləğ qaytarılır.",
+    "active": true,
+    "variations": [
+      "Otelin ləğv siyasəti sərtdir? Fikrimi dəyişsəm nə olur?",
+      "Ləğv qaydalarınız çətindir?",
+      "Fikrimi dəyişsəm cərimə olar?",
+      "Ləğv siyasətiniz çevikdir?",
+      "Bron edib fikrimi dəyişsəm nə olar?",
+      "Ləğv şərtləri ağırdır sizdə?",
+      "İmtina etsəm nə itirirəm?",
+      "Ləğv siyasəti barədə deyə bilərsiniz?",
+      "Rezervasiyadan imtina asan olur?",
+      "Fikrimi dəyişmə haqqım var?"
+    ]
+  },
+  {
+    "category": "Biznes müştəriləri",
+    "question": "Ezamiyyət üçün təsdiq sənədi verə bilərsiniz?",
+    "answer": "Bəli, qalışınızı təsdiq edən rəsmi sənəd və şirkət adına faktura təqdim edirik. Ezamiyyə üçün lazım olan bütün sənədləri çek-aut zamanı hazırlayırıq.",
+    "active": true,
+    "variations": [
+      "Ezamiyyət üçün təsdiq sənədi verə bilərsiniz?",
+      "Ezamiyyə sənədi hazırlayırsınız?",
+      "İş səfəri üçün sənəd lazımdır, verilir?",
+      "Komandirovka təsdiqi verə bilərsiniz?",
+      "Rəsmi sənəd tərtib edirsiniz ezamiyyə üçün?",
+      "Ezamiyyət kağızı nə vaxt hazır olur?",
+      "İş səfəri sənədləşməsində kömək edərsiniz?",
+      "Şirkətim üçün ezamiyyə sənədi lazımdır.",
+      "Ezamiyyə üçün rəsmi qeyd verilir?",
+      "Komandirovka sənədini hazır edərsiniz?"
+    ]
+  },
+  {
+    "category": "Ailə və uşaqlar",
+    "question": "Uşaq arabası ilə rahat gəzə bilərəm? Otel uşaq arabası üçün uyğundurmu?",
+    "answer": "Bəli, lift və panduslar sayəsində uşaq arabası ilə hərəkət rahatdır. Bulvar da araba ilə gəzinti üçün ideal yerdir.",
+    "active": true,
+    "variations": [
+      "Uşaq arabası ilə rahat gəzə bilərəm? Otel uyğundur?",
+      "Stroller ilə hərəkət etmək rahatdır?",
+      "Uşaq arabalı ana üçün otel uyğundur?",
+      "Uşaq arabasını necə daşıya bilərəm binada?",
+      "Otel uşaq arabası üçün əngəlsizdir?",
+      "Pandus var uşaq arabası üçün?",
+      "Uşaq arabası ilə liftdən istifadə edə bilərəm?",
+      "Uşaq arabalı gəzinti üçün otel uyğundur?",
+      "Stroller ilə gəzmək mümkündür ətrafda?",
+      "Uşaq arabası ilə otağa girmək rahatdır?"
+    ]
+  },
+  {
+    "category": "Hotel xidmətləri",
+    "question": "Hansı dillərdə xidmət göstərirsiniz?",
+    "answer": "Əməkdaşlarımız Azərbaycan, rus və ingilis dillərində sərbəst xidmət göstərir.",
+    "active": true,
+    "variations": [
+      "Hansı dillərdə xidmət göstərirsiniz?",
+      "Personalınız hansı dilləri bilir?",
+      "İngiliscə danışan işçiniz var?",
+      "Xidmət dilləriniz hansılardır?",
+      "Rusca danışa bilərsiniz?",
+      "Neçə dildə xidmət təklif edirsiniz?",
+      "Xarici dildə ünsiyyət mümkündür?",
+      "Əməkdaşlarınız hansı dillərdə danışır?",
+      "İngilis dilini bilən varmı?",
+      "Dil baryeri olmadan xidmət alacam?"
+    ]
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Hansı əlavə xidmətləriniz var və qiymətləri nə qədərdir?",
+    "answer": "Əlavə xidmətlərimiz və qiymətləri belədir: spa paketi 80 manat, cütlük spa paketi 140 manat, saunanın saatlıq istifadəsi 30 manat, hava limanı transferi 35 manat, səhər yeməyi 25 manat, otağa səhər yeməyi əlavə 10 manat, camaşır xidməti 15 manat, quru təmizləmə 20 manatdan, köynək ütüsü 3 manat, gecikmiş çek-aut 40 manat, əlavə çarpayı uşaq üçün 30, böyük üçün 40 manat, uşaq baxıcısı saatlıq 15 manat, kiçik it üçün gecəlik 20 manat. Hovuz, fitnes zalı və Vay-Fay pulsuzdur.",
+    "active": true,
+    "variations": [
+      "Hansı əlavə xidmətləriniz var, qiymətləri nədir?",
+      "Əlavə xidmətlərin qiymət siyahısını verə bilərsiniz?",
+      "Bütün ödənişli xidmətləriniz hansılardır?",
+      "Əlavə xərclər nələrdir?",
+      "Xidmət qiymətlərinizi bir yerdə deyə bilərsiniz?",
+      "Otel əlavə xidmətləri nədir, nə qədərdir?",
+      "Bütün xidmət tariflərini bilmək istəyirəm.",
+      "Əlavə ödənişli xidmətlər siyahısı varmı?",
+      "Hansı xidmətlərə görə əlavə pul verirəm?",
+      "Qiymət cədvəlinizi göstərə bilərsiniz?"
+    ]
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Yay mövsümündə qiymətlər necədir? Mövsümi tariflər varmı?",
+    "answer": "Yay mövsümündə tariflər bir qədər yüksək olur: Standart otaq gecəlik 140 manat, Delüks 230 manat, Suit isə 400 manatdır. Suit üçün yayda minimum 2 gecə qalış tələb olunur. Payız-qış aylarında qiymətlər baza tarifinə enir: 120, 200 və 350 manat.",
+    "active": true,
+    "variations": [
+      "Yay mövsümündə qiymətlər necədir? Mövsümi tariflər var?",
+      "Yayda qiymət artır?",
+      "Yay tarifləriniz nədir?",
+      "Mövsümə görə qiymət dəyişir?",
+      "Yay aylarında otaq nə qədərdir?",
+      "Yüksək mövsümdə qiymət necə olur?",
+      "Yay qiymətləri fərqlidir?",
+      "Mövsümi qiymət cədvəlinizi bilmək istəyirəm.",
+      "Yayda daha bahalıdır?",
+      "Yay tarifi ilə qış tarifi fərqlidir?"
+    ]
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Otaq qiymətinə nələr daxildir?",
+    "answer": "Otaq qiymətinə Vay-Fay, hovuz, fitnes zalı, seyf, mini-bardakı su və gündəlik təmizlik daxildir. Səhər yeməyi ayrıca 25 manatdır. Bütün qiymətlərə ƏDV daxildir, gizli əlavə haqq yoxdur.",
+    "active": true,
+    "variations": [
+      "Otaq qiymətinə nələr daxildir?",
+      "Qiymətə hansı xidmətlər əlavədir?",
+      "Otaq haqqına nə daxil edilib?",
+      "Ödədiyim qiymətə nə daxildir?",
+      "Qiymətin içində hansı imkanlar var?",
+      "Otaq haqqı nəyi əhatə edir?",
+      "Qiymətə daxil olan xidmətlər hansılardır?",
+      "Nəyə görə ödəyirəm otaq qiymətində?",
+      "Otaq qiyməti hansı xidmətləri özündə birləşdirir?",
+      "Qiymətə nə daxildir dəqiq deyə bilərsiniz?"
+    ]
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Ümumilikdə qiymətləriniz barədə məlumat verin. Nə qədər pul lazımdır?",
+    "answer": "Otaqlar gecəlik Standart 120, Delüks 200, Suit 350 manatdan başlayır. Səhər yeməyi 25 manat, hava limanı transferi 35 manat, spa paketi 80 manatdır. Hovuz, fitnes və Vay-Fay pulsuzdur. Dəqiq tarixlərinizi desəniz, ümumi məbləği hesablayım.",
+    "active": true,
+    "variations": [
+      "Ümumilikdə qiymətləriniz nədir? Nə qədər pul lazımdır?",
+      "Bütün qiymətləri ümumi şəkildə deyə bilərsiniz?",
+      "Ümumi büdcəni necə planlaya bilərəm?",
+      "Qalış üçün təxminən nə qədər pul lazımdır?",
+      "Ümumi xərc nə qədər olar?",
+      "Bütün xidmətlərin qiymətini bilmək istəyirəm.",
+      "Ümumi qiymət siyahınızı verə bilərsiniz?",
+      "Nə qədər pul gətirməliyəm özümlə?",
+      "Ümumi məlumat üçün qiymətləri deyin.",
+      "Sizinlə qalmaq nə qədərə başa gələr ümumilikdə?"
+    ]
+  }
+]

@@ -1,0 +1,1142 @@
+[
+  {
+    "category": "Ümumi məlumat",
+    "question": "Otel harada yerləşir? Ünvanınız nədir?",
+    "answer": "Astana Hotel Bakı şəhərində, Neftçilər prospekti 153 ünvanında yerləşir. Dənizkənarı bulvara piyada 5 dəqiqəlik məsafədədir.",
+    "active": true
+  },
+  {
+    "category": "Ümumi məlumat",
+    "question": "Otelə necə əlaqə saxlaya bilərəm?",
+    "answer": "Bizimlə +994 12 498 00 00 nömrəsi ilə əlaqə saxlaya bilərsiniz. Zənglərə hər gün 24 saat cavab veririk.",
+    "active": true
+  },
+  {
+    "category": "Giriş və çıxış",
+    "question": "Çek-in və çek-aut saatları neçədədir?",
+    "answer": "Çek-in saat 14:00-dan başlayır, çek-aut saat 12:00-a qədərdir. Erkən çek-in mövcudluqdan asılıdır və pulsuzdur. Gecikmiş çek-aut saat 18:00-a qədər 40 manatdır.",
+    "active": true
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Hansı otaq tipləriniz var?",
+    "answer": "Üç otaq tipimiz var. Standard — şəhər mənzərəli, iki nəfərlik. Delüks — dəniz mənzərəli, balkonlu, üç nəfərə qədər. Suit — iki otaqlı lüks süit, jakuzi ilə, dörd nəfərə qədər.",
+    "active": true
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Otaqlarda hansı imkanlar var?",
+    "answer": "Bütün otaqlarda pulsuz Vay-Fay, televizor, kondisioner və mini-bar var. Delüks otaqlarda əlavə balkon və dəniz mənzərəsi, Suit otaqlarda jakuzi və ayrıca qonaq otağı mövcuddur.",
+    "active": true
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Rezervasiyanı necə ləğv edə bilərəm? Ləğv qaydası nədir?",
+    "answer": "Rezervasiya çek-in tarixinə 48 saat qalana qədər pulsuz ləğv edilə bilər. Daha gec ləğvlərdə ilk gecənin qiyməti tutulur. Ləğv üçün zəng etməniz kifayətdir.",
+    "active": true
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Ödənişi necə edə bilərəm? Hansı ödəniş üsullarını qəbul edirsiniz?",
+    "answer": "Nağd, Viza və Masterkard bank kartları, həmçinin bank köçürməsi qəbul olunur. Rezervasiya zamanı ilk gecənin qiyməti depozit kimi tutulur.",
+    "active": true
+  },
+  {
+    "category": "Restoran və qidalanma",
+    "question": "Səhər yeməyi qiymətə daxildirmi?",
+    "answer": "Səhər yeməyi ayrıca sifariş olunur, qiyməti 25 manatdır. Açıq bufet formasında restoranımızda saat 07:00-dan 10:30-a qədər verilir. Otağa səhər yeməyi sifarişi əlavə 10 manatdır.",
+    "active": true
+  },
+  {
+    "category": "Hotel xidmətləri",
+    "question": "Oteldə hovuz varmı?",
+    "answer": "Bəli, açıq hovuzumuz var. Hovuz hər gün saat 07:00-dan 22:00-a qədər açıqdır və otel qonaqları üçün pulsuzdur.",
+    "active": true
+  },
+  {
+    "category": "Hotel xidmətləri",
+    "question": "Fitnes zalınız varmı?",
+    "answer": "Bəli, fitnes zalımız 24 saat açıqdır. Giriş otaq kartı ilədir və otel qonaqları üçün pulsuzdur.",
+    "active": true
+  },
+  {
+    "category": "Hotel xidmətləri",
+    "question": "Spa xidmətiniz varmı? Spa qiyməti nə qədərdir?",
+    "answer": "Bəli, spa mərkəzimiz saat 10:00-dan 21:00-a qədər işləyir. Spa paketinə 60 dəqiqəlik klassik masaj, türk hamamı və sauna daxildir, qiyməti 80 manatdır. Cütlük paketi 140 manatdır.",
+    "active": true
+  },
+  {
+    "category": "Nəqliyyat",
+    "question": "Hava limanından transfer varmı?",
+    "answer": "Bəli, Heydər Əliyev Hava Limanından otelə və geriyə transfer xidmətimiz var, qiyməti 35 manatdır. Transfer əvvəlcədən sifariş olunmalıdır. Yol təxminən 25-30 dəqiqə çəkir.",
+    "active": true
+  },
+  {
+    "category": "İnternet və texnologiya",
+    "question": "Vay-Fay pulsuzdurmu?",
+    "answer": "Bəli, bütün otaqlarda və otelin ümumi ərazilərində Vay-Fay tamamilə pulsuzdur.",
+    "active": true
+  },
+  {
+    "category": "Parkinq",
+    "question": "Parkinq varmı?",
+    "answer": "Bəli, otelin pulsuz parkinqi var, lakin yer sayı məhduddur. Elektromobillər üçün 2 şarj yeri mövcuddur.",
+    "active": true
+  },
+  {
+    "category": "Ailə və uşaqlar",
+    "question": "Uşaqlar üçün qaydalar necədir? Uşaqla qala bilərəmmi?",
+    "answer": "6 yaşa qədər uşaqlar valideynlə eyni otaqda pulsuz qalır. 6 yaşdan 12 yaşa qədər uşaqlar üçün əlavə çarpayı 30 manatdır.",
+    "active": true
+  },
+  {
+    "category": "Ev heyvanları",
+    "question": "Ev heyvanı ilə qala bilərəmmi?",
+    "answer": "Ev heyvanları yalnız 5 kiloqrama qədər kiçik itlər üçün icazəlidir, gecəlik əlavə 20 manat ödənilir. Suit otaqlarda ev heyvanı qadağandır.",
+    "active": true
+  },
+  {
+    "category": "Hotel qaydaları",
+    "question": "Otaqda siqaret çəkmək olarmı?",
+    "answer": "Xeyr, bütün otaqlarda siqaret çəkmək qadağandır. Pozuntu halında 100 manat cərimə tutulur. Siqaret üçün terrasda ayrılmış xüsusi zona mövcuddur.",
+    "active": true
+  },
+  {
+    "category": "Camaşırxana",
+    "question": "Camaşırxana xidmətiniz varmı?",
+    "answer": "Bəli, gündəlik camaşır xidmətimiz var, qiyməti 15 manatdır. Səhər təhvil verilən paltarlar axşama qədər hazır olur.",
+    "active": true
+  },
+  {
+    "category": "Endirimlər və kampaniyalar",
+    "question": "Hansı endirimlər və kampaniyalar var?",
+    "answer": "Hazırda yay endirimi kampaniyası keçirilir: 3 gecə və daha çox qalanlara Delüks və Suit otaqlarda 15 faiz endirim tətbiq olunur. Həmçinin 30 gün əvvəl rezervasiya edənlərə bütün otaq tiplərində 10 faiz erkən rezervasiya endirimi var.",
+    "active": true
+  },
+  {
+    "category": "Endirimlər və kampaniyalar",
+    "question": "Bal ayı paketi varmı?",
+    "answer": "Bəli, bal ayı paketimiz var: Suit otaqda 3 gecə, şampan, gül bəzəyi və cütlük spa paketi daxildir. Qiyməti 1350 manat əvəzinə 1100 manatdır.",
+    "active": true
+  },
+  {
+    "category": "Biznes müştəriləri",
+    "question": "Konfrans zalınız varmı?",
+    "answer": "Bəli, 80 nəfərlik konfrans zalımız var. Proyektor və səs sistemi ilə təchiz olunub. Günlük icarə 500 manatdır, otel qonaqlarına 20 faiz endirim tətbiq olunur.",
+    "active": true
+  },
+  {
+    "category": "Restoran və qidalanma",
+    "question": "Restoranınız varmı? Nahar və şam yeməyi verilirmi?",
+    "answer": "Bəli, otelin restoranı var. Səhər yeməyi 07:00-10:30, nahar 12:30-15:00, şam yeməyi 18:30-22:30 arası verilir. Rum sörvis ilə yemək sifarişi 24 saat mümkündür.",
+    "active": true
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Dəniz mənzərəli otaq varmı?",
+    "answer": "Bəli, Delüks otaqlarımız dəniz mənzərəli və balkonludur. Suit otaqların da bir hissəsi dənizə baxır. Rezervasiya zamanı istəyinizi bildirsəniz, nəzərə alarıq.",
+    "active": true
+  },
+  {
+    "category": "Təhlükəsizlik",
+    "question": "Otaqda seyf varmı?",
+    "answer": "Bəli, bütün otaqlarda elektron seyf var və istifadəsi pulsuzdur. Qiymətli əşyalarınızı həmçinin risepşındakı baş seyfdə də saxlaya bilərsiniz.",
+    "active": true
+  },
+  {
+    "category": "Giriş və çıxış",
+    "question": "Gec gələcəyəm, risepşın işləyəcəkmi?",
+    "answer": "Risepşınımız 24 saat işləyir, istənilən vaxt çek-in edə bilərsiniz. Gec gələcəyinizi əvvəlcədən bildirsəniz, rezervasiyanız təhlükəsiz saxlanılar.",
+    "active": true
+  },
+  {
+    "category": "Nəqliyyat",
+    "question": "Taksi çağıra bilərsinizmi?",
+    "answer": "Bəli, risepşın istənilən vaxt sizin üçün taksi çağıra bilər. Həmçinin otelin öz transfer xidmətindən də istifadə edə bilərsiniz.",
+    "active": true
+  },
+  {
+    "category": "Ətraf ərazi",
+    "question": "Otel şəhər mərkəzinə yaxındırmı? Yaxınlıqda nə var?",
+    "answer": "Otel şəhərin mərkəzində, Neftçilər prospektində yerləşir. Dənizkənarı bulvar piyada 5 dəqiqəlik, İçərişəhər 15 dəqiqəlik məsafədədir. Yaxınlıqda restoranlar, ticarət mərkəzləri və muzeylər var.",
+    "active": true
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Qrup rezervasiyası edə bilərəmmi?",
+    "answer": "Bəli, qrup rezervasiyaları üçün xüsusi şərtlər təklif olunur. 5 otaqdan çox rezervasiya üçün menecerlərimiz sizinlə fərdi qaydada əlaqə saxlayacaq.",
+    "active": true
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Faktura və ya qəbz ala bilərəmmi?",
+    "answer": "Bəli, çek-aut zamanı bütün ödənişlər üzrə rəsmi qəbz təqdim olunur. Şirkət adına faktura lazımdırsa, əvvəlcədən şirkət rekvizitlərini bildirin.",
+    "active": true
+  },
+  {
+    "category": "Əlçatanlıq",
+    "question": "Əlil arabası ilə giriş mümkündürmü? Əlilliyi olan qonaqlar üçün şərait varmı?",
+    "answer": "Bəli, oteldə lift, panduslar və əlilliyi olan qonaqlar üçün uyğunlaşdırılmış otaqlar mövcuddur. Rezervasiya zamanı ehtiyacınızı bildirsəniz, uyğun otaq ayırarıq.",
+    "active": true
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Valyuta dəyişmək mümkündürmü? Hansı valyuta ilə ödəniş edə bilərəm?",
+    "answer": "Bütün qiymətlər manatladır və ödənişlər manatla qəbul olunur. Yaxınlıqda bank və valyuta dəyişmə məntəqələri var, risepşın sizə yol göstərə bilər.",
+    "active": true
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Ütü və fen varmı otaqda?",
+    "answer": "Bütün otaqlarda fen var. Ütü və ütü masası risepşından pulsuz sifariş oluna bilər, həmçinin camaşırxana xidmətimizdən istifadə edə bilərsiniz.",
+    "active": true
+  },
+  {
+    "category": "Ümumi məlumat",
+    "question": "Oteliniz haqqında məlumat verə bilərsiniz? Astana Hotel necə oteldir?",
+    "answer": "Astana Hotel Bakının mərkəzində yerləşən dörd ulduzlu şəhər otelidir. 10 rahat otağımız, restoranımız, açıq hovuzumuz, spa mərkəzimiz və konfrans zalımız var. Həm istirahət, həm də işgüzar səfərlər üçün əlverişlidir.",
+    "active": true
+  },
+  {
+    "category": "Ümumi məlumat",
+    "question": "Otel neçə ulduzludur?",
+    "answer": "Astana Hotel dörd ulduzlu oteldir.",
+    "active": true
+  },
+  {
+    "category": "Ümumi məlumat",
+    "question": "Otel neçə mərtəbəlidir? Neçə otağınız var?",
+    "answer": "Otelimiz dörd mərtəbəlidir və cəmi 10 otağımız var: 5 Standart, 3 Delüks və 2 Suit. Kiçik otel olduğumuz üçün hər qonağa fərdi diqqət göstəririk.",
+    "active": true
+  },
+  {
+    "category": "Ümumi məlumat",
+    "question": "Otelin üstünlükləri nələrdir? Niyə sizi seçməliyəm?",
+    "answer": "Əsas üstünlüklərimiz mərkəzi yerləşmə, dəniz mənzərəli otaqlar, pulsuz parkinq, açıq hovuz və 24 saat xidmətdir. Dənizkənarı bulvar cəmi 5 dəqiqəlik məsafədədir və qiymətlərimiz mövqeyimizə görə çox münasibdir.",
+    "active": true
+  },
+  {
+    "category": "Ümumi məlumat",
+    "question": "Hava limanına nə qədər məsafə var?",
+    "answer": "Heydər Əliyev Hava Limanı oteldən təxminən 25 kilometr məsafədədir. Avtomobillə yol 25-30 dəqiqə çəkir. Transfer xidmətimiz 35 manatdır.",
+    "active": true
+  },
+  {
+    "category": "Ümumi məlumat",
+    "question": "Şəhər mərkəzinə nə qədər məsafə var?",
+    "answer": "Otel elə şəhərin mərkəzində yerləşir. Dənizkənarı bulvar piyada 5 dəqiqə, İçərişəhər 15 dəqiqə, Fəvvarələr meydanı təxminən 20 dəqiqəlik piyada məsafəsindədir.",
+    "active": true
+  },
+  {
+    "category": "Ümumi məlumat",
+    "question": "Otelin yaxınlığında hansı görməli yerlər var?",
+    "answer": "Yaxınlıqda İçərişəhər, Qız Qalası, Dənizkənarı bulvar, Xalça Muzeyi və Alov Qüllələri var. Əksəriyyətinə piyada və ya qısa taksi yolu ilə çatmaq olar.",
+    "active": true
+  },
+  {
+    "category": "Ümumi məlumat",
+    "question": "Otelə ictimai nəqliyyatla necə gələ bilərəm?",
+    "answer": "Ən yaxın metro stansiyası İçərişəhərdir, oteldən piyada təxminən 15 dəqiqəlik məsafədədir. Neftçilər prospekti üzərindən çoxsaylı avtobus marşrutları da keçir.",
+    "active": true
+  },
+  {
+    "category": "Ətraf ərazi",
+    "question": "Yaxınlıqda restoran və kafe varmı?",
+    "answer": "Bəli, otelin ətrafında çoxlu restoran və kafe var. Milli mətbəx, italyan və şərq mətbəxi təklif edən məkanlar piyada 5-10 dəqiqəlik məsafədədir. Risepşın sizə məmnuniyyətlə tövsiyə verər.",
+    "active": true
+  },
+  {
+    "category": "Ətraf ərazi",
+    "question": "Yaxınlıqda aptek varmı?",
+    "answer": "Bəli, otelə ən yaxın aptek piyada 3 dəqiqəlik məsafədədir və 24 saat işləyir. Risepşın sizə yolu göstərə bilər.",
+    "active": true
+  },
+  {
+    "category": "Ətraf ərazi",
+    "question": "Yaxınlıqda xəstəxana və ya klinika varmı?",
+    "answer": "Bəli, otelə 10 dəqiqəlik məsafədə özəl klinika, 15 dəqiqəlik məsafədə isə dövlət xəstəxanası var. Təcili hallarda risepşın dərhal həkim və ya təcili yardım çağırar.",
+    "active": true
+  },
+  {
+    "category": "Ətraf ərazi",
+    "question": "Yaxınlıqda bank və ya bankomat varmı?",
+    "answer": "Bəli, otelin yaxınlığında bir neçə bank filialı və bankomat var. Ən yaxın bankomat piyada 2 dəqiqəlik məsafədədir.",
+    "active": true
+  },
+  {
+    "category": "Ətraf ərazi",
+    "question": "Yaxınlıqda ticarət mərkəzi varmı?",
+    "answer": "Bəli, ən yaxın ticarət mərkəzi piyada 10 dəqiqəlik məsafədədir. Orada mağazalar, supermarket və food kort mövcuddur. Şəhərin böyük ticarət mərkəzlərinə taksi ilə 10-15 dəqiqəyə çatmaq olar.",
+    "active": true
+  },
+  {
+    "category": "Ətraf ərazi",
+    "question": "Yaxınlıqda park varmı? Gəzinti üçün hara gedə bilərəm?",
+    "answer": "Dənizkənarı Milli Park, yəni bulvar, otelə piyada 5 dəqiqəlik məsafədədir. Gəzinti, qaçış və velosiped sürmək üçün ideal yerdir.",
+    "active": true
+  },
+  {
+    "category": "Ətraf ərazi",
+    "question": "Yaxınlıqda muzey varmı?",
+    "answer": "Bəli, Azərbaycan Xalça Muzeyi bulvarda, piyada 10 dəqiqəlik məsafədədir. İçərişəhərdəki muzeylər və Şirvanşahlar sarayı da 15-20 dəqiqəlik piyada məsafəsindədir.",
+    "active": true
+  },
+  {
+    "category": "Ətraf ərazi",
+    "question": "Dənizə girmək mümkündürmü? Çimərlik varmı?",
+    "answer": "Şəhər mərkəzində çimərlik yoxdur, amma Bakı ətrafındakı çimərliklərə avtomobillə 30-40 dəqiqəyə çatmaq olar. Risepşın transfer və ya taksi təşkil edə bilər. Oteldə isə açıq hovuzumuz var.",
+    "active": true
+  },
+  {
+    "category": "Ümumi məlumat",
+    "question": "Otelin e-poçt ünvanı və saytı varmı?",
+    "answer": "Rezervasiya və suallar üçün bizə telefonla müraciət edə bilərsiniz: +994 12 498 00 00. Zənglərə 24 saat cavab veririk.",
+    "active": true
+  },
+  {
+    "category": "Ümumi məlumat",
+    "question": "Oteldə neçə nəfər işləyir? Xidmət dili hansıdır?",
+    "answer": "Komandamız 24 saat xidmətinizdədir. Əməkdaşlarımız Azərbaycan, rus və ingilis dillərində xidmət göstərir.",
+    "active": true
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Standart otaq haqqında məlumat verin. Standart otaq necədir?",
+    "answer": "Standart otağımız 25 kvadratmetrdir, şəhər mənzərəlidir və iki nəfər üçün nəzərdə tutulub. İçində kinq bed və ya iki tək çarpayı, pulsuz Vay-Fay, televizor, kondisioner, mini-bar, seyf və fen var. Gecəlik qiyməti 120 manatdan başlayır.",
+    "active": true
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Delüks otaq haqqında məlumat verin. Delüks otaq necədir?",
+    "answer": "Delüks otağımız 35 kvadratmetrdir, dəniz mənzərəli və balkonludur. Üç nəfərə qədər qonaq üçün uyğundur, kinq bed və əlavə çarpayı imkanı var. Gecəlik qiyməti 200 manatdan başlayır.",
+    "active": true
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Suit otaq haqqında məlumat verin. Suit necədir?",
+    "answer": "Suit otağımız 60 kvadratmetrlik iki otaqlı lüks süitdir: yataq otağı və ayrıca qonaq otağı. Jakuzi, balkon və dörd nəfərə qədər yerləşmə imkanı var. Gecəlik qiyməti 350 manatdan başlayır.",
+    "active": true
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Otaqların sahəsi nə qədərdir?",
+    "answer": "Standart otaq 25 kvadratmetr, Delüks otaq 35 kvadratmetr, Suit isə 60 kvadratmetrdir.",
+    "active": true
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Hansı çarpayı növləri var? Kinq bed varmı?",
+    "answer": "Standart otaqlarda kinq bed və ya iki tək çarpayı seçimi var. Delüks otaqlarda kinq bed, Suit otaqlarda isə kinq bed və qonaq otağında açılan divan mövcuddur. İstəyinizi rezervasiya zamanı bildirin.",
+    "active": true
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Bir otaqda maksimum neçə nəfər qala bilər?",
+    "answer": "Standart otaqda maksimum 2 nəfər, Delüks otaqda 3 nəfər, Suit otaqda isə 4 nəfər qala bilər. 6 yaşa qədər uşaqlar bu saya daxil deyil.",
+    "active": true
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Ailə otağınız varmı? Böyük ailə üçün hansı otaq uyğundur?",
+    "answer": "Ailələr üçün ən uyğun seçim Suit otaqdır — iki otaqlıdır və dörd nəfərə qədər yerləşdirir. Daha böyük ailələr üçün yanaşı yerləşən iki otaq da təklif edə bilərik.",
+    "active": true
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Birləşən otaqlarınız varmı?",
+    "answer": "Birləşən qapılı otağımız yoxdur, amma eyni mərtəbədə yanaşı otaqlar təklif edə bilərik. Rezervasiya zamanı bildirsəniz, mövcudluğa uyğun təşkil edərik.",
+    "active": true
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Siqaret çəkilən otağınız varmı?",
+    "answer": "Xeyr, bütün otaqlarımız siqaret çəkilməyəndir. Siqaret üçün terrasda xüsusi zona ayrılıb. Otaqda siqaret çəkilməsi halında 100 manat cərimə tutulur.",
+    "active": true
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Balkonlu otaq varmı?",
+    "answer": "Bəli, Delüks və Suit otaqlarımız balkonludur. Standart otaqlarda balkon yoxdur.",
+    "active": true
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Otaqdan hansı mənzərə açılır?",
+    "answer": "Standart otaqlar şəhərə baxır, Delüks otaqlar dəniz mənzərəlidir. Suit otaqların bir hissəsi dənizə, bir hissəsi şəhərə baxır. Mənzərə istəyinizi rezervasiya zamanı bildirin.",
+    "active": true
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Otaqlar hər gün təmizlənirmi?",
+    "answer": "Bəli, bütün otaqlarda gündəlik təmizlik aparılır. Dəsmallar hər gün, yataq dəstləri iki gündən bir dəyişdirilir. Narahat edilmək istəmirsinizsə, qapıya xüsusi işarə asa bilərsiniz.",
+    "active": true
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Otaqda mini-bar varmı? Mini-bar ödənişlidirmi?",
+    "answer": "Bəli, bütün otaqlarda mini-bar var. İçindəki su pulsuzdur, digər içkilər və qəlyanaltılar isə qiymət cədvəlinə əsasən ödənişlidir. İstifadə etdikləriniz çek-aut zamanı hesaba əlavə olunur.",
+    "active": true
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Otaqda çaydan, çay və qəhvə varmı?",
+    "answer": "Bəli, bütün otaqlarda elektrik çaydanı, pulsuz çay və qəhvə dəsti var. Dəst hər gün təmizlik zamanı yenilənir.",
+    "active": true
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Otaqda kondisioner varmı? İstilik sistemi necədir?",
+    "answer": "Bəli, bütün otaqlarda fərdi idarə olunan kondisioner var — həm soyutma, həm də isitmə rejimi mövcuddur.",
+    "active": true
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Otaqda xalat və terlik varmı?",
+    "answer": "Delüks və Suit otaqlarda xalat və terlik standart olaraq qoyulur. Standart otaqlar üçün risepşından pulsuz sifariş edə bilərsiniz.",
+    "active": true
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Hamamda nələr var? Şampun və sabun verilirmi?",
+    "answer": "Bütün otaqların hamamında duş, fen, dəsmallar və pulsuz gigiyena vasitələri — şampun, duş geli, sabun və diş dəsti var. Suit otaqlarda əlavə jakuzi mövcuddur.",
+    "active": true
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Otaqda iş masası varmı?",
+    "answer": "Bəli, bütün otaqlarda iş masası, stul və masa lampası var. Vay-Fay pulsuzdur, USB enerji çıxışları da mövcuddur.",
+    "active": true
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Otaqlar səsizolyasiyalıdırmı? Küçə səsi eşidilirmi?",
+    "answer": "Otaqlarımızda ikiqat şüşəli pəncərələr var və səsizolyasiya yaxşıdır. Daha sakit otaq istəyirsinizsə, həyətə baxan otaq təklif edə bilərik.",
+    "active": true
+  },
+  {
+    "category": "Otaqlar",
+    "question": "Su pulsuzdurmu? Otağa su qoyulurmu?",
+    "answer": "Bəli, hər gün otağa iki şüşə içməli su pulsuz qoyulur. Əlavə su mini-barda və ya rum sörvis ilə sifariş oluna bilər.",
+    "active": true
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Rezervasiya necə edilir? Otaq bron etmək istəyirəm.",
+    "answer": "Rezervasiya üçün elə bu zəngdə sizə kömək edə bilərəm. Giriş və çıxış tarixlərini, otaq tipini və adınızı bildirsəniz, dərhal bron edərəm. İlk gecənin qiyməti depozit kimi tutulur.",
+    "active": true
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Telefonla rezervasiya edə bilərəm?",
+    "answer": "Bəli, əlbəttə. Elə indi telefonla rezervasiya edə bilərik. Tarixləri və otaq tipini deyin, qalanını mən həll edim.",
+    "active": true
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Onlayn rezervasiya mümkündürmü?",
+    "answer": "Otelimizi məşhur onlayn rezervasiya saytlarında tapa bilərsiniz. Amma birbaşa zənglə rezervasiya etsəniz, ən yaxşı qiymətə zəmanət veririk.",
+    "active": true
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Bu gün üçün boş otağınız varmı?",
+    "answer": "Bir dəqiqə, sistemdə yoxlayım. Hansı otaq tipi ilə maraqlanırsınız — Standart, Delüks, yoxsa Suit? Neçə nəfər üçün otaq lazımdır?",
+    "active": true
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Sabah üçün rezervasiya edə bilərəm?",
+    "answer": "Bəli, mövcudluq olduqda sabah üçün də rezervasiya mümkündür. Hansı otaq tipini istəyirsiniz və neçə gecə qalacaqsınız?",
+    "active": true
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Rezervasiyamı dəyişdirə bilərəm? Tarixi dəyişmək istəyirəm.",
+    "answer": "Bəli, mövcudluq olduqda rezervasiya tarixləri pulsuz dəyişdirilə bilər. Telefon nömrənizi deyin, rezervasiyanızı tapıb yeni tarixlərə keçirim.",
+    "active": true
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Rezervasiyamı təsdiqləmək istəyirəm. Bronum qüvvədədirmi?",
+    "answer": "Əlbəttə, yoxlayım. Rezervasiya etdiyiniz telefon nömrəsini deyin, sistemdə statusuna baxım.",
+    "active": true
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Gecikəcəyəm, rezervasiyam ləğv olunacaqmı?",
+    "answer": "Narahat olmayın, risepşın 24 saat işləyir və rezervasiyanız gecə saat 12-yə qədər qüvvədə qalır. Daha gec gələcəksinizsə, zəng edib bildirin, otağınızı saxlayaq.",
+    "active": true
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Zəmanətli rezervasiya üçün nə lazımdır?",
+    "answer": "Rezervasiyanı zəmanətə almaq üçün ilk gecənin qiyməti depozit kimi ödənilir. Bundan sonra otağınız tarixlərinizdə tam zəmanətlə saxlanılır.",
+    "active": true
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Korporativ rezervasiya edirik, şirkət üçün şərtlər varmı?",
+    "answer": "Bəli, şirkətlər üçün korporativ müqavilə və endirimli tariflər təklif edirik. Mütəmadi işgüzar səfərlər üçün xüsusi şərtlər mövcuddur. Şirkət rekvizitlərinizi bildirin, menecerimiz sizinlə əlaqə saxlasın.",
+    "active": true
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Tədbir üçün otaqlar bron etmək istəyirik.",
+    "answer": "Toy, konfrans və digər tədbirlər üçün qrup rezervasiyası və zal icarəsi birlikdə sərfəli paketlə təklif olunur. Tədbirin tarixini və qonaq sayını deyin, menecerimiz təklif hazırlasın.",
+    "active": true
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Neçə gün əvvəldən rezervasiya etmək lazımdır?",
+    "answer": "İstənilən vaxt rezervasiya edə bilərsiniz, amma yay mövsümündə otaqlar tez dolur. 30 gün əvvəl bron etsəniz, 10 faiz erkən rezervasiya endirimi qazanırsınız.",
+    "active": true
+  },
+  {
+    "category": "Giriş və çıxış",
+    "question": "Erkən çek-in mümkündürmü? Səhər tezdən gələcəyəm.",
+    "answer": "Erkən çek-in mövcudluqdan asılıdır və pulsuzdur. Otaq hazır deyilsə, baqajınızı pulsuz saxlayarıq, siz də restoranda və ya bulvarda vaxt keçirə bilərsiniz. Otaq hazır olan kimi sizə xəbər verərik.",
+    "active": true
+  },
+  {
+    "category": "Giriş və çıxış",
+    "question": "Gec çek-aut mümkündürmü? Axşam uçuşum var.",
+    "answer": "Bəli, gecikmiş çek-aut saat 18:00-a qədər 40 manatdır, mövcudluqdan asılıdır. Saat 13:00-a qədər isə adətən pulsuz güzəşt edirik. Axşama qədər baqajınızı pulsuz saxlaya bilərik.",
+    "active": true
+  },
+  {
+    "category": "Giriş və çıxış",
+    "question": "Gecə saat 2-də gələ bilərəm? Gecə çek-in mümkündürmü?",
+    "answer": "Bəli, risepşınımız 24 saat işləyir, gecə saat 2-də də çek-in edə bilərsiniz. Sadəcə rezervasiya zamanı gec gələcəyinizi bildirin ki, otağınız saxlanılsın.",
+    "active": true
+  },
+  {
+    "category": "Giriş və çıxış",
+    "question": "Çek-in üçün hansı sənədlər lazımdır?",
+    "answer": "Şəxsiyyət vəsiqəsi və ya pasport kifayətdir. Xarici vətəndaşlar üçün pasport mütləqdir. Rezervasiya başqa şəxsin adınadırsa, bunu əvvəlcədən bildirin.",
+    "active": true
+  },
+  {
+    "category": "Giriş və çıxış",
+    "question": "Çek-in üçün yaş məhdudiyyəti varmı?",
+    "answer": "Otaq rezervasiyası üçün minimum yaş 18-dir. 18 yaşdan kiçik qonaqlar yalnız valideyn və ya qanuni himayəçi ilə birlikdə qala bilər.",
+    "active": true
+  },
+  {
+    "category": "Giriş və çıxış",
+    "question": "Baqajımı saxlaya bilərəm? Çamadan otağı varmı?",
+    "answer": "Bəli, çek-indən əvvəl və çek-autdan sonra baqajınızı pulsuz saxlayırıq. Baqaj otağımız təhlükəsizdir və 24 saat əlçatandır.",
+    "active": true
+  },
+  {
+    "category": "Giriş və çıxış",
+    "question": "Otaq kartını itirsəm nə etməliyəm?",
+    "answer": "Narahat olmayın, risepşına müraciət edin, şəxsiyyətinizi təsdiqlədikdən sonra dərhal yeni kart verilir. İlk dəfə pulsuzdur, təkrar itirilmə halında 10 manat ödənilir.",
+    "active": true
+  },
+  {
+    "category": "Giriş və çıxış",
+    "question": "Qeydiyyat prosesi nə qədər çəkir?",
+    "answer": "Çek-in adətən 5 dəqiqədən çox çəkmir. Rezervasiya məlumatlarınız hazır olduqda sənədinizi göstərməniz kifayətdir.",
+    "active": true
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Qiymətlər necədir? Otaq neçəyədir?",
+    "answer": "Gecəlik qiymətlər Standart otaqda 120 manatdan, Delüks otaqda 200 manatdan, Suit otaqda isə 350 manatdan başlayır. Yay mövsümündə qiymətlər bir qədər fərqlənə bilər. Dəqiq tarixlərinizi desəniz, dəqiq qiyməti hesablayım.",
+    "active": true
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Qiymətə vergi daxildirmi? Əlavə xidmət haqqı varmı?",
+    "answer": "Bəli, bütün qiymətlərimizə ƏDV daxildir. Gizli əlavə xidmət haqqı yoxdur — dediyimiz qiymət son qiymətdir.",
+    "active": true
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Nağd ödəniş edə bilərəm?",
+    "answer": "Bəli, nağd ödəniş manatla qəbul olunur. Həmçinin kart və bank köçürməsi ilə də ödəyə bilərsiniz.",
+    "active": true
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Kartla ödəniş edə bilərəm? Hansı kartlar keçir?",
+    "answer": "Bəli, Viza və Masterkard kartları qəbul olunur. Ödəniş terminalımız həm risepşında, həm də restorandadır.",
+    "active": true
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Bank köçürməsi ilə ödəyə bilərəm?",
+    "answer": "Bəli, xüsusilə korporativ müştərilər üçün bank köçürməsi mümkündür. Rekvizitləri sizə təqdim edərik, ödəniş çek-inə qədər tamamlanmalıdır.",
+    "active": true
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Depozit nə qədərdir? Əvvəlcədən nə qədər ödəməliyəm?",
+    "answer": "Rezervasiya zamanı ilk gecənin qiyməti depozit kimi tutulur. Qalan məbləği çek-in və ya çek-aut zamanı ödəyə bilərsiniz.",
+    "active": true
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Depozitim geri qaytarılırmı? Ləğv etsəm pulum nə olur?",
+    "answer": "Çek-in tarixinə 48 saat qalana qədər ləğv etsəniz, depozit tam geri qaytarılır. Daha gec ləğvlərdə ilk gecənin qiyməti tutulur.",
+    "active": true
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Uşaqlar üçün ödəniş necədir?",
+    "answer": "6 yaşa qədər uşaqlar valideynlə eyni otaqda pulsuz qalır. 6-12 yaş arası uşaqlar üçün əlavə çarpayı 30 manatdır. 12 yaşdan yuxarı qonaqlar böyük hesab olunur.",
+    "active": true
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Dollar və ya avro ilə ödəyə bilərəm?",
+    "answer": "Ödənişlər yalnız manatla qəbul olunur. Yaxınlıqdakı banklarda və dəyişmə məntəqələrində valyutanı rahat dəyişə bilərsiniz, risepşın yol göstərər.",
+    "active": true
+  },
+  {
+    "category": "Restoran və qidalanma",
+    "question": "Səhər yeməyi nə vaxt və harada verilir?",
+    "answer": "Səhər yeməyi restoranımızda hər gün saat 07:00-dan 10:30-a qədər açıq bufet formasında verilir. Qiyməti 25 manatdır. Otağa sifariş əlavə 10 manatdır.",
+    "active": true
+  },
+  {
+    "category": "Restoran və qidalanma",
+    "question": "Səhər yeməyində nələr olur?",
+    "answer": "Açıq bufetimizdə isti yeməklər, yumurta, pendir-kərə yağı, təzə çörək, meyvə, qatıq, sıyıq, şirniyyat, çay və qəhvə olur. Milli səhər yeməyi seçimləri də var.",
+    "active": true
+  },
+  {
+    "category": "Restoran və qidalanma",
+    "question": "Rum sörvis varmı? Otağa yemək sifariş edə bilərəm?",
+    "answer": "Bəli, rum sörvis 24 saat işləyir. Menyu otağınızdadır, daxili telefonla sifariş verə bilərsiniz. Gecə saatlarında menyu bir qədər məhduddur.",
+    "active": true
+  },
+  {
+    "category": "Restoran və qidalanma",
+    "question": "Uşaq menyusu varmı?",
+    "answer": "Bəli, restoranımızda uşaq menyusu var — uşaqların sevdiyi sadə və sağlam yeməklər. Uşaq oturacağı da mövcuddur.",
+    "active": true
+  },
+  {
+    "category": "Restoran və qidalanma",
+    "question": "Vegetarian yeməkləriniz varmı?",
+    "answer": "Bəli, menyumuzda vegetarian seçimlər var. Aşpazımız istəyinizə uyğun ayrıca yemək də hazırlaya bilər, kifayətdir ki, əvvəlcədən bildirəsiniz.",
+    "active": true
+  },
+  {
+    "category": "Restoran və qidalanma",
+    "question": "Veqan yemək tapa bilərəm?",
+    "answer": "Bəli, veqan qonaqlarımız üçün seçimlər mövcuddur. Əvvəlcədən xəbər versəniz, aşpazımız sizin üçün xüsusi veqan menyu hazırlayar.",
+    "active": true
+  },
+  {
+    "category": "Restoran və qidalanma",
+    "question": "Yeməkləriniz halaldırmı?",
+    "answer": "Bəli, restoranımızda bütün ət məhsulları halaldır. Donuz əti istifadə olunmur.",
+    "active": true
+  },
+  {
+    "category": "Restoran və qidalanma",
+    "question": "Allergiyam var, xüsusi pəhriz yeməyi mümkündürmü?",
+    "answer": "Əlbəttə. Allergiyanızı və ya pəhriz tələblərinizi əvvəlcədən bildirin, aşpazımız buna uyğun yemək hazırlayar. Qlutensiz və şəkərsiz seçimlər də mümkündür.",
+    "active": true
+  },
+  {
+    "category": "Restoran və qidalanma",
+    "question": "Barınız varmı? Axşam harada içki içə bilərəm?",
+    "answer": "Bəli, restoranımızın bar hissəsi axşam saat 23:00-a qədər işləyir. İçkilər, kokteyllər və yüngül qəlyanaltılar təklif olunur. Sonra rum sörvis ilə otağa sifariş verə bilərsiniz.",
+    "active": true
+  },
+  {
+    "category": "Restoran və qidalanma",
+    "question": "Restorana kənar qonaqlar gələ bilərmi?",
+    "answer": "Bəli, restoranımız kənar qonaqlar üçün də açıqdır. Yer ayırtmaq üçün əvvəlcədən zəng etməniz məsləhətdir.",
+    "active": true
+  },
+  {
+    "category": "Restoran və qidalanma",
+    "question": "Kofe maşını varmı? Harada yaxşı qəhvə içə bilərəm?",
+    "answer": "Restoranımızda barista qəhvəsi — espresso, kapuçino və lattə hazırlanır. Otağınızda da pulsuz çay-qəhvə dəsti var.",
+    "active": true
+  },
+  {
+    "category": "Hotel xidmətləri",
+    "question": "Hovuz ödənişlidirmi? Hovuz nə vaxt açıqdır?",
+    "answer": "Hovuz otel qonaqları üçün tamamilə pulsuzdur. Hər gün saat 07:00-dan 22:00-a qədər açıqdır. Dəsmallar hovuzun yanında verilir.",
+    "active": true
+  },
+  {
+    "category": "Hotel xidmətləri",
+    "question": "Hovuz qapalıdır yoxsa açıq? Qışda işləyirmi?",
+    "answer": "Hovuzumuz açıq hovuzdur və may ayından oktyabra qədər işləyir. Qış aylarında bağlı olur, amma spa mərkəzimiz və saunamız il boyu xidmətinizdədir.",
+    "active": true
+  },
+  {
+    "category": "Hotel xidmətləri",
+    "question": "Uşaqlar hovuzdan istifadə edə bilərmi?",
+    "answer": "Bəli, uşaqlar valideyn nəzarəti ilə hovuzdan istifadə edə bilər. Hovuzun dayaz hissəsi uşaqlar üçün uyğundur.",
+    "active": true
+  },
+  {
+    "category": "Hotel xidmətləri",
+    "question": "Sauna varmı? Sauna ödənişlidirmi?",
+    "answer": "Bəli, spa mərkəzimizdə sauna və türk hamamı var. Spa paketinə daxildir, ayrıca istifadə isə saatlıq 30 manatdır. Saat 10:00-dan 21:00-a qədər işləyir.",
+    "active": true
+  },
+  {
+    "category": "Hotel xidmətləri",
+    "question": "Masaj sifariş edə bilərəm? Masaj neçəyədir?",
+    "answer": "Bəli, spa mərkəzimizdə 60 dəqiqəlik klassik masaj var. Tam spa paketi — masaj, türk hamamı və sauna — 80 manatdır. Cütlük paketi isə 140 manatdır. Əvvəlcədən yazılmaq məsləhətdir.",
+    "active": true
+  },
+  {
+    "category": "Hotel xidmətləri",
+    "question": "Fitnes zalında hansı avadanlıqlar var?",
+    "answer": "Fitnes zalımızda qaçış yolu, velotrenajor, ştanq-hantel dəsti və çoxfunksiyalı trenajor var. Zal 24 saat açıqdır, giriş otaq kartı ilədir və pulsuzdur.",
+    "active": true
+  },
+  {
+    "category": "Hotel xidmətləri",
+    "question": "Bağınız və ya terrasınız varmı?",
+    "answer": "Bəli, otelin həyət terrası var — yaşıllıq içində oturma guşələri ilə. Yayda terrasda səhər yeməyi və axşam çayı təklif olunur. Siqaret zonası da terrasdadır.",
+    "active": true
+  },
+  {
+    "category": "Hotel xidmətləri",
+    "question": "Lift varmı?",
+    "answer": "Bəli, oteldə lift var və bütün mərtəbələrə xidmət edir. Lift əlil arabası üçün də uyğundur.",
+    "active": true
+  },
+  {
+    "category": "Hotel xidmətləri",
+    "question": "Səhər oyandırma xidməti varmı?",
+    "answer": "Bəli, risepşına zəng edib istədiyiniz vaxtı deyin, sizi telefonla oyandaraq. Xidmət pulsuzdur.",
+    "active": true
+  },
+  {
+    "category": "İnternet və texnologiya",
+    "question": "İnternet sürəti necədir? Video zəng üçün yetərlidirmi?",
+    "answer": "Vay-Fay sürətimiz 100 meqabitə qədərdir — video zənglər, striminq və onlayn iş üçün tam yetərlidir. Bütün otaqlarda və ümumi ərazilərdə pulsuzdur.",
+    "active": true
+  },
+  {
+    "category": "İnternet və texnologiya",
+    "question": "Vay-Fay şifrəsi nədir? Necə qoşulum?",
+    "answer": "Vay-Fay şifrəsi çek-in zamanı otaq kartı ilə birlikdə verilir. Problem yaşasanız, risepşına zəng edin, dərhal kömək edərik.",
+    "active": true
+  },
+  {
+    "category": "İnternet və texnologiya",
+    "question": "Otaqda televizor necədir? Hansı kanallar var?",
+    "answer": "Bütün otaqlarda Smart Tivi var — yerli və xarici kanallar, həmçinin striminq tətbiqləri mövcuddur. Öz hesabınızla YouTube və digər platformalara qoşula bilərsiniz.",
+    "active": true
+  },
+  {
+    "category": "İnternet və texnologiya",
+    "question": "USB enerji çıxışı varmı? Telefonu harada şarj edim?",
+    "answer": "Bəli, otaqlarda çarpayı yanında USB enerji çıxışları və adi rozetkalar var. Adapter lazım olsa, risepşından pulsuz götürə bilərsiniz.",
+    "active": true
+  },
+  {
+    "category": "İnternet və texnologiya",
+    "question": "Noutbukla işləmək üçün şərait varmı?",
+    "answer": "Bəli, hər otaqda iş masası, sürətli Vay-Fay və USB çıxışları var. Həmçinin lobbidə sakit iş guşəsi və çap xidməti mövcuddur.",
+    "active": true
+  },
+  {
+    "category": "Ailə və uşaqlar",
+    "question": "Körpə çarpayısı verə bilərsiniz?",
+    "answer": "Bəli, körpə çarpayısı pulsuz təqdim olunur. Rezervasiya zamanı bildirin ki, otağınıza əvvəlcədən qoyulsun.",
+    "active": true
+  },
+  {
+    "category": "Ailə və uşaqlar",
+    "question": "Əlavə çarpayı mümkündürmü? Qiyməti nə qədərdir?",
+    "answer": "Bəli, əlavə çarpayı mümkündür — 6-12 yaş arası uşaqlar üçün 30 manat, böyüklər üçün 40 manatdır. Standart otaqda yer məhdud olduğu üçün əlavə çarpayı yalnız Delüks və Suit otaqlarda qoyulur.",
+    "active": true
+  },
+  {
+    "category": "Ailə və uşaqlar",
+    "question": "Uşaq baxıcısı xidməti varmı?",
+    "answer": "Əvvəlcədən sifarişlə uşaq baxıcısı xidməti təşkil edə bilərik, saatlıq 15 manatdır. Ən azı bir gün əvvəl risepşına müraciət edin.",
+    "active": true
+  },
+  {
+    "category": "Ailə və uşaqlar",
+    "question": "Uşaqlar üçün oyun sahəsi varmı?",
+    "answer": "Otelin həyət terrasında kiçik oyun guşəsi var. Həmçinin dənizkənarı bulvardakı böyük uşaq meydançaları piyada 5 dəqiqəlik məsafədədir.",
+    "active": true
+  },
+  {
+    "category": "Ailə və uşaqlar",
+    "question": "Ailə paketi və ya ailə endirimi varmı?",
+    "answer": "Suit otaqda qalan ailələr üçün səhər yeməyi daxil paket təklif edirik. 6 yaşa qədər uşaqlar onsuz da pulsuz qalır. Dəqiq tarixlərinizi desəniz, ən sərfəli variantı hesablayım.",
+    "active": true
+  },
+  {
+    "category": "Ev heyvanları",
+    "question": "İt və ya pişiklə qala bilərəm? Şərtlər nədir?",
+    "answer": "Yalnız 5 kiloqrama qədər kiçik itlərə icazə verilir, gecəlik 20 manat əlavə ödənişlə. Pişik və digər heyvanlar, təəssüf ki, qəbul olunmur. Suit otaqlarda ev heyvanı qadağandır.",
+    "active": true
+  },
+  {
+    "category": "Ev heyvanları",
+    "question": "Ev heyvanı üçün nə ödəməliyəm? Hansı qaydalar var?",
+    "answer": "Kiçik it üçün gecəlik 20 manat ödənilir. İt restorana və hovuz ərazisinə buraxılmır, ümumi ərazilərdə xaltada olmalıdır. Otaqda tək qalmamalıdır.",
+    "active": true
+  },
+  {
+    "category": "Nəqliyyat",
+    "question": "Transfer xidmətiniz varmı? Məni hava limanından götürə bilərsiniz?",
+    "answer": "Bəli, hava limanından otelə və geriyə transfer 35 manatdır. Uçuş nömrənizi və gəliş vaxtınızı bildirin, sürücümüz sizi adınız yazılmış lövhə ilə qarşılayar.",
+    "active": true
+  },
+  {
+    "category": "Nəqliyyat",
+    "question": "Şatl xidməti varmı?",
+    "answer": "Müntəzəm şatl xidmətimiz yoxdur, amma fərdi transfer sifariş edə bilərsiniz. Şəhər daxili gedişlər üçün risepşın taksi çağırar — taksilər 5 dəqiqəyə gəlir.",
+    "active": true
+  },
+  {
+    "category": "Nəqliyyat",
+    "question": "Avtomobil icarəyə götürə bilərəm?",
+    "answer": "Bəli, tərəfdaş icarə şirkətimiz vasitəsilə avtomobil icarəsi təşkil edirik. Avtomobil birbaşa otelə gətirilir. Qiymətlər sinifdən asılıdır, risepşın sizə variantları təqdim edər.",
+    "active": true
+  },
+  {
+    "category": "Nəqliyyat",
+    "question": "Velosiped icarəsi varmı?",
+    "answer": "Oteldə velosiped icarəsi yoxdur, amma dənizkənarı bulvarda — piyada 5 dəqiqəlik məsafədə — velosiped icarə məntəqələri var. Risepşın yol göstərər.",
+    "active": true
+  },
+  {
+    "category": "Parkinq",
+    "question": "Parkinq pulsuzdur? Yer tapacağammı?",
+    "answer": "Bəli, parkinq otel qonaqları üçün pulsuzdur, amma yer sayı məhduddur. Avtomobillə gələcəksinizsə, rezervasiya zamanı bildirin, sizə yer saxlayaq.",
+    "active": true
+  },
+  {
+    "category": "Parkinq",
+    "question": "Vale parkinq xidməti varmı?",
+    "answer": "Vale xidmətimiz yoxdur, parkinq otelin həyətindədir və girişə çox yaxındır. Baqajınızı daşımaqda əməkdaşlarımız kömək edər.",
+    "active": true
+  },
+  {
+    "category": "Parkinq",
+    "question": "Elektromobilimi şarj edə bilərəm?",
+    "answer": "Bəli, parkinqdə elektromobillər üçün 2 şarj yeri var. İstifadə pulsuzdur, amma yer məhdud olduğu üçün əvvəlcədən bildirməniz məsləhətdir.",
+    "active": true
+  },
+  {
+    "category": "Parkinq",
+    "question": "Parkinq təhlükəsizdirmi?",
+    "answer": "Bəli, parkinq otelin həyətindədir, 24 saat kamera nəzarəti altındadır və mühafizə olunur.",
+    "active": true
+  },
+  {
+    "category": "Camaşırxana",
+    "question": "Paltarlarımı yudura bilərəm? Nə vaxta hazır olur?",
+    "answer": "Bəli, camaşır xidmətimiz gündəlik işləyir, qiyməti 15 manatdır. Səhər saat 10-a qədər verilən paltarlar həmin axşam hazır olur.",
+    "active": true
+  },
+  {
+    "category": "Camaşırxana",
+    "question": "Quru təmizləmə xidməti varmı?",
+    "answer": "Bəli, quru təmizləmə xidmətimiz var, qiyməti 20 manatdan başlayır. Kostyum və palto kimi geyimlər bir günə hazır olur.",
+    "active": true
+  },
+  {
+    "category": "Camaşırxana",
+    "question": "Ütü xidməti varmı? Köynəyimi ütülədə bilərəm?",
+    "answer": "Bəli, ütü masası və ütünü otağınıza pulsuz veririk. İstəsəniz, camaşırxanamız paltarlarınızı ütüləyə bilər — köynək 3 manatdır.",
+    "active": true
+  },
+  {
+    "category": "Biznes müştəriləri",
+    "question": "Sənəd çap edə bilərəm? Çap xidməti varmı?",
+    "answer": "Bəli, risepşında çap və skan xidməti var. Az səhifə pulsuzdur, böyük həcmli çap üçün səhifəsi 20 qəpikdir. Sənədi e-poçtla göndərməniz kifayətdir.",
+    "active": true
+  },
+  {
+    "category": "Biznes müştəriləri",
+    "question": "İclas otağınız varmı? Kiçik görüş üçün yer lazımdır.",
+    "answer": "Bəli, 12 nəfərlik mitinq rumumuz var — ekran, ofis lövhəsi və video-konfrans imkanı ilə. Saatlıq 30 manat, günlük 100 manatdır. Çay-qəhvə xidməti daxildir.",
+    "active": true
+  },
+  {
+    "category": "Biznes müştəriləri",
+    "question": "Biznes mərkəziniz varmı?",
+    "answer": "Lobbidə kompüter, çap və skan imkanı olan iş guşəmiz var, 24 saat açıqdır. Böyük görüşlər üçün konfrans zalı və mitinq rum icarəyə verilir.",
+    "active": true
+  },
+  {
+    "category": "Tədbirlər",
+    "question": "Toy və ya nişan mərasimi keçirə bilərik?",
+    "answer": "Bəli, 120 nəfərlik banket zalımız toy, nişan və yubileylər üçün uyğundur. Yemək menyusu, bəzək və musiqi təşkilatı ilə tam paket təklif edirik. Tədbir menecerimiz sizinlə görüşüb təklif hazırlayar.",
+    "active": true
+  },
+  {
+    "category": "Tədbirlər",
+    "question": "Ad günü təşkil edə bilərsiniz? Otağı bəzəyə bilərsiniz?",
+    "answer": "Əlbəttə! Ad günü üçün otaq bəzəyi — şarlar, güllər və tort — 50 manatdan başlayır. Restoranda ad günü masası da təşkil edə bilərik. Bir gün əvvəl bildirin, hər şeyi hazırlayaq.",
+    "active": true
+  },
+  {
+    "category": "Tədbirlər",
+    "question": "Konfrans və ya seminar keçirmək istəyirik. Şərtlər nədir?",
+    "answer": "80 nəfərlik konfrans zalımız proyektor, səs sistemi və mikrofonlarla təchiz olunub. Günlük icarə 500 manatdır, otel qonaqlarına 20 faiz endirim var. Fasilə kofesi və nahar paketi əlavə sifariş oluna bilər.",
+    "active": true
+  },
+  {
+    "category": "Tədbirlər",
+    "question": "Korporativ tədbir üçün nə təklif edirsiniz?",
+    "answer": "Korporativ tədbirlər üçün konfrans zalı, banket zalı və qrup yerləşdirmə birlikdə paket şəklində təklif olunur. İştirakçı sayını və tarixi bildirin, menecerimiz fərdi təklif hazırlasın.",
+    "active": true
+  },
+  {
+    "category": "Təhlükəsizlik",
+    "question": "Otel təhlükəsizdirmi? Mühafizə varmı?",
+    "answer": "Bəli, oteldə 24 saat mühafizə xidməti və bütün ümumi ərazilərdə kamera nəzarəti var. Otaq qapıları elektron kartla açılır.",
+    "active": true
+  },
+  {
+    "category": "Təhlükəsizlik",
+    "question": "Yanğın təhlükəsizliyi necə təmin olunur?",
+    "answer": "Bütün otaqlarda tüstü detektorları, dəhlizlərdə yanğınsöndürənlər və işıqlandırılmış təxliyə planları var. Təxliyə çıxışları hər mərtəbədə göstərilib.",
+    "active": true
+  },
+  {
+    "category": "Təhlükəsizlik",
+    "question": "Təcili hallarda nə etməliyəm? Kimə zəng edim?",
+    "answer": "İstənilən təcili halda otaq telefonundan sıfırı yığın — risepşın 24 saat cavab verir. Tibbi yardım lazım olsa, dərhal həkim və ya təcili yardım çağırırıq.",
+    "active": true
+  },
+  {
+    "category": "Təhlükəsizlik",
+    "question": "Otağıma başqası girə bilərmi? Açarlar necə qorunur?",
+    "answer": "Otaq kartları fərdiləşdirilib və yalnız sizin otağınızı açır. Təmizlik xidməti qeydiyyatlı kartla daxil olur. Kartı itirsəniz, dərhal deaktiv edilib yenisi verilir.",
+    "active": true
+  },
+  {
+    "category": "Əlçatanlıq",
+    "question": "Əlilliyi olan qonaqlar üçün xüsusi otaq varmı?",
+    "answer": "Bəli, birinci mərtəbədə əlil arabası üçün uyğunlaşdırılmış otağımız var — geniş qapılar, tutacaqlı hamam və pandus girişi. Rezervasiya zamanı bildirin, bu otağı sizə ayıraq.",
+    "active": true
+  },
+  {
+    "category": "Əlçatanlıq",
+    "question": "Sanitar qovşaqlar əlil arabası üçün uyğundurmu?",
+    "answer": "Uyğunlaşdırılmış otağımızın hamamı tutacaqlar və geniş giriş ilə təchiz olunub. Ümumi ərazilərdə də əlçatan sanitar qovşaq mövcuddur.",
+    "active": true
+  },
+  {
+    "category": "Əlçatanlıq",
+    "question": "Görmə və ya eşitmə məhdudiyyəti olan qonaqlar üçün dəstək varmı?",
+    "answer": "Əməkdaşlarımız hər cür dəstək göstərməyə hazırdır. Ehtiyaclarınızı rezervasiya zamanı bildirsəniz, qalışınızı maksimum rahat təşkil edərik.",
+    "active": true
+  },
+  {
+    "category": "Hotel qaydaları",
+    "question": "Sakitlik saatları varmı? Gecə səs-küy olurmu?",
+    "answer": "Sakitlik saatları gecə 23:00-dan səhər 08:00-a qədərdir. Bu saatlarda ümumi ərazilərdə və otaqlarda səs-küyə icazə verilmir.",
+    "active": true
+  },
+  {
+    "category": "Hotel qaydaları",
+    "question": "Otağıma qonaq gələ bilərmi?",
+    "answer": "Bəli, qonaqlarınız saat 23:00-a qədər otağınızda ola bilər, risepşında qeydiyyatdan keçmələri kifayətdir. Gecələmə üçün isə qonaq rəsmi qeydiyyata alınmalı və əlavə ödəniş edilməlidir.",
+    "active": true
+  },
+  {
+    "category": "Hotel qaydaları",
+    "question": "Otaqda nəsə xarab etsəm nə olur?",
+    "answer": "Təsadüfi kiçik zədələr üçün narahat olmayın, sadəcə risepşına bildirin. Ciddi zərər halında dəymiş ziyan qiymətləndirilərək hesaba əlavə olunur.",
+    "active": true
+  },
+  {
+    "category": "Hotel qaydaları",
+    "question": "Nəsə unutsam nə etməliyəm? İtirilmiş əşyalar harada saxlanılır?",
+    "answer": "Tapılan əşyalar 3 ay müddətində qeydiyyatla saxlanılır. Zəng edib əşyanızı təsvir etsəniz, yoxlayıb sizə çatdırılmasını təşkil edərik — kuryer və ya poçtla göndərə bilərik.",
+    "active": true
+  },
+  {
+    "category": "Hotel qaydaları",
+    "question": "Otelə öz yeməyimi və içkimi gətirə bilərəm?",
+    "answer": "Otağınızda şəxsi qəlyanaltılar probleminiz deyil, amma restoran və ümumi ərazilərə kənar yemək-içki gətirilməsi qadağandır. Restoranımız və 24 saatlıq rum sörvis həmişə xidmətinizdədir.",
+    "active": true
+  },
+  {
+    "category": "Hotel qaydaları",
+    "question": "Elektron siqaret çəkmək olarmı?",
+    "answer": "Elektron siqaret də adi siqaret kimi yalnız terrasdakı siqaret zonasında icazəlidir. Otaqlarda bütün növ siqaret qadağandır.",
+    "active": true
+  },
+  {
+    "category": "Endirimlər və kampaniyalar",
+    "question": "Mövsümi endirimlər olurmu? Nə vaxt daha ucuzdur?",
+    "answer": "Bəli, mövsümdən asılı olaraq kampaniyalar keçiririk. Hazırda yay endirimi var: 3 gecədən çox qalanlara Delüks və Suit otaqlarda 15 faiz endirim. Noyabr-mart aylarında qiymətlər ümumiyyətlə daha münasibdir.",
+    "active": true
+  },
+  {
+    "category": "Endirimlər və kampaniyalar",
+    "question": "Daimi müştərilər üçün endirim varmı?",
+    "answer": "Bəli, daimi qonaqlarımızı unutmuruq — beşinci qalışdan etibarən 10 faiz daimi müştəri endirimi tətbiq olunur. Telefon nömrənizlə tarixçəniz sistemdə saxlanılır.",
+    "active": true
+  },
+  {
+    "category": "Endirimlər və kampaniyalar",
+    "question": "Uzun müddət qalsam endirim olar? Bir aylıq qiymət necədir?",
+    "answer": "7 gecədən uzun qalışlar üçün fərdi endirim təklif edirik. Aylıq qalış üçün xüsusi tarif mövcuddur — menecerimiz sizinlə əlaqə saxlayıb ən sərfəli təklifi hazırlayar.",
+    "active": true
+  },
+  {
+    "category": "Endirimlər və kampaniyalar",
+    "question": "Erkən rezervasiya endirimi necə işləyir?",
+    "answer": "Çek-in tarixindən ən azı 30 gün əvvəl rezervasiya etsəniz, bütün otaq tiplərində 10 faiz endirim qazanırsınız. Endirim avtomatik tətbiq olunur.",
+    "active": true
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Bu həftə sonu üçün yer varmı?",
+    "answer": "Yoxlayım. Hansı otaq tipində və neçə nəfər üçün otaq axtarırsınız? Cümə-bazar tarixlərini dəqiqləşdirsək, dərhal deyim.",
+    "active": true
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "İki gecə üçün ümumi qiymət nə qədər olar?",
+    "answer": "Tarixlərinizi və otaq tipini deyin, dəqiq hesablayım. Təxmini olaraq: Standart otaqda iki gecə 240 manatdan, Delüks otaqda 400 manatdan başlayır.",
+    "active": true
+  },
+  {
+    "category": "Giriş və çıxış",
+    "question": "Saat neçədə otağa girə bilərəm?",
+    "answer": "Otaqlar saat 14:00-dan təhvil verilir. Daha tez gəlsəniz, mövcudluq olduqda erkən çek-in pulsuzdur, olmasa baqajınızı saxlayıb otaq hazır olan kimi xəbər verərik.",
+    "active": true
+  },
+  {
+    "category": "Restoran və qidalanma",
+    "question": "Səhər yeməyi olmadan qala bilərəm? Məcburidirmi?",
+    "answer": "Əlbəttə, səhər yeməyi məcburi deyil — ayrıca xidmətdir. İstəsəniz qalışınıza əlavə edərsiniz, istəməsəniz ətrafda çoxlu kafe var.",
+    "active": true
+  },
+  {
+    "category": "Hotel xidmətləri",
+    "question": "Dəsmal və yataq dəsti nə qədər tez-tez dəyişdirilir?",
+    "answer": "Dəsmallar hər gün, yataq dəstləri iki gündən bir dəyişdirilir. İstəsəniz, gündəlik dəyişmə də sifariş edə bilərsiniz — risepşına bildirməniz kifayətdir.",
+    "active": true
+  },
+  {
+    "category": "Nəqliyyat",
+    "question": "Hava limanına necə qayıda bilərəm? Gediş transferi varmı?",
+    "answer": "Bəli, otelə gəldiyi kimi hava limanına da transfer edirik — 35 manat. Uçuşunuzdan ən azı 3-4 saat əvvəl yola çıxmağı tövsiyə edirik. Bir gün əvvəl sifariş verin.",
+    "active": true
+  },
+  {
+    "category": "Ümumi məlumat",
+    "question": "Otel yenidirmi? Nə vaxt tikilib və ya təmir olunub?",
+    "answer": "Otelimiz müasir standartlara uyğun tam təmirlidir, otaqlar və ümumi ərazilər yenilənib. Təmiz, işıqlı və müasir interyerlərimiz var.",
+    "active": true
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Başqasının adına rezervasiya edə bilərəm? Hədiyyə etmək istəyirəm.",
+    "answer": "Bəli, başqa şəxsin adına rezervasiya mümkündür. Qonağın adını və telefon nömrəsini bildirin. Hədiyyə qalışı üçün otağa gül və ya şampan da əlavə edə bilərik.",
+    "active": true
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Qiymətə səhər yeməyi daxil paket varmı?",
+    "answer": "Bəli, istəsəniz rezervasiyaya nəfər başına 25 manat hesabı ilə səhər yeməyi əlavə edirik. Beləliklə hər səhər açıq bufetimizdən istifadə edirsiniz.",
+    "active": true
+  },
+  {
+    "category": "Hotel xidmətləri",
+    "question": "Çətir götürə bilərəm? Yağış yağır.",
+    "answer": "Bəli, risepşında qonaqlar üçün pulsuz çətirlərimiz var. Çıxanda götürün, qayıdanda təhvil verin.",
+    "active": true
+  },
+  {
+    "category": "Təhlükəsizlik",
+    "question": "Həkim çağıra bilərsiniz? Özümü pis hiss edirəm.",
+    "answer": "Bəli, dərhal həkim çağıra bilərik və ya sizi ən yaxın klinikaya yönləndirərik. Təcili haldırsa, otaq telefonundan sıfırı yığın, təcili yardımı biz çağıraq.",
+    "active": true
+  },
+  {
+    "category": "Ətraf ərazi",
+    "question": "Suvenir haradan ala bilərəm?",
+    "answer": "İçərişəhərdə — piyada 15 dəqiqəlik məsafədə — çoxlu suvenir dükanı var. Milli sənətkarlıq məhsulları üçün ora ən yaxşı ünvandır. Risepşın marşrut məsləhəti verə bilər.",
+    "active": true
+  },
+  {
+    "category": "Restoran və qidalanma",
+    "question": "Gecə acsam nə edim? Gecə yemək tapa bilərəm?",
+    "answer": "Rum sörvis 24 saat işləyir — gecə menyusundan istədiyinizi otağınıza sifariş edə bilərsiniz. Mini-barda da qəlyanaltılar var.",
+    "active": true
+  },
+  {
+    "category": "Giriş və çıxış",
+    "question": "Çek-autdan sonra duş qəbul edə bilərəm? Gecə uçuşum var.",
+    "answer": "Gec çek-aut götürsəniz, otağınızda saat 18:00-a qədər qala bilərsiniz — 40 manatdır. Digər halda spa mərkəzimizin duş imkanlarından istifadə edə bilərsiniz, baqajınızı da pulsuz saxlayarıq.",
+    "active": true
+  },
+  {
+    "category": "Rezervasiya",
+    "question": "Otaq görə bilərəm? Şəkillər varmı?",
+    "answer": "Otelə yaxınlıqdadırsınızsa, buyurun gəlin, boş otaq olduqda məmnuniyyətlə göstərərik. Otaq şəkillərini vatsap ilə də göndərə bilərik — nömrənizi bildirin.",
+    "active": true
+  },
+  {
+    "category": "Ümumi məlumat",
+    "question": "Oteldə pul dəyişmə xidməti varmı?",
+    "answer": "Oteldə valyuta dəyişmə xidməti yoxdur, amma ən yaxın dəyişmə məntəqəsi və bank piyada 2-3 dəqiqəlik məsafədədir. Risepşın yolu göstərər.",
+    "active": true
+  },
+  {
+    "category": "Hotel qaydaları",
+    "question": "Otelin ləğv siyasəti sərtdirmi? Fikrimi dəyişsəm nə olur?",
+    "answer": "Siyasətimiz çevikdir: çek-inə 48 saat qalana qədər pulsuz ləğv. Ondan sonra yalnız ilk gecənin qiyməti tutulur, qalan məbləğ qaytarılır.",
+    "active": true
+  },
+  {
+    "category": "Biznes müştəriləri",
+    "question": "Ezamiyyət üçün təsdiq sənədi verə bilərsiniz?",
+    "answer": "Bəli, qalışınızı təsdiq edən rəsmi sənəd və şirkət adına faktura təqdim edirik. Ezamiyyə üçün lazım olan bütün sənədləri çek-aut zamanı hazırlayırıq.",
+    "active": true
+  },
+  {
+    "category": "Ailə və uşaqlar",
+    "question": "Uşaq arabası ilə rahat gəzə bilərəm? Otel uşaq arabası üçün uyğundurmu?",
+    "answer": "Bəli, lift və panduslar sayəsində uşaq arabası ilə hərəkət rahatdır. Bulvar da araba ilə gəzinti üçün ideal yerdir.",
+    "active": true
+  },
+  {
+    "category": "Hotel xidmətləri",
+    "question": "Hansı dillərdə xidmət göstərirsiniz?",
+    "answer": "Əməkdaşlarımız Azərbaycan, rus və ingilis dillərində sərbəst xidmət göstərir.",
+    "active": true
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Hansı əlavə xidmətləriniz var və qiymətləri nə qədərdir?",
+    "answer": "Əlavə xidmətlərimiz və qiymətləri belədir: spa paketi 80 manat, cütlük spa paketi 140 manat, saunanın saatlıq istifadəsi 30 manat, hava limanı transferi 35 manat, səhər yeməyi 25 manat, otağa səhər yeməyi əlavə 10 manat, camaşır xidməti 15 manat, quru təmizləmə 20 manatdan, köynək ütüsü 3 manat, gecikmiş çek-aut 40 manat, əlavə çarpayı uşaq üçün 30, böyük üçün 40 manat, uşaq baxıcısı saatlıq 15 manat, kiçik it üçün gecəlik 20 manat. Hovuz, fitnes zalı və Vay-Fay pulsuzdur.",
+    "active": true
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Yay mövsümündə qiymətlər necədir? Mövsümi tariflər varmı?",
+    "answer": "Yay mövsümündə tariflər bir qədər yüksək olur: Standart otaq gecəlik 140 manat, Delüks 230 manat, Suit isə 400 manatdır. Suit üçün yayda minimum 2 gecə qalış tələb olunur. Payız-qış aylarında qiymətlər baza tarifinə enir: 120, 200 və 350 manat.",
+    "active": true
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Otaq qiymətinə nələr daxildir?",
+    "answer": "Otaq qiymətinə Vay-Fay, hovuz, fitnes zalı, seyf, mini-bardakı su və gündəlik təmizlik daxildir. Səhər yeməyi ayrıca 25 manatdır. Bütün qiymətlərə ƏDV daxildir, gizli əlavə haqq yoxdur.",
+    "active": true
+  },
+  {
+    "category": "Qiymətlər və ödəniş",
+    "question": "Ümumilikdə qiymətləriniz barədə məlumat verin. Nə qədər pul lazımdır?",
+    "answer": "Otaqlar gecəlik Standart 120, Delüks 200, Suit 350 manatdan başlayır. Səhər yeməyi 25 manat, hava limanı transferi 35 manat, spa paketi 80 manatdır. Hovuz, fitnes və Vay-Fay pulsuzdur. Dəqiq tarixlərinizi desəniz, ümumi məbləği hesablayım.",
+    "active": true
+  }
+]

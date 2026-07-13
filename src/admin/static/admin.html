@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Astana Hotel — Admin Panel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://unpkg.com/lucide@0.462.0/dist/umd/lucide.min.js"></script>
+<style>
+:root {
+  --primary: #4F46E5; --secondary: #7C3AED; --accent: #06B6D4;
+  --success: #22C55E; --danger: #EF4444; --warn: #F59E0B;
+  --bg: #F8FAFC; --panel: #FFFFFF; --panel-glass: rgba(255,255,255,.8);
+  --border: #E2E8F0; --text: #0F172A; --muted: #64748B; --hover: #F1F5F9;
+  --shadow: 0 1px 2px rgba(15,23,42,.05), 0 4px 16px rgba(15,23,42,.06);
+  --shadow-lg: 0 8px 30px rgba(15,23,42,.12);
+  --grad: linear-gradient(135deg, var(--primary), var(--secondary));
+  --radius: 14px;
+}
+[data-theme="dark"] {
+  --bg: #0F172A; --panel: #1E293B; --panel-glass: rgba(30,41,59,.8);
+  --border: #2b3a52; --text: #F1F5F9; --muted: #94A3B8; --hover: #263447;
+  --shadow: 0 1px 2px rgba(0,0,0,.25), 0 4px 16px rgba(0,0,0,.28);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,.45);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: "Inter", system-ui, sans-serif; background: var(--bg); color: var(--text);
+  font-size: 14px; height: 100vh; overflow: hidden; -webkit-font-smoothing: antialiased;
+  transition: background .3s ease, color .3s ease;
+}
+button { font: inherit; cursor: pointer; }
+svg.lucide { width: 16px; height: 16px; vertical-align: -3px; }
+input, select, textarea {
+  font: inherit; color: var(--text); background: var(--panel);
+  border: 1.5px solid var(--border); border-radius: 10px; padding: 9px 12px;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+input:focus, select:focus, textarea:focus {
+  outline: none; border-color: var(--primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 18%, transparent);
+}
+
+/* ── Login ─────────────────────────────────────────────────────────────── */
+#login {
+  height: 100vh; display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(900px circle at 15% 10%, color-mix(in srgb, var(--primary) 22%, transparent), transparent 55%),
+              radial-gradient(800px circle at 85% 90%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 55%),
+              var(--bg);
+}
+#login form {
+  background: var(--panel-glass); backdrop-filter: blur(18px);
+  border: 1px solid var(--border); border-radius: 20px;
+  padding: 40px 36px; width: 380px; display: flex; flex-direction: column; gap: 14px;
+  box-shadow: var(--shadow-lg); animation: rise .5s cubic-bezier(.21,1.02,.73,1) both;
+}
+#login .logo {
+  width: 52px; height: 52px; border-radius: 15px; margin-bottom: 4px;
+  background: var(--grad); display: flex; align-items: center; justify-content: center;
+  font-size: 24px; box-shadow: 0 8px 24px rgba(79,70,229,.4);
+}
+#login h1 { font-size: 1.3rem; font-weight: 800; letter-spacing: -.02em; }
+#login .sub { color: var(--muted); font-size: .85rem; margin-top: -8px; margin-bottom: 6px; }
+.fld-i { position: relative; }
+.fld-i > svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+  color: var(--muted); pointer-events: none; }
+.fld-i input { width: 100%; padding-left: 38px; }
+.fld-i .peek { position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+  border: none; background: none; color: var(--muted); padding: 4px; border-radius: 6px; }
+.fld-i .peek:hover { color: var(--text); }
+#lerr { color: var(--danger); font-size: .85rem; min-height: 1.2em; }
+
+/* ── Düymələr ──────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px; justify-content: center;
+  border: 1.5px solid var(--border); background: var(--panel); color: var(--text);
+  border-radius: 10px; padding: 8px 14px; font-weight: 500;
+  transition: transform .15s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+}
+.btn:hover { background: var(--hover); transform: translateY(-1px); box-shadow: var(--shadow); }
+.btn:active { transform: translateY(0) scale(.98); }
+.btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+.btn.primary { background: var(--grad); color: #fff; border: none;
+  box-shadow: 0 4px 14px rgba(79,70,229,.35); }
+.btn.primary:hover { box-shadow: 0 6px 20px rgba(79,70,229,.5); filter: brightness(1.06); }
+.btn.danger { color: var(--danger); border-color: color-mix(in srgb, var(--danger) 45%, transparent); background: transparent; }
+.btn.danger:hover { background: color-mix(in srgb, var(--danger) 10%, transparent); }
+.btn.sm { padding: 4px 9px; font-size: .82rem; border-radius: 8px; }
+.btn.icon { padding: 7px; }
+.btn[disabled] { opacity: .5; pointer-events: none; }
+.btn .spin { width: 14px; height: 14px; border: 2px solid rgba(255,255,255,.4);
+  border-top-color: #fff; border-radius: 50%; animation: rot .7s linear infinite; }
+@keyframes rot { to { transform: rotate(360deg); } }
+
+/* ── Layout ────────────────────────────────────────────────────────────── */
+#app { display: none; height: 100vh; }
+#app.on { display: grid; grid-template-columns: 240px 1fr; grid-template-rows: 56px 1fr;
+  transition: grid-template-columns .25s ease; }
+#app.on.collapsed { grid-template-columns: 64px 1fr; }
+nav.top {
+  grid-column: 1 / 3; display: flex; align-items: center; gap: 12px; padding: 0 18px;
+  background: var(--panel-glass); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border); position: relative; z-index: 10;
+}
+nav.top .brand { font-weight: 800; letter-spacing: -.02em; display: flex; align-items: center; gap: 9px; }
+nav.top .brand .dot { width: 30px; height: 30px; border-radius: 9px; background: var(--grad);
+  display: flex; align-items: center; justify-content: center; font-size: 15px;
+  box-shadow: 0 4px 12px rgba(79,70,229,.35); }
+nav.top .crumb { color: var(--muted); font-size: .84rem; display: flex; align-items: center; gap: 6px; }
+nav.top .spacer { flex: 1; }
+nav.top .chip { color: var(--muted); font-size: .84rem; }
+.avatar { width: 30px; height: 30px; border-radius: 50%; background: var(--grad);
+  color: #fff; display: flex; align-items: center; justify-content: center;
+  font-size: .8rem; font-weight: 700; }
+
+aside {
+  background: var(--panel); border-right: 1px solid var(--border); overflow-y: auto;
+  overflow-x: hidden; padding: 12px 10px; scrollbar-width: thin;
+}
+aside .grp { color: var(--muted); font-size: .68rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .07em; padding: 14px 10px 5px;
+  white-space: nowrap; transition: opacity .2s; }
+aside a {
+  display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 9px;
+  color: var(--muted); text-decoration: none; margin-bottom: 2px; font-size: .9rem;
+  font-weight: 500; white-space: nowrap; position: relative;
+  transition: background .18s ease, color .18s ease, transform .15s ease;
+}
+aside a:hover { background: var(--hover); color: var(--text); transform: translateX(2px); }
+aside a.on { background: color-mix(in srgb, var(--primary) 12%, transparent); color: var(--primary); }
+aside a.on::before { content: ""; position: absolute; left: -10px; top: 20%; bottom: 20%;
+  width: 3px; border-radius: 2px; background: var(--grad); }
+aside a svg { flex-shrink: 0; }
+.collapsed aside .grp, .collapsed aside a .lbl { opacity: 0; width: 0; overflow: hidden; }
+.collapsed aside a { justify-content: center; }
+
+main { overflow-y: auto; padding: 22px 26px; scrollbar-width: thin; }
+main > * { animation: rise .35s cubic-bezier(.21,1.02,.73,1) both; }
+@keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+/* ── Kartlar / panellər ────────────────────────────────────────────────── */
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 14px; margin-bottom: 20px; }
+.card {
+  position: relative; background: var(--panel); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px 18px; box-shadow: var(--shadow);
+  transition: transform .2s ease, box-shadow .25s ease;
+  overflow: hidden;
+}
+.card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px;
+  background: var(--grad); opacity: 0; transition: opacity .25s ease; }
+.card:hover::before { opacity: 1; }
+.card .ic { width: 34px; height: 34px; border-radius: 10px; margin-bottom: 10px;
+  display: flex; align-items: center; justify-content: center;
+  background: color-mix(in srgb, var(--primary) 12%, transparent); color: var(--primary); }
+.card .v { font-size: 1.65rem; font-weight: 800; letter-spacing: -.03em; margin-top: 2px; }
+.card .l { color: var(--muted); font-size: .8rem; font-weight: 500; }
+a.card { text-decoration: none; color: inherit; display: block; }
+.panel {
+  background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 18px; margin-bottom: 16px; box-shadow: var(--shadow);
+}
+.panel h3 { font-size: .95rem; font-weight: 700; letter-spacing: -.01em;
+  margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 14px; }
+.row h3 { font-size: 1.05rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+
+/* ── Cədvəllər ─────────────────────────────────────────────────────────── */
+table.grid { width: 100%; border-collapse: collapse; font-size: .87rem; }
+table.grid th, table.grid td {
+  border-bottom: 1px solid var(--border); padding: 9px 11px; text-align: left;
+  max-width: 320px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+table.grid th { color: var(--muted); font-weight: 600; font-size: .78rem;
+  text-transform: uppercase; letter-spacing: .04em; cursor: pointer; user-select: none;
+  position: sticky; top: 0; background: var(--panel); z-index: 2; }
+table.grid tbody tr { transition: background .15s ease; }
+table.grid tbody tr:hover td { background: var(--hover); }
+table.grid tbody tr:last-child td { border-bottom: none; }
+.badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px;
+  border-radius: 99px; font-size: .73rem; font-weight: 600; }
+.badge.ok { background: color-mix(in srgb, var(--success) 14%, transparent); color: var(--success); }
+.badge.err { background: color-mix(in srgb, var(--danger) 14%, transparent); color: var(--danger); }
+.badge.warn { background: color-mix(in srgb, var(--warn) 16%, transparent); color: var(--warn); }
+.pager { display: flex; gap: 8px; align-items: center; margin-top: 14px; color: var(--muted); font-size: .86rem; }
+
+/* Empty state + skeleton */
+.emptybox { text-align: center; padding: 48px 20px; color: var(--muted); }
+.emptybox .big { font-size: 40px; margin-bottom: 12px; opacity: .7; }
+.emptybox h4 { color: var(--text); font-weight: 700; margin-bottom: 6px; }
+.skel { border-radius: var(--radius); background: var(--panel); border: 1px solid var(--border);
+  position: relative; overflow: hidden; margin-bottom: 14px; }
+.skel::after { content: ""; position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--muted) 10%, transparent), transparent);
+  animation: shimmer 1.4s infinite; }
+@keyframes shimmer { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
+
+/* ── Modal + toast ─────────────────────────────────────────────────────── */
+#overlay { position: fixed; inset: 0; background: rgba(2,6,23,.55); backdrop-filter: blur(4px);
+  display: none; align-items: center; justify-content: center; z-index: 50; }
+#overlay.on { display: flex; animation: fade .2s ease both; }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+#modal { background: var(--panel); border: 1px solid var(--border); border-radius: 18px;
+  padding: 24px; width: min(640px, 92vw); max-height: 86vh; overflow-y: auto;
+  box-shadow: var(--shadow-lg); animation: pop .28s cubic-bezier(.21,1.02,.73,1) both; }
+@keyframes pop { from { opacity: 0; transform: translateY(18px) scale(.97); } to { opacity: 1; transform: none; } }
+#modal h3 { margin-bottom: 16px; font-weight: 700; letter-spacing: -.01em; }
+#modal .fld { margin-bottom: 12px; }
+#modal .fld label { display: block; font-size: .78rem; font-weight: 600; color: var(--muted); margin-bottom: 4px; }
+#modal .fld input, #modal .fld textarea, #modal .fld select { width: 100%; }
+#toasts { position: fixed; right: 18px; bottom: 18px; display: flex; flex-direction: column;
+  gap: 10px; z-index: 60; }
+.toast { display: flex; align-items: center; gap: 10px;
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 12px; padding: 12px 16px; box-shadow: var(--shadow-lg); min-width: 260px;
+  animation: toastIn .3s cubic-bezier(.21,1.02,.73,1) both; font-weight: 500; }
+.toast.out { animation: toastOut .3s ease both; }
+@keyframes toastIn { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: none; } }
+@keyframes toastOut { to { opacity: 0; transform: translateX(40px); } }
+.toast .tic { width: 26px; height: 26px; border-radius: 8px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; }
+.toast.ok .tic { background: color-mix(in srgb, var(--success) 15%, transparent); color: var(--success); }
+.toast.err .tic { background: color-mix(in srgb, var(--danger) 15%, transparent); color: var(--danger); }
+
+pre.mono { font-family: ui-monospace, monospace; font-size: .82rem; white-space: pre-wrap; }
+.chat .u, .chat .a { padding: 10px 14px; border-radius: 14px; margin-bottom: 10px; max-width: 90%; line-height: 1.5; }
+.chat .u { background: color-mix(in srgb, var(--primary) 12%, transparent); margin-left: auto;
+  border-bottom-right-radius: 5px; }
+.chat .a { background: var(--hover); border-bottom-left-radius: 5px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+@media (max-width: 820px) {
+  #app.on { grid-template-columns: 1fr; }
+  aside { display: none; }
+  main { padding: 14px; }
+  .cards { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+}
+</style>
+</head>
+<body>
+
+<div id="login">
+  <form onsubmit="return doLogin(event)">
+    <div class="logo">🏨</div>
+    <h1>Astana Hotel</h1>
+    <div class="sub">Admin panelə daxil olun</div>
+    <div class="fld-i"><i data-lucide="user"></i>
+      <input id="lu" placeholder="İstifadəçi adı" autocomplete="username" required></div>
+    <div class="fld-i"><i data-lucide="lock"></i>
+      <input id="lp" type="password" placeholder="Parol" autocomplete="current-password" required>
+      <button type="button" class="peek" aria-label="Parolu göstər/gizlət"
+        onclick="const p=document.getElementById('lp'); p.type = p.type==='password'?'text':'password'">👁</button>
+    </div>
+    <button class="btn primary" id="loginBtn"><span>Daxil ol</span></button>
+    <div id="lerr" role="alert"></div>
+  </form>
+</div>
+
+<div id="app">
+  <nav class="top">
+    <button class="btn icon" onclick="toggleSide()" aria-label="Sidebar aç/bağla"><i data-lucide="panel-left"></i></button>
+    <span class="brand"><span class="dot">🏨</span> Astana Admin</span>
+    <span class="crumb"><i data-lucide="chevron-right"></i><span id="crumb"></span></span>
+    <span class="spacer"></span>
+    <button class="btn icon" onclick="toggleTheme()" id="themeBtn" aria-label="Tema dəyiş"><i data-lucide="sun"></i></button>
+    <span class="avatar" id="avatar"></span>
+    <span class="chip" id="who"></span>
+    <button class="btn sm" onclick="logout()"><i data-lucide="log-out"></i> Çıxış</button>
+  </nav>
+  <aside id="side"></aside>
+  <main id="main"></main>
+</div>
+
+<div id="overlay"><div id="modal" role="dialog" aria-modal="true"></div></div>
+<div id="toasts" aria-live="polite"></div>
+
+<script>
+/* ══ Nüvə ═════════════════════════════════════════════════════════════ */
+const API = "/api/admin";
+let TOKEN = localStorage.getItem("admtok") || "";
+let ME = JSON.parse(localStorage.getItem("admme") || "null");
+let charts = [];
+
+function icons() { if (window.lucide) lucide.createIcons(); }
+
+async function api(path, opts = {}) {
+  const headers = { "Authorization": "Bearer " + TOKEN, ...(opts.headers || {}) };
+  if (opts.body && !(opts.body instanceof FormData)) {
+    headers["Content-Type"] = "application/json";
+    opts.body = JSON.stringify(opts.body);
+  }
+  const r = await fetch(API + path, { ...opts, headers });
+  if (r.status === 401 && path !== "/login") { logout(); throw new Error("Sessiya bitdi, yenidən daxil olun"); }
+  if (!r.ok) {
+    const e = await r.json().catch(() => ({}));
+    throw new Error(e.detail || r.statusText);
+  }
+  const ct = r.headers.get("content-type") || "";
+  return ct.includes("json") ? r.json() : r;
+}
+
+function toast(msg, err = false) {
+  const d = document.createElement("div");
+  d.className = "toast " + (err ? "err" : "ok");
+  d.innerHTML = `<span class="tic">${err ? "✕" : "✓"}</span><span></span>`;
+  d.lastElementChild.textContent = msg;
+  document.getElementById("toasts").appendChild(d);
+  setTimeout(() => { d.classList.add("out"); setTimeout(() => d.remove(), 300); }, 3800);
+}
+
+function esc(s) { const d = document.createElement("span"); d.textContent = s ?? ""; return d.innerHTML; }
+
+function modal(html) {
+  document.getElementById("modal").innerHTML = html;
+  document.getElementById("overlay").classList.add("on");
+  icons();
+}
+function closeModal() { document.getElementById("overlay").classList.remove("on"); }
+document.getElementById("overlay").onclick = e => { if (e.target.id === "overlay") closeModal(); };
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
+
+function confirmDo(text, fn) {
+  modal(`<h3>⚠️ Təsdiq</h3><p style="margin-bottom:18px;color:var(--muted)">${esc(text)}</p>
+    <div class="row"><button class="btn danger" id="cyes">Bəli, sil</button>
+    <button class="btn" onclick="closeModal()">İmtina</button></div>`);
+  document.getElementById("cyes").onclick = () => { closeModal(); fn(); };
+}
+
+function emptyBox(icon, title, sub) {
+  return `<div class="emptybox"><div class="big">${icon}</div><h4>${title}</h4><p>${sub || ""}</p></div>`;
+}
+function skeleton() {
+  return `<div class="skel" style="height:110px"></div>
+          <div class="skel" style="height:260px"></div>
+          <div class="skel" style="height:180px"></div>`;
+}
+function animateCounters() {
+  document.querySelectorAll("[data-count]").forEach(el => {
+    const target = parseFloat(el.dataset.count) || 0;
+    const dur = 650, t0 = performance.now();
+    const step = t => {
+      const k = Math.min((t - t0) / dur, 1);
+      el.textContent = Number.isInteger(target)
+        ? Math.round(target * (1 - Math.pow(1 - k, 3)))
+        : (target * (1 - Math.pow(1 - k, 3))).toFixed(1);
+      if (k < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  });
+}
+
+function toggleTheme() {
+  const b = document.body;
+  b.dataset.theme = b.dataset.theme === "dark" ? "light" : "dark";
+  localStorage.setItem("admtheme", b.dataset.theme);
+  syncThemeBtn();
+}
+function syncThemeBtn() {
+  document.getElementById("themeBtn").innerHTML =
+    `<i data-lucide="${document.body.dataset.theme === "dark" ? "sun" : "moon"}"></i>`;
+  icons();
+}
+document.body.dataset.theme = localStorage.getItem("admtheme") || "dark";
+
+function toggleSide() {
+  document.getElementById("app").classList.toggle("collapsed");
+  localStorage.setItem("admside",
+    document.getElementById("app").classList.contains("collapsed") ? "1" : "");
+}
+
+/* ══ Auth ═════════════════════════════════════════════════════════════ */
+async function doLogin(e) {
+  e.preventDefault();
+  const lb = document.getElementById("loginBtn");
+  lb.disabled = true; lb.innerHTML = `<span class="spin"></span> Yoxlanılır...`;
+  try {
+    const r = await api("/login", { method: "POST", body: {
+      username: document.getElementById("lu").value.trim(),
+      password: document.getElementById("lp").value.trim() } });
+    TOKEN = r.token; ME = { username: r.username, role: r.role };
+    localStorage.setItem("admtok", TOKEN);
+    localStorage.setItem("admme", JSON.stringify(ME));
+    boot();
+  } catch (err) { document.getElementById("lerr").textContent = err.message; }
+  lb.disabled = false; lb.innerHTML = "<span>Daxil ol</span>";
+  return false;
+}
+function logout() {
+  localStorage.removeItem("admtok"); localStorage.removeItem("admme");
+  TOKEN = ""; ME = null;
+  document.getElementById("app").classList.remove("on");
+  document.getElementById("login").style.display = "flex";
+}
+
+/* ══ Naviqasiya ═══════════════════════════════════════════════════════ */
+const PAGES = [
+  { grp: "Ümumi" },
+  { id: "dashboard", label: "Dashboard", ic: "layout-dashboard" },
+  { id: "analytics", label: "Analytics", ic: "trending-up" },
+  { grp: "Otel" },
+  { id: "table/hotel_info", label: "Hotel məlumatı", ic: "building-2" },
+  { id: "table/room_types", label: "Otaq növləri", ic: "bed-double" },
+  { id: "table/services", label: "Xidmətlər", ic: "sparkles" },
+  { id: "table/campaigns", label: "Kampaniyalar", ic: "ticket-percent" },
+  { id: "table/reservations", label: "Rezervasiyalar", ic: "calendar-check" },
+  { id: "table/guests", label: "Qonaqlar", ic: "users" },
+  { id: "faq", label: "FAQ", ic: "message-circle-question" },
+  { grp: "AI Sistem" },
+  { id: "conversations", label: "Söhbətlər", ic: "messages-square" },
+  { id: "prompts", label: "Promptlar", ic: "file-pen-line" },
+  { id: "settings", label: "Model parametrləri", ic: "sliders-horizontal" },
+  { id: "logs", label: "Loglar", ic: "scroll-text" },
+  { grp: "Sistem" },
+  { id: "database", label: "Database (hamısı)", ic: "database" },
+  { id: "users", label: "İstifadəçilər", ic: "shield", role: "admin" },
+  { id: "audit", label: "Audit Log", ic: "eye", role: "admin" },
+];
+
+function renderSide() {
+  const side = document.getElementById("side");
+  side.innerHTML = PAGES.map(p => {
+    if (p.grp) return `<div class="grp">${p.grp}</div>`;
+    if (p.role === "admin" && ME.role !== "admin") return "";
+    return `<a href="#${p.id}" data-p="${p.id}"><i data-lucide="${p.ic}"></i><span class="lbl">${p.label}</span></a>`;
+  }).join("");
+  icons();
+}
+
+function nav() {
+  const hash = location.hash.slice(1) || "dashboard";
+  document.querySelectorAll("aside a").forEach(a =>
+    a.classList.toggle("on", a.dataset.p === hash));
+  charts.forEach(c => c.destroy()); charts = [];
+  const [page, arg] = hash.split("/");
+  const pg = PAGES.find(p => p.id === hash || p.id === page);
+  document.getElementById("crumb").textContent = pg ? (arg ? `${arg}` : pg.label) : hash;
+  M().innerHTML = skeleton();
+  const fn = VIEWS[page];
+  if (fn) fn(arg).catch(e => { toast(e.message, true); M().innerHTML = emptyBox("⚠️", "Yüklənmə xətası", esc(e.message)); });
+}
+window.onhashchange = nav;
+
+async function boot() {
+  document.getElementById("login").style.display = "none";
+  document.getElementById("app").classList.add("on");
+  if (localStorage.getItem("admside")) document.getElementById("app").classList.add("collapsed");
+  document.getElementById("who").textContent = `${ME.username} · ${ME.role}`;
+  document.getElementById("avatar").textContent = ME.username.slice(0, 2).toUpperCase();
+  syncThemeBtn();
+  renderSide();
+  nav();
+}
+
+/* ══ Görünüşlər ═══════════════════════════════════════════════════════ */
+const M = () => document.getElementById("main");
+const VIEWS = {};
+function mount(html) { M().innerHTML = html; icons(); }
+
+/* — Dashboard — */
+VIEWS.dashboard = async () => {
+  const s = await api("/dashboard");
+  const h = s.system;
+  const CARDS = [
+    ["users", "Ümumi qonaq", s.guests], ["calendar-check", "Ümumi rezervasiya", s.reservations],
+    ["phone-call", "Ümumi zəng", s.calls_total], ["phone-incoming", "Bugünkü zəng", s.calls_today],
+    ["message-square", "Bugünkü mesaj", s.messages_today], ["activity", "Orta növbə / zəng", s.avg_turns_per_call],
+  ];
+  mount(`
+  <div class="cards">
+    ${CARDS.map(([ic, l, v]) => `<div class="card"><div class="ic"><i data-lucide="${ic}"></i></div>
+      <div class="v" data-count="${v}">0</div><div class="l">${l}</div></div>`).join("")}
+  </div>
+  <div class="panel"><h3><i data-lucide="heart-pulse"></i> Sistem vəziyyəti</h3>
+    <span class="badge ${h.db ? "ok" : "err"}">● Database ${h.db ? "işləyir" : "bağlıdır"}</span>
+    <span class="badge ${h.ollama ? "ok" : "err"}">● Ollama ${h.ollama ? "işləyir" : "bağlıdır"}</span>
+    <span class="badge ok">● FAQ: ${h.faq_entries} giriş</span>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+    <div class="panel"><h3><i data-lucide="calendar-check"></i> Son rezervasiyalar</h3>
+      ${s.recent_reservations.length ? `<table class="grid"><thead>
+      <tr><th>Qonaq</th><th>Otaq</th><th>Tarix</th><th>Status</th><th>Məbləğ</th></tr></thead><tbody>
+      ${s.recent_reservations.map(r => `<tr><td>${esc(r.full_name)}</td><td>${esc(r.room_type)}</td>
+        <td>${esc(r.check_in)} → ${esc(r.check_out)}</td>
+        <td><span class="badge ${r.status === "confirmed" ? "ok" : "warn"}">${esc(r.status)}</span></td>
+        <td>${esc(r.total_price)} ₼</td></tr>`).join("")}</tbody></table>`
+      : emptyBox("📅", "Hələ rezervasiya yoxdur", "İlk rezervasiya burada görünəcək")}</div>
+    <div class="panel"><h3><i data-lucide="phone-call"></i> Son zənglər</h3>
+      ${s.recent_calls.length ? `<table class="grid"><thead>
+      <tr><th>Sessiya</th><th>Başladı</th><th>Mesaj</th></tr></thead><tbody>
+      ${s.recent_calls.map(c => `<tr><td><a href="javascript:void(0)" style="color:var(--primary)"
+        onclick="openTranscript('${esc(c.session_id)}')">${esc(c.session_id)}</a></td>
+        <td>${esc(c.started)}</td><td>${c.messages}</td></tr>`).join("")}</tbody></table>`
+      : emptyBox("📞", "Hələ zəng yoxdur", "Səsli asistentə ilk zəng burada görünəcək")}</div>
+  </div>
+  <div class="panel"><h3><i data-lucide="alert-triangle"></i> Son xətalar</h3>
+    ${s.recent_errors.length ? s.recent_errors.map(l =>
+      `<div style="color:var(--danger);font-size:.85rem;font-family:ui-monospace,monospace">${esc(l.time)} [${esc(l.component)}] ${esc(l.message)}</div>`).join("")
+      : '<span class="badge ok">✓ Xəta yoxdur</span>'}
+  </div>`);
+  animateCounters();
+};
+
+/* — Generic cədvəl redaktoru — */
+const tState = {};
+VIEWS.table = async (table) => {
+  const st = tState[table] ||= { page: 1, per: 25, sort: null, order: "asc", search: "", hidden: new Set(), sel: new Set() };
+  const params = new URLSearchParams({ page: st.page, per_page: st.per, order: st.order });
+  if (st.sort) params.set("sort", st.sort);
+  if (st.search) params.set("search", st.search);
+  const d = await api(`/tables/${table}/rows?` + params);
+  st.sel = new Set();
+  const cols = d.columns.filter(c => !st.hidden.has(c));
+  const pages = Math.max(1, Math.ceil(d.total / st.per));
+  const canW = ME.role !== "viewer", canD = ME.role === "admin";
+
+  mount(`
+  <div class="row">
+    <h3 style="margin-right:auto"><i data-lucide="table-2"></i> ${table}
+      <span style="color:var(--muted);font-weight:500;font-size:.85rem">${d.total} sətir</span></h3>
+    <input placeholder="Axtar..." value="${esc(st.search)}" style="width:200px" aria-label="Axtarış"
+      onchange="tState['${table}'].search=this.value; tState['${table}'].page=1; VIEWS.table('${table}')">
+    <button class="btn" onclick="colToggle('${table}', ${JSON.stringify(d.columns).replaceAll('"', "&quot;")})">
+      <i data-lucide="columns-3"></i> Sütunlar</button>
+    ${canW ? `<button class="btn primary" onclick="rowForm('${table}')"><i data-lucide="plus"></i> Əlavə et</button>` : ""}
+    ${canD ? `<button class="btn danger" onclick="delSelected('${table}')"><i data-lucide="trash-2"></i> Seçilənlər</button>` : ""}
+    <button class="btn sm" onclick="expo('${table}','csv')">CSV</button>
+    <button class="btn sm" onclick="expo('${table}','xlsx')">Excel</button>
+    <button class="btn sm" onclick="expo('${table}','json')">JSON</button>
+    ${canW ? `<label class="btn sm"><i data-lucide="upload"></i> Import<input type="file" hidden accept=".csv,.xlsx"
+      onchange="impo('${table}', this)"></label>` : ""}
+  </div>
+  <div class="panel" style="padding:0;overflow-x:auto">
+  ${d.rows.length ? `<table class="grid"><thead><tr>
+    <th style="width:34px"><input type="checkbox" aria-label="Hamısını seç" onclick="selAll('${table}', this.checked)"></th>
+    ${cols.map(c => `<th onclick="sortBy('${table}','${c}')">${c}
+      ${st.sort === c ? (st.order === "asc" ? "▲" : "▼") : ""}</th>`).join("")}
+    ${canW ? "<th></th>" : ""}
+  </tr></thead><tbody>
+    ${d.rows.map(r => `<tr>
+      <td><input type="checkbox" class="rowsel" data-pk="${esc(String(r[d.pk]))}" aria-label="Sətri seç"
+        onclick="selRow('${table}', this.dataset.pk, this.checked)"></td>
+      ${cols.map(c => `<td title="${esc(String(r[c] ?? ""))}">${esc(String(r[c] ?? ""))}</td>`).join("")}
+      ${canW ? `<td><button class="btn sm icon" aria-label="Redaktə et"
+        onclick='rowForm("${table}", ${JSON.stringify(r).replaceAll("'", "&#39;")})'><i data-lucide="pencil"></i></button></td>` : ""}
+    </tr>`).join("")}
+  </tbody></table>`
+  : emptyBox("🗂", "Cədvəl boşdur", canW ? "«Əlavə et» düyməsi ilə ilk sətri yaradın" : "")}</div>
+  <div class="pager">
+    <button class="btn sm icon" ${st.page <= 1 ? "disabled" : ""} aria-label="Əvvəlki səhifə"
+      onclick="tState['${table}'].page--; VIEWS.table('${table}')"><i data-lucide="chevron-left"></i></button>
+    Səhifə ${st.page} / ${pages}
+    <button class="btn sm icon" ${st.page >= pages ? "disabled" : ""} aria-label="Növbəti səhifə"
+      onclick="tState['${table}'].page++; VIEWS.table('${table}')"><i data-lucide="chevron-right"></i></button>
+    <select aria-label="Səhifə ölçüsü" onchange="tState['${table}'].per=+this.value; tState['${table}'].page=1; VIEWS.table('${table}')">
+      ${[25, 50, 100].map(n => `<option ${st.per === n ? "selected" : ""}>${n}</option>`).join("")}
+    </select> sətir
+  </div>`);
+};
+
+function sortBy(t, c) {
+  const st = tState[t];
+  if (st.sort === c) st.order = st.order === "asc" ? "desc" : "asc";
+  else { st.sort = c; st.order = "asc"; }
+  VIEWS.table(t);
+}
+function selRow(t, pk, on) { on ? tState[t].sel.add(pk) : tState[t].sel.delete(pk); }
+function selAll(t, on) {
+  tState[t].sel = new Set();
+  document.querySelectorAll("input.rowsel").forEach(cb => {
+    cb.checked = on;
+    if (on) tState[t].sel.add(cb.dataset.pk);
+  });
+}
+function colToggle(t, cols) {
+  const st = tState[t];
+  modal(`<h3>Sütunlar</h3>${cols.map(c => `<label style="display:block;margin:6px 0">
+    <input type="checkbox" ${st.hidden.has(c) ? "" : "checked"}
+      onchange="this.checked ? tState['${t}'].hidden.delete('${c}') : tState['${t}'].hidden.add('${c}')"> ${c}</label>`).join("")}
+    <div class="row" style="margin-top:14px"><button class="btn primary"
+      onclick="closeModal(); VIEWS.table('${t}')">Tətbiq et</button></div>`);
+}
+async function rowForm(t, row) {
+  const cols = await api(`/tables/${t}/columns`);
+  const isNew = !row;
+  modal(`<h3>${isNew ? "➕ Yeni sətir" : "✏️ Redaktə"} — ${t}</h3>
+    ${cols.map(c => `<div class="fld"><label>${c.name} <span style="opacity:.6;font-weight:400">(${c.type})</span></label>
+      <input name="${c.name}" value="${esc(row ? String(row[c.name] ?? "") : "")}"
+        ${!isNew && c.name === "id" ? "readonly" : ""}></div>`).join("")}
+    <div class="row"><button class="btn primary" id="rsave"><i data-lucide="save"></i> Yadda saxla</button>
+    <button class="btn" onclick="closeModal()">İmtina</button></div>`);
+  document.getElementById("rsave").onclick = async () => {
+    const data = {};
+    document.querySelectorAll("#modal input[name]").forEach(i => {
+      if (i.value !== "" || !isNew) data[i.name] = i.value;
+    });
+    try {
+      const d2 = await api(`/tables/${t}/rows`);
+      if (isNew) await api(`/tables/${t}/rows`, { method: "POST", body: data });
+      else await api(`/tables/${t}/rows/${row[d2.pk]}`, { method: "PUT", body: data });
+      closeModal(); toast("Yadda saxlanıldı"); VIEWS.table(t);
+    } catch (e) { toast(e.message, true); }
+  };
+}
+function delSelected(t) {
+  const pks = [...tState[t].sel];
+  if (!pks.length) return toast("Heç nə seçilməyib", true);
+  confirmDo(`${pks.length} sətir silinsin?`, async () => {
+    try {
+      const r = await api(`/tables/${t}/delete`, { method: "POST", body: { pks } });
+      toast(`${r.deleted} sətir silindi`); VIEWS.table(t);
+    } catch (e) { toast(e.message, true); }
+  });
+}
+async function expo(t, fmt) {
+  const r = await api(`/tables/${t}/export?fmt=${fmt}`);
+  const blob = await r.blob();
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob); a.download = `${t}.${fmt}`; a.click();
+}
+async function impo(t, input) {
+  const fd = new FormData(); fd.append("file", input.files[0]);
+  try {
+    const r = await api(`/tables/${t}/import`, { method: "POST", body: fd });
+    toast(`${r.inserted} sətir əlavə olundu` + (r.errors.length ? `, ${r.errors.length} xəta` : ""));
+    if (r.errors.length) console.warn(r.errors);
+    VIEWS.table(t);
+  } catch (e) { toast(e.message, true); }
+  input.value = "";
+}
+
+/* — Database siyahısı — */
+VIEWS.database = async () => {
+  const tables = await api("/tables");
+  mount(`<div class="cards">${tables.map(t =>
+    `<a class="card" href="#table/${t.name}">
+      <div class="ic"><i data-lucide="table-2"></i></div>
+      <div class="v" style="font-size:1.02rem">${t.name}</div>
+      <div class="l">~${Math.max(t.approx_rows, 0)} sətir</div></a>`).join("")}</div>`);
+};
+
+/* — FAQ — */
+let faqFilter = { search: "", cat: "", showInactive: true };
+VIEWS.faq = async () => {
+  const d = await api("/faq");
+  const canW = ME.role !== "viewer", canD = ME.role === "admin";
+  const list = d.entries.filter(e =>
+    (!faqFilter.search || (e.question + e.answer).toLowerCase().includes(faqFilter.search.toLowerCase()))
+    && (!faqFilter.cat || e.category === faqFilter.cat)
+    && (faqFilter.showInactive || e.active));
+  mount(`
+  <div class="row">
+    <h3 style="margin-right:auto"><i data-lucide="message-circle-question"></i> FAQ
+      <span style="color:var(--muted);font-weight:500;font-size:.85rem">${list.length} / ${d.entries.length}</span></h3>
+    <input placeholder="Axtar..." value="${esc(faqFilter.search)}" style="width:200px" aria-label="FAQ axtarışı"
+      onchange="faqFilter.search=this.value; VIEWS.faq()">
+    <select aria-label="Kateqoriya filtri" onchange="faqFilter.cat=this.value; VIEWS.faq()">
+      <option value="">Bütün kateqoriyalar</option>
+      ${d.categories.map(c => `<option ${faqFilter.cat === c ? "selected" : ""}>${esc(c)}</option>`).join("")}
+    </select>
+    ${canW ? `<button class="btn primary" onclick="faqForm()"><i data-lucide="plus"></i> Yeni FAQ</button>` : ""}
+  </div>
+  <div class="panel" style="padding:0;overflow-x:auto">
+  ${list.length ? `<table class="grid"><thead>
+    <tr><th>#</th><th>Kateqoriya</th><th>Sual</th><th>Cavab</th><th>Status</th><th></th></tr></thead><tbody>
+    ${list.map(e => `<tr style="${e.active ? "" : "opacity:.5"}">
+      <td>${e.id}</td><td>${esc(e.category)}</td>
+      <td title="${esc(e.question)}">${esc(e.question)}</td>
+      <td title="${esc(e.answer)}">${esc(e.answer)}</td>
+      <td><span class="badge ${e.active ? "ok" : "warn"}">${e.active ? "aktiv" : "passiv"}</span></td>
+      <td style="white-space:nowrap">
+        ${canW ? `<button class="btn sm icon" aria-label="Redaktə"
+          onclick='faqForm(${JSON.stringify(e).replaceAll("'", "&#39;")})'><i data-lucide="pencil"></i></button>` : ""}
+        ${canD ? `<button class="btn sm icon danger" aria-label="Sil" onclick="faqDel(${e.id})"><i data-lucide="trash-2"></i></button>` : ""}
+      </td></tr>`).join("")}
+  </tbody></table>` : emptyBox("❓", "FAQ tapılmadı", "Axtarış filtrini dəyişin və ya yeni FAQ əlavə edin")}</div>
+  <p style="color:var(--muted);margin-top:10px;font-size:.85rem">
+    Dəyişikliklər faq.json-a yazılır; RAG indeksi səsli serverin növbəti restartında avtomatik yenilənir.</p>`);
+};
+function faqForm(e) {
+  const isNew = !e;
+  modal(`<h3>${isNew ? "➕ Yeni FAQ" : "✏️ FAQ redaktə"}</h3>
+    <div class="fld"><label>Kateqoriya</label><input id="fc" value="${esc(e?.category || "")}"></div>
+    <div class="fld"><label>Sual</label><textarea id="fq" rows="2">${esc(e?.question || "")}</textarea></div>
+    <div class="fld"><label>Cavab</label><textarea id="fa" rows="5">${esc(e?.answer || "")}</textarea></div>
+    <div class="fld"><label><input type="checkbox" id="fact" ${e?.active !== false ? "checked" : ""}> Aktiv</label></div>
+    <div class="row"><button class="btn primary" id="fsave"><i data-lucide="save"></i> Yadda saxla</button>
+    <button class="btn" onclick="closeModal()">İmtina</button></div>`);
+  document.getElementById("fsave").onclick = async () => {
+    const body = { category: fc.value, question: fq.value, answer: fa.value, active: fact.checked };
+    try {
+      if (isNew) await api("/faq", { method: "POST", body });
+      else await api(`/faq/${e.id}`, { method: "PUT", body });
+      closeModal(); toast("FAQ yadda saxlanıldı"); VIEWS.faq();
+    } catch (err) { toast(err.message, true); }
+  };
+}
+function faqDel(id) {
+  confirmDo("Bu FAQ silinsin?", async () => {
+    await api("/faq/delete", { method: "POST", body: { ids: [id] } });
+    toast("Silindi"); VIEWS.faq();
+  });
+}
+
+/* — Söhbətlər — */
+let convPage = 1;
+VIEWS.conversations = async () => {
+  const d = await api(`/conversations?page=${convPage}&search=${encodeURIComponent(window.convSearch || "")}`);
+  mount(`
+  <div class="row"><h3 style="margin-right:auto"><i data-lucide="messages-square"></i> Söhbətlər
+    <span style="color:var(--muted);font-weight:500;font-size:.85rem">${d.total}</span></h3>
+    <input placeholder="Mətndə axtar..." style="width:220px" aria-label="Söhbət axtarışı"
+      onchange="window.convSearch=this.value; convPage=1; VIEWS.conversations()"></div>
+  <div class="panel" style="padding:0">
+  ${d.rows.length ? `<table class="grid"><thead>
+    <tr><th>Sessiya</th><th>Başladı</th><th>Bitdi</th><th>Mesaj</th><th>Müddət</th><th></th></tr></thead><tbody>
+    ${d.rows.map(c => `<tr><td>${esc(c.session_id)}</td><td>${esc(c.started)}</td>
+      <td>${esc(c.ended)}</td><td>${c.messages}</td><td>${c.duration_s}s</td>
+      <td><button class="btn sm" onclick="openTranscript('${esc(c.session_id)}')">
+        <i data-lucide="eye"></i> Transkript</button></td></tr>`).join("")}
+  </tbody></table>` : emptyBox("💬", "Hələ söhbət yoxdur", "Səsli asistentlə ilk zəng burada görünəcək")}</div>
+  <div class="pager"><button class="btn sm icon" ${convPage <= 1 ? "disabled" : ""} aria-label="Əvvəlki"
+    onclick="convPage--; VIEWS.conversations()"><i data-lucide="chevron-left"></i></button> Səhifə ${convPage}
+    <button class="btn sm icon" aria-label="Növbəti" onclick="convPage++; VIEWS.conversations()"><i data-lucide="chevron-right"></i></button></div>`);
+};
+async function openTranscript(sid) {
+  const rows = await api("/conversations/" + encodeURIComponent(sid));
+  modal(`<h3>💬 ${esc(sid)}</h3><div class="chat">
+    ${rows.map(r => `<div class="${r.role === "user" ? "u" : "a"}">
+      <div style="font-size:.7rem;color:var(--muted);margin-bottom:3px">${r.role === "user" ? "🗣 Müştəri (STT)" : "🤖 Ayxan (LLM→TTS)"} · ${esc(r.created_at)}</div>
+      ${esc(r.content)}</div>`).join("")}
+  </div><button class="btn" onclick="closeModal()">Bağla</button>`);
+}
+
+/* — Promptlar — */
+VIEWS.prompts = async () => {
+  const ps = await api("/prompts");
+  const canA = ME.role === "admin";
+  mount(ps.map(p => `
+    <div class="panel"><h3><i data-lucide="file-pen-line"></i> ${p.name}
+      <span class="badge ${p.source === "db" ? "ok" : "warn"}">${p.source === "db" ? "DB versiyası" : "kod default"}</span></h3>
+      <textarea id="pt_${p.name}" rows="7" style="width:100%" ${canA ? "" : "readonly"}>${esc(p.content)}</textarea>
+      <div class="row" style="margin-top:10px">
+        ${canA ? `<button class="btn primary" onclick="savePrompt('${p.name}')"><i data-lucide="save"></i> Yadda saxla (yeni versiya)</button>` : ""}
+        <button class="btn" onclick="promptHist('${p.name}')"><i data-lucide="history"></i> Tarixçə</button>
+      </div></div>`).join(""));
+};
+async function savePrompt(name) {
+  try {
+    await api(`/prompts/${name}`, { method: "PUT",
+      body: { content: document.getElementById("pt_" + name).value } });
+    toast("Prompt yeni versiya kimi saxlanıldı və dərhal tətbiq olundu");
+    VIEWS.prompts();
+  } catch (e) { toast(e.message, true); }
+}
+async function promptHist(name) {
+  const h = await api(`/prompts/${name}/history`);
+  modal(`<h3>📜 Tarixçə — ${name}</h3>${h.length ? h.map(v => `
+    <div class="panel"><div style="font-size:.8rem;color:var(--muted);margin-bottom:6px">
+      ${esc(v.created_at)} · ${esc(v.created_by || "?")} ${v.is_active ? '<span class="badge ok">aktiv</span>' : ""}</div>
+      <pre class="mono">${esc(v.content)}</pre></div>`).join("") : emptyBox("📜", "Hələ versiya yoxdur", "Kod defaultu işləyir")}
+    <button class="btn" onclick="closeModal()">Bağla</button>`);
+}
+
+/* — Model parametrləri — */
+VIEWS.settings = async () => {
+  const ss = await api("/settings");
+  const canA = ME.role === "admin";
+  mount(`<div class="panel"><h3><i data-lucide="sliders-horizontal"></i> Model parametrləri
+    <span style="color:var(--muted);font-size:.8rem;font-weight:400">dəyişiklik dərhal qüvvəyə minir, DB + config.py-a yazılır</span></h3>
+    <table class="grid"><thead><tr><th>Parametr</th><th>Tip</th><th>Dəyər</th><th></th></tr></thead><tbody>
+    ${ss.map(s => `<tr><td style="font-weight:600">${s.key}</td><td style="color:var(--muted)">${s.type}</td>
+      <td>${settingInput(s, canA)}</td>
+      <td>${canA ? `<button class="btn sm" onclick="saveSetting('${s.key}')"><i data-lucide="save"></i></button>` : ""}</td></tr>`).join("")}
+    </tbody></table>
+    <p style="color:var(--muted);font-size:.85rem;margin-top:10px">
+      Qeyd: whisper_model dəyişikliyi yalnız server restartından sonra tam tətbiq olunur.</p></div>`);
+};
+/* stt_provider üçün açılan siyahı (local ↔ groq switch); qalanları mətn sahəsi */
+function settingInput(s, canA) {
+  const dis = canA ? "" : "disabled";
+  if (s.key === "stt_provider") {
+    const opts = [
+      ["local", "local — faster-whisper (GPU, offline)"],
+      ["groq", "groq — Groq API whisper-large-v3 (GPU tələb etmir)"],
+    ].map(([v, l]) => `<option value="${v}" ${s.value === v ? "selected" : ""}>${l}</option>`).join("");
+    return `<select id="st_${s.key}" style="width:340px" ${dis}>${opts}</select>`;
+  }
+  if (s.key === "llm_provider") {
+    const opts = [
+      ["local", "local — Ollama (GPU, offline)"],
+      ["gemini", "gemini — Google Gemini API (GPU tələb etmir)"],
+    ].map(([v, l]) => `<option value="${v}" ${s.value === v ? "selected" : ""}>${l}</option>`).join("");
+    return `<select id="st_${s.key}" style="width:340px" ${dis}>${opts}</select>`;
+  }
+  return `<input id="st_${s.key}" value="${esc(String(s.value))}" style="width:280px" ${canA ? "" : "readonly"}>`;
+}
+async function saveSetting(key) {
+  try {
+    await api(`/settings/${key}`, { method: "PUT",
+      body: { value: document.getElementById("st_" + key).value } });
+    toast(key + " yeniləndi");
+  } catch (e) { toast(e.message, true); }
+}
+
+/* — Loglar — */
+let logFilter = { level: "", search: "" };
+VIEWS.logs = async () => {
+  const d = await api(`/logs?level=${logFilter.level}&search=${encodeURIComponent(logFilter.search)}`);
+  const color = { ERROR: "var(--danger)", WARNING: "var(--warn)", INFO: "var(--text)", DEBUG: "var(--muted)" };
+  mount(`
+  <div class="row"><h3 style="margin-right:auto"><i data-lucide="scroll-text"></i> Loglar
+    <span style="color:var(--muted);font-weight:500;font-size:.85rem">${d.total}</span></h3>
+    <select aria-label="Səviyyə filtri" onchange="logFilter.level=this.value; VIEWS.logs()">
+      <option value="">Hamısı</option>
+      ${["INFO", "WARNING", "ERROR", "DEBUG"].map(l =>
+        `<option ${logFilter.level === l ? "selected" : ""}>${l}</option>`).join("")}
+    </select>
+    <input placeholder="Axtar..." value="${esc(logFilter.search)}" style="width:220px" aria-label="Log axtarışı"
+      onchange="logFilter.search=this.value; VIEWS.logs()">
+    <button class="btn" onclick="VIEWS.logs()"><i data-lucide="refresh-cw"></i> Yenilə</button></div>
+  <div class="panel" style="font-family:ui-monospace,monospace;font-size:.82rem;max-height:70vh;overflow-y:auto">
+    ${d.lines.length ? d.lines.map(l => `<div style="color:${color[l.level] || "var(--text)"};padding:1px 0">
+      ${esc(l.time)} <b>${esc(l.level)}</b> [${esc(l.component)}] ${esc(l.message)}</div>`).join("")
+      : emptyBox("🧾", "Log tapılmadı", "Filtri dəyişin")}
+  </div>`);
+};
+
+/* — Analytics — */
+VIEWS.analytics = async () => {
+  const a = await api("/analytics");
+  mount(`
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+    <div class="panel"><h3><i data-lucide="trending-up"></i> Günlük zənglər (30 gün)</h3><canvas id="chDaily"></canvas></div>
+    <div class="panel"><h3><i data-lucide="clock"></i> Saatlara görə mesajlar (7 gün)</h3><canvas id="chHourly"></canvas></div>
+    <div class="panel"><h3><i data-lucide="gauge"></i> Gecikmələr (orta ms)</h3><canvas id="chLat"></canvas></div>
+    <div class="panel"><h3><i data-lucide="wrench"></i> Tool istifadəsi</h3><canvas id="chTools"></canvas></div>
+  </div>
+  <div class="panel"><h3><i data-lucide="message-circle-question"></i> Ən çox verilən suallar</h3>
+    ${a.top_questions.length ? `<table class="grid">
+    <thead><tr><th>Sual</th><th>Say</th></tr></thead><tbody>
+    ${a.top_questions.map(q => `<tr><td>${esc(q.question)}</td><td>${q.n}</td></tr>`).join("")}
+  </tbody></table>` : emptyBox("📊", "Hələ kifayət qədər data yoxdur", "Zənglər artdıqca statistika burada yığılacaq")}</div>`);
+
+  const P = ["#4F46E5", "#7C3AED", "#06B6D4", "#22C55E", "#F59E0B", "#EF4444"];
+  const gridC = getComputedStyle(document.body).getPropertyValue("--border").trim();
+  const mutedC = getComputedStyle(document.body).getPropertyValue("--muted").trim();
+  Chart.defaults.font.family = "Inter, sans-serif";
+  Chart.defaults.color = mutedC;
+  const gopt = { scales: { x: { grid: { color: gridC } }, y: { grid: { color: gridC } } },
+                 animation: { duration: 700, easing: "easeOutQuart" } };
+  const mk = (id, cfg) => charts.push(new Chart(document.getElementById(id), cfg));
+  mk("chDaily", { type: "line", options: gopt, data: {
+    labels: a.daily.map(d => d.day),
+    datasets: [{ label: "Zəng", data: a.daily.map(d => d.calls), tension: .35,
+                 borderColor: P[0], backgroundColor: P[0] + "22", fill: true },
+               { label: "Mesaj", data: a.daily.map(d => d.messages), tension: .35,
+                 borderColor: P[2], backgroundColor: "transparent" }] } });
+  mk("chHourly", { type: "bar", options: gopt, data: {
+    labels: a.hourly.map(h => h.hour + ":00"),
+    datasets: [{ label: "Mesaj", data: a.hourly.map(h => h.messages),
+                 backgroundColor: P[1] + "cc", borderRadius: 6 }] } });
+  const lat = Object.entries(a.latency);
+  mk("chLat", { type: "bar", options: { ...gopt, indexAxis: "y" }, data: {
+    labels: lat.map(([k]) => k),
+    datasets: [{ label: "orta ms", data: lat.map(([, v]) => v.avg_ms),
+                 backgroundColor: P[2] + "cc", borderRadius: 6 }] } });
+  mk("chTools", { type: "doughnut",
+    options: { animation: { duration: 700 }, cutout: "62%" }, data: {
+    labels: a.tools.map(t => t.tool),
+    datasets: [{ data: a.tools.map(t => t.count), backgroundColor: P, borderWidth: 0 }] } });
+};
+
+/* — İstifadəçilər — */
+VIEWS.users = async () => {
+  const us = await api("/users");
+  mount(`
+  <div class="row"><h3 style="margin-right:auto"><i data-lucide="shield"></i> İstifadəçilər</h3>
+    <button class="btn primary" onclick="userForm()"><i data-lucide="user-plus"></i> Yeni istifadəçi</button></div>
+  <div class="panel" style="padding:0"><table class="grid"><thead>
+    <tr><th>İstifadəçi</th><th>Rol</th><th>Status</th><th>Son giriş</th><th></th></tr></thead><tbody>
+    ${us.map(u => `<tr><td style="font-weight:600">${esc(u.username)}</td>
+      <td><span class="badge ${u.role === "admin" ? "err" : u.role === "operator" ? "warn" : "ok"}">${u.role}</span></td>
+      <td>${u.is_active ? '<span class="badge ok">aktiv</span>' : '<span class="badge err">bağlı</span>'}</td>
+      <td>${esc(u.last_login || "—")}</td>
+      <td><button class="btn sm icon" aria-label="Redaktə"
+            onclick='userForm(${JSON.stringify(u).replaceAll("'", "&#39;")})'><i data-lucide="pencil"></i></button>
+          <button class="btn sm icon danger" aria-label="Sil" onclick="userDel('${esc(u.username)}')"><i data-lucide="trash-2"></i></button></td></tr>`).join("")}
+  </tbody></table></div>`);
+};
+function userForm(u) {
+  const isNew = !u;
+  modal(`<h3>${isNew ? "➕ Yeni istifadəçi" : "✏️ Redaktə: " + esc(u.username)}</h3>
+    <div class="fld"><label>İstifadəçi adı</label><input id="uu" value="${esc(u?.username || "")}" ${isNew ? "" : "readonly"}></div>
+    <div class="fld"><label>Parol ${isNew ? "" : "(boş = dəyişmə)"}</label><input id="up" type="password"></div>
+    <div class="fld"><label>Rol</label><select id="ur">
+      ${["admin", "operator", "viewer"].map(r => `<option ${u?.role === r ? "selected" : ""}>${r}</option>`).join("")}</select></div>
+    <div class="fld"><label><input type="checkbox" id="ua" ${u?.is_active !== false ? "checked" : ""}> Aktiv</label></div>
+    <div class="row"><button class="btn primary" id="usave"><i data-lucide="save"></i> Yadda saxla</button>
+    <button class="btn" onclick="closeModal()">İmtina</button></div>`);
+  document.getElementById("usave").onclick = async () => {
+    const body = { username: uu.value, password: up.value, role: ur.value, is_active: ua.checked };
+    try {
+      if (isNew) await api("/users", { method: "POST", body });
+      else await api(`/users/${uu.value}`, { method: "PUT", body });
+      closeModal(); toast("Yadda saxlanıldı"); VIEWS.users();
+    } catch (e) { toast(e.message, true); }
+  };
+}
+function userDel(username) {
+  confirmDo(`'${username}' silinsin?`, async () => {
+    try { await api(`/users/${username}`, { method: "DELETE" }); toast("Silindi"); VIEWS.users(); }
+    catch (e) { toast(e.message, true); }
+  });
+}
+
+/* — Audit — */
+VIEWS.audit = async () => {
+  const d = await api("/audit");
+  mount(`<div class="row"><h3><i data-lucide="eye"></i> Audit Log
+    <span style="color:var(--muted);font-weight:500;font-size:.85rem">${d.total}</span></h3></div>
+  <div class="panel" style="padding:0">
+  ${d.rows.length ? `<table class="grid"><thead>
+    <tr><th>Vaxt</th><th>Kim</th><th>Əməliyyat</th><th>Hədəf</th><th>Detal</th></tr></thead><tbody>
+    ${d.rows.map(r => `<tr><td>${esc(r.created_at)}</td><td style="font-weight:600">${esc(r.username)}</td>
+      <td><span class="badge ${r.action === "delete" ? "err" : r.action.startsWith("create") ? "ok" : "warn"}">${esc(r.action)}</span></td>
+      <td>${esc(r.target)}</td>
+      <td title='${esc(JSON.stringify(r.detail))}'>${esc(JSON.stringify(r.detail))}</td></tr>`).join("")}
+  </tbody></table>` : emptyBox("🕵️", "Audit boşdur", "Yazma əməliyyatları burada qeyd olunacaq")}</div>`);
+};
+
+/* ══ Start ════════════════════════════════════════════════════════════ */
+icons();
+if (TOKEN && ME) {
+  api("/me").then(boot).catch(() => logout());
+}
+</script>
+</body>
+</html>

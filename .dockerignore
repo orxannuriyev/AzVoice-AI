@@ -1,0 +1,13 @@
+.venv/
+.git/
+__pycache__/
+*.pyc
+logs/
+models/
+vector_store/
+chroma_db/
+docs/
+tests/
+scripts/
+run.bat
+*.md

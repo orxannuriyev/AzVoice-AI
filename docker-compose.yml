@@ -1,0 +1,72 @@
+# Tam stack: veb app + PostgreSQL + Ollama — bir GPU serverdə.
+# İşə salma:  docker compose up -d --build
+# İlk dəfə:   docker compose exec ollama ollama pull gemma4:e4b
+# Sonra:      http://<server-ip>:8000
+services:
+  app:
+    build: .
+    container_name: hotel_app
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      OLLAMA_URL: http://ollama:11434/api/chat
+      # GPU yoxdursa: WHISPER_DEVICE=cpu və WHISPER_COMPUTE=int8 edin
+    volumes:
+      - hf_cache:/root/.cache          # Whisper + bge-m3 modelləri (~5GB)
+      - ./vector_store:/app/vector_store
+      - ./logs:/app/logs
+      - ./character:/app/character
+    depends_on:
+      db:
+        condition: service_healthy
+      ollama:
+        condition: service_started
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: hotel_db
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${DB_USER:-hotel_admin}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-hotel_secret_2026}
+      POSTGRES_DB: ${DB_NAME:-hotel_callcenter}
+    volumes:
+      - hotel_pgdata:/var/lib/postgresql/data
+      - ./database/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-hotel_admin} -d ${DB_NAME:-hotel_callcenter}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: hotel_ollama
+    restart: unless-stopped
+    volumes:
+      - ollama_models:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+volumes:
+  hotel_pgdata:
+  ollama_models:
+  hf_cache:

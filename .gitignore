@@ -1,0 +1,21 @@
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+
+# Avtomatik yaranan fayllar
+logs/
+audio/
+models/*.gguf
+
+# Böyük binar fayllar
+cloudflared-windows-amd64.exe
+*.exe
+
+# Daxili sənədlər
+overview.md
+
+.env
+database/.env
+.DS_Store
+Thumbs.db

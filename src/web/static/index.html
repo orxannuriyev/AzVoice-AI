@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="az">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Astana Hotel — AI Zəng Mərkəzi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4F46E5;
+      --secondary: #7C3AED;
+      --accent: #06B6D4;
+      --success: #22C55E;
+      --danger: #EF4444;
+      --warn: #F59E0B;
+      --bg: #eef1f6;
+      --panel: rgba(255, 255, 255, .74);
+      --border: rgba(15, 23, 42, .10);
+      --text: #1f2937;
+      --muted: #6b7280;
+      --logo: url("data:image/webp;base64,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");
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      display: flex;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Fon işıqları */
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: .12;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::before {
+      width: 560px;
+      height: 560px;
+      left: -180px;
+      top: -160px;
+      background: radial-gradient(circle, var(--primary), transparent 70%);
+    }
+
+    body::after {
+      width: 520px;
+      height: 520px;
+      right: -160px;
+      bottom: -180px;
+      background: radial-gradient(circle, var(--accent), transparent 70%);
+    }
+
+    /* ── Yan panel ─────────────────────────────────────────────────────────── */
+    aside {
+      position: relative;
+      z-index: 2;
+      width: 300px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0;
+      padding: 24px 12px 30px; /* Reduced padding for wider logo */
+      background: var(--panel);
+      backdrop-filter: blur(22px);
+      border-right: 1px solid var(--border);
+    }
+
+    .brand {
+      text-align: center;
+      animation: fadeDown .6s ease both;
+    }
+
+    .brand .wordmark {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: .01em;
+      line-height: 1.1;
+      color: #1f2937;
+    }
+
+    .brand .wordmark::first-letter {
+      color: #b8860b;
+    }
+
+    /* qızılı vurğu */
+    .brand h1 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -.02em;
+    }
+
+    .brand p {
+      color: var(--muted);
+      font-size: .8rem;
+      margin-top: 4px;
+    }
+
+    /* Zəng düyməsi + pulsasiya halqaları */
+    .call-wrap {
+      position: relative;
+      width: 168px;
+      height: 168px;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeUp .6s .15s ease both;
+    }
+
+    .ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 2px solid #4F7CFF;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    body.listening .ring {
+      animation: pulse 2.2s ease-out infinite;
+    }
+
+    body.listening .ring:nth-child(2) {
+      animation-delay: .7s;
+    }
+
+    body.listening .ring:nth-child(3) {
+      animation-delay: 1.4s;
+    }
+
+    body.speaking .ring {
+      border-color: #9B5CFF;
+      animation: pulse 1.4s ease-out infinite;
+    }
+
+    body.speaking .ring:nth-child(2) {
+      animation-delay: .45s;
+    }
+
+    body.speaking .ring:nth-child(3) {
+      animation-delay: .9s;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(.62);
+        opacity: .75;
+      }
+
+      100% {
+        transform: scale(1.12);
+        opacity: 0;
+      }
+    }
+
+    #callBtn {
+      width: 104px;
+      height: 104px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      font-size: 2.1rem;
+      color: #fff;
+      position: relative;
+      z-index: 2;
+      background: linear-gradient(135deg, #4F7CFF, #9B5CFF);
+      box-shadow: 0 10px 32px rgba(79, 124, 255, .4), inset 0 1px 0 rgba(255, 255, 255, .25);
+      transition: transform .18s ease, box-shadow .25s ease, background .3s ease;
+    }
+
+    #callBtn:hover {
+      transform: translateY(-3px) scale(1.03);
+    }
+
+    #callBtn:active {
+      transform: scale(.96);
+    }
+
+    #callBtn:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    #callBtn.active {
+      background: linear-gradient(135deg, var(--danger), #b91c1c);
+      box-shadow: 0 10px 32px rgba(239, 68, 68, .4), inset 0 1px 0 rgba(255, 255, 255, .2);
+    }
+
+    /* Status pill + ekvalayzer */
+    #statusPill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 44px;
+      padding: 10px 18px;
+      border-radius: 99px;
+      font-size: .88rem;
+      font-weight: 500;
+      background: rgba(148, 163, 184, .1);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      transition: all .3s ease;
+      text-align: center;
+      animation: fadeUp .6s .3s ease both;
+    }
+
+    body.listening #statusPill {
+      color: var(--success);
+      border-color: rgba(34, 197, 94, .35);
+    }
+
+    body.thinking #statusPill {
+      color: var(--warn);
+      border-color: rgba(245, 158, 11, .35);
+    }
+
+    body.speaking #statusPill {
+      color: var(--accent);
+      border-color: rgba(6, 182, 212, .35);
+    }
+
+    .eq {
+      display: none;
+      align-items: flex-end;
+      gap: 3px;
+      height: 16px;
+    }
+
+    body.speaking .eq {
+      display: flex;
+    }
+
+    .eq span {
+      width: 3px;
+      border-radius: 2px;
+      background: var(--accent);
+      animation: eq 1s ease-in-out infinite;
+    }
+
+    .eq span:nth-child(1) {
+      height: 40%;
+      animation-delay: 0s;
+    }
+
+    .eq span:nth-child(2) {
+      height: 90%;
+      animation-delay: .15s;
+    }
+
+    .eq span:nth-child(3) {
+      height: 60%;
+      animation-delay: .3s;
+    }
+
+    .eq span:nth-child(4) {
+      height: 100%;
+      animation-delay: .45s;
+    }
+
+    .eq span:nth-child(5) {
+      height: 50%;
+      animation-delay: .6s;
+    }
+
+    @keyframes eq {
+
+      0%,
+      100% {
+        transform: scaleY(.4);
+      }
+
+      50% {
+        transform: scaleY(1);
+      }
+    }
+
+    .dots {
+      display: none;
+      gap: 4px;
+    }
+
+    body.thinking .dots {
+      display: flex;
+    }
+
+    .dots i {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--warn);
+      animation: blink 1.2s ease-in-out infinite;
+    }
+
+    .dots i:nth-child(2) {
+      animation-delay: .2s;
+    }
+
+    .dots i:nth-child(3) {
+      animation-delay: .4s;
+    }
+
+    @keyframes blink {
+
+      0%,
+      80%,
+      100% {
+        opacity: .25;
+      }
+
+      40% {
+        opacity: 1;
+      }
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: .78rem;
+      text-align: center;
+      line-height: 1.6;
+      animation: fadeUp .6s .45s ease both;
+    }
+
+    .hint b {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* ── AI avatar səhnəsi (mərkəz) — character tam görünür, yan fon doldurur ─ */
+    .stage {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      min-width: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      /* Videonun əsl fon rəngi ilə eyni düz rəng — heç bir qradiyent yoxdur ki,
+     hər hansı bozarma zonası videonun kənarı ilə uyuşmazlıq yaratmasın. */
+      background: #fafafa;
+    }
+
+    .avatar {
+      height: 100%;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      display: block;
+      /* Sol/sağ kənarları şəffaflığa əridir — videonun düzbucaqlı sərhədi (və
+     öz kənar kölgəsi) fona tam qarışır, cizgi qalmır. Personaj mərkəzdədir,
+     kənar zonalar yalnız fondur, ona görə heç nə itmir. */
+      -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+      mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+    }
+
+    /* ── Söhbət (transkript) yan paneli ────────────────────────────────────── */
+    main.transcript {
+      position: relative;
+      z-index: 2;
+      width: 380px;
+      flex-shrink: 0;
+      margin-left: auto;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 22px 22px 32px;
+      background: var(--panel);
+      backdrop-filter: blur(22px);
+      border-left: 1px solid var(--border);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .transcript-head {
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    main::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    main::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, .25);
+      border-radius: 4px;
+    }
+
+    #log {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .empty {
+      margin: auto;
+      text-align: center;
+      color: var(--muted);
+      padding-top: 18vh;
+      animation: fadeUp .7s ease both;
+    }
+
+    .empty .ico {
+      font-size: 44px;
+      margin-bottom: 16px;
+      opacity: .8;
+    }
+
+    .empty h2 {
+      color: var(--text);
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -.02em;
+    }
+
+    .msg {
+      padding: 13px 17px;
+      border-radius: 18px;
+      max-width: 78%;
+      line-height: 1.55;
+      font-size: .93rem;
+      animation: msgIn .35s cubic-bezier(.21, 1.02, .73, 1) both;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, .18);
+    }
+
+    @keyframes msgIn {
+      from {
+        opacity: 0;
+        transform: translateY(14px) scale(.97);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .user {
+      align-self: flex-end;
+      border-bottom-right-radius: 6px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+    }
+
+    .bot {
+      align-self: flex-start;
+      border-bottom-left-radius: 6px;
+      background: var(--panel);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--border);
+    }
+
+    .msg .who {
+      display: block;
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      opacity: .65;
+      margin-bottom: 4px;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
+    @media (max-width: 720px) {
+      body {
+        flex-direction: column;
+        overflow: auto;
+      }
+
+      aside {
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 16px;
+        padding: 18px;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .call-wrap {
+        width: 96px;
+        height: 96px;
+        margin: 0;
+      }
+
+      #callBtn {
+        width: 68px;
+        height: 68px;
+        font-size: 1.4rem;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .brand .wordmark {
+        font-size: 1.15rem;
+      }
+
+      .brand p {
+        display: none;
+      }
+
+      .hint {
+        display: none;
+      }
+
+      .stage {
+        width: 100%;
+        height: 44vh;
+        flex: none;
+      }
+
+      main.transcript {
+        width: 100%;
+        height: auto;
+        flex: 1;
+        margin-left: 0;
+        padding: 16px 14px 24px;
+        border-left: none;
+        border-top: 1px solid var(--border);
+      }
+    }
+
+    .logo-wrap {
+      width: 100%;
+      max-width: 276px; /* Expanded maximum size */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 24px;
+      margin-bottom: 10px;
+      animation: fadeDown .6s ease both;
+    }
+
+    .logo-wrap svg {
+      width: 100%;
+      height: auto;
+    }
+
+    .controls-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; /* Centers all buttons/hints vertically in the remaining space */
+      gap: 24px;
+      width: 100%;
+    }
+
+    
+    /* Floating Transcript Toggle Button */
+    .transcript-toggle-btn {
+      position: fixed;
+      top: 14px;
+      right: 18px;
+      z-index: 1000; /* Ensure it stays on top of everything */
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      color: var(--text);
+    }
+    
+    .transcript-toggle-btn:hover {
+      transform: scale(1.05);
+      background: #ffffff;
+      border-color: #4F7CFF;
+      color: #4F7CFF;
+      box-shadow: 0 4px 16px rgba(79, 124, 255, 0.15);
+    }
+    
+    /* When transcript is hidden, collapse the panel completely */
+    body.transcript-hidden .transcript {
+      width: 0 !important;
+      min-width: 0 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      border-left: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      overflow: hidden !important;
+    }
+
+</style>
+</head>
+
+<body>
+  <aside>
+    <div class="logo-wrap">
+      <svg width="100%" viewBox="55 40 440 68" xmlns="http://www.w3.org/2000/svg" role="img" style="">
+<title style="fill:rgb(0, 0, 0);stroke:none;color:rgb(11, 11, 11);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">AzVoice AI wordmark</title>
+<desc style="fill:rgb(0, 0, 0);stroke:none;color:rgb(11, 11, 11);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">Modern wordmark with a sound wave icon leading in front, tightly followed by AzVoice text and a gradient colored AI text close behind it, no underline.</desc>
+<defs>
+<linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#4F7CFF"/>
+<stop offset="100%" stop-color="#9B5CFF"/>
+</linearGradient>
+</defs>
+
+<g stroke="#4F7CFF" stroke-width="6" stroke-linecap="round" style="fill:rgb(0, 0, 0);stroke:rgb(79, 124, 255);color:rgb(11, 11, 11);stroke-width:6px;stroke-linecap:round;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
+<line x1="60" y1="90" x2="60" y2="70" style="fill:rgb(0, 0, 0);stroke:rgb(79, 124, 255);color:rgb(11, 11, 11);stroke-width:6px;stroke-linecap:round;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<line x1="75" y1="95" x2="75" y2="55" style="fill:rgb(0, 0, 0);stroke:rgb(79, 124, 255);color:rgb(11, 11, 11);stroke-width:6px;stroke-linecap:round;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<line x1="90" y1="100" x2="90" y2="45" style="fill:rgb(0, 0, 0);stroke:rgb(79, 124, 255);color:rgb(11, 11, 11);stroke-width:6px;stroke-linecap:round;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<line x1="105" y1="95" x2="105" y2="55" style="fill:rgb(0, 0, 0);stroke:rgb(79, 124, 255);color:rgb(11, 11, 11);stroke-width:6px;stroke-linecap:round;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+<line x1="120" y1="90" x2="120" y2="70" style="fill:rgb(0, 0, 0);stroke:rgb(79, 124, 255);color:rgb(11, 11, 11);stroke-width:6px;stroke-linecap:round;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+</g>
+
+<text x="145" y="100" font-family="Arial, sans-serif" font-size="64" font-weight="700" fill="#111111" style="fill:rgb(17, 17, 17);stroke:none;color:rgb(11, 11, 11);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:Arial, sans-serif;font-size:64px;font-weight:700;text-anchor:start;dominant-baseline:auto">AzVoice</text>
+
+<text x="412" y="100" font-family="Arial, sans-serif" font-size="64" font-weight="700" fill="url(#g1)" style="stroke:none;color:rgb(11, 11, 11);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:Arial, sans-serif;font-size:64px;font-weight:700;text-anchor:start;dominant-baseline:auto">AI</text>
+</svg>
+    </div>
+    <div class="controls-container">
+      <div class="call-wrap">
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <button id="callBtn" title="Zəngi başlat" aria-label="Zəngi başlat və ya bitir">📞</button>
+    </div>
+    <div id="statusPill" role="status" aria-live="polite">
+      <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="eq" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span>
+      <span id="statusText">Zəngi başlatmaq üçün düyməyə basın</span>
+    </div>
+    <div class="hint">
+      <b>Necə işləyir?</b><br>
+      Düyməyə basın, mikrofona icazə verin<br>və adi telefon danışığı kimi danışın.<br>
+      Rezervasiya, qiymətlər, xidmətlər —<br>Ibrahim hər sualınıza cavab verəcək.
+    </div>
+
+    </div>
+  </aside>
+
+  <div class="stage">
+    <video id="avatar" class="avatar" muted loop playsinline preload="auto" src="/character/video"
+      aria-hidden="true"></video>
+  </div>
+
+  <main class="transcript">
+    <div class="transcript-head"><span>💬 Söhbət</span></div>
+    <div id="log">
+      <div class="empty" id="emptyState">
+        <div class="ico">🎧</div>
+        <h2>Sizi dinləməyə hazırıq</h2>
+        <p>Zəngi başladın — söhbət burada canlı görünəcək.</p>
+      </div>
+    </div>
+  </main>
+  <button id="transcriptToggleBtn" class="transcript-toggle-btn" title="Gizlət">✕</button>
+
+
+  <script>
+    const btn = document.getElementById("callBtn");
+    const statusText = document.getElementById("statusText");
+    const log = document.getElementById("log");
+    const avatar = document.getElementById("avatar");
+
+    // AI danışanda avatar videosu oynayır, susanda dayanır (səs onsuz da muted).
+    function avatarSpeak(on) {
+      if (!avatar) return;
+      if (on) { avatar.play().catch(() => { }); }
+      else { avatar.pause(); }
+    }
+
+    if (avatar) {
+      avatar.addEventListener("timeupdate", () => {
+        if (avatar.currentTime >= 15) {
+          avatar.currentTime = 0;
+        }
+      });
+    }
+
+    let ws = null, audioCtx = null, processor = null, source = null, stream = null;
+    let playQueue = [], playing = false, active = false;
+    // isSpeaking: assistant cavabının TAMAM bitməsini izləyir (cümlələr arası boşluq daxil).
+    // speakingLockUntil: son audio bitdikdən sonra 800ms mikrofon bağlı qalır.
+    let isSpeaking = false, speakingLockUntil = 0;
+    let serverState = "idle";
+
+    const STATUS_TEXT = {
+      listening: "Dinləyirəm — danışın",
+      thinking: "Düşünürəm...",
+      speaking: "Danışıram..."
+    };
+
+    let currentStatusState = "";
+    function setStatus(state, text) {
+      if (currentStatusState) {
+        document.body.classList.remove(currentStatusState);
+      }
+      if (state) {
+        document.body.classList.add(state);
+      }
+      currentStatusState = state || "";
+      statusText.textContent = text || STATUS_TEXT[state] || "";
+    }
+
+    function addMsg(text, cls) {
+      const es = document.getElementById("emptyState");
+      if (es) es.remove();
+      const d = document.createElement("div");
+      d.className = "msg " + cls;
+      d.innerHTML = `<span class="who">${cls === "user" ? "Siz" : "Ibrahim"}</span>`;
+      d.appendChild(document.createTextNode(text));
+      log.appendChild(d);
+      
+      // Only scroll into view if transcript is not hidden
+      if (!document.body.classList.contains("transcript-hidden")) {
+        d.scrollIntoView({ behavior: "smooth", block: "end" });
+      }
+    }
+
+    // ── Audio oxutma (server MP3 cümlələri göndərir, ardıcıl oxunur) ──────────
+    function playNext() {
+      if (playQueue.length === 0) {
+        playing = false;
+        avatarSpeak(false);   // ← Video DƏRHAL dayanır — son audio bitən anla eyni.
+        // Mikrofon üçün 800ms tampon (yalnız mikrofona aiddir, videoya yox).
+        speakingLockUntil = Date.now() + 800;
+        setTimeout(() => {
+          isSpeaking = false;
+          if (serverState !== "listening") return;
+          setStatus("listening");
+        }, 800);
+        return;
+      }
+      playing = true;
+      isSpeaking = true;
+      setStatus("speaking");
+      const blob = playQueue.shift();
+      const audio = new Audio(URL.createObjectURL(blob));
+      // Video səs HƏQİQƏTƏN eşidilməyə başlayan anda oynayır (dəqiq sinxron).
+      // Pauzadan davam edir (sıfıra qayıtmır) — hər dəfə yenidən başladığı bilinmir.
+      audio.onplaying = () => avatarSpeak(true);
+      audio.onended = playNext;
+      audio.onerror = playNext;
+      audio.play();
+    }
+
+    function enqueueAudio(buf) {
+      isSpeaking = true;  // növbəyə girdi — mikrofonu dərhal bağla (videoya toxunmur)
+      playQueue.push(new Blob([buf], { type: "audio/mpeg" }));
+      if (!playing) playNext();
+    }
+
+    // ── Mikrofon: brauzer tezliyindən 16kHz Int16-ya downsample ───────────────
+    function downsampleTo16k(input, fromRate) {
+      const ratio = fromRate / 16000;
+      const outLen = Math.floor(input.length / ratio);
+      const out = new Int16Array(outLen);
+      for (let i = 0; i < outLen; i++) {
+        const v = input[Math.floor(i * ratio)];
+        out[i] = Math.max(-1, Math.min(1, v)) * 32767;
+      }
+      return out;
+    }
+
+    async function startCall() {
+      stream = await navigator.mediaDevices.getUserMedia({
+        audio: {
+          echoCancellation: true, noiseSuppression: true, channelCount: 1
+        }
+      });
+
+      const proto = location.protocol === "https:" ? "wss" : "ws";
+      ws = new WebSocket(`${proto}://${location.host}/ws`);
+      ws.binaryType = "arraybuffer";
+
+      ws.onmessage = (e) => {
+        if (e.data instanceof ArrayBuffer) { enqueueAudio(e.data); return; }
+        const m = JSON.parse(e.data);
+        if (m.type === "transcript") addMsg(m.text, "user");
+        else if (m.type === "sentence") addMsg(m.text, "bot");
+        else if (m.type === "status") {
+          serverState = m.state;
+          if (!playing) setStatus(m.state);
+        }
+      };
+      ws.onclose = stopCall;
+
+      audioCtx = new AudioContext();
+      source = audioCtx.createMediaStreamSource(stream);
+      processor = audioCtx.createScriptProcessor(4096, 1, 1);
+      processor.onaudioprocess = (e) => {
+        // Qapı: yalnız server dinləyəndə + assistant danışmıyanda + tampon bitibəndə göndər
+        if (!active || isSpeaking || Date.now() < speakingLockUntil
+          || serverState !== "listening"
+          || ws.readyState !== WebSocket.OPEN) return;
+        const pcm = downsampleTo16k(e.inputBuffer.getChannelData(0), audioCtx.sampleRate);
+        ws.send(pcm.buffer);
+      };
+      source.connect(processor);
+      processor.connect(audioCtx.destination);
+
+      active = true;
+      btn.classList.add("active");
+      btn.textContent = "⏹";
+      setStatus("thinking", "Bağlanır...");
+    }
+
+    function stopCall() {
+      active = false;
+      serverState = "idle";
+      isSpeaking = false;
+      speakingLockUntil = 0;
+      avatarSpeak(false);  // zəng bitdi — videonu dayandır
+      playQueue = []; playing = false;
+      if (processor) { processor.disconnect(); processor = null; }
+      if (source) { source.disconnect(); source = null; }
+      if (audioCtx) { audioCtx.close(); audioCtx = null; }
+      if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
+      if (ws && ws.readyState === WebSocket.OPEN) ws.close();
+      ws = null;
+      btn.classList.remove("active");
+      btn.textContent = "📞";
+      setStatus("", "Zəng bitdi. Yenidən başlatmaq üçün düyməyə basın");
+    }
+
+    btn.onclick = () => (active ? stopCall() : startCall().catch(err => {
+      setStatus("", "Mikrofon icazəsi lazımdır: " + err.message);
+    }));
+  
+    // Floating Transcript Toggle Logic
+    const toggleBtn = document.getElementById("transcriptToggleBtn");
+    const isHidden = localStorage.getItem("transcriptHidden") === "true";
+    
+    function updateToggleUI(hidden) {
+      if (hidden) {
+        document.body.classList.add("transcript-hidden");
+        toggleBtn.innerHTML = "💬";
+        toggleBtn.title = "Söhbət panelini göstər";
+      } else {
+        document.body.classList.remove("transcript-hidden");
+        toggleBtn.innerHTML = "✕";
+        toggleBtn.title = "Söhbət panelini gizlət";
+      }
+    }
+    
+    updateToggleUI(isHidden);
+    
+    toggleBtn.addEventListener("click", () => {
+      const currentlyHidden = document.body.classList.contains("transcript-hidden");
+      const nextHidden = !currentlyHidden;
+      localStorage.setItem("transcriptHidden", nextHidden ? "true" : "false");
+      updateToggleUI(nextHidden);
+      
+      // Scroll last message into view upon opening
+      if (!nextHidden) {
+        const lastMsg = log.lastElementChild;
+        if (lastMsg) {
+          lastMsg.scrollIntoView({ behavior: "smooth", block: "end" });
+        }
+      }
+    });
+</script>
+</body>
+
+</html>

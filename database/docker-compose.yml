@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: hotel_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER:-hotel_admin}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-hotel_secret_2026}
+      POSTGRES_DB: ${DB_NAME:-hotel_callcenter}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - hotel_pgdata:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-hotel_admin} -d ${DB_NAME:-hotel_callcenter}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+volumes:
+  hotel_pgdata:
