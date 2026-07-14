@@ -32,10 +32,19 @@ def is_meaningful_utterance(transcript: str) -> bool:
     """
     if not transcript:
         return False
-    words = transcript.split()
-    if len(words) >= 2:
+    words = [w.strip(".,!?") for w in transcript.split()]
+    if len(words) >= 3:
         return True
-    return words[0].strip(".,!?").casefold() in _VALID_SHORT_WORDS
+    if len(words) == 2:
+        # Two-word phrases used to always pass — tiny noise hallucinations
+        # ("Elə də", "Hə mm") produced meaningless answers. Conservative filter:
+        # dropped ONLY when BOTH words are short (<=3 letters) junk not in the
+        # valid list. Real answers ("Bəli bəli", "Adım Elşən") still pass.
+        return not all(
+            len(w) <= 3 and w.casefold() not in _VALID_SHORT_WORDS
+            for w in words
+        )
+    return words[0].casefold() in _VALID_SHORT_WORDS
 
 
 class Transcriber:

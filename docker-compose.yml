@@ -13,6 +13,12 @@ services:
       DB_HOST: db
       DB_PORT: "5432"
       OLLAMA_URL: http://ollama:11434/api/chat
+      # Aşağıdakılar layihə kökündəki .env faylından oxunur (docker compose
+      # substitution). .env yoxdursa xəta vermir — default local rejim işləyir.
+      STT_PROVIDER: ${STT_PROVIDER:-groq}
+      LLM_PROVIDER: ${LLM_PROVIDER:-gemini}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
       # GPU yoxdursa: WHISPER_DEVICE=cpu və WHISPER_COMPUTE=int8 edin
     volumes:
       - hf_cache:/root/.cache          # Whisper + bge-m3 modelləri (~5GB)

@@ -1,69 +1,90 @@
-# 🏨 Astana Hotel — AI Call Center — Setup Guide
+# 🏨 Astana Hotel AI Call Center — Setup Guide
 
-This document is a step-by-step guide to running the project **from scratch on another computer**.
+> Step-by-step instructions to run the project **from scratch** on a fresh machine.
+> Separate commands are provided for **Windows** and **macOS / Linux** wherever they differ.
 
 ---
 
-## 📋 Requirements
+## 🔀 Choose Your Mode
 
-Before you start, make sure the following are installed:
+The system has two operating modes. Pick one before you start:
+
+| | 🌐 API Mode | 💻 GPU / Local Mode |
+|---|---|---|
+| **GPU required?** | ❌ No | ✅ Yes (NVIDIA CUDA 12.1+) |
+| **STT** | Groq Cloud (`whisper-large-v3`) | faster-whisper large-v3 (local) |
+| **LLM** | Google Gemini API | Ollama `gemma4:e4b` (local) |
+| **Internet** | ✅ Required at runtime | ❌ Only for first download |
+| **Keys needed** | `GROQ_API_KEY` + `GEMINI_API_KEY` | none |
+| **Extra software** | — | [Ollama](https://ollama.com) |
+
+> **Recommended for most users:** API Mode — no GPU, no Ollama, just two free API keys.
+
+---
+
+## 📋 Prerequisites (Both Modes)
+
+Install the following before you begin:
 
 | Software | Version | Download |
 |----------|---------|----------|
-| **Python** | 3.11+ | https://www.python.org/downloads/ |
+| **Python** | 3.10 or 3.11 | https://www.python.org/downloads/ |
 | **Docker Desktop** | Latest | https://www.docker.com/products/docker-desktop/ |
 | **Git** *(optional)* | Latest | https://git-scm.com/ |
 
-> ⚠️ **Windows users:** When installing Python, check the **"Add Python to PATH"** option!
+> ⚠️ **Windows users:** When installing Python, tick **"Add Python to PATH"** before clicking Install!
+
+> ⚠️ **macOS users:** After installing Docker Desktop, launch it at least once so the Docker daemon starts. You can also install Docker via [Homebrew](https://brew.sh): `brew install --cask docker`.
+
+**GPU / Local Mode only — also install:**
+- [Ollama](https://ollama.com) — download and install, then make sure it is running before you continue.
+- NVIDIA GPU drivers + CUDA Toolkit 12.1+
 
 ---
 
-## 🔑 API Keys — Get These First
+## 🌐 Setup — API Mode (no GPU needed)
 
-The system needs two API keys. Both are **free**:
+### Step 1 — Get the project
 
-### 1. Groq API Key (Speech-to-Text)
+```bash
+git clone https://github.com/orxannuriyev/AzVoice-AI.git
+cd AzVoice-AI
+```
+
+Or extract the ZIP you received and open a terminal in that folder.
+
+---
+
+### Step 2 — Get your API keys (both free)
+
+**Groq API Key — Speech-to-Text:**
 1. Go to [console.groq.com](https://console.groq.com)
 2. Sign up (a Google account works)
-3. Click **API Keys** → **Create API Key**
-4. Copy and save the key (it starts with `gsk_...`)
+3. Click **API Keys → Create API Key**
+4. Save the key — it starts with `gsk_…`
 
-### 2. Gemini API Key (Language Model)
+**Gemini API Key — Language Model:**
 1. Go to [aistudio.google.com](https://aistudio.google.com)
-2. Click **Get API key** → **Create API key**
-3. Copy and save the key (it starts with `AIza...`)
+2. Click **Get API key → Create API key**
+3. Save the key — it starts with `AIza…`
 
 ---
 
-## ⚙️ Setup Steps
+### Step 3 — Create the `.env` file
 
-### Step 1 — Open the project
-
-Extract the provided folder somewhere on your computer (e.g. `C:\Projects\Astana\`).
-
-Open a terminal (PowerShell or CMD) and go to the folder:
-```
-cd C:\Projects\Astana
-```
-
----
-
-### Step 2 — Create the `.env` file
-
-There is a file named `.env.example` in the folder. Create your `.env` from it:
-
-**Windows PowerShell:**
+**Windows (PowerShell):**
 ```powershell
 Copy-Item .env.example .env
+notepad .env
 ```
 
-**CMD:**
-```cmd
-copy .env.example .env
+**macOS / Linux:**
+```bash
+cp .env.example .env
+nano .env        # or: open -e .env  (TextEdit)  |  code .env  (VS Code)
 ```
 
-Now open the `.env` file in Notepad (or VS Code) and fill in the following lines:
-
+Set these values:
 ```env
 STT_PROVIDER=groq
 GROQ_API_KEY=gsk_paste_your_groq_key_here
@@ -72,98 +93,207 @@ LLM_PROVIDER=gemini
 GEMINI_API_KEY=AIza_paste_your_gemini_key_here
 ```
 
-**Save** and close the file.
+Save and close the file.
 
 ---
 
-### Step 3 — Create a virtual environment and install packages
+### Step 4 — Create a virtual environment & install packages
 
-**Run these commands in the terminal, one after another:**
-
+**Windows (PowerShell):**
 ```powershell
-# Create the virtual environment
 python -m venv .venv
-
-# Activate the virtual environment
 .venv\Scripts\activate
-
-# Install the required packages (may take 5-10 min)
 pip install -r requirements.txt
 ```
 
-> 💡 **Note:** During installation the `torch` package (~2.5 GB) will be downloaded — depending on your internet connection, this can take a while.
+**macOS / Linux:**
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+> 💡 `torch` (~2.5 GB) will be downloaded. This may take 5–15 minutes.
+
+> 💡 **macOS note:** `requirements.txt` pins a CUDA build of `torch`. On Apple Silicon / Intel Mac, install the CPU build first:
+> ```bash
+> pip install torch==2.5.1 torchaudio==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+> pip install -r requirements.txt
+> ```
 
 ---
 
-### Step 4 — Start Docker (Database)
+### Step 5 — Start the database
 
-**Open Docker Desktop** (double-click the Docker icon in the system tray and wait for it to start).
+Make sure **Docker Desktop is running**, then:
 
-Then run this command in the terminal:
-
-```powershell
+```bash
 docker compose up -d
 ```
 
-This command automatically:
-- ✅ Creates the PostgreSQL database
-- ✅ Seeds it with hotel rooms, services, prices, etc.
-- ✅ Builds a one-year room availability schedule
-
-To check that everything is running:
-```powershell
+Verify it is healthy:
+```bash
 docker compose ps
+# hotel_db should show status "healthy"
 ```
-You should see the service (`hotel_db`) in a **"healthy"** state.
 
 ---
 
-### Step 5 — Start the server
+### Step 6 — Start the server
 
+**Windows (PowerShell):**
 ```powershell
 .venv\Scripts\python -m uvicorn web.server:app --app-dir src --port 8000
 ```
 
-The server is ready when you see these lines in the terminal:
-```
-INFO:     Application startup complete.
-INFO:     Uvicorn running on http://127.0.0.1:8000
+**macOS / Linux:**
+```bash
+.venv/bin/python -m uvicorn web.server:app --app-dir src --port 8000
 ```
 
-> 🕐 **On the first run**, the AI models (bge-m3 ~600MB) will be downloaded — wait 1-2 minutes.
+> 🕐 **First run only:** The embedding model (bge-m3, ~600 MB) downloads automatically — wait 1–2 minutes.
 
 ---
 
-### Step 6 — Open the browser
-
-Open your browser (Chrome, Edge, Firefox) and go to:
+### Step 7 — Open the browser
 
 ```
 http://localhost:8000
 ```
 
-🎉 İbrahim's interface will open!
+🎉 İbrahim's interface will open — allow microphone access when prompted.
+
+---
+
+## 💻 Setup — GPU / Local Mode (CUDA GPU required)
+
+> **Before you start:** Make sure [Ollama](https://ollama.com) is installed and running. Check with: `ollama list`
+
+### Step 1 — Get the project
+
+Same as API mode — clone or extract the ZIP.
+
+---
+
+### Step 2 — Create the `.env` file
+
+**Windows (PowerShell):**
+```powershell
+Copy-Item .env.example .env
+notepad .env
+```
+
+**macOS / Linux:**
+```bash
+cp .env.example .env
+nano .env
+```
+
+Set (or verify) these values — `local` is already the default in `.env.example`:
+```env
+STT_PROVIDER=local
+LLM_PROVIDER=local
+```
+
+No API keys are needed for local mode.
+
+---
+
+### Step 3 — Pull the LLM model into Ollama (one-time, ~8 GB)
+
+```bash
+ollama pull gemma4:e4b
+```
+
+> **Note:** This is only for the **LLM**. The STT model (faster-whisper large-v3, ~3 GB) is downloaded automatically from HuggingFace on the **first server run** — you do not need to do anything for it.
+
+---
+
+### Step 4 — Create a virtual environment & install packages
+
+**Windows (PowerShell):**
+```powershell
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+```
+> `requirements.txt` already points to the CUDA 12.1 wheel index — `torch` with CUDA support is installed automatically.
+
+**macOS / Linux (CPU torch — no CUDA on Mac):**
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install torch==2.5.1 torchaudio==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+pip install -r requirements.txt
+```
+
+---
+
+### Step 5 — Start the database
+
+Make sure **Docker Desktop is running**, then:
+
+```bash
+docker compose up -d
+docker compose ps
+# hotel_db should show status "healthy"
+```
+
+---
+
+### Step 6 — Start the server
+
+**Windows (PowerShell):**
+```powershell
+.venv\Scripts\python -m uvicorn web.server:app --app-dir src --port 8000
+```
+
+**macOS / Linux:**
+```bash
+.venv/bin/python -m uvicorn web.server:app --app-dir src --port 8000
+```
+
+> 🕐 **First run:** faster-whisper large-v3 (~3 GB) downloads automatically — wait a few minutes.
+
+---
+
+### Step 7 — Open the browser
+
+```
+http://localhost:8000
+```
 
 ---
 
 ## 🔁 Running It Next Time
 
-Each time you want to use it, you only need:
-
+**Windows:**
 ```powershell
-# 1. Start Docker (every time)
+# Start DB
 docker compose up -d
 
-# 2. Start the server
+# Start server (API mode)
 .venv\Scripts\python -m uvicorn web.server:app --app-dir src --port 8000
 ```
+
+**macOS / Linux:**
+```bash
+# Start DB
+docker compose up -d
+
+# Activate venv, then start server
+source .venv/bin/activate
+python -m uvicorn web.server:app --app-dir src --port 8000
+```
+
+> GPU/Local mode only: also make sure `ollama serve` is running (or Ollama Desktop is open).
 
 ---
 
 ## 🛑 Stopping
 
-```powershell
-# Stop the server: Ctrl + C (in the terminal)
+```bash
+# Stop the server:  Ctrl + C  (in the terminal where it is running)
 
 # Stop Docker:
 docker compose down
@@ -174,28 +304,67 @@ docker compose down
 ## ❓ Common Problems
 
 ### "Port 8000 is already in use"
+**Windows:**
 ```powershell
-# Use a different port:
 .venv\Scripts\python -m uvicorn web.server:app --app-dir src --port 8001
-# Then: http://localhost:8001
 ```
+**macOS / Linux:**
+```bash
+.venv/bin/python -m uvicorn web.server:app --app-dir src --port 8001
+```
+Then open `http://localhost:8001`.
+
+---
 
 ### "Docker daemon is not running"
-Open Docker Desktop and wait for it to fully start (until the icon stabilizes).
+Open **Docker Desktop** and wait until the whale icon in the menu bar / system tray is fully animated (not paused).
+
+---
+
+### "python: command not found" (macOS)
+macOS ships `python3`, not `python`. Use `python3` everywhere, or create an alias:
+```bash
+alias python=python3
+```
+
+---
 
 ### "Microphone permission denied"
-Click the lock icon in the browser address bar → allow microphone access.
+Click the 🔒 lock icon in the browser address bar → **Allow** microphone access.
+
+---
 
 ### "pip install failed"
-```powershell
-# Upgrade pip:
+```bash
 python -m pip install --upgrade pip
-# Then try again:
 pip install -r requirements.txt
+```
+
+---
+
+### "torch" install fails on macOS (architecture mismatch)
+Force CPU-only torch first:
+```bash
+pip install torch==2.5.1 torchaudio==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+pip install -r requirements.txt
+```
+
+---
+
+### "ollama: command not found" (GPU mode)
+[Download and install Ollama](https://ollama.com/download), then restart your terminal.
+
+---
+
+### GPU mode: "CUDA out of memory"
+Try a smaller Whisper model by adding this line to `.env`:
+```env
+WHISPER_MODEL=large-v3-turbo
+WHISPER_COMPUTE=int8
 ```
 
 ---
 
 ## 📞 Support
 
-If any problem occurs, save the error message from the terminal output — it will be needed to solve the issue.
+If something goes wrong, copy the full error output from the terminal and share it — that's all we need to debug it quickly.

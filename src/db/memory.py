@@ -18,6 +18,7 @@ Design decisions:
 """
 
 import time
+import uuid
 from typing import List, Dict
 
 from utils.logger import get_logger
@@ -43,7 +44,9 @@ class ConversationMemory:
     """Persistent storage of the LLM conversation history in PostgreSQL."""
 
     def __init__(self):
-        self.session_id = f"call_{time.strftime('%Y%m%d_%H%M%S')}"
+        # uuid suffix: two calls opened in the same second used to share one
+        # session_id and their statistics got mixed together.
+        self.session_id = f"call_{time.strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:6]}"
         self._available = False
         try:
             with get_conn() as conn:

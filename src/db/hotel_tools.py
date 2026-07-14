@@ -45,6 +45,18 @@ def _jsonable(obj):
 # automatically within this horizon (see _ensure_availability).
 BOOKING_HORIZON_DAYS = 92
 
+# Maximum reservation length. Without a limit, "check_out = 2030" style input
+# made _ensure_availability insert thousands of rows and _price_for run a
+# per-day query loop — a single call could hang the DB (voice DoS).
+MAX_NIGHTS = 30
+
+
+def _nights_check(ci: date, co: date) -> dict | None:
+    if (co - ci).days > MAX_NIGHTS:
+        return {"error": (f"Maksimum {MAX_NIGHTS} gecəlik rezervasiya qəbul olunur. "
+                          "Zəhmət olmasa daha qısa tarix aralığı seçin.")}
+    return None
+
 # Azerbaijani month names -> month number (for "15 avqust", "avqustun 15-i")
 _AZ_MONTHS = {
     "yanvar": 1, "fevral": 2, "mart": 3, "aprel": 4, "may": 5, "iyun": 6,
@@ -200,6 +212,8 @@ def check_availability(check_in: str, check_out: str, room_type: str | None = No
         return {"error": "check_out tarixi check_in-dən sonra olmalıdır."}
     if err := _horizon_check(ci):
         return err
+    if err := _nights_check(ci, co):
+        return err
     nights = (co - ci).days
     with get_conn() as conn:
         cur = conn.cursor()
@@ -323,8 +337,17 @@ def create_reservation(phone: str, full_name: str, room_type: str,
         return {"error": "check_out tarixi check_in-dən sonra olmalıdır."}
     if err := _horizon_check(ci):
         return err
+    if err := _nights_check(ci, co):
+        return err
     nights = (co - ci).days
     phone = phone.strip().replace(" ", "")
+
+    # Full name is mandatory: at least first name + last name (2 words).
+    # Guard at the DB layer too, in case the model tries to pass a single name.
+    name_parts = [p for p in (full_name or "").strip().split() if len(p) >= 2]
+    if len(name_parts) < 2:
+        return {"error": "Tam ad natamamdır — həm ad, həm soyad tələb olunur. "
+                         "Zəhmət olmasa qonağın adını VƏ soyadını soruşun."}
 
     with get_conn() as conn:
         cur = conn.cursor()

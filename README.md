@@ -108,31 +108,115 @@ Multi-layer fallbacks keep the line from ever going silent (Groq → local Whisp
 
 ## ⚙️ Getting Started
 
-**Prerequisites:** Python 3.10/3.11, [Ollama](https://ollama.com) (running), Docker. A CUDA GPU is needed only for full-local Whisper large-v3; API mode runs without a GPU.
+> 📖 **New here? Go straight to [Setup.md](Setup.md)** — it has full step-by-step instructions for both **Windows** and **macOS / Linux**, covering **API mode** and **GPU/local mode**.
 
-```bash
-# 1) Install dependencies
-python -m pip install -r requirements.txt
+The system supports two operating modes — pick whichever fits your hardware:
 
-# 2) Pull the LLM model (one time, local mode only)
-ollama pull gemma4:e4b
+| | API Mode | GPU / Local Mode |
+|---|---|---|
+| **GPU required?** | ❌ No | ✅ Yes (CUDA) |
+| **STT** | Groq Cloud (`whisper-large-v3`) | faster-whisper large-v3 (local) |
+| **LLM** | Google Gemini API | Ollama `gemma4:e4b` (local) |
+| **Internet required?** | ✅ Yes | ❌ No (after first download) |
+| **Keys needed** | `GROQ_API_KEY` + `GEMINI_API_KEY` | none |
 
-# 3) Start the database
-cd database && docker-compose up -d && cd ..
+---
 
-# 4) Configure environment
-cp .env.example .env      # then fill in your keys/settings
+### 🌐 Quick-start — API Mode (no GPU needed)
 
-# 5a) Local voice mode (microphone)
-cd src && python main.py
+**Windows (PowerShell):**
+```powershell
+# 1. Copy and fill in your API keys
+Copy-Item .env.example .env
+# Open .env and set:  STT_PROVIDER=groq  LLM_PROVIDER=gemini
+# + your GROQ_API_KEY and GEMINI_API_KEY
 
-# 5b) Web mode (browser microphone + avatar)
-uvicorn src.web.server:app --host 0.0.0.0 --port 8000
+# 2. Create venv & install packages
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+
+# 3. Start the database
+docker compose up -d
+
+# 4. Start the server
+.venv\Scripts\python -m uvicorn web.server:app --app-dir src --port 8000
 ```
 
-> **Note on the STT model:** In full-local mode, STT uses **faster-whisper large-v3**. This is *not* an Ollama model — you do **not** run `ollama pull` for it. faster-whisper downloads the weights automatically from HuggingFace on the first run (~3 GB, cached afterward). `ollama pull` above is only for the LLM (`gemma4:e4b`). In API mode, STT runs on Groq Cloud and nothing is downloaded locally.
+**macOS / Linux:**
+```bash
+# 1. Copy and fill in your API keys
+cp .env.example .env
+# Open .env and set:  STT_PROVIDER=groq  LLM_PROVIDER=gemini
+# + your GROQ_API_KEY and GEMINI_API_KEY
 
-Detailed guides: [Setup.md](Setup.md) _(step-by-step setup from scratch)_ · [docs/RUN.md](docs/RUN.md) · [docs/DEPLOY.md](docs/DEPLOY.md) · [docs/ADMIN.md](docs/ADMIN.md)
+# 2. Create venv & install packages
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+
+# 3. Start the database
+docker compose up -d
+
+# 4. Start the server
+.venv/bin/python -m uvicorn web.server:app --app-dir src --port 8000
+```
+
+---
+
+### 💻 Quick-start — GPU / Local Mode (CUDA GPU required)
+
+> **Requirements:** NVIDIA GPU with CUDA 12.1+, [Ollama](https://ollama.com) installed and running.
+
+**Windows (PowerShell):**
+```powershell
+# 1. Copy env file — local mode is already the default
+Copy-Item .env.example .env
+# Optionally open .env and verify:  STT_PROVIDER=local  LLM_PROVIDER=local
+
+# 2. Pull the LLM model into Ollama (one-time, ~8 GB)
+ollama pull gemma4:e4b
+
+# 3. Create venv & install packages (CUDA build is pulled automatically)
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+
+# 4. Start the database
+docker compose up -d
+
+# 5. Start the server
+.venv\Scripts\python -m uvicorn web.server:app --app-dir src --port 8000
+```
+
+**macOS / Linux:**
+```bash
+# 1. Copy env file
+cp .env.example .env
+# Open .env and verify:  STT_PROVIDER=local  LLM_PROVIDER=local
+
+# 2. Pull the LLM model into Ollama (one-time, ~8 GB)
+ollama pull gemma4:e4b
+
+# 3. Create venv & install packages
+python3 -m venv .venv
+source .venv/bin/activate
+# On macOS, install CPU-only torch (no CUDA on Apple Silicon):
+pip install torch==2.5.1 torchaudio==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+pip install -r requirements.txt --ignore-requires-python
+
+# 4. Start the database
+docker compose up -d
+
+# 5. Start the server
+.venv/bin/python -m uvicorn web.server:app --app-dir src --port 8000
+```
+
+> **Note:** faster-whisper large-v3 (~3 GB) is downloaded from HuggingFace automatically on the **first run** — not via `ollama pull`. `ollama pull gemma4:e4b` is only for the LLM.
+
+Then open **http://localhost:8000** in your browser.
+
+**More guides:** [Setup.md](Setup.md) _(full cross-platform walkthrough)_ · [docs/RUN.md](docs/RUN.md) · [docs/DEPLOY.md](docs/DEPLOY.md) · [docs/ADMIN.md](docs/ADMIN.md)
 
 ### 🔑 Environment Variables
 

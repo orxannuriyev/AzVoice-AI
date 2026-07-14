@@ -84,7 +84,7 @@ class Config:
     # Changed at runtime from the admin panel: Model parameters -> stt_provider.
     # The RMS gate, cleaning and hallucination filters apply to both providers
     # (see stt/transcriber.py).
-    stt_provider: str = os.getenv("STT_PROVIDER", 'groq')
+    stt_provider: str = os.getenv("STT_PROVIDER", "groq")
     # If the Groq call fails (network error / rate limit), fall back to local whisper.
     stt_fallback_to_local: bool = True
     # The Groq key is read from .env — NOT written in code, not committed to git.
@@ -106,7 +106,7 @@ class Config:
     #            stronger tool-calling and Azerbaijani; model = gemini_model).
     # Changed at runtime from the admin panel (Model parameters -> llm_provider).
     # Routing, hallucination guard and streaming are the same for both providers.
-    llm_provider: str = os.getenv("LLM_PROVIDER", 'gemini')
+    llm_provider: str = os.getenv("LLM_PROVIDER", "gemini")
     gemini_api_key: str = os.getenv("GEMINI_API_KEY", "")
     gemini_model: str = os.getenv("GEMINI_MODEL", 'gemini-3.1-flash-lite')
     gemini_openai_url: str = os.getenv(
@@ -121,9 +121,14 @@ class Config:
     llm_model: str = os.getenv("LLM_MODEL", "gemma4:e4b")
     ollama_url: str = os.getenv("OLLAMA_URL", "http://localhost:11434/api/chat")
     ollama_keep_alive: str = "30m"
-    llm_temperature: float = 0.0
+    llm_temperature: float = 0.2
     llm_top_p: float = 0.9
-    llm_max_tokens: int = 250
+    llm_max_tokens: int = 600
+    # Ollama context window (num_ctx). Default (4096) is too small: persona
+    # prompt + tool definitions + FAQ context + conversation history exceed it,
+    # and Ollama silently truncates the OLDEST part — the model "forgets" the
+    # name/dates the caller already gave and loses the tool definitions.
+    llm_num_ctx: int = int(os.getenv("LLM_NUM_CTX", "16384"))
     llm_timeout_s: float = 60.0
 
     # ── RAG (FAISS + BM25 hybrid) ──────────────────────────────────────────

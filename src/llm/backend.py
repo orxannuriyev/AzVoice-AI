@@ -39,7 +39,7 @@ logger = get_logger("LLM")
 # precisely in the FAQ — they are answered via the fast RAG path
 # (tool path 10-25s, RAG direct <1s).
 _TOOL_INTENT_RE = re.compile(
-    r"rezervasiya|bron|l[əe]ğv|imtina"
+    r"rezerv\w*|bron|l[əe]ğv|imtina"
     r"|boş\s*(ota[qğ]|yer)|otaq\s*qalıb|yer\s*qalıb|mövcudluq"
     r"|(bu\s*gün|sabah|birisi\s*gün|g[əe]l[əe]n\s*(h[əe]ft[əe]|ay))[^.?!]{0,25}ota[qğ]"
     r"|(yanvar|fevral|mart|aprel|iyun|iyul|avqust|sentyabr|oktyabr|noyabr|dekabr)"
@@ -67,7 +67,7 @@ _SLOT_QUESTION_RE = re.compile(
 # away from the tool path — otherwise the reservation ended in a tool-less "false success".
 _SLOT_ANSWER_RE = re.compile(
     r"^\s*(xeyr|yox|oldu|tamam|olar)\b"
-    r"|\b(bəli|hə+|doğrudur|düzdür|təsdiq(\s*edirəm)?|razıyam|uyğundur)\b"
+    r"|\b(bəli|hə+|doğrudur|düzdür|təsdiq\w*|razıyam|uyğundur)\b"
     r"|\bstandart\b|\bdel[üu]ks\b|\bsuit\b"
     r"|\+?\d[\d\s\-\.]{4,}"
     r"|\b(yanvar|fevral|mart|aprel|may|iyun|iyul|avqust|sentyabr|oktyabr|noyabr|dekabr"
@@ -97,6 +97,101 @@ _WRITE_SUCCESS_CLAIM_RE = re.compile(
 )
 # DB-writing (write) tools — a success claim can only be confirmed by these.
 _WRITE_TOOLS = frozenset({"create_reservation", "cancel_reservation"})
+
+# ── Deterministic slot tracking ────────────────────────────────────────────
+# The small local model forgets given info and does not reliably call
+# create_reservation. Therefore the CODE itself extracts the reservation slots
+# (name, phone, room type, dates) from the conversation, injects them into the
+# system prompt every turn ("do not re-ask"), and on the user's confirmation
+# executes create_reservation directly — without depending on the model.
+
+# NAME token: MUST start with a capital letter ("Elşən", "Şükürov"). Without
+# this, common words after "adam" ("otaqda iki adam qalacaq") were captured as
+# a fake name and could reach the DB. Keyword parts ("adım", "soyadım") are
+# case-insensitive via the inline (?i:...) group; the name class is NOT.
+_AZ_NAME = r"[A-ZƏĞİÖÜÇŞ][a-zəğıöüçş\-']+"
+
+_NAME_USER_RES = [
+    # "ad və soyadım Elşən Şükürovdur"
+    re.compile(rf"(?i:ad\s+v[əe]\s+soyad[ıi]m(?:\s+is[əe])?)\s+({_AZ_NAME})\s+({_AZ_NAME})"),
+    # "adım Elşən (Şükürov)"
+    re.compile(rf"\b(?i:ad[ıi]m(?:[ıi]z)?(?:\s+is[əe])?)\s+({_AZ_NAME})(?:\s+({_AZ_NAME}))?"),
+    # STT sometimes writes "adım" as "adam" — accepted ONLY when followed by a
+    # capitalized name ("Adam Emin Əliyevdir" yes, "iki adam qalacaq" no).
+    re.compile(rf"\b(?i:adam)\s+({_AZ_NAME})(?:\s+({_AZ_NAME}))?"),
+]
+_SURNAME_USER_RE = re.compile(rf"\b(?i:soyad[ıi]m(?:[ıi]z)?(?:\s+is[əe])?)\s+({_AZ_NAME})")
+# Assistant's own summary ("Adınız Elşən, soyadınız Şükürovdur") — fills gaps.
+_NAME_ASSIST_RE = re.compile(rf"\b(?i:ad[ıi]n[ıi]z(?:\s+is[əe])?)\s+({_AZ_NAME})")
+_SURNAME_ASSIST_RE = re.compile(rf"\b(?i:soyad[ıi]n[ıi]z(?:\s+is[əe])?)\s+({_AZ_NAME})")
+
+_ROOM_TYPE_RE = re.compile(r"\b(standart|del[üu]ks|deluks|suit)\b", re.IGNORECASE)
+_DATE_ISO_RE = re.compile(r"\b(20\d{2})-(\d{1,2})-(\d{1,2})\b")
+_AZ_MONTHS = {"yanvar": 1, "fevral": 2, "mart": 3, "aprel": 4, "may": 5,
+              "iyun": 6, "iyul": 7, "avqust": 8, "sentyabr": 9,
+              "oktyabr": 10, "noyabr": 11, "dekabr": 12}
+_DATE_TEXT_RE = re.compile(
+    r"\b(\d{1,2})\s+(yanvar|fevral|mart|aprel|may|iyun|iyul|avqust|sentyabr|oktyabr|noyabr|dekabr)\w*",
+    re.IGNORECASE)
+_CHECKIN_HINT_RE = re.compile(r"g[əe]li[şs]|giri[şs]|\bçek-?in\b", re.IGNORECASE)
+_CHECKOUT_HINT_RE = re.compile(r"gedi[şs]|ç[ıi]x[ıi][şs]|ayr[ıi]l[ıi][şs]|\bçek-?aut\b", re.IGNORECASE)
+
+_PHONE_TEXT_RE = re.compile(r"(?:\+|plus\s*)?\s*(?:9\s*9\s*4|0\d)[\d\s,\-\.]{6,}", re.IGNORECASE)
+
+# The user's clear confirmation ("bəli, təsdiqləyirəm") — "yox/deyil" negation is excluded.
+_USER_CONFIRM_RE = re.compile(
+    r"\b(t[əe]sdiq\w*|b[əe]li|h[əe]\b|doğrudur|düzdür|raz[ıi]yam|olar|edin|el[əe]yin)\b",
+    re.IGNORECASE)
+_USER_NEGATE_RE = re.compile(r"\b(yox|xeyr|deyil|s[əe]hv|yanl[ıi][şs]|dayan|l[əe]ğv)\b", re.IGNORECASE)
+# The assistant's final confirmation question ("Bu məlumatlar doğrudurmu ... təsdiqləyirsinizmi?")
+_ASSIST_CONFIRM_Q_RE = re.compile(r"doğrudur|t[əe]sdiql[əe]yirsiniz|raz[ıi]s[ıi]n[ıi]z", re.IGNORECASE)
+
+_COPULA_RE = re.compile(r"(d[ıiuü]r|d[ıiuü])$")
+
+
+def _strip_copula(token: str) -> str:
+    """'Şükürovdur' -> 'Şükürov' (only if the remainder is long enough)."""
+    stripped = _COPULA_RE.sub("", token)
+    return stripped if len(stripped) >= 3 else token
+
+
+def _extract_phone(text: str) -> str | None:
+    m = _PHONE_TEXT_RE.search(text.replace("plus", "+").replace("Plus", "+"))
+    if not m:
+        return None
+    digits = re.sub(r"\D", "", m.group(0))
+    if digits.startswith("994") and len(digits) == 12:
+        return "+" + digits
+    if digits.startswith("0") and len(digits) == 10:
+        return "+994" + digits[1:]
+    if len(digits) == 9:
+        return "+994" + digits
+    return None
+
+
+def _extract_dates(text: str) -> list[str]:
+    """Returns ISO (YYYY-MM-DD) dates found in the text, in order."""
+    from datetime import date
+    today = date.today()
+    found: list[str] = []
+    for m in _DATE_ISO_RE.finditer(text):
+        y, mo, d = int(m.group(1)), int(m.group(2)), int(m.group(3))
+        try:
+            found.append(date(y, mo, d).isoformat())
+        except ValueError:
+            continue
+    for m in _DATE_TEXT_RE.finditer(text):
+        d, mo = int(m.group(1)), _AZ_MONTHS[m.group(2).lower()]
+        try:
+            cand = date(today.year, mo, d)
+        except ValueError:
+            continue
+        if cand < today:
+            cand = date(today.year + 1, mo, d)
+        iso = cand.isoformat()
+        if iso not in found:
+            found.append(iso)
+    return found
 
 REPLACEMENTS = {
     # --- App / technology ---
@@ -220,7 +315,9 @@ def _warmup_ollama() -> None:
                     "stream": False,
                     "think": False,
                     "keep_alive": cfg.ollama_keep_alive,
-                    "options": {"num_predict": 1},
+                    # num_ctx must match the real requests — otherwise Ollama
+                    # reloads the model on the first real call (extra latency).
+                    "options": {"num_predict": 1, "num_ctx": cfg.llm_num_ctx},
                 },
                 timeout=cfg.llm_timeout_s,
             ).raise_for_status()
@@ -278,6 +375,10 @@ class LLMBackend:
         self._active_provider = (cfg.llm_provider or "local").lower()
         # The last time the wait message was spoken (for the cooldown)
         self._last_wait_ts = 0.0
+        # Deterministic reservation slots — collected by CODE from the
+        # conversation; not dependent on the model's memory.
+        self._slots: dict = {"first_name": None, "last_name": None, "phone": None,
+                             "room_type": None, "check_in": None, "check_out": None}
         # Preload the model in the background — so the first real request does not
         # wait 15+ seconds on a cold start (see logs: "LLM ilk cümlə latency: 15804 ms").
         # Only meaningful in local (Ollama) mode; Gemini is a cloud API.
@@ -353,6 +454,123 @@ class LLMBackend:
             return cleaned
         return None
 
+    # --- deterministic slot tracking ------------------------------------------
+
+    def _update_slots(self, text: str, from_assistant: bool = False) -> None:
+        """Extracts reservation slots from the text. User text can OVERWRITE
+        slots (the caller corrects themselves); assistant text only FILLS
+        empty slots (except ISO dates, which are normalized values)."""
+        s = self._slots
+
+        def _set(key: str, value):
+            if value and (not from_assistant or not s[key]):
+                s[key] = value
+
+        # Name / surname
+        if from_assistant:
+            if m := _NAME_ASSIST_RE.search(text):
+                _set("first_name", _strip_copula(m.group(1)))
+            if m := _SURNAME_ASSIST_RE.search(text):
+                _set("last_name", _strip_copula(m.group(1)))
+        else:
+            got_surname = False
+            for rx in _NAME_USER_RES:
+                if m := rx.search(text):
+                    s["first_name"] = _strip_copula(m.group(1))
+                    if m.lastindex and m.lastindex >= 2 and m.group(2):
+                        s["last_name"] = _strip_copula(m.group(2))
+                        got_surname = True
+                    break
+            # "soyadım Y" is checked separately — but if the surname was already
+            # captured from "ad və soyadım X Y", it must not overwrite it
+            # (there "soyadım X" would wrongly match the FIRST name).
+            if not got_surname and (m := _SURNAME_USER_RE.search(text)):
+                s["last_name"] = _strip_copula(m.group(1))
+
+        # Phone / room type
+        _set("phone", _extract_phone(text))
+        if m := _ROOM_TYPE_RE.search(text):
+            room = m.group(1).lower()
+            room = {"deluks": "Delüks", "delüks": "Delüks", "deluks": "Delüks",
+                    "standart": "Standart", "suit": "Suit"}.get(room, room.title())
+            _set("room_type", room)
+
+        # Dates: two dates in one sentence -> first = check-in, second = check-out;
+        # a single date is assigned by the gəliş/gediş hint words.
+        dates = _extract_dates(text)
+        if len(dates) >= 2:
+            ci, co = sorted(dates[:2])
+            if not from_assistant or not s["check_in"]:
+                s["check_in"] = ci
+            if not from_assistant or not s["check_out"]:
+                s["check_out"] = co
+        elif len(dates) == 1:
+            if _CHECKOUT_HINT_RE.search(text) and not _CHECKIN_HINT_RE.search(text):
+                _set("check_out", dates[0]) if from_assistant else s.__setitem__("check_out", dates[0])
+            elif _CHECKIN_HINT_RE.search(text):
+                _set("check_in", dates[0]) if from_assistant else s.__setitem__("check_in", dates[0])
+            elif not s["check_in"]:
+                s["check_in"] = dates[0]
+            elif not s["check_out"] and dates[0] > s["check_in"]:
+                s["check_out"] = dates[0]
+
+    def _slots_ready(self) -> bool:
+        s = self._slots
+        return all([s["first_name"], s["last_name"], s["phone"],
+                    s["room_type"], s["check_in"], s["check_out"]])
+
+    def _slots_block(self) -> str:
+        """The collected-slots block appended to the system prompt every turn."""
+        s = self._slots
+        yoxdur = "hələ məlum deyil"
+        name = " ".join(p for p in (s["first_name"], s["last_name"]) if p) or yoxdur
+        missing = []
+        if not s["first_name"] or not s["last_name"]:
+            missing.append("ad-soyad")
+        if not s["phone"]:
+            missing.append("telefon")
+        if not s["room_type"]:
+            missing.append("otaq tipi")
+        if not s["check_in"]:
+            missing.append("gəliş tarixi")
+        if not s["check_out"]:
+            missing.append("gediş tarixi")
+        return (
+            "\n\nİNDİYƏ QƏDƏR TOPLANAN REZERVASİYA MƏLUMATLARI "
+            "(dəyişməz fakt kimi qəbul et, bunları TƏKRAR SORUŞMA):\n"
+            f"  Ad-soyad: {name}\n"
+            f"  Telefon: {s['phone'] or yoxdur}\n"
+            f"  Otaq tipi: {s['room_type'] or yoxdur}\n"
+            f"  Gəliş: {s['check_in'] or yoxdur} | Gediş: {s['check_out'] or yoxdur}\n"
+            + ("  ÇATIŞMAYAN: " + ", ".join(missing) + " — yalnız bunları soruş.\n"
+               if missing else
+               "  Bütün məlumatlar tamdır — qiyməti de və təsdiq soruş.\n")
+        )
+
+    def _try_auto_reservation(self, user_text: str) -> dict | None:
+        """If the user gave a CLEAR confirmation, the previous assistant message
+        was the confirmation question, and all slots are complete — the code
+        itself executes create_reservation (does not trust the model).
+        Returns the tool result, or None (conditions not met)."""
+        if not self._slots_ready():
+            return None
+        if _USER_NEGATE_RE.search(user_text) or not _USER_CONFIRM_RE.search(user_text):
+            return None
+        last = self._history[-1] if self._history else None
+        if not (last and last["role"] == "assistant"
+                and _ASSIST_CONFIRM_Q_RE.search(last["content"])):
+            return None
+        s = self._slots
+        args = {"phone": s["phone"],
+                "full_name": f"{s['first_name']} {s['last_name']}",
+                "room_type": s["room_type"],
+                "check_in": s["check_in"], "check_out": s["check_out"]}
+        logger.info(f"Avtomatik create_reservation (kod tərəfindən): {args}")
+        result = execute_tool("create_reservation", args)
+        logger.info(f"Tool nəticəsi (create_reservation): "
+                    f"{json.dumps(result, ensure_ascii=False)[:300]}")
+        return result
+
     # --- prompt / history ----------------------------------------------------
 
     def _build_messages(self, user_text: str, candidates: List[Candidate]) -> list:
@@ -384,6 +602,9 @@ class LLMBackend:
         return messages
 
     def _update_history(self, user_text: str, response: str):
+        # The assistant's summary sentences ("Adınız Elşən, gəliş 2026-07-21...")
+        # fill the EMPTY slots — normalized dates often appear first here.
+        self._update_slots(response, from_assistant=True)
         self._history.append({"role": "user", "content": user_text})
         self._history.append({"role": "assistant", "content": response})
         max_messages = cfg.max_history_turns * 2
@@ -412,6 +633,7 @@ class LLMBackend:
                     "temperature": cfg.llm_temperature,
                     "top_p": cfg.llm_top_p,
                     "num_predict": cfg.llm_max_tokens,
+                    "num_ctx": cfg.llm_num_ctx,
                 },
             },
             timeout=cfg.llm_timeout_s,
@@ -553,14 +775,20 @@ class LLMBackend:
             "REZERVASİYA SIRALAMA QAYDASI — ÇOX VACİB:\n"
             "Rezervasiya üçün lazım olan bütün məlumatları BİR ANDA soruşma. "
             "Hər məlumatı AYRI-AYRI, SİRASI İLƏ, bir sual olaraq soruş:\n"
-            "  Addım 1 → Yalnız tam adı soruş. Cavabı al, növbəti addıma keç.\n"
+            "  Addım 1 → Yalnız tam adı soruş: MÜTLƏQ həm ad, həm SOYAD. İstifadəçi "
+            "tək ad desə (məs. yalnız 'Elşən'), soyadını da soruş — soyadsız növbəti "
+            "addıma KEÇMƏ.\n"
             "  Addım 2 → Yalnız əlaqə (telefon) nömrəsini soruş. Cavabı al.\n"
             "  Addım 3 → Yalnız otaq tipini soruş: Standart, Delüks, yoxsa Suit? Cavabı al.\n"
             "  Addım 4 → Yalnız gəliş (çek-in) tarixini soruş. Cavabı al.\n"
             "  Addım 5 → Yalnız gedis (çek-aut) tarixini soruş. Cavabı al.\n"
-            "  Addım 6 → Topladığın bütün məlumatları bir dəfə istifadəçiyə oxu və "
-            "'Məlumatlar doğrudur?' deyə təsdiq soruş.\n"
-            "  Addım 7 → İstifadəçi 'Bəli' deyəndən sonra DƏRHAL create_reservation tool-unu çağır.\n"
+            "  Addım 6 → check_availability tool-unu çağırıb bu tarixlər üçün boş otağı "
+            "və ÜMUMİ QİYMƏTİ öyrən. Otaq yoxdursa, başqa tarix/tip təklif et.\n"
+            "  Addım 7 → Topladığın bütün məlumatları (ad-soyad, telefon, otaq tipi, "
+            "tarixlər) VƏ ümumi qiyməti bir dəfə istifadəçiyə oxu, sonra "
+            "'Bu qiymətə razısınız, rezervasiyanı təsdiqləyirsiniz?' deyə soruş. "
+            "Qiyməti deməmiş təsdiq soruşma.\n"
+            "  Addım 8 → İstifadəçi 'Bəli' deyəndən sonra DƏRHAL create_reservation tool-unu çağır.\n"
             "Hər addımda yalnız bir sual ver. Cavab gəlmədən növbəti sualı soruşma.\n\n"
             "ÇOX VACİB QAYDALAR:\n"
             "1. Rezervasiya YALNIZ create_reservation tool-u çağırılıb 'success: true' "
@@ -611,6 +839,7 @@ class LLMBackend:
                     "temperature": cfg.llm_temperature,
                     "top_p": cfg.llm_top_p,
                     "num_predict": cfg.llm_max_tokens,
+                    "num_ctx": cfg.llm_num_ctx,
                 },
             },
             timeout=cfg.llm_timeout_s,
@@ -761,7 +990,7 @@ class LLMBackend:
         ("is breakfast included?") are answered immediately without a tool."""
         start = time.perf_counter()
         full_response = ""
-        system_content = self._tools_system_prompt()
+        system_content = self._tools_system_prompt() + self._slots_block()
         if candidates is None:
             candidates = self.knowledge.retrieve(user_text)
         if candidates:
@@ -891,6 +1120,36 @@ class LLMBackend:
         # if the API fails it will drop to "local" for this turn.
         self._active_provider = (cfg.llm_provider or "local").lower()
 
+        # ── Deterministic slot tracking + auto-execution ──────────────────
+        # Slots are extracted from the user's text by CODE. If this turn is a
+        # clear confirmation answer and all slots are complete, the reservation
+        # is written to the DB directly — whether the model calls the tool or
+        # not no longer matters.
+        self._update_slots(user_text)
+        auto = self._try_auto_reservation(user_text)
+        if auto is not None:
+            self._last_route = "tools"
+            if auto.get("success"):
+                code = auto.get("short_code") or auto.get("confirmation_code") or ""
+                total = auto.get("total_price") or auto.get("final_price")
+                response = "Təşəkkür edirəm, rezervasiyanız uğurla təsdiqləndi!"
+                if total:
+                    response += f" Ümumi məbləğ {total} manatdır."
+                if code:
+                    response += f" Təsdiq nömrəniz: {code}."
+                response += " Sizi Astana Hotel-də görməyə şad olacağıq!"
+                # Reservation done — slots are cleared (protection against double booking)
+                self._slots = dict.fromkeys(self._slots)
+            else:
+                err = auto.get("error") or "Naməlum xəta baş verdi."
+                response = f"Üzr istəyirəm, rezervasiyanı tamamlaya bilmədim. {err}"
+            for sentence in _split_sentences(response):
+                cleaned = self._emit(sentence)
+                if cleaned:
+                    yield cleaned
+            self._update_history(user_text, response)
+            return
+
         # Routing: hotel operation queries (reservation, price, free room...) are
         # answered with database tools. If a tool dialogue is ongoing (e.g. the
         # model asked for name/phone), answers without keywords also stay on the
@@ -960,6 +1219,19 @@ class LLMBackend:
             return
 
         best = candidates[0] if candidates else None
+
+        # FAQ-HIJACK GUARD: the FAQ base contains user-INTENT phrasings
+        # ("Rezervasiyamı təsdiqləmək istəyirəm"). If the top match is such an
+        # operational intent (reservation/cancel), an FAQ text answer is wrong —
+        # the conversation is handed to the tool path (observed in logs:
+        # "Məlumatlarımı təsdiqləyirəm" -> Direct FAQ answer broke the flow).
+        if best and _TOOL_INTENT_RE.search(best.question):
+            logger.info(
+                f"FAQ-hijack qarşısı: '{best.question[:60]}' → tool yoluna yönləndirildi")
+            self._last_route = "tools"
+            yield from self._stream_with_tools(user_text, candidates)
+            return
+
         multi_intent = _is_multi_intent(user_text) and len(candidates) > 1
 
         # High confidence + single-intent, context-free question — no LLM needed,
@@ -1056,5 +1328,6 @@ class LLMBackend:
         The call log in the DB is left untouched."""
         self._history = []
         self._last_route = "rag"
-        logger.info("Söhbət tarixi silindi.")
+        self._slots = dict.fromkeys(self._slots)
+        logger.info("Söhbət tarixi silindi.")  # noqa
 

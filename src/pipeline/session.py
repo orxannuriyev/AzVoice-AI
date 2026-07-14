@@ -64,9 +64,13 @@ class CallSession:
     def greet(self):
         """Greeting spoken once at the start of the call."""
         greeting = (
-            "Salam, hər vaxtınız xeyir! "
-            "Sizinlə əlaqə saxlayan Astana otelin süni intellekt assistenti İbrahimdir. "
-            "Sizi dinləyirəm, necə kömək edə bilərəm?"
+            "Salam, hörmətli münsiflər və dəyərli qonaqlar! "
+            "Astana Hotel-ə xoş gəlmisiniz. "
+            "Ümid edirəm, gününüz xoş keçir və çox yorulmamısınız. "
+            "Mən İbrahiməm – otelimizin yorulmayan əməkdaşı. "
+            "Maaş almıram, məzuniyyət istəmirəm, amma suallarınızı "
+            "24 saat cavablandırmağa hazıram. "
+            "Buyurun, bu gün sizə necə kömək edə bilərəm?"
         )
         logger.info(f"Salamlama: {greeting}")
         print(f"\nIbrahim: {greeting}")

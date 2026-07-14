@@ -1,4 +1,7 @@
+import threading
 import time
+from pathlib import Path
+
 import torch
 import numpy as np
 from utils.logger import get_logger, log_latency
@@ -6,16 +9,39 @@ from config import cfg
 
 logger = get_logger("VAD")
 
+# torch.hub.load used to run on EVERY WebSocket connection — each new call cost
+# ~0.5-1s and torch.hub could touch GitHub over the network (a call would not
+# even open if the internet was down). Now: the first load comes through the
+# hub (fills the local cache), subsequent ones load OFFLINE from the local
+# cache directory (source="local"). Each connection still gets its OWN model
+# instance — Silero keeps internal LSTM state, a shared instance would mix the
+# streams of concurrent calls.
+_HUB_LOCK = threading.Lock()
+_LOCAL_REPO: str | None = None
+
+
+def _load_silero():
+    global _LOCAL_REPO
+    with _HUB_LOCK:
+        if _LOCAL_REPO:
+            return torch.hub.load(
+                repo_or_dir=_LOCAL_REPO, model="silero_vad",
+                source="local", trust_repo=True,
+            )
+        model, utils = torch.hub.load(
+            repo_or_dir="snakers4/silero-vad", model="silero_vad",
+            force_reload=False, trust_repo=True,
+        )
+        cached = Path(torch.hub.get_dir()) / "snakers4_silero-vad_master"
+        if cached.exists():
+            _LOCAL_REPO = str(cached)
+        return model, utils
+
 
 class VADDetector:
     def __init__(self):
         logger.info("Silero VAD yüklənir...")
-        self.model, self.utils = torch.hub.load(
-            repo_or_dir="snakers4/silero-vad",
-            model="silero_vad",
-            force_reload=False,
-            trust_repo=True
-        )
+        self.model, self.utils = _load_silero()
         logger.info("Silero VAD hazırdır.")
 
         self._speech_started = False
