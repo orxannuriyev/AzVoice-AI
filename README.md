@@ -10,10 +10,10 @@ The assistant, **İbrahim**, listens to the caller in Azerbaijani, understands t
 
 | Member | Role |
 |--------|------|
-| **Orkhan Nuriyev** | System Architecture, Voice Assistant Pipeline, Backend Integration |
-| **Ibrahim Suleymanov** | LLM Integration, Prompt Engineering, Speech Processing |
-| **Esli Ehmedova** | Demo Development, Web Interface, Frontend Integration |
-| **Ulviyye Eliyeva** | Data Collection & Preprocessing, Testing & Evaluation, Documentation |
+| **Orkhan Nuriyev** | **AI Engineer** – STT, LLM & TTS Integration, RAG Development, Database & Docker Infrastructure, Demo Development |
+| **Ibrahim Suleymanov** | **AI Engineer** – STT, LLM & TTS Integration, RAG Development, Web Interface Development, Database & Docker Infrastructure |
+| **Esli Ehmedova** | **Frontend & Documentation Engineer** – Web Interface Development, Demo Development, Data Preprocessing, Project Documentation |
+| **Ulviyye Eliyeva** | **Data & QA Engineer** – Data Collection, Testing & Evaluation, Quality Assurance |
 
 ---
 
