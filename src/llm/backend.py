@@ -92,7 +92,12 @@ _WRITE_SUCCESS_CLAIM_RE = re.compile(
     r"(yarad[ıi]ld|yarad[ıi]l[ıi]b|təsdiql[əe]nd|təsdiql[əe]nm[ıi]ş|təsdiql[əe]n[ıi]b"
     r"|rəsmiləşdiril|tamamland|qeydiyyata\s+al[ıi]n)"
     r"|qeydiyyatdan\s+ke[çc]ird"
-    r"|ləğv\s+edil(d|[ıi]b)",
+    r"|ləğv\s+edil(d|[ıi]b)"
+    # There is NO update function — a completed "I updated / changed the
+    # reservation/price" claim is always false. Only finished forms are caught
+    # ("yenilədim", "yeniləndi"), not intent/questions ("yeniləyimmi?").
+    r"|(rezervasiya|bron|qiymət|məbləğ)\w*[^.?!]{0,40}"
+    r"(yenilə(d[ıi]m|nd[ıi]|n[ıi]b)|dəyişdir(d[ıi]m|ild[ıi]|il[ıi]b)|düzəl(td[ıi]m|dild[ıi]))",
     re.IGNORECASE,
 )
 # DB-writing (write) tools — a success claim can only be confirmed by these.
@@ -586,7 +591,10 @@ class LLMBackend:
         return (f"\n\nDƏQİQ QİYMƏT (verilənlər bazasından hesablanıb): "
                 f"{o['total_price']} AZN — {o.get('nights')} gecə, {s['room_type']}{camp}.\n"
                 "Müştəriyə qiymət deyəndə YALNIZ bu rəqəmi söylə. ÖZÜN HESABLAMA, "
-                "gecə sayını özün vurma, başqa rəqəm uydurma.\n")
+                "gecə sayını özün vurma, başqa rəqəm uydurma.\n"
+                "Müştəri bu qiymətə etiraz etsə də, rəqəm DƏYİŞMİR — izah et ki, "
+                "gecəlik tarif tarixdən asılıdır və 'başlayır' qiyməti minimumdur. "
+                "Müştərinin təklif etdiyi rəqəmlə RAZILAŞMA.\n")
 
     def _try_auto_reservation(self, user_text: str) -> dict | None:
         """If the user gave a CLEAR confirmation, the previous assistant message
@@ -862,7 +870,16 @@ class LLMBackend:
             "xidmət haqqında soruşsa, o zaman detalları söylə.\n"
             "10. Müştəri təsdiq kodunu (6 rəqəm) deyəndə get_reservation_by_code "
             "tool-u ilə rezervasiyanı tap; kodu telefon nömrəsi ilə qarışdırma.\n"
-            "11. Cavab mətnində HEÇ VAXT JSON, kod, fiqurlu mötərizə {}, "
+            "11. Mövcud rezervasiyanı DƏYİŞMƏK/YENİLƏMƏK funksiyası YOXDUR — "
+            "'rezervasiyanı yenilədim', 'qiyməti dəyişdim' HEÇ VAXT DEMƏ, bu yalandır. "
+            "Müştəri dəyişiklik istəsə: əvvəlki rezervasiyanı cancel_reservation ilə "
+            "ləğv edib yenisini yaratmağı təklif et.\n"
+            "12. QİYMƏT QƏTİDİR: qiymət verilənlər bazasından hesablanır və müştəri "
+            "etiraz etsə belə DƏYİŞMİR. 'X manatdan başlayır' MİNİMUM qiymətdir — "
+            "gecəlik tarif tarixə və mövsümə görə fərqli ola bilər. Müştəri "
+            "'niyə baha çıxdı' soruşsa, bunu izah et; öz hesabınla YENİ rəqəm çıxarma, "
+            "müştərinin dediyi rəqəmlə razılaşıb qiyməti 'düzəltmə'.\n"
+            "13. Cavab mətnində HEÇ VAXT JSON, kod, fiqurlu mötərizə {}, "
             "\"action\", \"action_input\" və ya tool adları yazma. Tool çağırmaq "
             "istəyirsənsə, onu YALNIZ rəsmi tool-calling mexanizmi ilə çağır — "
             "mətn kimi yazsan istifadəçi onu eşidəcək, bu QADAĞANDIR."
