@@ -379,6 +379,13 @@ class LLMBackend:
         # conversation; not dependent on the model's memory.
         self._slots: dict = {"first_name": None, "last_name": None, "phone": None,
                              "room_type": None, "check_in": None, "check_out": None}
+        # Deterministic price quote: when room type + dates are known, the CODE
+        # itself calls check_availability and the exact DB price is injected
+        # into the system prompt — the model must not invent its own number.
+        # Cached by (room_type, check_in, check_out) so the DB is not queried
+        # on every single turn.
+        self._price_cache_key: tuple | None = None
+        self._price_cache_res: dict | None = None
         # Preload the model in the background — so the first real request does not
         # wait 15+ seconds on a cold start (see logs: "LLM ilk cümlə latency: 15804 ms").
         # Only meaningful in local (Ollama) mode; Gemini is a cloud API.
@@ -546,6 +553,40 @@ class LLMBackend:
                if missing else
                "  Bütün məlumatlar tamdır — qiyməti de və təsdiq soruş.\n")
         )
+
+    def _price_block(self) -> str:
+        """When room type + dates are known, computes the EXACT price via the
+        check_availability tool and returns it as a system-prompt block.
+        The model quoted an invented number ("600 manat") while the DB wrote
+        782 (rate plans + campaign) — with this block the model may only speak
+        the DB-calculated figure. On any error returns "" (behavior unchanged)."""
+        s = self._slots
+        if not (s["room_type"] and s["check_in"] and s["check_out"]):
+            return ""
+        key = (s["room_type"], s["check_in"], s["check_out"])
+        if self._price_cache_key != key:
+            res = execute_tool("check_availability", {
+                "check_in": s["check_in"], "check_out": s["check_out"],
+                "room_type": s["room_type"],
+            })
+            self._price_cache_key, self._price_cache_res = key, res
+            logger.info(f"Deterministik qiymət sorğusu {key}: "
+                        f"{json.dumps(res, ensure_ascii=False)[:200]}")
+        res = self._price_cache_res or {}
+        opts = res.get("options") or []
+        if not opts:
+            return ""
+        o = opts[0]
+        if not o.get("available"):
+            return ("\n\nDİQQƏT — BOŞ OTAQ YOXDUR: seçilmiş tarixlərdə "
+                    f"{s['room_type']} tipində boş otaq yoxdur. Müştəriyə bunu de "
+                    "və başqa tarix və ya otaq tipi təklif et. Rezervasiya təsdiqi soruşma.\n")
+        camp = (f" ('{o['campaign_applied']}' kampaniyası tətbiq olunub)"
+                if o.get("campaign_applied") else "")
+        return (f"\n\nDƏQİQ QİYMƏT (verilənlər bazasından hesablanıb): "
+                f"{o['total_price']} AZN — {o.get('nights')} gecə, {s['room_type']}{camp}.\n"
+                "Müştəriyə qiymət deyəndə YALNIZ bu rəqəmi söylə. ÖZÜN HESABLAMA, "
+                "gecə sayını özün vurma, başqa rəqəm uydurma.\n")
 
     def _try_auto_reservation(self, user_text: str) -> dict | None:
         """If the user gave a CLEAR confirmation, the previous assistant message
@@ -807,10 +848,13 @@ class LLMBackend:
             "7. İstifadəçi ümumi məlumat (otel, otaqlar, qiymətlər) istəyəndə əlavə "
             "sual vermədən uyğun tool-u (get_hotel_info, get_room_types) birbaşa "
             "çağırıb cavabı ver.\n"
-            "8. Rezervasiya uğurla yaradıldıqda YALNIZ short_code-u (6 rəqəmli təsdiq "
-            "nömrəsini) istifadəçiyə söylə. reservation_id, UUID və ya digər texniki "
-            "identifikatorları HEÇ VAXT OXUMA — onlar yalnız daxili istifadə üçündür.\n"
-            "   Düzgün nümunə: 'Rezervasiyanız təsdiqləndi. Təsdiq nömrəniz: 482910.'\n"
+            "8. Rezervasiya uğurla yaradıldıqda tool nəticəsindəki total_price "
+            "məbləğini VƏ short_code-u (6 rəqəmli təsdiq nömrəsini) istifadəçiyə "
+            "söylə — qiyməti tool nəticəsindən götür, özün hesablama. "
+            "reservation_id, UUID və ya digər texniki identifikatorları HEÇ VAXT "
+            "OXUMA — onlar yalnız daxili istifadə üçündür.\n"
+            "   Düzgün nümunə: 'Rezervasiyanız təsdiqləndi. Ümumi məbləğ 782 manatdır. "
+            "Təsdiq nömrəniz: 482910.'\n"
             "   Səhv nümunə: 'Rezervasiya ID-niz: 3f2a9b1c-...' — QADAĞANDIR.\n"
             "9. list_services nəticəsini tam siyahı kimi sadalama — bu çox uzun çəkir. "
             "Yalnız mövcud kateqoriyaları qısa şəkildə say (məs. 'Spa, transfer, səhər "
@@ -990,7 +1034,8 @@ class LLMBackend:
         ("is breakfast included?") are answered immediately without a tool."""
         start = time.perf_counter()
         full_response = ""
-        system_content = self._tools_system_prompt() + self._slots_block()
+        system_content = (self._tools_system_prompt() + self._slots_block()
+                          + self._price_block())
         if candidates is None:
             candidates = self.knowledge.retrieve(user_text)
         if candidates:
@@ -1329,5 +1374,7 @@ class LLMBackend:
         self._history = []
         self._last_route = "rag"
         self._slots = dict.fromkeys(self._slots)
+        self._price_cache_key = None
+        self._price_cache_res = None
         logger.info("Söhbət tarixi silindi.")  # noqa
 

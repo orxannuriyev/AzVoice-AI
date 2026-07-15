@@ -155,7 +155,8 @@ class Config:
 
     # ── TTS ────────────────────────────────────────────────────────────────
     tts_voice: str = "az-AZ-BabekNeural"
-    tts_rate: str = "+0%"
+    # +15% ≈ 1.15x speed — the default pace sounded too slow for callers.
+    tts_rate: str = "+15%"
     tts_volume: str = "+0%"
     tts_sample_rate: int = 24000
 
