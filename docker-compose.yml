@@ -1,6 +1,6 @@
-# Tam stack: veb app + PostgreSQL + Ollama — bir GPU serverdə.
-# İşə salma:  docker compose up -d --build
-# İlk dəfə:   docker compose exec ollama ollama pull gemma4:e4b
+# Full stack: web app + PostgreSQL + Ollama — on a single GPU server.
+# Start:      docker compose up -d --build
+# First time: docker compose exec ollama ollama pull gemma4:e4b
 # Sonra:      http://<server-ip>:8000
 services:
   app:
@@ -13,15 +13,16 @@ services:
       DB_HOST: db
       DB_PORT: "5432"
       OLLAMA_URL: http://ollama:11434/api/chat
-      # Aşağıdakılar layihə kökündəki .env faylından oxunur (docker compose
-      # substitution). .env yoxdursa xəta vermir — default local rejim işləyir.
+      # The values below are read from the .env file at the project root
+      # (docker compose substitution). If .env is missing there is no error —
+      # the defaults apply.
       STT_PROVIDER: ${STT_PROVIDER:-groq}
       LLM_PROVIDER: ${LLM_PROVIDER:-gemini}
       GROQ_API_KEY: ${GROQ_API_KEY:-}
       GEMINI_API_KEY: ${GEMINI_API_KEY:-}
-      # GPU yoxdursa: WHISPER_DEVICE=cpu və WHISPER_COMPUTE=int8 edin
+      # No GPU? Set WHISPER_DEVICE=cpu and WHISPER_COMPUTE=int8
     volumes:
-      - hf_cache:/root/.cache          # Whisper + bge-m3 modelləri (~5GB)
+      - hf_cache:/root/.cache          # Whisper + bge-m3 models (~5GB)
       - ./vector_store:/app/vector_store
       - ./logs:/app/logs
       - ./character:/app/character

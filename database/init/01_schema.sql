@@ -1,9 +1,9 @@
 -- ============================================================
--- Otel AI Call Center — Əsas sxem (tək otel)
--- hotel_info: 1 sətirlik cədvəl — otelin öz məlumatları
+-- Hotel AI Call Center — Core schema (single hotel)
+-- hotel_info: single-row table — the hotel's own data
 -- ============================================================
 
--- ENUM tipləri
+-- ENUM types
 CREATE TYPE room_status AS ENUM ('available', 'occupied', 'maintenance', 'cleaning');
 CREATE TYPE reservation_status AS ENUM ('pending', 'confirmed', 'checked_in', 'checked_out', 'cancelled');
 CREATE TYPE service_category AS ENUM ('spa', 'transfer', 'breakfast', 'laundry', 'other');
@@ -11,7 +11,7 @@ CREATE TYPE discount_type AS ENUM ('percent', 'fixed');
 CREATE TYPE payment_status AS ENUM ('pending', 'paid', 'refunded');
 CREATE TYPE kb_category AS ENUM ('policy', 'faq', 'service_desc', 'marketing');
 
--- 1. hotel_info (1 sətir — otelin öz məlumatları)
+-- 1. hotel_info (single row — the hotel's own data)
 CREATE TABLE hotel_info (
     id             uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     name           varchar(255) NOT NULL,

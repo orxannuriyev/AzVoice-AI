@@ -1,10 +1,10 @@
 -- ============================================================
--- Söhbət tarixçəsi — LLM yaddaşının davamlı saxlanması.
--- Hər user/assistant növbəsi bir sətir kimi yazılır; proqram
--- yenidən başlayanda son növbələr yüklənib LLM kontekstinə
--- qaytarılır (bax src/db/memory.py).
--- Qeyd: cədvəl həmçinin runtime-da CREATE TABLE IF NOT EXISTS
--- ilə yaradılır, ona görə mövcud DB-lərdə re-init tələb olunmur.
+-- Conversation history — persistent storage of the LLM memory.
+-- Each user/assistant turn is written as one row; when the app
+-- restarts, the recent turns are loaded back into the LLM
+-- context (see src/db/memory.py).
+-- Note: the table is also created at runtime with CREATE TABLE
+-- IF NOT EXISTS, so existing DBs do not need a re-init.
 -- ============================================================
 
 CREATE TABLE IF NOT EXISTS conversation_history (
