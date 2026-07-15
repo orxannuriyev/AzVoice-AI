@@ -248,9 +248,9 @@ Set these in `.env` (see `.env.example` — **never commit `.env`**):
 | Admin Panel (RBAC) | ✅ Working | Auth, dashboard, DB CRUD, prompt versioning |
 | Performance Evaluation | ✅ Working | Latency + response quality benchmarked |
 | Docker Deployment | ✅ Working | App + DB + Ollama compose |
-| Hotel Knowledge Base Expansion | 🔧 In Progress | Dataset and JSON improvements |
-| Monitoring Dashboard | ⏳ Planned | Conversation analytics and logs |
-| Final Presentation | ⏳ Planned | Demo slides and project overview |
+| Hotel Knowledge Base Expansion | ✅ Working | Dataset and JSON improvements |
+| Monitoring Dashboard | ✅ Working | Conversation analytics and logs |
+| Final Presentation | ✅ Working | Demo slides and project overview |
 
 ---
 
